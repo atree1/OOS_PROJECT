@@ -1,0 +1,132 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품 상세정보</title>
+<link href="../../css/common.css?20180918" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<style>
+td {
+	text-align: center;
+}
+.detail_con{
+	padding:20px 0 20px 20px;
+}
+
+.myPageSheetTable{
+	border-top:1px solid #aaa;
+}
+
+.myPageSheetTable th{
+	border-top: 0px;
+	border-bottom: 1px solid #e1e1e1;
+    font-weight: bold;
+    color:#333;
+    height: 45px;
+    font-size:14px;
+}
+
+.cell{
+	border-left: 1px solid #e1e1e1;
+    color:#333;
+}
+
+</style>
+	<div id="detailContents" class="detail_con"  th:with="order=${detail[0]}" >
+		<div class="detail_table_info">
+			<p class="info_tit">주문정보</p>
+			<table width="100%"  class="myPageSheetTable">
+				<colgroup>
+					<col width="96">
+					<col width="358">
+					<col width="185">
+					<col width="100">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>주문번호</th>
+						<th>주문상품</th>
+						<th>결제금액</th>
+						<th>상태</th>
+					</tr>
+				</thead>
+				<tbody th:each="arr: ${detail}" class="orderInfo">
+					<tr>
+						<td class="first_cell">
+							<div class="td_detail2" th:text="${arr.odno}"></div>
+						</td>
+						<td class="cell">
+							<div class="td_info">
+								<p><a href="" th:text="${arr.product.imgList}"><img src="" class="thumb"></a></p>
+								<ul>
+									<li class="seller_info">
+									<a href="" th:text="${arr.product.sno}"></a>
+									</li>
+									<li class="tit_info">
+									<a th:href="|javascript:window.open('/store/detail?pno=${arr.pno}&sno=${arr.product.sno}')|" th:text="${arr.product.pname}"></a></li>
+									<li th:text="|수량 : ${arr.qty} 개|"></li>
+								</ul>
+							</div>
+						</td>
+						<td class="cell">
+							<table class="price_chk">
+								<colgroup>
+									<col width="60%">
+									<col>
+								</colgroup>
+								<tbody>
+									<tr>
+										<td>판매가</td>
+										<td class="last_num" th:text="|${arr.product.price}원|"></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td class="cell">
+							<div class="td_status">
+								<span class="btn_bg2 btn_status_b1">배송중</span>
+								<p name="p_parcel">
+									[<span class="parcel">우체국택배</span>]
+								</p>
+							</div>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+		<div class="detail_table_info">
+			<p class="info_tit mart30">배송정보</p>
+			<table width="100%"  class="myPageSheetTable">
+				<colgroup>
+					<col width="96">
+					<col width="358">
+				</colgroup>
+			
+				<tbody class="orderInfo">
+					<tr>
+						<td class="first_cell">이름</td>
+						<td class="cell"  th:text="${order.pnum}">sdf</td>
+					</tr>
+					<tr>
+						<td class="first_cell">연락처</td>
+						<td><input type="text" name="hp_no1" value="010"> - 
+							<input type="text" name="hp_no2" value="7379">- 
+							<input type="text" name="hp_no3" value="2489">
+						</td>
+					</tr>
+					<tr>
+						<td class="first_cell">주소</td>
+						<td class="first_cell">
+						<input type="text" th:value="${order.addressDetail}">
+						<input type="text" th:value="${order.address}"></td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+</body>
+</html>
