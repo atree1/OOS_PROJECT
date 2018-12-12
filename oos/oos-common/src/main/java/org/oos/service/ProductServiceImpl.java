@@ -5,9 +5,11 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.oos.domain.CategoryVO;
 import org.oos.domain.ProductImgVO;
 import org.oos.domain.ProductOptionVO;
 import org.oos.domain.ProductVO;
+import org.oos.mapper.CategoryMapper;
 import org.oos.mapper.ProductImgMapper;
 import org.oos.mapper.ProductMapper;
 import org.oos.mapper.ProductOptionMapper;
@@ -15,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
+import lombok.extern.java.Log;
 @Service
+@Log
 public class ProductServiceImpl implements ProductService {
 
 	@Setter(onMethod_=@Autowired)
@@ -26,6 +30,10 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Setter(onMethod_=@Autowired)
 	private ProductOptionMapper optMapper;
+	
+	
+	@Setter
+	private CategoryMapper cateMapper;
 	
 	@Override
     public List<String> getName() {
@@ -94,6 +102,13 @@ public class ProductServiceImpl implements ProductService {
 		for (ProductOptionVO opt:vo.getOptList()) {
 			opt.setPno(vo.getPno());
 			optMapper.insert(opt);
+		}
+		
+		for (CategoryVO cate:vo.getCateList()) {
+			log.info("**********************");
+			cate.setPno(vo.getPno());
+			log.info("cate:"+cate);
+			//cateMapper.insert(cate);
 		}
 		
 		return result;
