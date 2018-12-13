@@ -22,6 +22,7 @@ public class ProductVO {
 	private Date updatedate;
 	private List<ProductImgVO> imgList;
 	private List<ProductOptionVO> optList;
+	private List<CategoryVO> cateList;
 	private  char del;	
 	private int QuestionReplyCnt;
 	private int ReviewReplyCnt;

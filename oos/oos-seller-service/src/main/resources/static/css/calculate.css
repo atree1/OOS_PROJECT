@@ -1,0 +1,1542 @@
+@charset "UTF-8";
+/* NHN Technology Services UIT Development Center */
+/* Common */
+body, p,
+h1, h2, h3, h4, h5, h6,
+ul, ol, li,
+dl, dt, dd,
+table, th, td,
+form, fieldset, legend, input, textarea, button, select {
+    margin: 0;
+    padding: 0;
+    font-family: '나눔고딕',NanumGothic,'맑은고딕',MalgunGothic,'돋움',Dotum,Helvetica,sans-serif;
+}
+
+body,
+input,
+textarea,
+select,
+button,
+table {
+    font-size: 12px;
+}
+
+img,
+fieldset {
+    border: 0;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+em, address {
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+    text-decoration: underline;
+}
+
+input[type=search]::-ms-clear,
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+.blind,
+.u_skip,
+#u_skip {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.npay_btn_common .ico_excel:before, .npay_btn_common .arrow_right:after, .npay_btn_common .arrow_left:after, .npay_selectbox:before, .npay_checkbox.square .label_check:before, .npay_checkbox.square input[type="checkbox"]:checked + .label_check:before, .npay_checkbox.square input[type="checkbox"]:disabled + .label_check:before, .npay_checkbox.square input[type="checkbox"]:checked:disabled + .label_check:before, .npay_checkbox.circle .label_check:before, .npay_checkbox.circle input[type="checkbox"]:checked + .label_check:before, .npay_checkbox.circle input[type="checkbox"]:disabled + .label_check:before, .npay_checkbox.circle input[type="checkbox"]:checked:disabled + .label_check:before, .npay_calendar_section .calendar_input .calendar_button, .npay_calendar .calendar_month .month_prev, .npay_calendar .calendar_month .month_next, .npay_paginate .star_prev:before, .npay_paginate .prev:before, .npay_paginate .next:before, .npay_paginate .end_next:before, .npay_tooltip .tooltip_close, .ico_notify:before, .npay_link_help, .npay_link_help.size_small, .result_table table .no_data span:before {
+    background-image: url(../img/sprite/sp_calculate.png);
+    background-size: 169px 168px;
+}
+
+.my_summary.ico_way:before, .my_summary.ico_cycle:before, .my_summary.ico_duedate:before, .my_summary.ico_type:before, .my_summary.ico_division:before {
+    background-image: url(../img/sprite/sp_calculate_my.png);
+    background-size: 134px 88px;
+}
+
+.npay_popup_wrap .popup_close:after {
+    background-image: url(../img/sprite/sp_calculate_popup.png);
+    background-size: 15px 15px;
+}
+
+.npay_btn_common {
+    display: inline-block;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.npay_btn_common.type_gray {
+    color: #fff;
+    border: none;
+    background-color: #9aa4ba;
+}
+
+.npay_btn_common.type_basic {
+    color: #767a82;
+    border-color: #d2d5dc;
+}
+
+.npay_btn_common.type_basic:disabled {
+    opacity: 0.6;
+    /*border-color: #e1e3e9;
+            color: #888;
+            background-color: #fcfdfe;*/
+}
+
+.npay_btn_common.type_basic_green {
+    color: #00c73c;
+    border-color: #00c73c;
+}
+
+.npay_btn_common.type_green {
+    color: #fff;
+    border-color: #00a933;
+    background-color: #00c73c;
+}
+
+.npay_btn_common.size_small {
+    padding: 0 8px;
+    line-height: 18px;
+}
+
+.npay_btn_common.size_small.type_gray {
+    line-height: 20px;
+}
+
+.npay_btn_common.size_medium {
+    padding: 0 15px;
+    line-height: 28px;
+}
+
+.npay_btn_common.size_medium.type_gray {
+    line-height: 30px;
+}
+
+.npay_btn_common.size_large {
+    font-size: 14px;
+    padding: 0 20px;
+    line-height: 36px;
+}
+
+.npay_btn_common.size_large.type_gray {
+    line-height: 38px;
+}
+
+.npay_btn_common.size_big {
+    width: 198px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 48px;
+}
+
+.npay_btn_common.size_big.type_gray {
+    line-height: 50px;
+}
+
+.npay_btn_common .ico_excel:before {
+    display: inline-block;
+    margin: -1px 5px 1px 0;
+    background-position: -65px -46px;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    content: '';
+}
+
+.npay_btn_common .ico_arrow:after {
+    display: inline-block;
+    margin: -1px 0 1px 3px;
+    content: '';
+    vertical-align: middle;
+}
+
+.npay_btn_common .arrow_right:after {
+    background-position: -81px -46px;
+    width: 13px;
+    height: 10px;
+}
+
+.npay_btn_common .arrow_left:after {
+    background-position: -76px -134px;
+    width: 13px;
+    height: 10px;
+}
+
+.npay_selectbox {
+    overflow: hidden;
+    position: relative;
+    width: 200px;
+    border: 1px solid #dbdde2;
+    background-color: #fff;
+    font-size: 12px;
+    color: #4d5159;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 28px;
+}
+
+.npay_selectbox:before {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-position: -135px -76px;
+    width: 9px;
+    height: 6px;
+}
+
+.npay_selectbox .selectlabel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-left: 10px;
+}
+
+.npay_selectbox .selectlabel.selected {
+    color: #4d5159;
+}
+
+.npay_selectbox .select {
+    position: relative;
+    width: 100%;
+    height: 28px;
+    line-height: normal;
+    border: 0px;
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.npay_selectbox.type_gray {
+    background-color: #f8f9fd;
+}
+
+.npay_checkbox .label_check {
+    display: inline-block;
+    position: relative;
+    min-height: 20px;
+    padding-left: 26px;
+    font-size: 13px;
+    color: #52555c;
+    line-height: 20px;
+    vertical-align: top;
+}
+
+.npay_checkbox .label_check:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+}
+
+.npay_checkbox input[type="checkbox"]:disabled + .label_check {
+    opacity: 0.6;
+}
+
+.npay_checkbox.square .label_check:before {
+    background-position: 0px -148px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.square input[type="checkbox"]:checked + .label_check:before {
+    background-position: -149px -120px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.square input[type="checkbox"]:disabled + .label_check:before {
+    background-position: -111px -76px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.square input[type="checkbox"]:checked:disabled + .label_check:before {
+    background-position: -149px -96px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.circle .label_check:before {
+    background-position: -149px -24px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.circle input[type="checkbox"]:checked + .label_check:before {
+    background-position: -149px 0px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.circle input[type="checkbox"]:disabled + .label_check:before {
+    background-position: -76px -110px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_checkbox.circle input[type="checkbox"]:checked:disabled + .label_check:before {
+    background-position: -124px -110px;
+    width: 20px;
+    height: 20px;
+}
+
+.npay_inputbox {
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    color: #303236;
+    border: 1px solid #dbdde2;
+    background-color: #fff;
+    line-height: 28px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+
+.npay_inputbox:disabled {
+    background-color: #e9ebf0;
+    border-color: #dbdde2;
+    color: #4d5159;
+    opacity: .6;
+}
+
+.npay_inputbox.date {
+    font-size: 14px;
+    font-family: Arial, '나눔고딕', NanumGothic, '맑은고딕', MalgunGothic, '돋움', Dotum, Helvetica, sans-serif;
+}
+
+.npay_calendar_section:after {
+    clear: both;
+    display: block;
+    content: '';
+}
+
+.npay_calendar_section .calendar_input {
+    float: left;
+    position: relative;
+    padding-right: 39px;
+}
+
+.npay_calendar_section .calendar_input .npay_inputbox {
+    width: 95px;
+    border-right-width: 0;
+}
+
+.npay_calendar_section .calendar_input .calendar_button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid #dbdde2;
+    background-position: -46px -64px;
+    width: 40px;
+    height: 30px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.npay_calendar_section .calendar_input + .calendar_input {
+    padding-left: 31px;
+}
+
+.npay_calendar_section .calendar_input + .calendar_input:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 30px;
+    width: 31px;
+    text-align: center;
+    content: '~';
+}
+
+.npay_calendar_section .calendar_input .npay_calendar {
+    position: absolute;
+    right: 0;
+    top: 32px;
+}
+
+.npay_calendar {
+    width: 236px;
+    border: 1px solid #d9d9d9;
+}
+
+.npay_calendar th,
+.npay_calendar td {
+    border: none !important;
+}
+
+.npay_calendar .calendar_month {
+    position: relative;
+    height: 52px;
+    line-height: 52px;
+    background-color: #9aa4ba;
+    text-align: center;
+}
+
+.npay_calendar .calendar_month .month_num {
+    color: #fff;
+    font-size: 23px;
+    font-weight: normal;
+    font-family: Helvetica Neue, '나눔고딕', NanumGothic, '맑은고딕', MalgunGothic, '돋움', Dotum, Helvetica, sans-serif;
+}
+
+.npay_calendar .calendar_month .month_prev,
+.npay_calendar .calendar_month .month_next {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.npay_calendar .calendar_month .month_prev {
+    left: 23px;
+    background-position: -90px -64px;
+    width: 12px;
+    height: 20px;
+}
+
+.npay_calendar .calendar_month .month_next {
+    right: 23px;
+    background-position: -72px -148px;
+    width: 12px;
+    height: 20px;
+}
+
+.npay_calendar .calendar_day {
+    padding: 10px 13px 9px;
+    background-color: #f6f9f6;
+}
+
+.npay_calendar .day_table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.npay_calendar .day_table th,
+.npay_calendar .day_table td {
+    padding: 4px 4px 3px 3px;
+    font-size: 13px;
+    line-height: 22px;
+    text-align: center;
+}
+
+.npay_calendar .day_table th {
+    padding-bottom: 4px;
+    color: #9aa4ba;
+    font-weight: normal;
+}
+
+.npay_calendar .day_table td label {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin: 0 auto;
+    color: #555;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.npay_calendar .day_table td label:hover {
+    color: #fff;
+    background-color: #c9d0dd;
+}
+
+.npay_calendar .day_table td label.today {
+    background-color: #c9d0dd;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.npay_calendar .day_table td :checked + label {
+    color: #fff;
+    background-color: #536386;
+}
+
+.npay_calendar .day_table td :checked + label.today {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.npay_calendar .day_table td :disabled + label {
+    color: #555;
+    opacity: .4;
+}
+
+.npay_calendar .day_table td :disabled + label:hover {
+    background-color: transparent;
+}
+
+.npay_selectbtn_section {
+    display: table;
+    width: 482px;
+    table-layout: fixed;
+    border-spacing: 1px;
+    background-color: #d2d5dc;
+}
+
+.npay_selectbtn_section li {
+    position: relative;
+    display: table-cell;
+    height: 30px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.npay_selectbtn_section li .label_button {
+    display: block;
+    color: #767a82;
+    text-align: center;
+    line-height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.npay_selectbtn_section li :checked + .label_button {
+    position: relative;
+    margin: -1px;
+    color: #fff;
+    border: 1px solid #00a933;
+    background-color: #00c73c;
+    z-index: 10;
+}
+
+.npay_selectbtn_section.period {
+    width: 224px;
+}
+
+.npay_selectbtn_section.period :checked + .label_button {
+    color: #00c73c;
+    border-color: #00c73c;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.npay_selectlist_section {
+    overflow-y: scroll;
+    width: 174px;
+    height: 194px;
+    padding: 7px 0;
+    border: 1px solid #e0e4e8;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.npay_selectlist_section .select_list .select_item .label_look {
+    display: block;
+    color: #555;
+    line-height: 30px;
+    text-indent: 13px;
+    cursor: pointer;
+}
+
+.npay_selectlist_section .select_list .select_item :checked + .label_look {
+    color: #00c73c;
+}
+
+.npay_selectlist_section .select_list .select_item :disabled + .label_look {
+    color: #1088ed;
+}
+
+.npay_paginate {
+    text-align: center;
+}
+
+.npay_paginate a,
+.npay_paginate strong {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-left: -5px;
+    font-family: Arial, '나눔고딕', NanumGothic, '맑은고딕', MalgunGothic, '돋움', Dotum, Helvetica, sans-serif;
+    color: #5f6369;
+    text-align: center;
+    line-height: 34px;
+    border: 1px solid #e7e7e7;
+    vertical-align: top;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: #fff;
+}
+
+.npay_paginate a:hover {
+    color: #00c73c;
+}
+
+.npay_paginate strong {
+    color: #00c73c;
+    border-color: #00c73c;
+    z-index: 10;
+}
+
+.npay_paginate .star_prev:before,
+.npay_paginate .prev:before,
+.npay_paginate .next:before,
+.npay_paginate .end_next:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+}
+
+.npay_paginate .star_prev:before {
+    background-position: -111px 0px;
+    width: 34px;
+    height: 34px;
+}
+
+.npay_paginate .prev:before {
+    background-position: -111px -38px;
+    width: 34px;
+    height: 34px;
+}
+
+.npay_paginate .next:before {
+    background-position: 0px -110px;
+    width: 34px;
+    height: 34px;
+}
+
+.npay_paginate .end_next:before {
+    background-position: -38px -110px;
+    width: 34px;
+    height: 34px;
+}
+
+.npay_listdot_small {
+    clear: both;
+}
+
+.npay_listdot_small li {
+    position: relative;
+    padding-left: 6px;
+    color: #767a83;
+    line-height: 18px;
+}
+
+.npay_listdot_small li:before {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 2px;
+    height: 2px;
+    content: '';
+    background-color: #767a83;
+}
+
+.npay_listdot_small li.point_color:before {
+    background-color: #00c73c;
+}
+
+.npay_tooltip {
+    position: absolute;
+    width: 417px;
+    padding: 20px 25px 20px 20px;
+    border: 1px solid #dbdde2;
+    background-color: #fff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 20;
+}
+
+.npay_tooltip .npay_tooltip_h {
+    margin: -20px 0 20px;
+    font-size: 16px;
+    color: #4d5159;
+    line-height: 52px;
+    border-bottom: 1px solid #e0e4e8;
+}
+
+.npay_tooltip .npay_tooltip_h strong {
+    font-weight: normal;
+}
+
+.npay_tooltip .tooltip_close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background-color: transparent;
+    background-position: -107px -148px;
+    width: 15px;
+    height: 15px;
+}
+
+.npay_tooltip .tooltip_button {
+    margin-top: 20px;
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+}
+
+.npay_tooltip .tooltip_button .npay_btn_common + .npay_btn_common {
+    margin-left: 10px;
+}
+
+.npaylist_dot_medium {
+    margin: -3px 0 -4px;
+}
+
+.npaylist_dot_medium li {
+    position: relative;
+    padding-left: 8px;
+    font-size: 13px;
+    color: #888;
+    line-height: 20px;
+}
+
+.npaylist_dot_medium li:before {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 3px;
+    height: 3px;
+    background-color: #a0a0a0;
+    content: '';
+}
+
+.npaylist_dot_medium li + li {
+    margin-top: 20px;
+}
+
+.npaylist_dot_medium li ul {
+    margin-top: 10px;
+}
+
+.npaylist_dot_medium li ul li + li {
+    margin-top: 10px;
+}
+
+.npaylist_dot_medium li ul li:before {
+    top: 9px;
+    width: 4px;
+    height: 1px;
+}
+
+.npaylist_dot_medium li a {
+    color: #888;
+    text-decoration: none;
+}
+
+.npaylist_dot_medium li a:after {
+    display: inline-block;
+    margin: -1px 0 1px 4px;
+    font-size: 10px;
+    line-height: normal;
+    content: '>';
+    vertical-align: middle;
+}
+
+.npay_fee_info {
+    margin-top: 20px;
+    font-weight: normal;
+    padding-left: 8px;
+    font-size: 13px;
+    color: #888;
+    line-height: 20px;
+    display: block;
+}
+
+.my_summary:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+}
+
+.my_summary.ico_way:before {
+    background-position: -92px 0px;
+    width: 42px;
+    height: 42px;
+}
+
+.my_summary.ico_cycle:before {
+    background-position: 0px 0px;
+    width: 42px;
+    height: 42px;
+}
+
+.my_summary.ico_duedate:before {
+    background-position: 0px -46px;
+    width: 42px;
+    height: 42px;
+}
+
+.my_summary.ico_type:before {
+    background-position: -46px -46px;
+    width: 42px;
+    height: 42px;
+}
+
+.my_summary.ico_division:before {
+    background-position: -46px 0px;
+    width: 42px;
+    height: 42px;
+}
+
+.ico_notify {
+    position: relative;
+    padding-left: 30px;
+    font-size: 15px;
+    color: #303236;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.ico_notify:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    background-position: -48px -148px;
+    width: 20px;
+    height: 20px;
+}
+
+.point_color {
+    color: #00c73c !important;
+}
+
+.point_color.minus {
+    color: #ff545c !important;
+}
+
+body {
+    background-color: #edf0f5;
+}
+
+.npay_content {
+    overflow-x: scroll;
+    min-width: 798px;
+}
+
+.npay_calculate_heading {
+    position: relative;
+    padding: 18px 0 18px 56px;
+    background-color: #fff;
+    line-height: 23px;
+    z-index: 20;
+}
+
+.npay_calculate_heading:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: #e3e7ee;
+    content: '';
+}
+
+.npay_calculate_heading .h2 {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+.npay_link_help {
+    display: inline-block;
+    border: 0 none;
+    background-color: transparent;
+    background-position: -48px -148px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.npay_link_help.size_small {
+    background-position: -88px -148px;
+    width: 15px;
+    height: 15px;
+}
+
+.npay_menu {
+    height: 60px;
+    padding-left: 60px;
+    background-color: #fff;
+    border-bottom: 1px solid #e3e7ee;
+}
+
+.npay_menu li {
+    float: left;
+}
+
+.npay_menu li a {
+    display: block;
+    color: #555;
+    font-size: 18px;
+    line-height: 60px;
+    text-decoration: none;
+}
+
+.npay_menu li.on a {
+    position: relative;
+    color: #00c73c;
+}
+
+.npay_menu li.on a:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #00c73c;
+    content: '';
+}
+
+.npay_menu li + li {
+    position: relative;
+    margin-left: 20px;
+    padding-left: 22px;
+}
+
+.npay_menu li + li:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 1px;
+    height: 17px;
+    background-color: #e3e7ee;
+    content: '';
+}
+
+.napy_sub_content {
+    padding: 10px 25px 8px;
+}
+
+.npay_section {
+    margin-top: 11px;
+    background-color: #fff;
+    border: 1px solid #e3e7ee;
+    background-color: #fff;
+}
+
+.npay_section .button_area {
+    padding: 20px 0;
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+}
+
+.npay_section .button_area .npay_btn_common {
+    width: 110px;
+}
+
+.npay_section .button_area .npay_btn_common + .npay_btn_common {
+    margin-left: 13px;
+}
+
+.npay_calculate_way {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.calculate_way_list {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.calculate_way_list li {
+    float: left;
+    position: relative;
+    padding-left: 50px;
+    text-align: left;
+}
+
+.calculate_way_list li span {
+    color: #8f95a0;
+    font-size: 13px;
+}
+
+.calculate_way_list li span .npay_link_help {
+    margin: -1px 0 1px;
+}
+
+.calculate_way_list li p {
+    margin-top: 2px;
+    color: #303236;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.calculate_way_list li + li {
+    margin-left: 50px;
+}
+
+.npay_sub_heading {
+    position: relative;
+    padding: 25px 0 24px 36px;
+    border-bottom: 1px solid #e2e6ee;
+}
+
+.npay_sub_heading .h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.h_right_area {
+    position: absolute;
+    right: 34px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.h_right_area .npay_selectbox {
+    display: inline-block;
+    width: auto;
+    margin: -1px 0 1px;
+    vertical-align: middle;
+}
+
+.h_right_area .npay_selectbox .select {
+    padding-right: 38px;
+}
+
+.h_right_area .npay_selectbox + .npay_btn_common {
+    margin-left: 8px;
+}
+
+.npay_board_area {
+    padding: 0 35px 0 34px;
+    background-color: #f8f9fd;
+}
+
+.npay_board_table {
+    width: 100%;
+}
+
+.npay_board_table .label_width {
+    width: 184px;
+}
+
+.npay_board_table .float_left {
+    float: left;
+}
+
+.npay_board_table .float_left + .float_left {
+    margin-left: 10px;
+}
+
+.npay_board_table .float_left + .notify {
+    margin-left: 15px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.npay_board_table th,
+.npay_board_table td {
+    padding: 15px 20px 15px 0;
+    line-height: 30px;
+    vertical-align: top;
+}
+
+.npay_board_table th {
+    position: relative;
+    font-size: 13px;
+    color: #767a83;
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+}
+
+.npay_board_table th .npay_link_help {
+    margin: -1px 0 1px;
+}
+
+.npay_board_table tr + tr th,
+.npay_board_table tr + tr td {
+    border-top: 1px solid #ebeef4;
+}
+
+.npay_board_table .cell:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.npay_board_table th:nth-of-type(even) {
+    position: relative;
+    padding-left: 21px;
+}
+
+.npay_board_table th:nth-of-type(even):before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    content: '';
+    background-color: #d2d5dc;
+    width: 1px;
+    height: 16px;
+}
+
+.npay_calendar_section + .npay_listdot_small {
+    margin-top: 10px;
+}
+
+.npay_result_list {
+    padding: 20px 34px;
+}
+
+.npay_result_list + .npay_result_list {
+    background-color: #f8f9fd;
+}
+
+.npay_result_list + .npay_result_list .result_table tbody {
+    background-color: #fff;
+}
+
+.thickline_box {
+    padding: 19px 30px;
+    border: 4px solid #ebeef2;
+}
+
+.thickline_box .blank {
+    margin: 0 -20px 0 -21px;
+}
+
+.result_table {
+    overflow-x: auto;
+    border: 1px solid #dbdde2;
+}
+
+.result_table table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.result_table table th,
+.result_table table td {
+    margin: 0;
+    padding: 11px 0;
+    line-height: 18px;
+}
+
+.result_table table th {
+    font-size: 13px;
+    color: #767a82;
+    font-weight: normal;
+    background-color: #f8f9fd;
+    border-bottom: 1px solid #dbdde2;
+    text-align: center;
+}
+
+.result_table table td {
+    overflow: hidden;
+    padding: 11px 25px;
+    font-size: 12px;
+    color: #555;
+    text-align: left;
+    word-break: break-all;
+}
+
+.result_table table td + td {
+    border-left: 1px solid #e4e5ea;
+}
+
+.result_table table th + th {
+    border-left: 1px solid #dbdde2;
+}
+
+.result_table table tr + tr td {
+    border-top: 1px solid #e4e5ea;
+}
+
+.result_table table .tl {
+    text-align: left;
+}
+
+.result_table table .tr {
+    text-align: right;
+}
+
+.result_table table .tc {
+    text-align: center;
+}
+
+.result_table table .point_color_blue {
+    color: #1187eb;
+}
+
+.result_table table .no_data {
+    padding: 25px 0;
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+}
+
+.result_table table .no_data span {
+    position: relative;
+    display: inline-block;
+    padding-top: 73px;
+}
+
+.result_table table .no_data span:before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    content: '';
+    background-position: 0px 0px;
+    width: 61px;
+    height: 60px;
+}
+
+.thickline_box + .result_table,
+.result_table + .npay_paginate {
+    margin-top: 20px;
+}
+
+.result_value {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+}
+
+.result_value th,
+.result_value td {
+    font-size: 13px;
+}
+
+.result_value th {
+    text-align: left;
+    font-weight: normal;
+}
+
+.result_value td b {
+    font-family: Tahoma, '나눔고딕', NanumGothic, '맑은고딕', MalgunGothic, '돋움', Dotum, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.result_value td.amount {
+    text-align: right;
+}
+
+.result_value.horizontal .cell_header {
+    width: 117px;
+}
+
+.result_value.horizontal th,
+.result_value.horizontal td {
+    line-height: 27px;
+}
+
+.result_value.horizontal th {
+    padding-left: 21px;
+    color: #4d5159;
+}
+
+.result_value.horizontal td {
+    padding: 0 20px 0 10px;
+    text-align: right;
+    color: #00c73c;
+}
+
+.result_value.horizontal td + th {
+    position: relative;
+}
+
+.result_value.horizontal td + th:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 1px;
+    height: 27px;
+    background-color: #e3e7ee;
+    content: '';
+}
+
+.result_value.vertical {
+    margin: -7px 0 -5px;
+}
+
+.result_value.vertical th,
+.result_value.vertical td {
+    padding: 9px 0;
+    line-height: 25px;
+}
+
+.result_value.vertical th {
+    color: #767a82;
+}
+
+.result_value.vertical td {
+    padding-left: 30px;
+    color: #8f95a0;
+}
+
+.result_value.vertical td b {
+    font-weight: normal;
+}
+
+.result_value.vertical td.amount {
+    color: #4d5159;
+}
+
+.result_value.vertical tr + tr th,
+.result_value.vertical tr + tr td,
+.result_value.vertical tfoot th,
+.result_value.vertical tfoot td {
+    border-top: 1px solid #eef1f5;
+}
+
+.result_value.vertical tfoot th,
+.result_value.vertical tfoot td {
+    color: #00c73c !important;
+}
+
+.result_value.vertical tfoot th {
+    padding-top: 21px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.result_value.vertical tfoot td {
+    font-size: 14px;
+}
+
+.result_value.vertical tfoot td b {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.result_value.vertical tfoot td.amount {
+    font-size: 15px;
+}
+
+.result_value.vertical .group table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.result_value.vertical .group table th,
+.result_value.vertical .group table td {
+    padding: 0;
+    border-top: none;
+}
+
+.notify_area {
+    padding: 11px 35px;
+    background-color: #fffde3;
+    border: 1px solid #d5dde0;
+}
+
+.npay_inner_heading {
+    position: relative;
+    padding-bottom: 19px;
+}
+
+.npay_inner_heading .h4 {
+    font-size: 15px;
+    color: #303236;
+    font-weight: normal;
+    line-height: 30px;
+}
+
+.npay_inner_heading .h_right_area {
+    top: 0;
+    right: 0;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.s_result_list .npay_inner_heading {
+    margin-top: -8px;
+    padding-bottom: 8px;
+}
+
+.s_result_list .result_table + .npay_inner_heading {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #ebeef5;
+}
+
+@media screen and (max-width: 1152px) {
+    .npay_board_area {
+        padding-bottom: 10px;
+    }
+    .npay_board_table {
+        table-layout: auto;
+    }
+    .npay_board_table th,
+    .npay_board_table td {
+        padding-bottom: 5px;
+    }
+    .npay_board_table .float_left {
+        float: none;
+        margin: 0 10px 10px 0 !important;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .npay_board_table .npay_calendar_section + .notify {
+        display: inline-block;
+        margin: 0 0 10px 0;
+    }
+    .result_value.horizontal th {
+        padding-left: 6px;
+    }
+    .result_value.horizontal td {
+        padding: 0 5px 0 3px;
+    }
+}
+
+.npay_popup_wrap {
+    position: relative;
+    background-color: #fff;
+    word-break: break-all;
+}
+
+.npay_popup_wrap .header {
+    background-color: #00c73c;
+    padding: 18px 45px 19px 30px;
+}
+
+.npay_popup_wrap .header .title {
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: normal;
+    color: #fff;
+}
+
+.npay_popup_wrap .content {
+    padding: 30px;
+}
+
+.npay_popup_wrap .popup_close {
+    position: absolute;
+    right: 19px;
+    top: 10px;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+}
+
+.npay_popup_wrap .popup_close:after {
+    background-position: 0px 0px;
+    width: 15px;
+    height: 15px;
+    display: block;
+    content: '';
+}
+
+.npay_popup_wrap .desc_section {
+    margin: -10px 0 10px;
+    line-height: 30px;
+}
+
+.npay_popup_wrap .desc_section:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.npay_popup_wrap .desc_section p {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1088ed;
+}
+
+.npay_popup_wrap .desc_section .npay_btn_common {
+    float: right;
+}
+
+.npay_popup_wrap .result_table table th {
+    color: #9199ac;
+}
+
+.npay_popup_wrap .result_table table td {
+    padding: 11px 10px;
+    text-align: center;
+}
+
+.npay_popup_wrap .result_table table .sum td {
+    font-weight: bold;
+    border-top: 1px solid #e4e5ea;
+}
+
+.npay_popup_wrap .result_table table .no_data {
+    font-size: 14px;
+}
+
+.npay_popup_wrap .button_section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.npay_popup_wrap .button_section .npay_btn_common.size_large {
+    width: 138px;
+    padding: 0;
+}

@@ -1,0 +1,1943 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/sellerLayout}">
+<div class="container" style="margin-top: 20px;"
+	layout:fragment="container">
+	
+<div class="seller-content" role="main">
+    <div id="seller-content" class="seller-sub-frame">
+        <div id="productFormNavbar" class="seller-sub-title">
+            <div class="pull-left">
+                <h2 class="title">
+                    상품수정 <span class="info-must text-danger"><i
+                        class="icon-must"></i>필수항목</span>
+                </h2>
+            </div>
+        </div>
+        <div class="seller-sub-content">
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-lg-2 col-sm-3 col-xs-5 control-label">카테고리
+                        <i class="icon-must" aria-label="필수항목"></i>
+                        <a role="button" href="">
+                            <i class="fn fn-help1 text-primary"></i>
+                            <span class="sr-only">도움말</span></a>
+                    </label>
+                    <div class="col-lg-10 col-sm-9 col-xs-7 input-content">
+                        <div class="set-option no-set">
+                            <a href="" class="btn btn-default btn-hide active"><span class="sr-only">메뉴토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-content input-content">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <div class="input-content">
+                                <div class="seller-input-toggle ng-hide">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <div class="seller-input-toggle">
+                                                <input type="radio" name="category" class="radio" id="r_1_1"
+                                                       disabled="disabled">
+                                                <label for="r_1_1">카테고리명 검색</label>
+                                                <input type="radio" name="category" class="radio" id="r1_2_2"
+                                                       checked="checked">
+                                                <label for="r1_2_2">카테고리명 선택</label>
+                                                <div class="ng-hide">
+                                                    <input type="radio" name="category" class="radio" id="r2_3_3">
+                                                    <label for="r2_3_3">+ 카테고리 일괄선택</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-single btn-block">카테고리 템플릿</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="seller-input">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                    템플릿 추가
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ng-hide">
+                                    <div class="selectize-control search">
+                                        <div class="selectize-control ng-pristine ng-untouched ng-valid single plugin-dropdown_toolbar plugin-no_results">
+                                            <div class="selectize-input items ng-valid ng-pristine full has-options has-items">
+                                                <div data-value="50000788" class="item">패션잡화&gt;남성신발&gt;스니커즈</div>
+                                                <input type="text" autocomplete="off" tabindex="0"
+                                                       style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                            </div>
+                                            <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid plugin-dropdown_toolbar plugin-no_results"
+                                                 style="display: none; width: 100px; top: 0px; left: 0px;">
+                                                <div class="dropdown_toolbar" style="position: relative;">
+                                                    <div>
+                                                        <ul class="seller-tap ng-hide" role="tablist">
+                                                            <li role="tab" aria-selected="false" class="ng-hide">
+                                                                <a href=""><span>최근 등록 카테고리</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="selectize-dropdown-content">
+                                                        <div data-value="50000788" data-selectable=""
+                                                             class="option selected active">
+                                                            패션잡화&gt;남성신발&gt;스니커즈
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="seller-data-list category-list">
+                                    <div>
+                                        <ul class="data-group">
+                                            <li class="" nstyle="">
+                                                <a role="button" href="">도매</a>
+                                            </li>
+                                            <li class="" nstyle="">
+                                                <a role="button" href="">소매</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div ng-show="vm.showLevel >= 2" class="">
+                                        <ul class="data-group">
+                                            <li class="no-depth ng-hide"><a href="">중분류</a></li>
+                                            <li class="" style="">
+                                                <a role="button" href="">남성</a>
+                                            </li>
+                                            <li class="" style="">
+                                                <a role="button" href="">여성</a>
+                                            </li>
+                                            <li class="" style="">
+                                                <a role="button" href="">공용</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <ul class="data-group">
+                                            <li class="no-depth ng-hide"><a href="">소분류</a></li>
+                                            <li class="no-depth" style="">
+                                                <a role="button" href="">구두</a>
+                                            </li>
+                                            <li class="no-depth" style="">
+                                                <a role="button" href="">구두</a>
+                                            </li>
+                                            <li class="no-depth" style="">
+                                                <a role="button" href="">구두</a>
+                                            </li>
+                                            <li class="no-depth" style="">
+                                                <a role="button" href="">구두</a>
+                                            </li>
+                                            <li class="no-depth" style="">
+                                                <a role="button" href="">구두</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <ul class="data-group">
+                                            <li class="no-depth" style=""><a href="">세분류</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-lg-1 col-sm-2 col-xs-4 control-label">판매가
+                        <i class="icon-must" aria-label="필수항목"></i>
+                    </label>
+                    <div class="col-lg-11 col-sm-10 col-xs-8 input-content">
+                        <div class="set-option" style="">
+                            <a class="btn btn-default active" href="" style="">
+                                <span class="sr-only">메뉴토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-content input-content" style="">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label" for="prd_price2">판매가
+                                <i class="icon-must" aria-label="필수항목"></i></label>
+                            <div class="input-content">
+                                <div class="form-inline" id="error_salePrice">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="product.salePrice" type="tel"
+                                                       class="form-control ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
+                                                       placeholder="숫자만 입력" id="prd_price2"
+                                                       max="999999990" minlength="2" maxlength="11">
+                                                <a role="button" class="btn-clear" tabindex="-1"
+                                                   style="display: none;"><span aria-label="삭제">×</span>
+                                                </a>
+                                            </div>
+                                            <span class="input-group-addon">원</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="text-sub hidden-xs">사만구천원</span>
+                                    </div>
+                                </div>
+                                <p class="sub-text text-primary">
+                                    네이버 쇼핑을 통한 주문일 경우 네이버쇼핑 매출연동수수료 2%가 네이버페이 결제수수료와 별도로 과금됩니다. <a
+                                        role="button" href="" class="btn-link text-primary">수수료안내</a>
+                                </p>
+                                <p class="sub-text text-primary">
+                                    판매가, 할인가를 활용한 비정상 거래는 자동 탐지되어 판매지수에 포함되지 않으니 유의해주세요. <a
+                                        role="button" target="_blank"
+                                        href="https://sell.smartstore.naver.com/#/center-notice/detail/100002667"
+                                        class="btn-link text-primary">안내</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-lg-1 col-sm-2 col-xs-4 control-label">
+                        재고수량<i class="icon-must" aria-label="필수항목"></i>
+                    </label>
+                    <div class="col-lg-11 col-sm-10 col-xs-8 input-content">
+                        <div class="set-option">
+                            <a class="btn btn-default btn-hide active" href="">
+                                <span class="sr-only">메뉴토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-content input-content">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <div class="input-content">
+                                <div class="form-inline" id="error_stockQuantity">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="seller-input-wrap">
+                                                <input name="product.stockQuantity" type="tel"
+                                                       class="form-control ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-max ng-valid-required ng-valid-maxlength"
+                                                       id="stock" placeholder="숫자만 입력" title="재고수량 입력"
+                                                       maxlength="10" required="required" readonly="readOnly"
+                                                       disabled="disabled">
+                                                <a role="button" class="btn-clear" tabindex="-1" style="display: none;">
+                                                    <span aria-label="삭제">×</span>
+                                                </a>
+                                            </div>
+                                            <span class="input-group-addon">개</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="sub-text text-primary">색상/사이즈 간편입력 옵션의 재고관리를
+                                            하지 않는 경우, 임의의 값으로 표시되며 주문 시에도 재고가 차감되지 않습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-lg-2 col-sm-3 col-xs-6 control-label">상품이미지
+                        <i class="icon-must" aria-label="필수항목"></i>
+                        <a role="button" href="">
+                            <i class="fn fn-help1 text-primary" aria-hidden="true"></i>
+                            <span class="sr-only">도움말</span>
+                        </a>
+                    </label>
+                    <div class="col-lg-10 col-sm-9 col-xs-6 input-content">
+                        <div class="set-option">
+                            <a class="btn btn-default active" href="">
+                                <span class="sr-only">메뉴 토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-content inner-content">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">대표이미지
+                                <i class="icon-must" aria-label="필수항목"></i>
+                                <a role="button" href="">
+                                    <i class="fn fn-help1 text-primary" aria-hidden="true"></i>
+                                    <span class="sr-only">도움말</span></a>
+                            </label>
+                            <div class="input-content">
+                                <div class="pc" style="">
+                                    <div class="seller-product-img add-img">
+                                        <div class="wrap-img">
+                                            <ul class="img-list">
+                                                <li class="" style="">
+                                                    <div class="img">
+                                                        <img width="140" height="140" alt="등록한 이미지"
+                                                             src="/shop1.phinf.naver.net/20180913_300/usedfashion_1536766677379bsuPw_JPEG/60073857020800904_416149636.jpg?type=f344">
+                                                        <p class="toolbar">
+                                                            <a role="button" href="">
+                                                                <i class="seller-icon icon-magnifier"
+                                                                   aria-label="미리보기 적용"></i>
+                                                            </a>
+                                                            <a role="button" href="" name="multi_image_modify_$index">
+                                                                <i class="seller-icon icon-pen" aria-label="이미지 수정"></i>
+                                                            </a>
+                                                            <a role="button" href="">
+                                                                <i class="seller-icon icon-delete"
+                                                                   aria-label="이미지 삭제"></i>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="form-group sr-only">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_names"
+                                               class="ng-pristine ng-untouched ng-not-empty ng-valid ng-valid-required"
+                                               required="required">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_upload_all_names"
+                                               class="ng-pristine ng-untouched ng-valid ng-valid-required ng-not-empty">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_upload_minSize"
+                                               class="ng-pristine ng-untouched ng-valid ng-valid-required ng-not-empty">
+                                        <input type="text" style="visibility: hidden; opacity: 0;"
+                                               name="_hidden_uploaded_upload_maxSize"
+                                               class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-required">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_upload_square"
+                                               class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-required">
+                                    </div>
+                                    <div class="181120124541214_2_img_upload_error_area"></div>
+                                    <div class="form-group">
+                                        <p class="sub-text text-primary" style="">권장 크기 : 640 x 640 (윈도대상 750 x
+                                            1000)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label">추가이미지&nbsp;<br
+                                    class="visible-xs">
+                                <span class="sub-text text-muted">(<i
+                                        class="text-primary">5</i>/9)
+                                </span><i class="icon-must ng-hide" aria-label="필수항목"></i>
+                            </label>
+                            <div class="input-content">
+                                (움직이는 이미지의 경우 첫 번째 컷이 등록)']" use-order-modal="true"
+                                order-modal-title="추가이미지">
+                                <div class="pc" style="">
+                                    <div class="seller-product-img add-img">
+                                        <div class="wrap-img">
+                                            <ul class="img-list">
+                                                <li class="" style="">
+                                                    <div class="img">
+                                                        <img width="140" height="140" alt="등록한 이미지"
+                                                             src="/shop1.phinf.naver.net/20180913_13/usedfashion_1536766683447HSRLW_JPEG/60073863089600395_472811288.jpg?type=f344">
+                                                        <p class="toolbar">
+                                                            <a role="button" href=""><i
+                                                                    class="seller-icon icon-magnifier"
+                                                                    aria-label="미리보기 적용"></i>
+                                                            </a>
+                                                            <a role="button" href="" name="multi_image_modify_$index">
+                                                                <i class="seller-icon icon-pen" aria-label="이미지 수정"></i>
+                                                            </a>
+                                                            <a role="button" href="">
+                                                                <i class="seller-icon icon-delete"
+                                                                   aria-label="이미지 삭제"></i>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="">
+                                                    <div class="img">
+                                                        <img width="140" height="140" alt="등록한 이미지"
+                                                             src="/shop1.phinf.naver.net/20180913_235/usedfashion_1536766689559HAGlH_JPEG/60073869200839100_626484424.jpg?type=f344">
+                                                        <p class="toolbar">
+                                                            <a role="button" href="">
+                                                                <i class="seller-icon icon-magnifier"
+                                                                   aria-label="미리보기 적용"></i>
+                                                            </a>
+                                                            <a role="button" href="" name="multi_image_modify_$index">
+                                                                <i class="seller-icon icon-pen" aria-label="이미지 수정"></i>
+                                                            </a>
+                                                            <a role="button" href=""><i
+                                                                    class="seller-icon icon-delete"
+                                                                    aria-label="이미지 삭제"></i>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="">
+                                                    <div class="img">
+                                                        <img width="140" height="140" alt="등록한 이미지"
+                                                             src="/shop1.phinf.naver.net/20180913_279/usedfashion_1536766695037SPrDR_JPEG/60073874679104941_793789672.jpg?type=f344">
+                                                        <p class="toolbar">
+                                                            <a role="button" href="">
+                                                                <i class="seller-icon icon-magnifier"
+                                                                   aria-label="미리보기 적용"></i>
+                                                            </a>
+                                                            <a role="button" href="" name="multi_image_modify_$index">
+                                                                <i class="seller-icon icon-pen" aria-label="이미지 수정"></i>
+                                                            </a>
+                                                            <a role="button" href="">
+                                                                <i class="seller-icon icon-delete"
+                                                                   aria-label="이미지 삭제"></i>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="">
+                                                    <div class="register-img">
+                                                        <a role="button" href="" class="btn-add-img">
+                                                            <i class="seller-icon icon-plus" aria-hidden="true"></i>
+                                                            <span class="sr-only">이미지 등록</span>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="form-group sr-only">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_names"
+                                               class="ng-pristine ng-untouched ng-valid ng-valid-required ng-not-empty">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_upload_all_names"
+                                               class="ng-pristine ng-untouched ng-valid ng-valid-required ng-not-empty">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_upload_minSize"
+                                               class="ng-pristine ng-untouched ng-valid ng-valid-required ng-not-empty">
+                                        <input type="text" style="visibility: hidden; opacity: 0;"
+                                               name="_hidden_uploaded_upload_maxSize"
+                                               class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-required">
+                                        <input type="text" style="visibility: hidden; opacity: 0"
+                                               name="_hidden_uploaded_upload_square"
+                                               class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-required">
+                                    </div>
+                                    <div class="181120124541244_3_img_upload_error_area"></div>
+
+                                    <div class="form-group mg-top" style="">
+                                        <a class="btn btn-default" role="button">순서 변경</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="sub-text text-primary" style="">
+                                            권장 크기 : 640 x 640 (윈도대상 750 x 1000)<br>추가이미지는 최대 9개까지
+                                            설정할 수 있습니다.<br>jpg,jpeg,gif,png,bmp 형식의 정지 이미지만 등록됩니다.<br
+                                                class="visible-xs">(움직이는 이미지의 경우 첫 번째 컷이 등록)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-sm-3 col-xs-4 control-label">상품 주요정보<i
+                            class="icon-must" aria-label="필수항목"></i></label>
+                    <div class="col-sm-9 col-xs-8 input-content">
+                        <div class="set-option">
+                            <a class="btn btn-default active" href="" style=""><span
+                                    class="sr-only">메뉴토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-content input-content" style="">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap" style="">
+                            <label class="control-label" for="prd-model">모델명
+                                <a href="" role="button">
+                                    <i class="fn fn-help1 text-primary" aria-hidden="true">
+                                        <span class="sr-only">도움말</span></i>
+                                </a>
+                                <i class="icon-must ng-hide" aria-label="필수항목"></i>
+                            </label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="seller-input-wrap">
+                                                    <input name="product.detailAttribute.naverShoppingSearchInfo.modelName"
+                                                           type="text"
+                                                           class="form-control ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required ng-valid-pattern ng-valid-maxlength"
+                                                           id="prd-model"
+                                                           maxlength="150"
+                                                           style="min-width: 440px">
+                                                    <a role="button" class="btn-clear" tabindex="-1"
+                                                       style="display: none;"><span
+                                                            aria-label="삭제">×</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-info ng-hide">변경됨</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="form-sub-wrap include-line" style="">
+                                    <label class="control-label">브랜드 <a href="" role="button" class="" style="">
+                                        <i class="fn fn-help1 text-primary" aria-hidden="true">
+                                            <span class="sr-only">도움말</span></i>
+                                    </a>
+                                        <i class="icon-must ng-hide" aria-label="필수항목" style=""></i>
+                                    </label>
+                                    <div class="input-content">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="input-group auto-complete">
+                                                    <div class="seller-input-wrap">
+                                                        <div class="selectize-control ng-pristine ng-untouched ng-valid single plugin-inputMaxlength">
+                                                            <div class="selectize-input items not-full ng-valid ng-pristine">
+                                                                <input type="text" autocomplete="off" tabindex="0"
+                                                                       placeholder="브랜드를 입력해주세요." maxlength="50"
+                                                                       style="width: 130.672px;">
+                                                            </div>
+                                                            <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid plugin-inputMaxlength"
+                                                                 style="display: none;">
+                                                                <div class="selectize-dropdown-content"></div>
+                                                            </div>
+                                                        </div>
+                                                        <input class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-empty"
+                                                               tabindex="-1"
+                                                               style="width: 4px; opacity: 0; position: absolute; left: -10000px;"
+                                                               value="">
+                                                        <input type="hidden"
+                                                               name="product.detailAttribute.naverShoppingSearchInfo.brandName"
+                                                               autocomplete="off"
+                                                               class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required"
+                                                               style="">
+                                                    </div>
+                                                    <span class="input-group-btn"><button
+                                                            type="button" class="btn btn-default2">설정안함</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-info">
+                                            선택된 브랜드 : <strong>일루젼 </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-sub-wrap include-line">
+                                    <label class="control-label">제조사
+                                        <i class="icon-must ng-hide" aria-label="필수항목" style=""></i></label>
+                                    <div class="input-content">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="input-group auto-complete">
+                                                    <div class="seller-input-wrap">
+                                                        <div class="selectize-control ng-pristine ng-untouched ng-valid single plugin-inputMaxlength">
+                                                            <div class="selectize-input items not-full ng-valid ng-pristine">
+                                                                <input type="text" autocomplete="off" tabindex="0"
+                                                                       placeholder="제조사를 입력해주세요." maxlength="50"
+                                                                       style="width: 130.672px;">
+                                                            </div>
+                                                            <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid plugin-inputMaxlength"
+                                                                 style="display: none;">
+                                                                <div class="selectize-dropdown-content"></div>
+                                                            </div>
+                                                        </div>
+                                                        <input class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-empty"
+                                                               tabindex="-1"
+                                                               style="width: 4px; opacity: 0; position: absolute; left: -10000px;"
+                                                               value="">
+                                                        <input type="hidden"
+                                                               name="product.detailAttribute.naverShoppingSearchInfo.manufacturerName"
+                                                               autocomplete="off"
+                                                               class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required"
+                                                               style="">
+                                                    </div>
+                                                    <span class="input-group-btn">
+                                                        <button type="button"
+                                                                class="btn btn-default2">설정안함</button></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-info">
+                                            선택된 제조사 : <strong>일루젼협력업체 </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-sub-wrap include-line">
+                            <label class="control-label">상품속성
+                                <i class="icon-must ng-hide" aria-label="필수항목"></i>
+                            </label>
+                            <div class="input-content">
+                                <div class="form-control-static">
+                                    <strong class="text-info">[스니커즈]</strong> 카테고리 맞춤형 검색정보를
+                                    입력해보세요.
+                                </div>
+                                <p class="sub-text text-primary">상품에 맞는 속성이 없거나 중요 속성이
+                                    누락되었다면 고객센터 1:1문의에 남겨주세요. (카테고리, 보완 필요한 내용 자세히 기재)</p>
+                            </div>
+                            <div class="input-content-responsive" style="">
+                                <table class="seller-table seller-table-bordered">
+                                    <caption>
+                                        <span class="sr-only">상품속성 선택 테이블</span>
+                                    </caption>
+                                    <colgroup class="hidden-xs-table-column-group">
+                                        <col style="width: 170px">
+                                        <col>
+                                    </colgroup>
+                                    <colgroup class="visible-xs-table-column-group">
+                                        <col style="width: 95px">
+                                        <col>
+                                    </colgroup>
+                                    <tbody class="" style="">
+                                    <tr>
+                                        <th colspan="2" class="emphasis-title">주요사항</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">주요소재</th>
+                                        <td>
+                                            <div class="form-inline has-wide-selectize">
+                                                <div class="form-group">
+                                                    <div class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                                        <div class="selectize-input items has-options ng-valid ng-pristine full has-items">
+                                                            <div data-value="10040900" class="item">스웨이드</div>
+                                                            <input type="text" autocomplete="off" tabindex="0"
+                                                                   readonly=""
+                                                                   style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        </div>
+                                                        <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                             style="display: none; width: 100px; top: 0px; left: 0px;">
+                                                            <div class="selectize-dropdown-content">
+                                                                <div data-value="" data-selectable="" class="option">
+                                                                    선택
+                                                                </div>
+                                                                <div data-value="10197460" data-selectable=""
+                                                                     class="option">가죽
+                                                                </div>
+                                                                <div data-value="10726692" data-selectable=""
+                                                                     class="option">인조가죽(합성피혁)
+                                                                </div>
+                                                                <div data-value="10040900" data-selectable=""
+                                                                     class="option selected">스웨이드
+                                                                </div>
+                                                                <div data-value="10040902" data-selectable=""
+                                                                     class="option">캔버스
+                                                                </div>
+                                                                <div data-value="10040904" data-selectable=""
+                                                                     class="option">메시
+                                                                </div>
+                                                                <div data-value="10030859" data-selectable=""
+                                                                     class="option">니트
+                                                                </div>
+                                                                <div data-value="10040901" data-selectable=""
+                                                                     class="option">에나멜
+                                                                </div>
+                                                                <div data-value="10574775" data-selectable=""
+                                                                     class="option">폴리에스테르
+                                                                </div>
+                                                                <div data-value="10040848" data-selectable=""
+                                                                     class="option">PVC
+                                                                </div>
+                                                                <div data-value="10388535" data-selectable=""
+                                                                     class="option">EVA
+                                                                </div>
+                                                                <div data-value="10030314" data-selectable=""
+                                                                     class="option">고무
+                                                                </div>
+                                                                <div data-value="10574774" data-selectable=""
+                                                                     class="option">면
+                                                                </div>
+                                                                <div data-value="10304568" data-selectable=""
+                                                                     class="option">고어텍스
+                                                                </div>
+                                                                <div data-value="10040847" data-selectable=""
+                                                                     class="option">패브릭
+                                                                </div>
+                                                                <div data-value="10030656" data-selectable=""
+                                                                     class="option">기타
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <select class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+                                                            tabindex="-1"
+                                                            style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        <option value="? object:1777 ?" selected="selected"></option>
+                                                        <option value="10040900">스웨이드</option>
+                                                    </select>
+                                                    <input type="hidden" autocomplete="off"
+                                                           class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">성별</th>
+                                        <td>
+                                            <div class="form-inline has-wide-selectize">
+                                                <div class="form-group">
+                                                    <div class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                                        <div class="selectize-input items has-options ng-valid ng-pristine full has-items">
+                                                            <div data-value="10030583" class="item">남녀공용</div>
+                                                            <input type="text" autocomplete="off" tabindex="0"
+                                                                   readonly=""
+                                                                   style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        </div>
+                                                        <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                             style="display: none; width: 100px; top: 0px; left: 0px;">
+                                                            <div class="selectize-dropdown-content">
+                                                                <div data-value="" data-selectable="" class="option">
+                                                                    선택
+                                                                </div>
+                                                                <div data-value="10029065" data-selectable=""
+                                                                     class="option">남성용
+                                                                </div>
+                                                                <div data-value="10537277" data-selectable=""
+                                                                     class="option">여성용
+                                                                </div>
+                                                                <div data-value="10030583" data-selectable=""
+                                                                     class="option selected">남녀공용
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <select class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+                                                            tabindex="-1"
+                                                            style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        <option value="? object:1780 ?" selected="selected"></option>
+                                                        <option value="10030583">남녀공용</option>
+                                                    </select>
+                                                    <input type="hidden" autocomplete="off"
+                                                           class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">솔</th>
+                                        <td>
+                                            <div class="form-inline has-wide-selectize">
+                                                <div class="form-group">
+                                                    <div class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                                        <div class="selectize-input items has-options ng-valid ng-pristine full has-items">
+                                                            <div data-value="10030314" class="item">고무</div>
+                                                            <input type="text" autocomplete="off" tabindex="0"
+                                                                   readonly=""
+                                                                   style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        </div>
+                                                        <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                             style="display: none; width: 100px; top: 0px; left: 0px;">
+                                                            <div class="selectize-dropdown-content">
+                                                                <div data-value="" data-selectable="" class="option">
+                                                                    선택
+                                                                </div>
+                                                                <div data-value="10388534" data-selectable=""
+                                                                     class="option">파일론
+                                                                </div>
+                                                                <div data-value="10030314" data-selectable=""
+                                                                     class="option selected">고무
+                                                                </div>
+                                                                <div data-value="10574779" data-selectable=""
+                                                                     class="option">폴리우레탄
+                                                                </div>
+                                                                <div data-value="10388535" data-selectable=""
+                                                                     class="option">EVA
+                                                                </div>
+                                                                <div data-value="10735038" data-selectable=""
+                                                                     class="option">TPU
+                                                                </div>
+                                                                <div data-value="10040848" data-selectable=""
+                                                                     class="option">PVC
+                                                                </div>
+                                                                <div data-value="10030653" data-selectable=""
+                                                                     class="option">플라스틱
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <select class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+                                                            tabindex="-1"
+                                                            style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        <option value="? object:1783 ?" selected="selected"></option>
+                                                        <option value="10030314">고무</option>
+                                                    </select>
+                                                    <input type="hidden" autocomplete="off"
+                                                           class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">발목높이</th>
+                                        <td>
+                                            <div class="form-inline has-wide-selectize">
+                                                <div class="form-group">
+                                                    <div class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                                        <div class="selectize-input items has-options ng-valid ng-pristine full has-items">
+                                                            <div data-value="10040938" class="item">미드탑</div>
+                                                            <input type="text" autocomplete="off" tabindex="0"
+                                                                   readonly=""
+                                                                   style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        </div>
+                                                        <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                             style="display: none; width: 100px; top: 0px; left: 0px;">
+                                                            <div class="selectize-dropdown-content">
+                                                                <div data-value="" data-selectable="" class="option">
+                                                                    선택
+                                                                </div>
+                                                                <div data-value="10040937" data-selectable=""
+                                                                     class="option">하이탑
+                                                                </div>
+                                                                <div data-value="10040938" data-selectable=""
+                                                                     class="option selected">미드탑
+                                                                </div>
+                                                                <div data-value="10040939" data-selectable=""
+                                                                     class="option">로우탑
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <select class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+                                                            tabindex="-1"
+                                                            style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                        <option value="? object:1786 ?" selected="selected"></option>
+                                                        <option value="10040938">미드탑</option>
+                                                    </select>
+                                                    <input type="hidden" autocomplete="off"
+                                                           class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-primary mg-top"
+                                            data-nclicks-code="atb.inputmore">
+                                        <i class="fn-booking fn-booking-plus1" aria-hidden="true"></i>
+                                        속성 더 입력하기
+                                    </button>
+                                    <button type="button" class="btn btn-default mg-top"
+                                            data-nclicks-code="atb.preview">선택항목 미리보기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-detail ng-hide">
+                            <div class="form-sub-detail-wrap">
+                                <label class="control-label"
+                                       for="customMadeInfo_useReturnCancelNotification">반품/취소
+                                    제한<br class="hidden-xs">안내 및 동의<i class="icon-must"
+                                                                      aria-label="필수항목"></i>
+                                </label>
+                                <div class="input-content">
+                                    <div class="form-group">
+                                        <div class="seller-input-toggle">
+                                            <input type="radio" name="prd-useReturnCancelNotification"
+                                                   id="customMadeInfo_useReturnCancelNotification"
+                                                   class="ng-pristine ng-untouched ng-valid ng-empty"
+                                                   value="true"><label
+                                                for="customMadeInfo_useReturnCancelNotification">설정함</label><input
+                                                type="radio" name="prd-useReturnCancelNotification"
+                                                class="r-no-set ng-pristine ng-untouched ng-valid ng-empty"
+                                                id="customMadeInfo_useReturnCancelNotification2"><label
+                                                for="customMadeInfo_useReturnCancelNotification2">설정안함</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-lg-2 col-sm-2 col-xs-3 control-label">배송
+                        <i class="icon-must" aria-label="필수항목"></i>
+                        <a role="button" href="">
+                            <i class="fn fn-help1 text-primary" aria-hidden="true"></i>
+                            <span class="sr-only">도움말</span></a>
+                    </label>
+                    <div class="col-lg-10 col-sm-10 col-xs-9 input-content">
+                        <div class="set-option no-ellipsis">
+                            <span class="text"></span>
+                            <a class="btn btn-default active" href="" style="">
+                                <span class="sr-only">메뉴 토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-content inner-content" style="">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">배송여부
+                                <i class="icon-must" aria-label="필수항목"></i>
+                                <a href="" role="button" class="font-icon-button">
+                                    <i class="fn fn-info1" aria-hidden="true"></i>
+                                    <span class="sr-only">툴팁</span></a>
+                            </label>
+                            <div class="input-content">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <div class="seller-input-toggle">
+                                            <input type="radio" name="delivery2" id="rdelivery"
+                                                   class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                                   value="true"><label for="rdelivery">배송</label><input
+                                                type="radio" name="delivery2"
+                                                class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
+                                                id="rdelivery_no" value="false">
+                                            <label for="rdelivery_no">배송없음</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-single btn-block">배송비 템플릿</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="seller-input">
+                                            <label><input type="checkbox"
+                                                          class="ng-pristine ng-untouched ng-valid ng-empty">템플릿
+                                                추가<span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-sub-detail ng-hide">
+                            <label class="control-label"></label>
+                            <div class="input-content">
+                                <div class="form-inline has-error-msg pd-top-sm">
+                                    <div class="form-group">
+                                        <div class="text-info">
+                                            오늘출발 기준시간 <a href="" role="button" class="font-icon-button">
+                                            <i class="fn fn-info1" aria-hidden="true"></i><span
+                                                class="sr-only">툴팁</span></a> :<strong>
+                                            오늘출발 할 수 있는 결제완료 시간을 설정해주세요.</strong>
+                                            <input type="text" name="vm.limitDeliveryTime"
+                                                   style="visibility: hidden; width: 0; height: 0; opacity: 0; padding-top: 0"
+                                                   class="ng-pristine ng-untouched ng-empty ng-valid ng-valid-required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-default btn-sm">기준시간 설정</button>
+                                    </div>
+                                </div>
+                                <div class="form-inline ng-hide">
+                                    <div class="form-group">
+                                        <div class="seller-input">
+                                            <label><input type="checkbox"
+                                                          name="deliveryAttributeType_option"
+                                                          class="ng-pristine ng-untouched ng-valid ng-empty">오늘출발
+                                                가능 옵션 설정<span></span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ng-hide">
+                                    <div class="form-group">
+                                        <div class="selectize-control ng-pristine ng-untouched ng-valid multi plugin-optgroup_columns plugin-remove_button">
+                                            <div class="selectize-input items not-full ng-pristine ng-valid has-options">
+                                                <input type="text" autocomplete="off" tabindex="0"
+                                                       placeholder="옵션 검색" style="width: 55.3438px;">
+                                            </div>
+                                            <div class="selectize-dropdown multi ng-pristine ng-untouched ng-valid plugin-optgroup_columns plugin-remove_button"
+                                                 style="display: none;">
+                                                <div class="selectize-dropdown-content">
+                                                    <div data-value="블랙" data-selectable=""
+                                                         class="option active">블랙
+                                                    </div>
+                                                    <div data-value="브라운" data-selectable="" class="option">브라운
+                                                    </div>
+                                                    <div data-value="베이지" data-selectable="" class="option">베이지
+                                                    </div>
+                                                    <div data-value="레드" data-selectable="" class="option">레드
+                                                    </div>
+                                                    <div data-value="옐로우" data-selectable="" class="option">옐로우
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select class="ng-pristine ng-untouched selectized ng-empty ng-valid ng-valid-required"
+                                                multiple="multiple" tabindex="-1"
+                                                style="width: 4px; opacity: 0; position: absolute; left: -10000px;"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ng-pristine ng-valid-min ng-valid-max ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-valid ng-valid-required form-sub-wrap">
+                            <div class="form-sub-wrap">
+                                <div class="form-sub-detail-wrap">
+                                    <label class="control-label">상품별&nbsp;<br
+                                            class="visible-xs">배송비<i class="icon-must" aria-label="필수항목"></i>
+                                        <ul class=&quot;seller-ul-list&quot;>
+                                            <li>배송비는 상품 결제 금액이 아니라, 판매자가 설정한 상품의 &quot;판매가&quot;를 기준으로 청구됩니다.<br>- 예)
+                                                3만원이상 무료배송으로 설정한 경우 : 할인쿠폰 등 사용으로 결제금액이 2만원이어도, 상품 판매가가 3만원 이상이면 무료배송
+                                                적용됨
+                                            </li>
+                                            <li>반품/교환에 필요한 배송비는 &quot;반품 / 교환&quot; 항목에서 별도로 설정이 가능합니다.</li>
+                                        </ul>
+                                        <i class="fn fn-info1"
+                                           aria-hidden="true"></i><span class="sr-only">툴팁</span>
+                                    </label>
+                                    <div class="input-content">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                                    <div class="selectize-input items ng-valid ng-pristine full has-options has-items">
+                                                        <div data-value="CONDITIONAL_FREE" class="item">조건부
+                                                            무료
+                                                        </div>
+                                                        <input type="text" autocomplete="off" tabindex="0" readonly=""
+                                                               style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                    </div>
+                                                    <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                         style="display: none;">
+                                                        <div class="selectize-dropdown-content">
+                                                            <div data-value="FREE" data-selectable=""
+                                                                 class="option">무료
+                                                            </div>
+                                                            <div data-value="CONDITIONAL_FREE" data-selectable=""
+                                                                 class="option selected active">조건부 무료
+                                                            </div>
+                                                            <div data-value="PAID" data-selectable=""
+                                                                 class="option">유료
+                                                            </div>
+                                                            <div data-value="UNIT_QUANTITY_PAID" data-selectable=""
+                                                                 class="option">수량별
+                                                            </div>
+                                                            <div data-value="RANGE_QUANTITY_PAID"
+                                                                 data-selectable="" class="option">구간별
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <select class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+                                                        tabindex="-1"
+                                                        style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                    <option value="? string:CONDITIONAL_FREE ?"
+                                                            selected="selected"></option>
+                                                    <option value="CONDITIONAL_FREE">조건부 무료</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-sub-detail">
+                                <div class="form-sub-detail-wrap ng-hide">
+                                    <label class="control-label">제주/도서산간 추가배송비
+                                        <ul class=&quot;seller-ul-list&quot;>
+                                            <li>제주 또는 도서산간 추가배송비를 권역별로 설정할 수 있습니다.</li>
+                                            <li>도선료 등 별도로 추가되는 배송비는 설정할 수 없습니다.<br>안내된 배송비 외에 추가 배송비가 필요한 경우, 구매자에게 별도로
+                                                안내 및 청구 하셔야 합니다.
+                                            </li>
+                                        </ul>
+                                        <i class="fn fn-info1"
+                                           aria-hidden="true"></i><span class="sr-only">툴팁</span></label>
+                                    <div class="input-content">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="seller-input-toggle">
+                                                    <input type="radio" name="delivery_price"
+                                                           id="delivery_price1_1"
+                                                           class="ng-pristine ng-untouched ng-valid ng-empty"
+                                                           value="true" disabled="disabled"><label
+                                                        for="delivery_price1_1">설정함</label>
+                                                    <input type="radio" name="delivery_price"
+                                                           class="r-no-set ng-pristine ng-untouched ng-valid ng-empty"
+                                                           id="delivery_price2_1"
+                                                           value="false" disabled="disabled"><label
+                                                        for="delivery_price2_1">설정안함</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ng-hide">
+                                                <p class="sub-text text-primary">
+                                                    <a href="http://sell.smartstore.naver.com/o/delivery/area"
+                                                       class="btn-link text-primary" target="_blank">제주/도서
+                                                        산간지역안내</a>
+                                                </p>
+                                            </div>
+
+                                            <div class="form-inline mobile-inline has-error-msg ng-hide">
+                                                <div class="form-group form-control-static">
+                                                    제주 및 도서산간 추가배송비
+                                                </div>
+                                                <div class="form-group form-control-static ng-hide">
+                                                    제주 추가배송비
+                                                </div>
+                                                <div class="form-group ng-hide">
+                                                    <div class="input-group">
+                                                        <div class="seller-input-wrap">
+                                                            <input type="tel"
+                                                                   class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-max ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-valid ng-valid-required"
+                                                                   min="10" minlength="2" max="100000" maxlength="10"
+                                                                   disabled="disabled">
+                                                            <a role="button" class="btn-clear" tabindex="-1"
+                                                               style="display: none;"><span aria-label="삭제">×</span></a>
+                                                        </div>
+                                                        <span class="input-group-addon">원</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group form-control-static ng-hide">
+                                                    제주 외 도서산간 추가배송비
+                                                </div>
+                                                <div class="form-group ng-hide">
+                                                    <div class="input-group">
+                                                        <div class="seller-input-wrap">
+                                                            <input type="tel"
+                                                                   class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-max ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-valid ng-valid-required"
+                                                                   min="10" minlength="2" max="100000" maxlength="10"
+                                                                   disabled="disabled"><a
+                                                                role="button" class="btn-clear" tabindex="-1"
+                                                                style="display: none;"><span
+                                                                aria-label="삭제">×</span></a>
+                                                        </div>
+                                                        <span class="input-group-addon">원</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-sub-detail-wrap">
+                                    <label class="control-label" for="basic_price">기본 배송비
+                                        <i class="icon-must" aria-label="필수항목"></i>
+                                    </label>
+                                    <div class="input-content">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="seller-input-wrap">
+                                                        <input name="product.deliveryInfo.deliveryFee.baseFee"
+                                                               type="tel"
+                                                               class="form-control ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
+                                                               id="basic_price" placeholder="숫자만 입력" min="10"
+                                                               minlength="2" max="100000" maxlength="10"
+                                                               required="required"><a role="button"
+                                                                                      class="btn-clear" tabindex="-1"
+                                                                                      style="display: none;"><span
+                                                            aria-label="삭제">×</span></a>
+                                                    </div>
+                                                    <span class="input-group-addon">원</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-sub-detail-wrap">
+                                    <label class="control-label">결제방식
+                                        <i aria-label="필수항목"></i>
+                                    </label>
+                                    <div class="input-content">
+                                        <div class="form-group">
+                                            <div class="seller-input">
+                                                <label><input type="radio" name="payment"
+                                                              value="COLLECT"
+                                                              class="ng-pristine ng-untouched ng-valid ng-not-empty">착불<span></span></label><label><input
+                                                    type="radio" name="payment"
+                                                    value="PREPAID"
+                                                    class="ng-pristine ng-untouched ng-valid ng-not-empty">선결제<span></span></label><label><input
+                                                    type="radio" name="payment"
+                                                    value="COLLECT_OR_PREPAID"
+                                                    class="ng-pristine ng-untouched ng-valid ng-not-empty">착불
+                                                또는 선결제<span></span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-sub-wrap">
+                                <label class="control-label">출고지<i class="icon-must"
+                                                                   aria-label="필수항목"></i></label>
+                                <div class="input-content">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="hidden" name="_shippingAddress" autocomplete="off"
+                                                   class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required"
+                                                   required="required">
+                                            <div class="text-info">
+                                                <strong>조성익</strong>
+                                                <p>(우 : 02427) 서울특별시 동대문구 휘경로17길 17-5 지하1층</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="vertical-align: bottom">
+                                            <button type="button" class="btn btn-single btn-block">판매자 주소록</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-lg-2 col-sm-3 col-xs-4 control-label">반품/교환<i class="icon-must"
+                                                                                    aria-label="필수항목"></i> <a
+                            role="button"
+                            href=""><i class="fn fn-help1 text-primary"
+                                       aria-hidden="true"></i><span class="sr-only">도움말</span></a></label>
+                    <div class="col-lg-10 col-sm-9 col-xs-8 input-content">
+                        <div class="set-option">
+                            <a class="btn btn-default active" href="" style=""><span
+                                    class="sr-only">메뉴 토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-content input-content" style="">
+                    <div class="form-section-sub">
+                        <div class="ng-valid ng-valid-required ng-valid-min ng-valid-max ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse"
+                             style="">
+                            <div class="form-sub-wrap">
+                                <label class="control-label">반품/교환 택배사<i class="icon-must"
+                                                                         aria-label="필수항목"></i>
+                                </label>
+                                <div class="input-content">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="hidden" autocomplete="off"
+                                                   class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required"
+                                                   required="required">
+                                            <div class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                                <div
+                                                        class="selectize-input items ng-valid ng-pristine has-options full has-items">
+                                                    <div data-value="255012" class="item">기본
+                                                        반품택배사(로젠택배)
+                                                    </div>
+                                                    <input type="text" autocomplete="off" tabindex="0" readonly=""
+                                                           style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                                </div>
+                                                <div class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                        style="display: none;">
+                                                    <div class="selectize-dropdown-content">
+                                                        <div data-value="255012" data-selectable=""
+                                                             class="option selected">기본 반품택배사(로젠택배)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input selectize="" name="_returnDeliveryCompany"
+                                                   config="vm.returnDeliveryCompanyConfig"
+                                                   options="vm.returnDeliveryCompanyOptions"
+                                                   class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+                                                   tabindex="-1" value="255012"
+                                                   style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                        </div>
+                                    </div>
+                                    <p class="sub-text text-primary">
+                                        <a role="button" href="" class="btn-link text-primary">반품택배사 설정 안내</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-sub-wrap">
+                                <label class="control-label" for="return_price">반품배송비(편도)
+                                    <i class="icon-must"
+                                       aria-label="필수항목"></i> <a href="" role="button"
+                                                                 class="font-icon-button"><i
+                                            class="fn fn-info1" aria-hidden="true"></i><span
+                                            class="sr-only">툴팁</span></a>
+                                </label>
+                                <div class="input-content">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="seller-input-wrap">
+                                                    <input name="product.deliveryInfo.claimDeliveryInfo.returnDeliveryFee"
+                                                            type="tel"
+                                                            class="form-control ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
+                                                            id="return_price" placeholder="숫자만 입력"
+                                                            min="0" minlength="1" max="1000000" maxlength="10" 
+                                                            required="required"><a
+                                                        role="button" class="btn-clear" tabindex="-1"
+                                                        style="display: none;"><span aria-label="삭제">×</span></a>
+                                                </div>
+                                                <span class="input-group-addon">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="sub-text text-primary">최초 배송시의 배송비가 무료인 경우 왕복
+                                        배송비 6,000원이 청구됩니다.</p>
+                                </div>
+                            </div>
+                            <div class="form-sub-wrap">
+                                <label class="control-label" for="exchange_price">교환배송비(왕복)
+                                    <i class="icon-must"
+                                       aria-label="필수항목"></i> <a href="" role="button"
+                                                                 class="font-icon-button"><i
+                                            class="fn fn-info1" aria-hidden="true"></i><span
+                                            class="sr-only">툴팁</span></a>
+                                </label>
+                                <div class="input-content">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="seller-input-wrap">
+                                                    <input name="product.deliveryInfo.claimDeliveryInfo.exchangeDeliveryFee"
+                                                            type="tel"
+                                                            class="form-control ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
+                                                            id="exchange_price" placeholder="숫자만 입력" min="0"
+                                                            minlength="1" max="1000000" maxlength="10"  required="required" style=""><a
+                                                        role="button" class="btn-clear" tabindex="-1"
+                                                        style="display: none;"><span aria-label="삭제">×</span></a>
+                                                </div>
+                                                <span class="input-group-addon">원</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-sub-wrap">
+                                <label class="control-label">반품/교환지 <i class="icon-must"
+                                                                       aria-label="필수항목"></i>
+                                </label>
+                                <div class="input-content">
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="hidden" name="_returnAddress" autocomplete="off"
+                                                   class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required"
+                                                   required="required">
+                                            <div class="text-info">
+                                                <strong>조성익</strong>
+                                                <p>(우 : 02427) 서울특별시 동대문구 휘경로17길 17-5 지하1층</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="vertical-align: bottom">
+                                            <button type="button" class="btn btn-single btn-block">판매자 주소록</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seller-btn-area ng-hide">
+                                <button
+                                        class="btn btn-sm btn-default2 progress-button progress-button-dir-horizontal progress-button-style-top-line"
+                                        type="button">
+                                    <span class="content" ng-transclude="">변경</span><span
+                                        class="progress"><span
+                                        class="progress-inner notransition"></span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="title-line" role="button">
+                    <label class="col-sm-2 col-xs-4 control-label">검색설정 <a
+                            role="button" href=""><i
+                            class="fn fn-help1 text-primary" aria-hidden="true"></i><span
+                            class="sr-only">도움말</span></a></label>
+                    <div class="col-sm-10 col-xs-8 input-content">
+                        <div class="set-option">
+                            <a class="btn btn-default active" href="" style=""><span
+                                    class="sr-only">메뉴토글</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-content input-content" style="">
+                    <div class="form-section-sub">
+                        <div class="form-sub-wrap">
+                            <label class="control-label">태그 <a href=""
+                                                               role="button" class="font-icon-button"><i
+                                    class="fn fn-info1" aria-hidden="true"></i><span
+                                    class="sr-only">툴팁</span></a></label>
+                            <div class="input-content">
+                                <div class="seller-data-list tag-list hidden-xs">
+                                    <div>
+                                        <span class="title">요즘 뜨는 HOT 태그</span>
+                                        <ul class="data-group">
+                                            <li><a href="">이색적인</a></li>
+                                            <li><a href="">빈티지스러운</a></li>
+                                            <li><a href="">밀리터리룩코디</a></li>
+                                            <li><a href="">럭셔리데일리룩</a></li>
+                                            <li><a href="">LOVELY</a></li>
+                                            <li><a href="">페미닌룩코디</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <span class="title">감성태그</span>
+                                        <ul class="data-group">
+                                            <li><a href="">간지나는</a></li>
+                                            <li><a href="">하객패션</a></li>
+                                            <li><a href="">댄디코디</a></li>
+                                            <li><a href="">견고한</a></li>
+                                            <li><a href="">원포인트코디</a></li>
+                                            <li><a href="">일상패션</a></li>
+                                            <li><a href="">엣지매력</a></li>
+                                            <li><a href="">심플리스</a></li>
+                                            <li><a href="">뉴욕빈티지</a></li>
+                                            <li><a href="">시즌잇템</a></li>
+                                            <li><a href="">가죽패션</a></li>
+                                            <li><a href="">럭셔리수공예</a></li>
+                                            <li><a href="">신학기패션</a></li>
+                                            <li><a href="">시선집중</a></li>
+                                            <li><a href="">바스켓코디</a></li>
+                                            <li><a href="">훈남</a></li>
+                                            <li><a href="">상큼발랄한</a></li>
+                                            <li><a href="">캐주얼패션</a></li>
+                                            <li><a href="">블랙간지</a></li>
+                                            <li><a href="">포멀</a></li>
+                                            <li><a href="">패피스타일</a></li>
+                                            <li><a href="">올드스쿨빈티지</a></li>
+                                            <li><a href="">80s빈티지</a></li>
+                                            <li><a href="">컬러풀한디자인</a></li>
+                                            <li><a href="">둥글둥글</a></li>
+                                            <li><a href="">화사한컬러</a></li>
+                                            <li><a href="">빈티지</a></li>
+                                            <li><a href="">패피들이애정하는</a></li>
+                                            <li><a href="">여심룩</a></li>
+                                            <li><a href="">단순</a></li>
+                                            <li><a href="">파스텔스타일</a></li>
+                                            <li><a href="">10대코디</a></li>
+                                            <li><a href="">독특한</a></li>
+                                            <li><a href="">큐트걸보이</a></li>
+                                            <li><a href="">캐쥬얼</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <span class="title">이벤트형 태그</span>
+                                        <ul class="data-group">
+                                            <li><a href="">봄</a></li>
+                                            <li><a href="">돌잔치</a></li>
+                                            <li><a href="">결혼식</a></li>
+                                            <li><a href="">간절기</a></li>
+                                            <li><a href="">겨울</a></li>
+                                            <li><a href="">바캉스</a></li>
+                                            <li><a href="">졸업식</a></li>
+                                            <li><a href="">가을</a></li>
+                                            <li><a href="">사계절</a></li>
+                                            <li><a href="">프러포즈</a></li>
+                                            <li><a href="">여름휴가</a></li>
+                                            <li><a href="">기념일</a></li>
+                                            <li><a href="">어버이날</a></li>
+                                            <li><a href="">나들이</a></li>
+                                            <li><a href="">연말모임</a></li>
+                                            <li><a href="">신혼여행</a></li>
+                                            <li><a href="">여름</a></li>
+                                            <li><a href="">입학식</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <span class="title">타겟형 태그</span>
+                                        <ul class="data-group">
+                                            <li><a href="">초등학생</a></li>
+                                            <li><a href="">여성</a></li>
+                                            <li><a href="">40대</a></li>
+                                            <li><a href="">30대남성</a></li>
+                                            <li><a href="">10대</a></li>
+                                            <li><a href="">10대남성</a></li>
+                                            <li><a href="">50대남성</a></li>
+                                            <li><a href="">커플</a></li>
+                                            <li><a href="">20대</a></li>
+                                            <li><a href="">40대남성</a></li>
+                                            <li><a href="">30대</a></li>
+                                            <li><a href="">20대남성</a></li>
+                                            <li><a href="">중고등학생</a></li>
+                                            <li><a href="">60대이상남성</a></li>
+                                            <li><a href="">60대이상</a></li>
+                                            <li><a href="">50대</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="select-category visible-xs">
+                                    <div class="form-group">
+                                        <div
+                                                class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                            <div
+                                                    class="selectize-input items not-full ng-valid ng-pristine has-options">
+                                                <input type="text" autocomplete="off" tabindex="0"
+                                                       placeholder="요즘 뜨는 HOT 태그" readonly=""
+                                                       style="width: 111.344px;">
+                                            </div>
+                                            <div
+                                                    class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                    style="display: none;">
+                                                <div class="selectize-dropdown-content">
+                                                    <div data-value="20406" data-selectable=""
+                                                         class="option active">이색적인
+                                                    </div>
+                                                    <div data-value="991107" data-selectable=""
+                                                         class="option">빈티지스러운
+                                                    </div>
+                                                    <div data-value="3713289" data-selectable=""
+                                                         class="option">밀리터리룩코디
+                                                    </div>
+                                                    <div data-value="4483533" data-selectable=""
+                                                         class="option">럭셔리데일리룩
+                                                    </div>
+                                                    <div data-value="680013" data-selectable=""
+                                                         class="option">LOVELY
+                                                    </div>
+                                                    <div data-value="243397" data-selectable=""
+                                                         class="option">페미닌룩코디
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select selectize="" placeholder="요즘 뜨는 HOT 태그"
+                                                options="vm.viewData.hotTags" ng-model="vm.mobileHotTag"
+                                                class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-empty"
+                                                tabindex="-1"
+                                                style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                            <option value="? undefined:undefined ?" selected="selected"></option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div
+                                                class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                            <div
+                                                    class="selectize-input items not-full ng-valid ng-pristine has-options">
+                                                <input type="text" autocomplete="off" tabindex="0"
+                                                       placeholder="감성태그" readonly="" style="width: 52px;">
+                                            </div>
+                                            <div
+                                                    class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                    style="display: none;">
+                                                <div class="selectize-dropdown-content">
+                                                    <div data-value="172256" data-selectable=""
+                                                         class="option active">간지나는
+                                                    </div>
+                                                    <div data-value="4676" data-selectable="" class="option">하객패션
+                                                    </div>
+                                                    <div data-value="75476" data-selectable="" class="option">착화감좋은
+                                                    </div>
+                                                    <div data-value="314384" data-selectable=""
+                                                         class="option">댄디코디
+                                                    </div>
+                                                    <div data-value="19395" data-selectable="" class="option">견고한
+                                                    </div>
+                                                    <div data-value="83074" data-selectable="" class="option">원포인트코디
+                                                    </div>
+                                                    <div data-value="76253" data-selectable="" class="option">일상패션
+                                                    </div>
+                                                    <div data-value="1723756" data-selectable=""
+                                                         class="option">아메카지신발
+                                                    </div>
+                                                    <div data-value="3168904" data-selectable=""
+                                                         class="option">캐주얼남자화
+                                                    </div>
+                                                    <div data-value="1930641" data-selectable=""
+                                                         class="option">엣지매력
+                                                    </div>
+                                                    <div data-value="172219" data-selectable=""
+                                                         class="option">모던스니커즈
+                                                    </div>
+                                                    <div data-value="903753" data-selectable=""
+                                                         class="option">심플리스
+                                                    </div>
+                                                    <div data-value="794778" data-selectable=""
+                                                         class="option">뉴욕빈티지
+                                                    </div>
+                                                    <div data-value="75834" data-selectable="" class="option">시즌잇템
+                                                    </div>
+                                                    <div data-value="888276" data-selectable=""
+                                                         class="option">가죽패션
+                                                    </div>
+                                                    <div data-value="367085" data-selectable=""
+                                                         class="option">회사갈때신기좋은
+                                                    </div>
+                                                    <div data-value="1910543" data-selectable=""
+                                                         class="option">럭셔리수공예
+                                                    </div>
+                                                    <div data-value="105000" data-selectable=""
+                                                         class="option">모던슈즈
+                                                    </div>
+                                                    <div data-value="835738" data-selectable=""
+                                                         class="option">신학기패션
+                                                    </div>
+                                                    <div data-value="6609" data-selectable="" class="option">시선집중
+                                                    </div>
+                                                    <div data-value="246431" data-selectable=""
+                                                         class="option">캐쥬얼단화
+                                                    </div>
+                                                    <div data-value="754033" data-selectable=""
+                                                         class="option">캐쥬얼배낭
+                                                    </div>
+                                                    <div data-value="1856840" data-selectable=""
+                                                         class="option">바스켓코디
+                                                    </div>
+                                                    <div data-value="153326" data-selectable=""
+                                                         class="option">훈남
+                                                    </div>
+                                                    <div data-value="1154383" data-selectable=""
+                                                         class="option">남성용독특한구두
+                                                    </div>
+                                                    <div data-value="4609" data-selectable="" class="option">상큼발랄한
+                                                    </div>
+                                                    <div data-value="226742" data-selectable=""
+                                                         class="option">캐주얼패션
+                                                    </div>
+                                                    <div data-value="618815" data-selectable=""
+                                                         class="option">블랙간지
+                                                    </div>
+                                                    <div data-value="525265" data-selectable=""
+                                                         class="option">폭신한슈즈
+                                                    </div>
+                                                    <div data-value="4668" data-selectable="" class="option">포멀
+                                                    </div>
+                                                    <div data-value="4660" data-selectable="" class="option">패피스타일
+                                                    </div>
+                                                    <div data-value="5403517" data-selectable=""
+                                                         class="option">올드스쿨빈티지
+                                                    </div>
+                                                    <div data-value="539093" data-selectable=""
+                                                         class="option">케쥬얼신발
+                                                    </div>
+                                                    <div data-value="222768" data-selectable=""
+                                                         class="option">80s빈티지
+                                                    </div>
+                                                    <div data-value="1298517" data-selectable=""
+                                                         class="option">컬러풀한디자인
+                                                    </div>
+                                                    <div data-value="1873622" data-selectable=""
+                                                         class="option">둥글둥글
+                                                    </div>
+                                                    <div data-value="1627405" data-selectable=""
+                                                         class="option">남성화캐주얼
+                                                    </div>
+                                                    <div data-value="885862" data-selectable=""
+                                                         class="option">캐주얼정장신발
+                                                    </div>
+                                                    <div data-value="469155" data-selectable=""
+                                                         class="option">화사한컬러
+                                                    </div>
+                                                    <div data-value="5528" data-selectable="" class="option">빈티지
+                                                    </div>
+                                                    <div data-value="75616" data-selectable="" class="option">패피들이애정하는
+                                                    </div>
+                                                    <div data-value="5284378" data-selectable=""
+                                                         class="option">여심룩
+                                                    </div>
+                                                    <div data-value="182373" data-selectable=""
+                                                         class="option">남자스니커즈코디
+                                                    </div>
+                                                    <div data-value="672254" data-selectable=""
+                                                         class="option">단순
+                                                    </div>
+                                                    <div data-value="2193526" data-selectable=""
+                                                         class="option">파스텔스타일
+                                                    </div>
+                                                    <div data-value="598654" data-selectable=""
+                                                         class="option">10대코디
+                                                    </div>
+                                                    <div data-value="3226712" data-selectable=""
+                                                         class="option">겨울케주얼화
+                                                    </div>
+                                                    <div data-value="6641" data-selectable="" class="option">독특한
+                                                    </div>
+                                                    <div data-value="1903883" data-selectable=""
+                                                         class="option">큐트걸보이
+                                                    </div>
+                                                    <div data-value="8055" data-selectable="" class="option">캐쥬얼
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select selectize="" placeholder="감성태그"
+                                                options="vm.viewData.emotionTags"
+                                                class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-empty"
+                                                tabindex="-1"
+                                                style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                            <option value="? undefined:undefined ?" selected="selected"></option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"
+                                         ng-if="vm.viewData.eventTags &amp;&amp; vm.viewData.eventTags.length > 0">
+                                        <div
+                                                class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                            <div
+                                                    class="selectize-input items not-full ng-valid ng-pristine has-options">
+                                                <input type="text" autocomplete="off" tabindex="0"
+                                                       placeholder="이벤트형 태그" readonly=""
+                                                       style="width: 79.3438px;">
+                                            </div>
+                                            <div
+                                                    class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                    style="display: none;">
+                                                <div class="selectize-dropdown-content">
+                                                    <div data-value="656" data-selectable=""
+                                                         class="option active">봄
+                                                    </div>
+                                                    <div data-value="657" data-selectable="" class="option">돌잔치
+                                                    </div>
+                                                    <div data-value="12212" data-selectable="" class="option">결혼식
+                                                    </div>
+                                                    <div data-value="679" data-selectable="" class="option">간절기
+                                                    </div>
+                                                    <div data-value="97923" data-selectable="" class="option">겨울
+                                                    </div>
+                                                    <div data-value="654" data-selectable="" class="option">바캉스
+                                                    </div>
+                                                    <div data-value="227045" data-selectable=""
+                                                         class="option">졸업식
+                                                    </div>
+                                                    <div data-value="97922" data-selectable="" class="option">가을
+                                                    </div>
+                                                    <div data-value="5323" data-selectable="" class="option">사계절
+                                                    </div>
+                                                    <div data-value="15590" data-selectable="" class="option">프러포즈
+                                                    </div>
+                                                    <div data-value="4686" data-selectable="" class="option">여름휴가
+                                                    </div>
+                                                    <div data-value="11921" data-selectable="" class="option">기념일
+                                                    </div>
+                                                    <div data-value="669" data-selectable="" class="option">어버이날
+                                                    </div>
+                                                    <div data-value="675" data-selectable="" class="option">나들이
+                                                    </div>
+                                                    <div data-value="76243" data-selectable="" class="option">연말모임
+                                                    </div>
+                                                    <div data-value="7337" data-selectable="" class="option">신혼여행
+                                                    </div>
+                                                    <div data-value="676" data-selectable="" class="option">여름
+                                                    </div>
+                                                    <div data-value="227046" data-selectable=""
+                                                         class="option">입학식
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select placeholder="이벤트형 태그"
+                                                config="::vm.config.mobileRecommendTagSelectizeConfig"
+                                                options="vm.viewData.eventTags"
+                                                class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-empty"
+                                                tabindex="-1"
+                                                style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                            <option value="? undefined:undefined ?" selected="selected"></option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div
+                                                class="selectize-control ng-pristine ng-untouched ng-valid single">
+                                            <div
+                                                    class="selectize-input items not-full ng-valid ng-pristine has-options">
+                                                <input type="text" autocomplete="off" tabindex="0"
+                                                       placeholder="타겟형 태그" readonly=""
+                                                       style="width: 67.3438px;">
+                                            </div>
+                                            <div
+                                                    class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+                                                    style="display: none;">
+                                                <div class="selectize-dropdown-content">
+                                                    <div data-value="648" data-selectable=""
+                                                         class="option active">초등학생
+                                                    </div>
+                                                    <div data-value="636" data-selectable="" class="option">여성
+                                                    </div>
+                                                    <div data-value="76629" data-selectable="" class="option">40대
+                                                    </div>
+                                                    <div data-value="400196" data-selectable=""
+                                                         class="option">30대남성
+                                                    </div>
+                                                    <div data-value="612" data-selectable="" class="option">10대
+                                                    </div>
+                                                    <div data-value="942421" data-selectable=""
+                                                         class="option">10대남성
+                                                    </div>
+                                                    <div data-value="1457012" data-selectable=""
+                                                         class="option">50대남성
+                                                    </div>
+                                                    <div data-value="649" data-selectable="" class="option">커플
+                                                    </div>
+                                                    <div data-value="613" data-selectable="" class="option">20대
+                                                    </div>
+                                                    <div data-value="540157" data-selectable=""
+                                                         class="option">40대남성
+                                                    </div>
+                                                    <div data-value="76636" data-selectable="" class="option">30대
+                                                    </div>
+                                                    <div data-value="672449" data-selectable=""
+                                                         class="option">20대남성
+                                                    </div>
+                                                    <div data-value="1244836" data-selectable=""
+                                                         class="option">중고등학생
+                                                    </div>
+                                                    <div data-value="5950996" data-selectable=""
+                                                         class="option">60대이상남성
+                                                    </div>
+                                                    <div data-value="5950997" data-selectable=""
+                                                         class="option">60대이상
+                                                    </div>
+                                                    <div data-value="246400" data-selectable=""
+                                                         class="option">50대
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select selectize="" placeholder="타겟형 태그"
+                                                class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-empty"
+                                                tabindex="-1"
+                                                style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+                                            <option value="? undefined:undefined ?" selected="selected"></option>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="info-result">
+                                    <div class="form-group">
+                                        <div class="seller-input">
+                                            <label><input type="checkbox"
+                                                          class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                태그 직접 입력(선택포함 최대 10개)<span></span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choice-content choice-tag">
+                                                <span class="choice-label"
+                                                >#
+                                                    가죽드라이빙슈즈 <a role="button"
+                                                                href=""><i
+                                                            aria-hidden="true" class="choice-close"
+                                                            aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    드라이빙슈즈 <a role="button"
+                                                              href=""><i
+                                            aria-hidden="true" class="choice-close" aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    스웨이드드라이빙슈즈 <a role="button"
+                                                                  href=""><i
+                                            aria-hidden="true" class="choice-close" aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    남자드라이빙슈즈 <a role="button"
+                                                                href=""><i
+                                            aria-hidden="true" class="choice-close" aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    여자드라이빙슈즈 <a role="button"
+                                                                href=""><i
+                                            aria-hidden="true" class="choice-close" aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    남자슈즈 <a role="button"
+                                                            href=""><i aria-hidden="true" class="choice-close"
+                                                                       aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    개성강한 <a role="button"
+                                                            href=""><i aria-hidden="true" class="choice-close"
+                                                                       aria-label="삭제">×</i></a>
+                                                </span><span class="choice-label"
+                                >#
+                                                    캐쥬얼한 <a role="button"
+                                                            href=""><i aria-hidden="true" class="choice-close"
+                                                                       aria-label="삭제">×</i></a>
+                                                </span>
+                                </div>
+                                <p class="sub-text text-primary">
+                                    입력하신 태그 중 일부는 내부 기준에 의해검색에 노출되지 않을 수 있습니다.<br>카테고리/ 브랜드/
+                                    판매처명이 포함된 태그의 경우는 등록되지 않습니다.<br>판매상품과 직접 관련 없는 태그를 입력 시
+                                    판매금지될 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap">
+                            <label class="control-label" for="search2">Page Title<a
+                                    role="button" href=""><i
+                                    class="fn fn-help1 text-primary" aria-hidden="true"></i><span
+                                    class="sr-only">도움말</span></a></label>
+                            <div class="input-content">
+                                <div class="form-group">
+                                    <div class="seller-input-wrap">
+                                        <input name="product.detailAttribute.seoInfo.pageTitle"
+                                               type="text"
+                                               class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-pattern ng-valid-maxlength"
+                                               id="search2"
+                                               maxlength="100"><a role="button"
+                                                                  class="btn-clear" tabindex="-1"
+                                                                  style="display: none;"><span
+                                            aria-label="삭제">×</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-sub-wrap" ng-hide="::vm.viewData.isSetProduct">
+                            <label class="control-label" for="search3">Meta
+                                description <a role="button" href=""><i
+                                        class="fn fn-help1 text-primary" aria-hidden="true"></i><span
+                                        class="sr-only">도움말</span></a>
+                            </label>
+                            <div class="input-content">
+                                <div class="form-group">
+                                    <div class="seller-input-wrap">
+                                        <input
+                                                name="product.detailAttribute.seoInfo.metaDescription"
+                                                type="text"
+                                                class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-pattern ng-valid-maxlength"
+                                                placeholder="" id="search3"
+                                                maxlength="160"><a role="button"
+                                                                   class="btn-clear" tabindex="-1"
+                                                                   style="display: none;"><span
+                                            aria-label="삭제">×</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="seller-btn-area btn-group-xlg hidden-xs">
+
+                <div class="btn-group btn-group-lg">
+                    <button type="button"
+                            class="btn btn-default2"
+                            target="preview">미리보기
+                    </button>
+                    <button type="button"
+                            class="btn btn-primary progress-button progress-button-dir-horizontal progress-button-style-top-line">
+                        <span class="content">저장하기</span><span
+                            class="progress"><span class="progress-inner notransition"></span></span>
+                    </button>
+                </div>
+                <div class="btn-group btn-group-lg">
+                    <button type="button"
+                            class="btn btn-default">삭제
+                    </button>
+                    <button type="button"
+                            class="btn btn-default">취소
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="productFormMobileFloatingBar"
+			class="btn-group btn-group-justified visible-xs navbar-fixed-bottom"
+			role="group">
+			
+	<div class="btn-group" role="group">
+		<button type="button"
+				class="btn btn-primary btn-lg progress-button progress-button-dir-horizontal progress-button-style-top-line">
+			<span class="content">저장하기</span>
+			<span class="progress"><span class="progress-inner notransition"></span>
+			</span>
+		</button>
+	</div>
+	<div class="btn-group" role="group">
+		<button type="button" class="btn btn-default btn-lg">삭제</button>
+	</div>
+	<div class="btn-group" role="group">
+		<button class="btn btn-default btn-lg" data-nclicks-code="flt.cancel">취소</button>
+	</div>
+		
+</div>
+</div>
