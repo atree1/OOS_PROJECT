@@ -1,0 +1,692 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/sellerLayout}">
+<div class="container" style="margin-top: 20px;"
+	layout:fragment="container">
+
+<div class="seller-content" role="main">
+	<div id="seller-content" class="seller-sub-frame">
+		<div ng-if="!vm.useOwnTitleBar" class="">
+			<div class="seller-sub-title" ng-if="vm.title">
+				<div class="pull-left">
+					<h2 class="title">판매자 정보</h2>
+				</div>
+				<div class="pull-right hidden-xs" ui-view="title-right"></div>
+			</div>
+			<div class="seller-flick" ng-if="vm.hasMenu3d()" style="">
+				<div class="seller-flick-container">
+					<div class="scroller ps-container ps-theme-default"
+						options="{hideScrollbars:true}"
+						data-ps-id="5dad5b4c-b483-dd4c-0df6-b966f4ee4a80">
+						<div ng-transclude="">
+							<ul class="seller-menu-tap" role="tablist">
+								<li role="tab"
+									ng-repeat="menu3d in vm.currentMenu3d track by $index"
+									ui-sref-active-eq="selected" ng-if="vm.menu2dChanged"
+									class="selected"><a href="#/seller/info"
+									ui-sref="main.seller-info"
+									ui-sref-opts="{&quot;reload&quot;:&quot;main.seller-info&quot;}"><span>판매자
+											정보</span></a></li>
+								<li role="tab"
+									ng-repeat="menu3d in vm.currentMenu3d track by $index"
+									ui-sref-active-eq="selected" ng-if="vm.menu2dChanged"><a
+									href="#/seller/withdraw" ui-sref="main.seller-withdraw"
+									ui-sref-opts="{&quot;reload&quot;:&quot;main.seller-withdraw&quot;}"><span>탈퇴
+											신청</span></a></li>
+							</ul>
+						</div>
+						<div class="ps-scrollbar-x-rail"
+							style="left: 0px; bottom: 0px; display: none;">
+							<div class="ps-scrollbar-x" tabindex="0"
+								style="left: 0px; width: 0px;"></div>
+						</div>
+						<div class="ps-scrollbar-y-rail"
+							style="top: 0px; right: 0px; display: none;">
+							<div class="ps-scrollbar-y" tabindex="0"
+								style="top: 0px; height: 0px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ui-view class="" style="">
+		<form id="infoChangeForm" name="vm.modifyForm" novalidate=""
+			autocomplete="off" validate-non-visible-controls="true"
+			class="ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength">
+			<div class="seller-sub-content">
+				<ng-include src="'center/sellers/info/include/represent.html.inc'">
+				<div class="panel panel-seller">
+					<div class="panel-heading">
+						<div class="pull-left">
+							<h3 class="panel-title">판매자 정보</h3>
+						</div>
+						<div class="pull-right"></div>
+						<div class="pull-right">
+							<button ng-click="vm.realtimeNotiConf()"
+								ng-if="vm.accountInfo.naverPay &amp;&amp; vm.accountInfo.payUseYn"
+								type="button" class="btn btn-default2 btn-sm">실시간 알림 설정
+							</button>
+							<button ng-click="vm.printEscrowDocument()"
+								ng-if="vm.canPrintEscrow()" type="button"
+								class="btn btn-primary btn-sm">
+								<i class="seller-icon icon-print hidden-xs" aria-hidden="true"></i>
+								구매안전서비스 이용확인증
+							</button>
+						</div>
+					</div>
+					<div class="panel-body">
+						<ul class="seller-list-border">
+							<li><label class="control-label">판매자 유형</label>
+								<div class="input-content">
+									<div class="form-control-static">국내 사업자</div>
+								</div></li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS' || vm.accountInfo.represent.representType == 'OVERSEAS_BUSINESS'">
+								<label class="control-label">상호</label>
+								<div class="input-content">
+									<div class="form-control-static">일루젼</div>
+								</div>
+							</li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS' || vm.accountInfo.represent.representType == 'OVERSEAS_BUSINESS'">
+								<label class="control-label">사업자<span class="hidden-xs">등록</span>번호
+							</label>
+
+								<div
+									ng-if="vm.accountInfo.represent.representType === 'DOMESTIC_BUSINESS'"
+									class="input-content">
+									<div class="form-control-static">705-12-00210</div>
+								</div>
+							</li>
+							<li><label class="control-label">사업장<br
+									class="visible-xs">소재지
+							</label>
+
+								<div class="input-content"
+									ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS'">
+									<div class="form-control-static">(우 : 02427) 서울특별시 동대문구
+										휘경로17길 17-5 지하1층</div>
+								</div></li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS'">
+								<label class="control-label">사업자 구분</label>
+								<div class="input-content">
+									<div class="form-control-static">간이사업자</div>
+								</div>
+							</li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS'">
+								<label class="control-label">업태</label>
+								<div class="input-content">
+									<div class="form-control-static">서비스</div>
+								</div>
+							</li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS'">
+								<label class="control-label">업종</label>
+								<div class="input-content">
+									<div class="form-control-static">기타 섬유, 직물 및 의복액세서리 소매업</div>
+								</div>
+							</li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS' &amp;&amp; vm.accountInfo.represent.declaredToOnlineMarkettingNumber !== undefined &amp;&amp; !_S.isBlank(vm.accountInfo.represent.declaredToOnlineMarkettingNumber)">
+								<label class="control-label">통신판매업<br class="visible-xs">신고번호
+							</label>
+								<div class="input-content">
+									<div class="form-control-static">2017-서울종로-0322</div>
+								</div>
+							</li>
+							<li
+								ng-if="vm.accountInfo.represent.representType == 'DOMESTIC_BUSINESS' || vm.accountInfo.represent.representType == 'OVERSEAS_BUSINESS'">
+								<label class="control-label">대표자 이름</label>
+								<div class="input-content">
+									<div class="form-control-static">조성익</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</ng-include>
+				<ng-include src="'center/sellers/info/include/member.html.inc'">
+				<div class="panel panel-seller">
+					<div class="panel-heading">
+						<div class="pull-left">
+							<h3 class="panel-title">담당자 정보</h3>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="panel-body-info">
+							<span ng-if="::!vm.accountInfo.represent.isCreator">상품의
+								주문현황 및 </span> 스마트스토어센터 중요 안내를 받는 담당자 정보입니다.
+						</div>
+						<ul class="seller-list-border">
+							<li><label class="control-label">이름</label>
+								<div class="input-content">
+									<div class="form-control-static">조*익</div>
+								</div></li>
+							<li><label class="control-label">로그인ID</label>
+								<div class="input-content">
+									<div class="form-control-static">used****</div>
+								</div></li>
+							<li><label class="control-label">이메일 주소</label>
+								<div class="input-content">
+									<div class="form-control-static">dail****@naver.com</div>
+								</div></li>
+							<li><label class="control-label">휴대폰<br
+									class="visible-xs">번호
+							</label>
+								<div class="input-content">
+									<div class="form-control-static">0108972****</div>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+				</ng-include>
+				<ng-include
+					ng-if="vm.accountInfo.naverPay &amp;&amp; vm.accountInfo.naverPay.id"
+					src="'center/sellers/info/include/settlement.html.inc'">
+				<div class="panel panel-seller">
+					<div class="panel-heading">
+						<h3 class="panel-title">정산정보</h3>
+					</div>
+					<div class="panel-body">
+						<ul class="seller-list-border">
+							<li
+								ng-if="vm.accountInfo.defaultChannel.type !== 'AFFILIATE' &amp;&amp; (vm.accountInfo.represent.representType === 'DOMESTIC_PERSONAL' || vm.accountInfo.represent.representType === 'DOMESTIC_BUSINESS')">
+								<label class="control-label">정산대금<br class="visible-xs">수령방법
+							</label>
+								<div class="input-content">
+									<div class="form-group">
+										<div class="seller-input">
+											<label
+												ng-repeat="settlementType in vm.enums['SettlementType'].values"><input
+												type="radio"
+												ng-model="vm.accountInfo.naverPay.settlementType"
+												name="settlementType" value="BANKACCOUNT"
+												class="ng-pristine ng-untouched ng-valid ng-not-empty">정산대금
+												입금계좌<span></span></label><label
+												ng-repeat="settlementType in vm.enums['SettlementType'].values"><input
+												type="radio"
+												ng-model="vm.accountInfo.naverPay.settlementType"
+												name="settlementType" value="CHARGEPAY"
+												class="ng-pristine ng-untouched ng-valid ng-not-empty">판매자
+												충전금<span></span></label>
+										</div>
+									</div>
+									<p class="sub-text text-primary">정산대금 수령방법 변경시 변경일로부터 1영업일
+										이후에 적용됩니다.</p>
+								</div>
+							</li>
+							<li
+								ng-if="vm.accountInfo.represent.representType === 'DOMESTIC_PERSONAL' || vm.accountInfo.represent.representType === 'DOMESTIC_BUSINESS'">
+								<label class="control-label long-label">정산대금<br
+									class="visible-xs">입금계좌
+							</label>
+								<div class="input-content">
+									<div class="form-inline mobile-inline">
+										<div class="form-group form-control-static">
+											농협 64112****** <span class="text-sub">(예금주:조성익)</span>
+										</div>
+									</div>
+									<p
+										ng-if="vm.accountInfo.represent.representType === 'DOMESTIC_BUSINESS'"
+										class="sub-text text-primary">
+										정산계좌정보는 중요 변경 사항으로 정보변경신청을 통해 변경이 가능합니다. <a
+											ui-sref="main.judgment.modification.input-info"
+											href="#/judgment/modification" class="btn-link text-primary">정보변경신청</a>
+									</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</ng-include>
+				<div class="panel panel-seller">
+					<div class="panel-heading">
+						<h3 class="panel-title">상품 대표 카테고리</h3>
+					</div>
+					<div class="panel-body">
+						<ul class="seller-list-border">
+							<li><label class="control-label">대표 카테고리<i
+									class="icon-must" aria-label="필수항목"></i></label>
+								<div class="input-content">
+									<div class="form-inline">
+										<ncp-product-category-select name="productCategory"
+											product-category="vm.accountInfo.categoryId"
+											selected-depth="1" placeholder="대표 카테고리 선택">
+										<div
+											ng-repeat="categories in vm.depthCategories track by $index"
+											class="form-group" style="">
+											<div
+												class="selectize-control ng-pristine ng-untouched ng-valid single">
+												<div
+													class="selectize-input items required ng-valid ng-pristine full has-options has-items">
+													<div data-value="50000000" class="item">패션의류</div>
+													<input type="text" autocomplete="off" tabindex="0"
+														readonly=""
+														style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+												</div>
+												<div
+													class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+													style="display: none; width: 664px; top: 40px; left: 0px;">
+													<div class="selectize-dropdown-content">
+														<div data-value="50000004" data-selectable=""
+															class="option">가구/인테리어</div>
+														<div data-value="50005542" data-selectable=""
+															class="option">도서</div>
+														<div data-value="50000003" data-selectable=""
+															class="option">디지털/가전</div>
+														<div data-value="50000008" data-selectable=""
+															class="option">생활/건강</div>
+														<div data-value="50000007" data-selectable=""
+															class="option">스포츠/레저</div>
+														<div data-value="50000006" data-selectable=""
+															class="option">식품</div>
+														<div data-value="50000009" data-selectable=""
+															class="option">여행/문화</div>
+														<div data-value="50000005" data-selectable=""
+															class="option">출산/육아</div>
+														<div data-value="50000000" data-selectable=""
+															class="option selected active">패션의류</div>
+														<div data-value="50000001" data-selectable=""
+															class="option">패션잡화</div>
+														<div data-value="50000002" data-selectable=""
+															class="option">화장품/미용</div>
+													</div>
+												</div>
+											</div>
+											<select selectize="" id="181120110628808_1_prod_catg_key_0"
+												name="_category_181120110628808_1_prod_catg_key_0"
+												config="vm.selectizeConfig" options="categories"
+												ng-model="vm.selectedValues[$index]"
+												ng-disabled="vm.isDisabled()" required=""
+												placeholder="카테고리 선택" title="카테고리 선택"
+												class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+												tabindex="-1"
+												style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+												<option value="? string:50000000 ?" selected="selected"></option>
+												<option value="50000000">패션의류</option>
+											</select>
+										</div>
+										</ncp-product-category-select>
+									</div>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+				<ng-include src="'center/sellers/info/include/delivery.html.inc'">
+				<div class="panel panel-seller">
+					<div class="panel-heading">
+						<h3 class="panel-title">배송정보</h3>
+					</div>
+					<div class="panel-body">
+						<div class="panel-body-info">
+							<span class="pull-left">출고지 주소와 반품/교환지 주소는 주소록에서 수정/변경이
+								가능합니다.</span> <span class="pull-right"><button type="button"
+									class="btn btn-default2 btn-sm"
+									ng-click="vm.openAddressBookModal()">주소록</button></span>
+						</div>
+						<ul class="seller-list-border">
+							<li><label class="control-label" for="delivery-addr">출고지
+									주소</label>
+								<div class="input-content">
+									<div class="form-inline">
+										<div class="form-group">
+											<input type="text" class="form-control" value="조성익"
+												id="delivery-addr" readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control"
+											value="(우 : 02427) 서울특별시 동대문구 휘경로17길 17-5 지하1층"
+											title="출고지 주소" readonly="readonly">
+									</div>
+									<div class="form-inline">
+										<div class="form-group">
+											<input type="text" class="form-control" value="010-8972-8053"
+												title="출고지 전화번호1" readonly="readonly">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" value="010-8972-8053"
+												title="출고지 전화번호2" readonly="readonly">
+										</div>
+									</div>
+								</div></li>
+							<li><label class="control-label long-label"
+								for="return-addr">반품/<br class="visible-xs">교환지 주소
+							</label>
+								<div class="input-content">
+									<div class="form-inline">
+										<div class="form-group">
+											<input type="text" class="form-control" value="조성익"
+												id="return-addr" readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control"
+											value="(우 : 02427) 서울특별시 동대문구 휘경로17길 17-5 지하1층"
+											title="반품/교환지 주소" readonly="readonly">
+									</div>
+									<div class="form-inline">
+										<div class="form-group">
+											<input type="text" class="form-control" value="010-8972-8053"
+												title="반품/교환지 전화번호1" readonly="readonly">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" value="010-8972-8053"
+												title="반품/교환지 전화번호2" readonly="readonly">
+										</div>
+									</div>
+								</div></li>
+							<li
+								ng-if="'DOMESTIC_BUSINESS' === vm.accountInfo.represent.representType &amp;&amp; !vm.isMobile()">
+								<label class="control-label long-label">굿스플로 서비스<br>신청/관리
+							</label>
+								<div class="input-content">
+									<button type="button" class="btn btn-default2"
+										ng-click="vm.openDeliveryCheck()">택배사 계약정보 확인</button>
+									<p class="sub-text text-primary">계약된 택배사가 있으신 경우, 계약정보 등록 후
+										반품 수거지시 서비스와 굿스플로 송장출력 서비스를 이용하실 수 있습니다.</p>
+								</div>
+							</li>
+							<li
+								ng-if="'DOMESTIC_BUSINESS' === vm.accountInfo.represent.representType &amp;&amp; !vm.isMobile()">
+								<label class="control-label long-label">기본 반품택배사 설정</label>
+								<div class="input-content">
+									<button type="button" class="btn btn-default2"
+										ng-click="vm.openReturnDeliveryModal()">기본 반품택배사 관리</button>
+									<p class="sub-text text-primary">계약 택배사로 설정된 이후에도 택배사 계약코드
+										설정 정보 오류, 택배사 계약상태 변경 등의 사유로 반품 수거가 원활히 이루어지지 않는 경우에는 언제든지 네이버
+										페이 지정(CJ대한통운)택배로 자동 변경될 수 있습니다.</p>
+									<p class="sub-text text-primary">택배사 계약정보가 변경된 경우, 변경 즉시
+										새로운 계약코드로 다시 계약확인 요청 및 반품택배사 재설정을 해주셔야 합니다. 네이버 페이
+										지정(CJ대한통운)택배의 해지를 원하실 경우 고객센터(1588-3819)로 문의 부탁 드립니다</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</ng-include>
+				<div class="panel panel-seller"
+					ng-if="vm.accountInfo.represent.isOverSeaProductSales">
+					<div class="panel-heading">
+						<h3 class="panel-title">해외배송정보</h3>
+					</div>
+					<div class="panel-body">
+						<ul class="seller-list-border">
+							<li><label class="control-label">상품배송 유형<i
+									class="icon-must" aria-label="필수항목"></i></label>
+								<div class="input-content">
+									<div class="form-inline">
+										<div class="form-group">
+											<div
+												class="selectize-control ng-pristine ng-untouched ng-valid single">
+												<div
+													class="selectize-input items required ng-valid ng-pristine full has-options has-items">
+													<div data-value="DELIVER" class="item">택배</div>
+													<input type="text" autocomplete="off" tabindex="0"
+														readonly=""
+														style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+												</div>
+												<div
+													class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+													style="display: none;">
+													<div class="selectize-dropdown-content">
+														<div data-value="DELIVER" data-selectable=""
+															class="option selected active">택배</div>
+														<div data-value="EXPERSS" data-selectable=""
+															class="option">일반특송</div>
+													</div>
+												</div>
+											</div>
+											<select selectize="" id="delivery-type" name="delivery-type"
+												config="vm.config.selectize.default"
+												options="vm.enums['ProductDeliveryType'].values"
+												ng-model="vm.accountInfo.productDeliveryType" required=""
+												title="배송유형 선택"
+												class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
+												tabindex="-1"
+												style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+												<option value="? string:DELIVER ?" selected="selected"></option>
+												<option value="DELIVER">택배</option>
+											</select>
+										</div>
+									</div>
+								</div></li>
+							<li><label class="control-label">수입형태<i
+									class="icon-must" aria-label="필수항목"></i></label>
+								<div class="input-content">
+									<div class="form-inline">
+										<div class="form-group">
+											<div
+												class="selectize-control ng-pristine ng-untouched ng-valid single">
+												<div
+													class="selectize-input items required not-full ng-invalid ng-pristine has-options">
+													<input type="text" autocomplete="off" tabindex="0"
+														readonly="" style="width: 4px;">
+												</div>
+												<div
+													class="selectize-dropdown single ng-pristine ng-untouched ng-valid"
+													style="display: none;">
+													<div class="selectize-dropdown-content">
+														<div data-value="FORMALITY" data-selectable=""
+															class="option active">정식</div>
+														<div data-value="INFORMALITY" data-selectable=""
+															class="option">병행</div>
+													</div>
+												</div>
+											</div>
+											<select selectize="" id="import-type" name="import-type"
+												config="vm.config.selectize.default"
+												options="vm.enums['ImportType'].values"
+												ng-model="vm.accountInfo.importType" required=""
+												title="수입형태 선택"
+												class="ng-pristine ng-untouched selectized ng-invalid ng-invalid-required ng-empty"
+												tabindex="-1"
+												style="width: 4px; opacity: 0; position: absolute; left: -10000px;">
+												<option value="? undefined:undefined ?" selected="selected"></option>
+												<option value=""></option>
+											</select>
+										</div>
+									</div>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+				<ng-include
+					src="'center/sellers/info/include/individual-info-protection-law.html.inc'">
+				<div class="panel panel-seller">
+					<div class="panel-heading">
+						<div class="pull-left">
+							<h3 class="panel-title">
+								판매자 개인정보처리방침 관리 <a href="" role="button"
+									class="font-icon-button"
+									uib-popover-html="'
+                            <ul class=&quot;seller-ul-list&quot;>
+                                <li>저장된 내용은 스마트스토어에 PC로 진입한 사용자에게만 노출 되며 메인 메뉴 가장 하단에 ‘판매자 개인정보처리방침‘ 이라는 메뉴명으로 노출 됩니다.</li>
+                                <li>공개, 비공개 설정 및 입력하신 내용이 스토어에 반영되기까지 최대 5분의 시간이 걸릴 수 있습니다.</li>
+                                <li>배송위탁의 업무내용은 ‘물품배송‘으로 자동 입력되어 노출 됩니다.</li>
+                                <li>기타업무 위탁업체의 경우 최대 5개까지 입력 가능하며 업체명과 위탁 업무 모두 기입 하셔야 저장됩니다.</li>
+                            </ul>'"
+									popover-trigger="'outsideClick'"
+									popover-placement="bottom-left" popover-append-to-body="true"><i
+									class="fn fn-info1" aria-hidden="true"></i><span
+									class="sr-only">툴팁</span></a>
+							</h3>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="panel-body-info">
+							정보통신서비스 제공자로부터 개인정보를 제공받은 사업자는 정보통신망법을 준수해야 하며, 정보통신망법 제27조의2에
+							따라개인정보 처리방침을 정하여 공개할 의무가 있습니다.<br>회사 홈페이지에 별도로 ‘개인정보 처리방침’을
+							공개하지 않는 스마트스토어 판매자 회원의 경우 스마트스토어에서 제공하는 ‘개인정보 처리방침’ 공개 기능을 이용해
+							구매자에게 해당 내용을 고지 할 수 있습니다.
+						</div>
+						<ul class="seller-list-border">
+							<li><label class="control-label">개인정보<br>처리방침공개
+									여부
+							</label>
+								<div class="input-content">
+									<div class="form-group">
+										<div class="seller-input">
+											<label><input type="radio"
+												name="individualInfoProtectionLawExpsYn"
+												ng-model="vm.individualInfoProtectionLawInfo.exposureYn"
+												ng-value="true"
+												class="ng-pristine ng-untouched ng-valid ng-not-empty"
+												value="true">공개<span></span></label><label><input
+												type="radio" name="individualInfoProtectionLawExpsYn"
+												ng-model="vm.individualInfoProtectionLawInfo.exposureYn"
+												ng-value="false"
+												class="ng-pristine ng-untouched ng-valid ng-not-empty"
+												value="false">비공개<span></span></label>
+										</div>
+									</div>
+								</div></li>
+							<li><label class="control-label">배송 위탁<br>업체 입력
+							</label>
+								<div class="input-content">
+									<div class="form-inline">
+										<div class="form-group">
+											<button type="button" class="btn btn-default2"
+												data-target=".data-target-componentSetup"
+												data-toggle="modal"
+												ng-disabled="!vm.individualInfoProtectionLawExposureCheck()"
+												ng-click="vm.getDeliveryCompanies()" disabled="disabled">택배사
+												선택</button>
+										</div>
+										<div class="form-group">
+											<div class="seller-input">
+												<label><input type="checkbox" name="directInput"
+													ng-model="vm.individualInfoProtectionLawInfo.directInput"
+													ng-disabled="!vm.individualInfoProtectionLawExposureCheck()"
+													class="ng-pristine ng-untouched ng-valid ng-empty"
+													disabled="disabled">직접 입력<span></span></label>
+											</div>
+										</div>
+									</div>
+									<div
+										class="modal fade seller-layer-modal data-target-componentSetup"
+										tabindex="-1" role="dialog"
+										aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-md">
+											<div class="modal-content">
+												<div class="modal-header bg-primary">
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="닫기">
+														<span aria-hidden="true">×</span>
+													</button>
+													<h2 class="modal-title">택배사 선택</h2>
+												</div>
+												<div class="modal-body">
+													<p class="sub-text">배송 위탁 택배사를 선택해주세요. 여러 개의 택배사를 선택하실
+														수 있습니다.</p>
+													<div class="form-section form-bg-section">
+														<div class="form-section-sub">
+															<div class="form-sub-detail">
+																<div class="form-sub-detail-wrap">
+																	<div class="form-group">
+																		<div class="input-content">
+																			<div class="seller-input fix-min-width"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<div class="seller-btn-area">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">취소</button>
+														<button type="button" class="btn btn-primary"
+															data-dismiss="modal"
+															ng-click="vm.selectDeliveryCompanies()">확인</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div></li>
+							<li><label class="control-label">기타 업무 위탁&nbsp;<br
+									class="hidden-xs">업체 입력
+							</label>
+								<div class="input-content">
+									<div class="seller-input">
+										<div class="form-group">
+											<label><input type="radio" name="etcConsignmentYn"
+												ng-model="vm.individualInfoProtectionLawInfo.etcConsignmentYn"
+												ng-value="true"
+												ng-disabled="!vm.individualInfoProtectionLawExposureCheck()"
+												ng-click="vm.initEtcConsignmentList()"
+												class="ng-pristine ng-untouched ng-valid ng-not-empty"
+												value="true" disabled="disabled">있음<span></span></label><label><input
+												type="radio" name="etcConsignmentYn"
+												ng-model="vm.individualInfoProtectionLawInfo.etcConsignmentYn"
+												ng-value="false"
+												ng-disabled="!vm.individualInfoProtectionLawExposureCheck()"
+												ng-click="vm.initEtcConsignmentList()"
+												class="ng-pristine ng-untouched ng-valid ng-not-empty"
+												value="false" disabled="disabled">없음<span></span></label>
+										</div>
+									</div>
+									<div class="seller-option-input"></div>
+									<span class="_custom_domain_err_msg"></span>
+								</div></li>
+							<li><label class="control-label">개인정보 보호<br>책임자
+							</label>
+								<div class="input-content">
+									<div class="form-group">
+										<div class="seller-input">
+											<label><input type="checkbox" name="chrgrSame"
+												ng-model="vm.individualInfoProtectionLawInfo.chrgrSame"
+												ng-click="vm.individualInfoProtectionLawChrgrSame()"
+												ng-disabled="!vm.individualInfoProtectionLawExposureCheck()"
+												class="ng-pristine ng-untouched ng-valid ng-empty"
+												disabled="disabled">담당자 정보와 동일<span></span></label>
+											<div class="form-inline">
+												<div class="form-group">
+													<input type="text"
+														class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
+														placeholder="이름" name="chrgrName" ng-maxlength="20"
+														ng-model="vm.individualInfoProtectionLawInfo.chrgrName"
+														ng-disabled="!vm.individualInfoProtectionLawExposureCheck()||vm.individualInfoProtectionLawInfo.chrgrSame"
+														required="" disabled="disabled">
+												</div>
+											</div>
+											<div class="form-group">
+												<input type="text"
+													class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
+													placeholder="이메일 주소" name="chrgrEmail" ng-maxlength="30"
+													ng-model="vm.individualInfoProtectionLawInfo.chrgrEmail"
+													ng-disabled="!vm.individualInfoProtectionLawExposureCheck()||vm.individualInfoProtectionLawInfo.chrgrSame"
+													required="" disabled="disabled">
+											</div>
+										</div>
+									</div>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+				</ng-include>
+				<div class="seller-btn-area btn-group-xlg">
+					<button ng-click="vm.clearSellerInfo()"
+						ng-disabled="vm.modifyForm.$pristine" type="button"
+						class="btn btn-default" disabled="disabled">취소</button>
+					<button progress-button="vm.submitForm()" pb-style="top-line"
+						type="button" ng-disabled="!vm.modifyForm.$dirty"
+						class="btn btn-primary progress-button progress-button-dir-horizontal progress-button-style-top-line"
+						disabled="disabled">
+						<span class="content" ng-transclude="">확인</span><span
+							class="progress"><span class="progress-inner notransition"
+							ng-style="progressStyles"
+							ng-class="{ notransition: !allowProgressTransition }"></span></span>
+					</button>
+				</div>
+			</div>
+		</form>
+		</ui-view>
+	</div>
+</div>
+
+</div>
