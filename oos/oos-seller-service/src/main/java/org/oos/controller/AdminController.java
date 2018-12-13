@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 	
 	@GetMapping({"comment", "edit", "home", "manage", 
-		"paysettle", "products", "seller"})
+		"paysettle", "products", "seller","forms"})
 	public void admin() {
 		
 	}
