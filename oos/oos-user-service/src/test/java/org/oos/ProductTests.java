@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.oos.domain.Criteria;
 import org.oos.domain.ProductVO;
+import org.oos.mapper.HashTagMapper;
 import org.oos.mapper.MemberMapper;
 import org.oos.mapper.ProductImgMapper;
 import org.oos.mapper.ProductMapper;
@@ -35,6 +36,16 @@ public class ProductTests {
 	
 	@Setter(onMethod_=@Autowired)
 	private MemberMapper memberMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private HashTagMapper hashTagMapper;
+	
+	@Test
+	public void testGet() {
+		
+		log.info(""+ hashTagMapper.getName());
+	}
+	
 	
 	@Test
 	public void testMemberMapper() {

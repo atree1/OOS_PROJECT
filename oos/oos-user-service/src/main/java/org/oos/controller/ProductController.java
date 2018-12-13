@@ -44,7 +44,8 @@ public class ProductController {
 		List<ProductOptionVO> optList=new ArrayList<>();
 		for(int i=0;i<size.length;i++) {
 			ProductOptionVO optVO=new ProductOptionVO();
-		optVO.setPno(vo.getPno());
+		optVO.setPno(vo.
+				getPno());
 		optVO.setSize(size[i]);
 		optVO.setQty(qty[i]);
 		optList.add(optVO);
