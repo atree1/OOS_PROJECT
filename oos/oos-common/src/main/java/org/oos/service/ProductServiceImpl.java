@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 	private ProductOptionMapper optMapper;
 	
 	
-	@Setter
+	@Setter(onMethod_=@Autowired)
 	private CategoryMapper cateMapper;
 	
 	@Override
@@ -108,8 +108,10 @@ public class ProductServiceImpl implements ProductService {
 			log.info("**********************");
 			cate.setPno(vo.getPno());
 			log.info("cate:"+cate);
-			//cateMapper.insert(cate);
-		}
+		
+			cateMapper.insert(cate);
+			
+			}
 		
 		return result;
 		

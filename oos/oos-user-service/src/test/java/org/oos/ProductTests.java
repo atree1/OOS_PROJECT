@@ -7,8 +7,10 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
+import org.oos.domain.CategoryVO;
 import org.oos.domain.Criteria;
 import org.oos.domain.ProductVO;
+import org.oos.mapper.CategoryMapper;
 import org.oos.mapper.HashTagMapper;
 import org.oos.mapper.MemberMapper;
 import org.oos.mapper.ProductImgMapper;
@@ -40,10 +42,16 @@ public class ProductTests {
 	@Setter(onMethod_=@Autowired)
 	private HashTagMapper hashTagMapper;
 	
+	@Setter(onMethod_=@Autowired)
+	private CategoryMapper cateMapper;
+	
 	@Test
 	public void testGet() {
 		
-		log.info(""+ hashTagMapper.getName());
+		CategoryVO vo =new CategoryVO();
+		vo.setCatename("hi");
+		vo.setPno(100L);
+		log.info(""+ cateMapper.insert(vo));
 	}
 	
 	

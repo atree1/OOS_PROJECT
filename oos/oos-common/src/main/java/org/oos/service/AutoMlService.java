@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,20 @@ public class AutoMlService {
 			list.add(annotationPayload.getDisplayName());
 			
 			log.info("Predicted class score :" + annotationPayload.getClassification().getScore());
+		} 
+		
+		
+		try {
+			
+			
+			predictionClient.awaitTermination(1, TimeUnit.SECONDS);
+			predictionClient.shutdown();
+			predictionClient.close();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		
 		return list;
 	}
