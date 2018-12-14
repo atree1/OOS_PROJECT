@@ -187,11 +187,8 @@ public class UploadController {
 			log.info(URLDecoder.decode(fileName, "UTF-8"));
 			file= new File("c:\\upload\\"+URLDecoder.decode(fileName, "UTF-8"));
 			file.delete();
-			if(type.equals("image")){
-				String largeFileName=file.getAbsolutePath().replace("s_", "");
-				file=new File(largeFileName);
-				file.delete();
-			}
+
+
 		}catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
