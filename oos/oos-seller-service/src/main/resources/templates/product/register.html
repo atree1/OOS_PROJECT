@@ -150,32 +150,8 @@ $(document).ready(function(e){
 	
 	
 	var formObj = $("form[role='form']");
-	var idx = 1;
-	
-	//옵션삭제
-	$(".optionDiv").on("click","button ",function(e){
-		
-		e.preventDefault();
-		console.log("remove");
-		var span=$(this).closest('span');
-		span.remove();
-	});
-	
- 	//옵션추가버튼
-	$("#optionAddBtn").on("click",function(e){
-		e.preventDefault();
-		
-		console.log("Option added");
-		
-		var str ="";
-		
-			str +="<span ><input name='size' type='text' class='form-control' required>";				
-			str +="<input name='qty' type='text' class='form-control' required>";
-			str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
 
-			$('.optionDiv').append(str);
-		
-	}); 
+ 	
 	
 	$("button[type='submit']").on("click",function(e){
 		

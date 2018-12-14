@@ -40,7 +40,7 @@ public class StoreController {
 	
 	@PostMapping("/register")
 	public String storeRegisterPost(StoreVO vo) {
-		
+		log.info(""+vo);
 		storeService.register(vo);
 		return "/exam/home";
 	}

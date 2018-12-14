@@ -2,10 +2,14 @@ package org.oos.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductImgVO;
+import org.oos.domain.StoreHashTagVO;
 import org.oos.domain.StoreVO;
+import org.oos.mapper.StoreHashTagMapper;
 import org.oos.mapper.StoreImgMapper;
 import org.oos.mapper.StoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,9 @@ public class StoreServiceImpl implements StoreService {
 	private StoreMapper mapper;
 	
 	@Setter(onMethod_=@Autowired)
+	private StoreHashTagMapper hashMapper;
+	
+	@Setter(onMethod_=@Autowired)
 	private StoreImgMapper imgMapper;
 	
 	@Override
@@ -35,8 +42,21 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
+	@Transactional
 	public int register(StoreVO vo) {
-		return mapper.insert(vo);
+		
+		mapper.insert(vo);
+		vo.getImgList().forEach(img->{
+			img.setSno(vo.getSno());
+			imgMapper.insert(img);
+		});
+		vo.getHashList().forEach(hno->{
+			StoreHashTagVO hashVO=new StoreHashTagVO();
+			hashVO.setHno(hno);
+			hashVO.setSno(vo.getSno());
+			hashMapper.insert(hashVO);
+		});
+		return 1;
 	}
 
 	@Override

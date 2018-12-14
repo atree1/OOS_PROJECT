@@ -23,6 +23,9 @@
 	<insert id="insert">
 		insert into tbl_store(sname,owner,sinfo,saddress,tel)
 		values(#{sname},#{owner},#{sinfo},#{saddress},#{tel})
+			<selectKey resultType="Long" keyProperty="sno" order="AFTER"> 
+	 	select max(sno) from tbl_store
+	 	</selectKey>
 	</insert>
 
 	<update id="modify">
