@@ -8,4 +8,5 @@ public interface HashTagService {
 	
 	public List<String> getName();
 
+	public List<HashTagVO> getList();
 }
