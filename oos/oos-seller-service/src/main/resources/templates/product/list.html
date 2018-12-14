@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/sellerLayout}">
+
+<div class="container" style="margin-top: 20px;"
+	layout:fragment="container">
+	
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">판매중인상품</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                   <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>상품번호</th>
+                                            <th>상품명</th>
+                                            <th>가격</th>
+                                            <th>등록일</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                  
+                                        <tr th:each="product:${product}">
+                                            <td>1</td>
+                                             <td th:text="${product.pno}"></td>
+                                            <td th:text="${product.pname}"></td>
+                                            <td th:text="${product.price}"></td>
+                                            <td th:text="${product.regdate}"></td>
+                                            
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+            </div>
+         </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+<script th:inline="javascript">
+		
+	</script>

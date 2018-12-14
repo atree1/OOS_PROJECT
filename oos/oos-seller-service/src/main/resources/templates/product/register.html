@@ -55,7 +55,7 @@
 	}
 </style>
 <div>
-        <div id="page-wrapper">
+        <div id="page-wrapper" class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">상품등록</h1>
@@ -87,16 +87,22 @@
 										<label>상품설명</label>
 										<textarea class="form-control" rows="3"></textarea>
 									</div> -->
-									<div>
-										<div class="sizeDiv">
-											<label>size</label> <input name="size" type="text"
+											<div >
+										<button class="btn btn-success" id="optionAddBtn">+</button>
+										</div>
+								
+									<div class="optionDiv">
+									<span >
+										<div class="sizeDiv" style="float: left; width: 33%;">
+											<label>사이즈</label> <input name="size" type="text" 
 												class="form-control" required>
 										</div>
-										<div class="qtyDiv">
-											<label>qty</label> <input name="qty" type="text"
+										<div class="qtyDiv" style="float: left; width: 33%;">
+											<label>수량</label> <input name="qty" type="text" data-idx="0"
 												class="form-control" required>
 										</div>
-										<button id="optionAddBtn">추가</button>
+									<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button>
+										</span>
 									</div>
 									<div class="form-group uploadDiv">
 										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
@@ -109,7 +115,7 @@
 									</div>
 									<div class="form-group">
 										<div>
-											<button class="btn btn-success" type="submit">Register</button>
+											<button class="btn btn-success" type="submit">상품등록</button>
 										</div>
 									</div>
 									
@@ -144,6 +150,16 @@ $(document).ready(function(e){
 	
 	
 	var formObj = $("form[role='form']");
+	var idx = 1;
+	
+	//옵션삭제
+	$(".optionDiv").on("click","button ",function(e){
+		
+		e.preventDefault();
+		console.log("remove");
+		var span=$(this).closest('span');
+		span.remove();
+	});
 	
  	//옵션추가버튼
 	$("#optionAddBtn").on("click",function(e){
@@ -152,20 +168,13 @@ $(document).ready(function(e){
 		console.log("Option added");
 		
 		var str ="";
-		var str2 ="";
-		var sizeDiv = $(".sizeDiv");
-		var qtyDiv = $(".qtyDiv");
 		
+			str +="<span ><input name='size' type='text' class='form-control' required>";				
+			str +="<input name='qty' type='text' class='form-control' required>";
+			str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
+
+			$('.optionDiv').append(str);
 		
-			str +="<input name='size' type='text' class='form-control' required>";
-		
-		sizeDiv.append(str);
-		console.log(str);
-		
-		
-			str2 +="<input name='qty' type='text' class='form-control' required>";
-		qtyDiv.append(str2);
-		console.log(str2);
 	}); 
 	
 	$("button[type='submit']").on("click",function(e){
