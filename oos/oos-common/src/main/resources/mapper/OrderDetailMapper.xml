@@ -23,8 +23,8 @@
 	</select>
 
 	<insert id="insert">
-		insert into tbl_order_detail(ono, pno, qty, opno, pnum, address, addressDetail) 
-		value(#{ono}, #{pno}, #{qty}, #{opno}, #{pnum}, #{address}, #{addressDetail})
+		insert into tbl_order_detail(ono, pno, qty, opno, pnum, address, addressDetail,sno) 
+		value(#{ono}, #{pno}, #{qty}, #{opno}, #{pnum}, #{address}, #{addressDetail},#{sno})
 	</insert>
 
 	<update id="modify">

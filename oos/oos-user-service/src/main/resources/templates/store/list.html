@@ -173,7 +173,7 @@
 			
 			(function(){
 
-				/* $.each(goodsImg, function(index, item){
+				 $.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
 					
 					var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
@@ -181,7 +181,7 @@
 					var imgDiv= $('#img_'+item.pno);
 					imgDiv.attr("src","/display?fileName="+fileCallPath); 
 				}); 
-				*/
+				
 				$("#pageNum").val(pageMaker.cri.pageNum);
 				$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
 			})();
