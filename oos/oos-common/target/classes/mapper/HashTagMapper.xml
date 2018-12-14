@@ -10,5 +10,11 @@
          where hno>0 and del = 'N'
      </select>
      
+     <select id="getList" resultType="org.oos.domain.HashTagVO">
+         select * from tbl_hashtag
+         where hno>0 and del = 'N'
+     </select>
+     
+      
   
 </mapper>
