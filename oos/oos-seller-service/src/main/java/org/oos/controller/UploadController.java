@@ -149,7 +149,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<List<StoreImgVO>> uploadStore(MultipartFile[] uploadFile) {
 		
-		List<ProductImgVO> list = new ArrayList<>();
+		List<StoreImgVO> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload";
 
 		String uploadFolderPath = getFolder();
@@ -164,14 +164,14 @@ public class UploadController {
 		for (MultipartFile multipartFile : uploadFile) {
 			
 
-			ProductImgVO productImgVO = new ProductImgVO();
+			StoreImgVO storeImgVO = new StoreImgVO();
 						
 			String uploadFileName = multipartFile.getOriginalFilename();
 
 			// IE has file path
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
-			productImgVO.setIname(uploadFileName);
+			storeImgVO.setIname(uploadFileName);
 
 			UUID uuid = UUID.randomUUID();
 
@@ -182,8 +182,8 @@ public class UploadController {
 				multipartFile.transferTo(saveFile);
 
 
-				productImgVO.setUuid(uuid.toString());
-				productImgVO.setIpath(uploadFolderPath);
+				storeImgVO.setUuid(uuid.toString());
+				storeImgVO.setIpath(uploadFolderPath);
 
 				// check image type file
 								
@@ -195,7 +195,7 @@ public class UploadController {
 				
 
 				// add to List
-				list.add(productImgVO);
+				list.add(storeImgVO);
 
 			} catch (Exception e) {
 				e.printStackTrace();

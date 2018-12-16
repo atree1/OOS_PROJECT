@@ -13,10 +13,11 @@ public interface StoreService {
 	
 	public List<String> getName();
 	
-	public ProductImgVO getImg(Long sno);
+	public List<ProductImgVO> getImg(Long sno);
 	
 	public StoreVO get(Long sno);
 	
+	public StoreVO getBySid(String sid);
 	public int register(StoreVO vo);
 	
 	public int remove(Long sno);

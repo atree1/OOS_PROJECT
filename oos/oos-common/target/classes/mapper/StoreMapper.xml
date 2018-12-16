@@ -19,6 +19,10 @@
 		select * from tbl_store where sno =
 		#{sno}
 	</select>
+	<select id="getBySid" resultType="org.oos.domain.StoreVO">
+		select * from tbl_store where owner =
+		#{owner}
+	</select>
 
 	<insert id="insert">
 		insert into tbl_store(sname,owner,sinfo,saddress,tel)

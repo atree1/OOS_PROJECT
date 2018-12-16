@@ -9,5 +9,5 @@ public interface ProductImgMapper {
 	public int insert(ProductImgVO vo);
 	public int delete(String uuid);
 	public void deleteAll(Long pno);
-	
+	public List<ProductImgVO> get(Long sno);
 }

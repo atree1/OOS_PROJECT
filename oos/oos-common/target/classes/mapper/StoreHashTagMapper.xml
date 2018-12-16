@@ -6,12 +6,12 @@
 <mapper namespace="org.oos.mapper.StoreHashTagMapper">
 
 	<insert id="insert">
-	insert into tbl_store_hashTag(sno,hno)
-	values (#{sno},#{hno})
+	insert into tbl_store_hashTag(sno,hno,tag)
+	values (#{sno},#{hno},#{tag})
 
 	</insert>
 	
-	<select id="getList">
+	<select id="getList" resultType="org.oos.domain.StoreHashTagVO">
 	select *
 	from tbl_store_hashTag
 	where shno>0 and sno=#{sno};

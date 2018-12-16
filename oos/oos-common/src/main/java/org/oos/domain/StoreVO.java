@@ -20,6 +20,6 @@ public class StoreVO {
 	private Date updatedate;
 	private char del;
 	private List<StoreImgVO> imgList;
-	private List<Long> hashList;
+	private List<StoreHashTagVO> hashList;
 
 }

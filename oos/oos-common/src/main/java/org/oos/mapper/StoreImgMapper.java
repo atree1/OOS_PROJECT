@@ -1,11 +1,12 @@
 package org.oos.mapper;
 
-import org.oos.domain.ProductImgVO;
+import java.util.List;
+
 import org.oos.domain.StoreImgVO;
 
 public interface StoreImgMapper {
 	
-	public ProductImgVO get(Long sno);
+	public List<StoreImgVO> get(Long sno);
 	
 	public int insert(StoreImgVO vo);
 	

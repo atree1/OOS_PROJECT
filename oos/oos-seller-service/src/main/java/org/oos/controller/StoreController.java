@@ -21,20 +21,17 @@ public class StoreController {
 	
 	@Setter(onMethod_=@Autowired)
 	private StoreService storeService;
-	
+
 	@Setter(onMethod_=@Autowired)
 	private SellerService sellerService;
 	
 	@Setter(onMethod_=@Autowired)
 	private HashTagService hashTagService;
 	
-	
 	@GetMapping("/register")
 	public void storeRegister(String sid, Model model) {
 		log.info("register get~");
-		log.info("sid:"+sid);
-		log.info(""+hashTagService.getList() );
-		model.addAttribute("seller",sellerService.get(sid) );
+		model.addAttribute("owner",sid );
 		model.addAttribute("hashTagList",hashTagService.getList());
 	}
 	
@@ -44,5 +41,24 @@ public class StoreController {
 		storeService.register(vo);
 		return "/exam/home";
 	}
-	
+	@GetMapping("/read")
+	public void storeRead(String sid, Model model) {
+		log.info("register get~");
+		StoreVO vo=storeService.getBySid(sid);
+		model.addAttribute("owner",sid );
+		model.addAttribute("store",vo);
+	}
+	@GetMapping("/modify")
+	public void storeModify(String sid, Model model) {
+		log.info("modify get~");
+		StoreVO vo=storeService.getBySid(sid);
+		model.addAttribute("owner",sid );
+		model.addAttribute("store",vo);
+	}
+	@PostMapping("/modify")
+	public String storeModifyPost(StoreVO vo) {
+		log.info(""+vo);
+		storeService.modify(vo);
+		return "/exam/home";
+	}
 }

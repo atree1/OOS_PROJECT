@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: oos-common
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: admin
+Built-By: lhj41
 Implementation-Vendor-Id: org.oos
-Build-Jdk: 1.8.0_191
+Build-Jdk: 1.8.0_181
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/oos/oos-common
 Created-By: Maven Integration for Eclipse

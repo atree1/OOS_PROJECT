@@ -7,8 +7,8 @@ import javax.transaction.Transactional;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductImgVO;
-import org.oos.domain.StoreHashTagVO;
 import org.oos.domain.StoreVO;
+import org.oos.mapper.ProductImgMapper;
 import org.oos.mapper.StoreHashTagMapper;
 import org.oos.mapper.StoreImgMapper;
 import org.oos.mapper.StoreMapper;
@@ -29,8 +29,8 @@ public class StoreServiceImpl implements StoreService {
 	private StoreHashTagMapper hashMapper;
 	
 	@Setter(onMethod_=@Autowired)
-	private StoreImgMapper imgMapper;
-	
+	private StoreImgMapper sImgMapper;
+	private ProductImgMapper pImgMapper;
 	@Override
 	public List<StoreVO> getList(PageDTO dto) {
 		return mapper.getList(dto);
@@ -48,13 +48,11 @@ public class StoreServiceImpl implements StoreService {
 		mapper.insert(vo);
 		vo.getImgList().forEach(img->{
 			img.setSno(vo.getSno());
-			imgMapper.insert(img);
+			sImgMapper.insert(img);
 		});
-		vo.getHashList().forEach(hno->{
-			StoreHashTagVO hashVO=new StoreHashTagVO();
-			hashVO.setHno(hno);
-			hashVO.setSno(vo.getSno());
-			hashMapper.insert(hashVO);
+		vo.getHashList().forEach(hash->{
+			hash.setSno(vo.getSno());
+			hashMapper.insert(hash);
 		});
 		return 1;
 	}
@@ -75,8 +73,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public ProductImgVO getImg(Long sno) {
-		return imgMapper.get(sno);
+	public List<ProductImgVO> getImg(Long sno) {
+		return pImgMapper.get(sno);
+	
 	}
 	
 	@Override
@@ -84,4 +83,14 @@ public class StoreServiceImpl implements StoreService {
         return mapper.getName();
     }
 
+	@Override
+	public StoreVO getBySid(String sid) {
+		// TODO Auto-generated method stub
+		StoreVO vo=mapper.getBySid(sid);
+		vo.setImgList(sImgMapper.get(vo.getSno()));
+		vo.setHashList(hashMapper.getList(vo.getSno()));
+		return vo;
+	}
+	
+	
 }
