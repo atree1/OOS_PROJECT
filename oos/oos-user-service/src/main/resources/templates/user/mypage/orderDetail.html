@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
 <title>상품 상세정보</title>
 <link href="../../css/common.css?20180918" type="text/css" rel="stylesheet">
 </head>
@@ -39,9 +41,11 @@ td {
 			<table width="100%"  class="myPageSheetTable">
 				<colgroup>
 					<col width="96">
-					<col width="358">
+					<col width="208">
 					<col width="185">
 					<col width="100">
+					<col width="140">
+					<col width="130">
 				</colgroup>
 				<thead>
 					<tr>
@@ -49,6 +53,8 @@ td {
 						<th>주문상품</th>
 						<th>결제금액</th>
 						<th>상태</th>
+						<th>배송조회</th>
+						<th>주문취소</th>
 					</tr>
 				</thead>
 				<tbody th:each="arr: ${detail}" class="orderInfo">
@@ -72,7 +78,7 @@ td {
 						<td class="cell">
 							<table class="price_chk">
 								<colgroup>
-									<col width="60%">
+									<col width="70%">
 									<col>
 								</colgroup>
 								<tbody>
@@ -86,10 +92,19 @@ td {
 						<td class="cell">
 							<div class="td_status">
 								<span class="btn_bg2 btn_status_b1">배송중</span>
+							</div>
+						</td>
+						</td>
+						<td class="cell">
+							<div class="td_status">
+								<span th:text="|송장번호 : [${arr.orderNum}]|">운송장 번호</span>
 								<p name="p_parcel">
-									[<span class="parcel">우체국택배</span>]
+									<a th:href="|https://tracker.delivery/#/kr.epost/${arr.orderNum}|" target="_blank">배송조회</a>
 								</p>
 							</div>
+						</td>
+						<td  class="cell">
+							<button class="basketSwapBtn orderRemove" th:id="${arr.odno}">주문 취소</button>
 						</td>
 					</tr>
 					
@@ -107,20 +122,20 @@ td {
 				<tbody class="orderInfo">
 					<tr>
 						<td class="first_cell">이름</td>
-						<td class="cell"  th:text="${order.pnum}">sdf</td>
+						<td class="cell" th:text="${#authentication.principal.member.mname}">NAME</td>
 					</tr>
 					<tr>
 						<td class="first_cell">연락처</td>
-						<td><input type="text" name="hp_no1" value="010"> - 
-							<input type="text" name="hp_no2" value="7379">- 
-							<input type="text" name="hp_no3" value="2489">
+						<td><input type="text" id="pnum">- 
+							<input type="text" id="pnum2">- 
+							<input type="text" id="pnum3">
 						</td>
 					</tr>
 					<tr>
 						<td class="first_cell">주소</td>
 						<td class="first_cell">
-						<input type="text" th:value="${order.addressDetail}">
-						<input type="text" th:value="${order.address}"></td>
+						<input type="text" th:value="${order.address}">
+						<input type="text" th:value="${order.addressdetail}"></td>
 					</tr>
 					
 				</tbody>
@@ -128,5 +143,30 @@ td {
 			
 		</div>
 	</div>
+	<form id="orderDetailForm" method="post" action="/user/mypage/orderDetail">
+	
+	</form>
 </body>
+
+<script src="/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	var token = $("meta[name='_csrf']").attr("content");
+	var csrfName = $("meta[name='_csrf_name']").attr("content");
+	var ono = String([[${detail[0].ono}]]);
+	var tel = String([[${detail[0].pnum}]]);
+	
+	$("#pnum").val("0"+tel.substring(0,2));
+	$("#pnum2").val(tel.substring(2,6));
+	$("#pnum3").val(tel.substring(6));
+	
+	$(".orderRemove").click(function(){
+		$("#orderDetailForm").append("<input type='hidden' name='odno' value='"+$(this).attr("id")+"'>")
+							.append("<input type='hidden' name='ono' value='"+ono+"'>")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"'>")
+							.submit();
+	});
+});
+</script>
+
 </html>

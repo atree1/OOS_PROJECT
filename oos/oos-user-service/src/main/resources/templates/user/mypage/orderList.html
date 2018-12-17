@@ -11,7 +11,7 @@
 
 	<div style="height: 70px;">
 		<table cellspacing="0"
-			style="padding-left: 225px; width: 1100px; height: 50px;">
+			style="padding-left: 225px; height: 50px;">
 			<tbody>
 				<tr style="width: 800px;">
 					<td class="orderListTab basket1 active" 
@@ -111,7 +111,7 @@
 						<td class="" th:text="${arr.detail.product.pname}"></td>
 						<td th:id="|ono_${arr.ono}|" class="orderDetail"><button
 							type="button" class="btn btn-info basketSwapBtn" style="width:70px;">상세보기</button></td>
-						<td class="" th:text="${arr.total}">주문금액</td>
+						<td class="" th:text="|${arr.total}원|">주문금액</td>
 						<td class="" th:text="${arr.state}">주문상태</td>
 						<td class=""><button type="submit" data-oper='remove'
 								class="btn-remove basketSwapBtn" style="width:70px; color:#fff; background:#ff7f7a" 
@@ -129,7 +129,7 @@
 		<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
 	</div>
 	<form id="orderListForm">
-		<input type='hidden' name='mid' value='member1'>
+		<input type='hidden' name='mid' th:value='${#authentication.principal.member.mid}'>
 		<input type='hidden' id="pageNum" name='pageNum' />
 	</form>
 </div>
@@ -140,7 +140,8 @@
 	<link rel="stylesheet"
 		href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 		type="text/css" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script th:inline="javascript">
 		var orderForm = $("#orderListForm");
@@ -222,7 +223,8 @@
 				var ono = $(this).data("ono");
 				console.log(ono);
 				orderForm.attr("action", "/user/mypage/orderList")
-						.append("<input type='hidden' name='ono' value='"+ono+"' >");
+						.append("<input type='hidden' name='ono' value='"+ono+"' >")
+						.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
 				orderForm.attr("method", "post").submit();
 			}
 		});
@@ -233,7 +235,7 @@
 		});
 		
 		$(".orderListTab").click(function(){
-			window.location.href="/user/mypage/orderList?mid=member1";
+			orderForm.submit();
 		})
 	</script>
 </th:block>

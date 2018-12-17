@@ -33,11 +33,10 @@
 								<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
 								<div class="storeLocation"
 									style="font-size: 13px; color: #9b9b9b; margin-top: 4px;"
-									th:text="${arr.sno}">SNAME</div>
+									th:text="${arr.sname}">SNAME</div>
 							</div>
 							<div style="margin: 0 15px;">
-								<span style="float: left; font-size: 12px; margin-top: 7px;"><img
-									class="zzimImg" src="../img/card_zzim_off_btn.png">28</span><span
+								<span
 									style="float: right; font-size: 20px; font-weight: bold; margin-top: 7px;"
 									th:text="${arr.price}">PRICE</span>
 							</div> <span class="mouseOverBorder"></span>
@@ -123,9 +122,6 @@
 
 	
 	<form id="listForm">
-		<input type='hidden' name='amount' value='12' /> 
-		<input type='hidden' id="pageNum" name='pageNum' />
-		<input type='hidden' name='mid'  value='member1'/>
 		<input type='hidden' name='category' id='category' th:value="${cri.category}"/> 
 		<input type='hidden' name='keyword' id='keyword' th:value="${cri.keyword}"/>
 	</form>

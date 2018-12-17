@@ -3,7 +3,7 @@
 	layout:decorate="~{/layout/shopLayout}">
 
 <div class="container" style="margin-top: 20px;"
-	layout:fragment="container">
+	layout:fragment="container"  th:with="member = ${#authentication.principal.member}">
 	<style>
 		.successBox td{
 			font-size:20px;
@@ -112,6 +112,7 @@
 										<div class="payMethodInputArea" style="height: 54px;">
 											<div class="orderInfo"><strong  th:text="${member.mname}">NAME</strong></div>
 											<div class="orderInfo" th:text="${member.address}">Address</div>
+											<div class="orderInfo" th:text="${member.addressdetail}">AddressDetail</div>
 											<div class="orderInfo" th:text="${member.pnum}" style="color:#9b9b9b">전화번호</div>
 										
 										</div>
@@ -178,7 +179,7 @@
 		})();
 		
 		$(".orderBtn").click(function(){
-			window.location.href = '/store/list?sno=1&pageNum=1&amount=10&mid="test"';
+			window.location.href = '/';
 		})
 		
 	});

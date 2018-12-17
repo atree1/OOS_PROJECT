@@ -8,7 +8,7 @@
 			<div class="table-cell" style="">
 				<span class="storeBigCategoryName" style="color: #9b9b9b;">매장홈</span><span
 					style="color: #9b9b9b;">&nbsp;&nbsp;&nbsp; &gt; &nbsp;&nbsp;</span><span
-					class="selectedMypageMenu selectedStoreName">DAN</span>
+					class="selectedMypageMenu selectedStoreName" th:text="${store.sname}">SNAME</span>
 			</div>
 		</div>
 
@@ -21,91 +21,33 @@
 				</div>
 				<div class="main_store_info">
 					<div style="font-size: 17px; color: #9b9b9b; margin-bottom: 6px;"
-						th:text="${store.saddress}">APM 4층 57</div>
+						th:text="${store.saddress}">ADDRESS</div>
 					<div
 						style="font-size: 40px; color: #333; font-weight: bold; line-height: 1.0; margin-bottom: 15px;"
-						th:text="${store.sname}">DAN</div>
-					<div
+						th:text="${store.sname}">SNAME</div>
+					<div id="storeTel"
 						style="font-size: 17px; color: #333; line-height: 1.0; margin-bottom: 30px;"
 						th:text=${store.tel}>TEL</div>
 					<div class="tradeBtnWrapClass" style="position: relative;">
 						<button class="storeHomeTradeBtn" onclick="requestAddTrade(0)"
 							style="position: absolute; left: 200px; display: block;">
 							<div class="tradeBtnImg"></div>
-							<span class="tradeStatusBtn">+ 거래처 추가</span>
+							<span class="tradeStatusBtn">+ 찜리스트 추가</span>
 						</button>
 					</div>
 					<div style="line-height: 1.0 position:relative;">
-						<span style="color: #9b9b9b; font-size: 14px; margin-right: 5px;">거래처수</span><span
+						<span style="color: #9b9b9b; font-size: 14px; margin-right: 5px;">찜목록 추가수</span><span
 							class="store_info_text" style="margin-right: 15px;">242</span><span
 							style="color: #9b9b9b;">|</span><span
-							style="color: #9b9b9b; font-size: 14px; margin-left: 15px; margin-right: 5px;">신상</span><span
-							class="store_info_text" style="margin-right: 15px;">152</span><span
-							style="color: #9b9b9b;">|</span><span
-							style="color: #9b9b9b; font-size: 14px; margin-left: 15px; margin-right: 5px;">거래처만
-							공개</span><span class="store_info_text">0</span>
+							style="color: #9b9b9b; font-size: 14px; margin-left: 15px; margin-right: 5px;">물품</span><span
+							class="store_info_text" style="margin-right: 15px;">152</span>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div style="position: relative; margin-top: 80px; width: 100%;">
-			<div
-				style="width: 140px; position: relative; margin-left: 10px; float: right;">
-				<button id="showPriceOption" class="selectBox"
-					onclick="priceOptionListShow()"
-					style="position: absolute; right: 0px; width: 140px; height: 30px; margin-left: 10px; margin-top: -5px; text-align: left; padding: 0.6em; cursor: pointer;">가격별
-					보기</button>
-				<div id="priceOption" class="selectArea"
-					style="position: absolute; top: 24px; width: 300px; left: -160px; margin: 0px; background-color: #fff; z-index: 99; border: 1px solid #e1e1e1; padding: 0px; display: none;">
-					<div class="priceOptionInner" style="padding: 20px;">
-						<div class="radioDiv">
-							<input type="radio" name="priceScope" id="priceScope1" value="전체"
-								checked="true"><label class="" for="priceScope1"
-								style="width: 130px;">전체</label>
-						</div>
-						<div class="radioDiv">
-							<input type="radio" name="priceScope" id="priceScope2"
-								value="1만원 이하"><label class="" for="priceScope2"
-								style="width: 130px;">1만원 이하</label>
-						</div>
-						<div class="radioDiv">
-							<input type="radio" name="priceScope" id="priceScope3"
-								value="1만원~2만원"><label class="" for="priceScope3"
-								style="width: 130px;">1만원~2만원</label>
-						</div>
-						<div class="radioDiv">
-							<input type="radio" name="priceScope" id="priceScope4"
-								value="2만원~3만원"><label class="" for="priceScope4"
-								style="width: 130px;">2만원~3만원</label>
-						</div>
-						<div class="radioDiv">
-							<input type="radio" name="priceScope" id="priceScope5"
-								value="3만원 이상"><label class="" for="priceScope5"
-								style="width: 130px;">3만원 이상</label>
-						</div>
-						<div class="radioDiv">
-							<input type="radio" name="priceScope" id="priceScope6"
-								value="직접입력"><label class="" for="priceScope6"
-								style="width: 130px;">직접입력</label>
-							<button class="smallBtn" onclick="inputClear()"
-								style="float: right;">초기화</button>
-						</div>
-						<div class="directInputArea">
-							<input id="minPrice" class="priceInput" type="text"
-								onkeyup="this.value=number_filter(this.value)"
-								style="width: 114px; height: 20px; margin-right: 7px; float: left;">
-							<div style="display: inline-block; line-height: 24px;">~</div>
-							<input id="maxPrice" class="priceInput" type="text"
-								onkeyup="this.value=number_filter(this.value)"
-								style="width: 114px; height: 20px; margin-left: 5px; float: right;">
-							<button class="optionModifi" onclick="priceSearchStart()"
-								style="margin-top: 10px; width: 100%;">검색</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			
 			<div class="sortMethodSelect"
 				style="margin-top: 40px; font-size: 13px; margin-right: 386px;">
 				<div id="sortMethod_0" class="sortMethodClass selected">최신순</div>
@@ -139,7 +81,7 @@
 						</div>
 						<div style="margin: 0 15px;">
 							<span style="float: left; font-size: 12px; margin-top: 7px;"><img
-								class="zzimImg" src="../img/card_zzim_off_btn.png">28</span><span
+								class="zzimImg" src="/img/card_zzim_off_btn.png">28</span><span
 								style="float: right; font-size: 20px; font-weight: bold; margin-top: 7px;"
 								th:text="${arr.price}">PRICE</span>
 						</div> 
@@ -170,21 +112,23 @@
 			var storeForm = $("#storeForm");
 			var pageMaker = [[${pageMaker}]]
 			var goodsImg=[[${product}]];
+			var store=[[${store}]];
 			
 			(function(){
 
-				 $.each(goodsImg, function(index, item){
-					 console.log(item);
+				/* $.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
-					console.log(img);
-					if(img){
-						var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
-					}
+					
+					var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
 					
 					var imgDiv= $('#img_'+item.pno);
 					imgDiv.attr("src","/display?fileName="+fileCallPath); 
 				}); 
-				 
+				*/
+				$("#storeTel").html(store.tel.substring(0,3) + "-" + 
+						store.tel.substring(3,7) + "-" + store.tel.substring(7));
+			
+				
 				$("#pageNum").val(pageMaker.cri.pageNum);
 				$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
 			})();
