@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.oos.domain.ProductImgVO;
+import org.oos.domain.StoreImgVO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,18 +33,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log
 public class UploadController {
-	private boolean checkImageType(File file) {
-		String contentType;
-		try {
-			contentType = Files.probeContentType(file.toPath());
-			return contentType.startsWith("image");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
+	
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
@@ -145,6 +135,67 @@ public class UploadController {
 
 				// add to List
 				list.add(productImgVO);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} // end for
+		return new ResponseEntity<>(list, HttpStatus.OK);
+		
+	}
+	
+	@PostMapping(value = "/uploadStore", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<StoreImgVO>> uploadStore(MultipartFile[] uploadFile) {
+		
+		List<StoreImgVO> list = new ArrayList<>();
+		String uploadFolder = "C:\\upload";
+
+		String uploadFolderPath = getFolder();
+		// make folder --------
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+		// make yyyy/MM/dd folder
+
+		for (MultipartFile multipartFile : uploadFile) {
+			
+
+			StoreImgVO storeImgVO = new StoreImgVO();
+						
+			String uploadFileName = multipartFile.getOriginalFilename();
+
+			// IE has file path
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			log.info("only file name: " + uploadFileName);
+			storeImgVO.setIname(uploadFileName);
+
+			UUID uuid = UUID.randomUUID();
+
+			uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+			try {
+				File saveFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(saveFile);
+
+
+				storeImgVO.setUuid(uuid.toString());
+				storeImgVO.setIpath(uploadFolderPath);
+
+				// check image type file
+								
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s_" + uploadFileName));
+
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+
+					thumbnail.close();
+				
+
+				// add to List
+				list.add(storeImgVO);
 
 			} catch (Exception e) {
 				e.printStackTrace();

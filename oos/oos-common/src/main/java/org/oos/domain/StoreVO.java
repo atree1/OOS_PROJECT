@@ -1,6 +1,7 @@
 package org.oos.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class StoreVO {
 	private Date regdate;
 	private Date updatedate;
 	private char del;
-	
-	private ProductImgVO img;
+	private List<StoreImgVO> imgList;
+	private List<StoreHashTagVO> hashList;
+
 }

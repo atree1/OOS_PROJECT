@@ -26,4 +26,5 @@ public class ProductVO {
 	private  char del;	
 	private int QuestionReplyCnt;
 	private int ReviewReplyCnt;
+	private String content;
 }
