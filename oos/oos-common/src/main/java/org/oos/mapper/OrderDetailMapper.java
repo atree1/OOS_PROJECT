@@ -17,4 +17,6 @@ public interface OrderDetailMapper {
 	public int delete(Long odno);
 	
 	public int insert(OrderDetailVO vo);
+	
+	public int deleteAll(Long ono);
 }
