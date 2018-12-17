@@ -38,7 +38,10 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public StoreVO get(Long sno) {
-		return mapper.get(sno);
+		StoreVO vo= mapper.get(sno);
+		vo.setImgList(sImgMapper.get(vo.getSno()));
+		vo.setHashList(hashMapper.getList(vo.getSno()));
+		return vo;
 	}
 
 	@Override
@@ -63,7 +66,25 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
+	@Transactional
 	public int modify(StoreVO vo) {
+		
+		sImgMapper.deleteAll(vo.getSno());
+		hashMapper.deleteAll(vo.getSno());
+		if (vo.getImgList() == null) {
+			return mapper.modify(vo);
+		}
+		
+		if (vo.getImgList().size() > 0) {
+			vo.getImgList().forEach(attach -> {
+				attach.setSno(vo.getSno());
+				sImgMapper.insert(attach);
+			});
+		}
+		vo.getHashList().forEach(hash->{
+			hash.setSno(vo.getSno());
+			hashMapper.insert(hash);
+		});
 		return mapper.modify(vo);
 	}
 

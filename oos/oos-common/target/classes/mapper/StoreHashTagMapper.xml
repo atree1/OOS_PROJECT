@@ -17,5 +17,7 @@
 	where shno>0 and sno=#{sno};
 	
 	</select>
-	
+	<delete id="deleteAll">
+		delete from tbl_store_hashTag where sno=#{sno}
+	</delete>
 </mapper>
