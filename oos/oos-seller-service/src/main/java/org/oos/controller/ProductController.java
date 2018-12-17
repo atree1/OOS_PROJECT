@@ -114,10 +114,6 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		
-		vo.getImgList().forEach(img -> {
-			String path = "C:\\upload\\" + img.getIpath() + "\\" + img.getUuid() + "_" + img.getIname();
-			
-		});
 		vo.setCateList(cateList);
 
 		int result = productService.register(vo);
