@@ -27,7 +27,6 @@ import lombok.extern.java.Log;
 @Log
 @RequestMapping("/exam/*")
 public class AdminController {
-<<<<<<< HEAD
 
 	@Setter(onMethod_ = @Autowired)
 	private OrderService orderService;
@@ -39,11 +38,6 @@ public class AdminController {
 	private ProductService productService;
 
 	@GetMapping({ "comment", "edit", "home", "paysettle", "products", "seller" })
-=======
-	
-	@GetMapping({"comment", "edit", "home", "manage", 
-		"paysettle", "products", "seller","forms","forms2"})
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 	public void admin() {
 
 	}
