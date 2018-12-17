@@ -38,6 +38,10 @@
 	<update id="delete">
 		update tbl_order set del = "Y" where ono = #{ono}
 	</update>
+	
+	<update id="modify">
+		update tbl_order set state = #{state}, dno = #{dno} where ono = #{ono}
+	</update>
 
 	<select id="orderList" parameterType="map"
 		resultType="org.oos.domain.OrderVO">

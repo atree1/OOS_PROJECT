@@ -6,20 +6,16 @@
 <mapper namespace="org.oos.mapper.MemberMapper">
 
 	<select id="getList" resultType="org.oos.domain.MemberVO">
-		select
-		*
-		from
-		tbl_member
-		where mid
-		!=''
+		select* from tbl_member
+		where mid !=''
 		and del = 'N'
 		order by regdate desc
 		limit #{skip}, #{amount}
 	</select>
 
 	<select id="get" resultType="org.oos.domain.MemberVO">
-		select * from tbl_member where
-		mid=#{mid}
+		select * from tbl_member
+		where mid=#{mid}
 	</select>
 	
 	<insert id="insert">
@@ -42,18 +38,44 @@
 
 	<update id="changeAutority">
 		update tbl_member set permit = #{permit}
-		where mid =
-		#{mid}
-
+		where mid =#{mid}
 	</update>
 	
 	<select id="count" resultType="int">
-	
-	select count(*)
-	from
+	select count(*) from
     tbl_member
 	where mid != '' and del = 'N'
+	</select>
 	
+	<select id="getMyStoreList" resultType="org.oos.domain.StoreVO">
+		select * from tbl_store_like
+		where mid = #{mid}
+		limit #{cri.skip}, #{cri.amount}
+	</select>
+	
+	<insert id="insertSnsAuth">
+		insert into tbl_sns_auth(user_id, access_token, sns, user_pw)
+		value(#{user_id},#{access_token},#{sns},#{user_pw})
+	</insert>
+	
+	<select id="getSnsAuth" resultType="org.oos.domain.AuthDTO">
+		select * from tbl_sns_auth
+		where user_id=#{user_id} and del = 'N'
 	</select>
 
+	<update id="deleteSns">
+		update tbl_sns_auth
+		set del = 'Y'
+		where user_id = #{mid}
+	</update>
+
+	<update id="changeAutority">
+		update tbl_member set permit = #{permit}
+		where mid = #{mid}
+	</update>
+	
+	<select id="getAllList" resultType="org.oos.domain.MemberVO">
+		select * from tbl_member
+		where mid !='' and del = 'N'
+	</select>
 </mapper>

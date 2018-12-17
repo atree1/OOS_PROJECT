@@ -52,6 +52,12 @@
 		limit #{dto.cri.skip}, #{dto.cri.amount}
 	</select>	
 	
+	<update id="deleteAll">
+		update tbl_order_detail set del = "Y" 
+		where ono = #{ono}
+	</update>
+	
+	
 	<select id="snoCount" resultType="int">
 		select count(*) from tbl_order_detail
 		where odno > 0 and sno = #{sno} and del='N'
