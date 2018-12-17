@@ -20,4 +20,8 @@ public interface OrderService {
 	
 	public int delete(Long ono);
 	
+	public List<OrderVO> orderList(Map<String, Object> map);
+	
+	public int orderCount(Map<String, Object> map);
+	
 }
