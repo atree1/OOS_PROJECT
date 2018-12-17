@@ -23,10 +23,8 @@
 	</insert>
 
 	<update id="modify">
-		update tbl_member set mpw = #{mpw}, mname =
-		#{mname},
-		pnum = #{pnum}, birth = #{birth}, email = #{email}, address =
-		#{address}
+		update tbl_member set mname = #{mname}, pnum = #{pnum}, 
+		birth = #{birth}, email = #{email}, address = #{address}
 		where mid = #{mid}
 	</update>
 
