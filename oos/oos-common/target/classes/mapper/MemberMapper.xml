@@ -68,11 +68,6 @@
 		set del = 'Y'
 		where user_id = #{mid}
 	</update>
-
-	<update id="changeAutority">
-		update tbl_member set permit = #{permit}
-		where mid = #{mid}
-	</update>
 	
 	<select id="getAllList" resultType="org.oos.domain.MemberVO">
 		select * from tbl_member
