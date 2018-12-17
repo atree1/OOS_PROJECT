@@ -33,7 +33,7 @@
                                         <tr th:each="product:${product}">
                                             <td>1</td>
                                             <td th:text="${product.pno}"></td>
-                                            <td><a th:href="@{'/product/read?pno='+ ${product.pno}+'&sno='+${store.sno}}" th:text="${product.pname}"></a></td>
+                                            <td th:text="${product.pname}"></td>
                                             <td th:text="${product.price}"></td>
                                             <td th:text="${product.regdate}"></td>    
                                         </tr>                                  
@@ -79,19 +79,28 @@ $(document).ready(function(){
 	
 	var storeForm = $("#storeForm");
 	var pageMaker = [[${pageMaker}]];
+	var productName =[[${product.pname}]]
+	
+	$(productName).on("click",function(e){
+		
+		e.preventDefault();
+		console.log("click..")
+	});
 	
 	$(".paginate_button").click(function(e) {
-		
+		e.preventDefault();
 		 $("#pageNum").val($(this).attr("id").substring(0));
 		storeForm.submit();
 	});
 	
-	$(".paginate_button previous").click(function(){
+	$(".paginate_button previous").click(function(e){
+		e.preventDefault();
 		$("#pageNum").val(Number(pageMaker.startPage) -1);
 		storeForm.submit();
 	});
 	
 	$(".paginate_button next").click(function(){
+		e.preventDefault();
 		$("#pageNum").val(Number(pageMaker.endPage) + 1);
 		storeForm.submit();
 	});

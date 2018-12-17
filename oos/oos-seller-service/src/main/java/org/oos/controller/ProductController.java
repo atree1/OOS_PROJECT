@@ -43,15 +43,26 @@ public class ProductController {
 	@Setter(onMethod_=@Autowired)
 	private ImgurMapper imgurMapper;
 	
-	@GetMapping("/read")
-	public void productGet(Long pno,Long sno, Model model) {
+	@GetMapping({"/read","/modify"})
+	public void productGet(Criteria cri,Long pno, Long sno, Model model) {
 
+		Map<String, Object> map = new HashMap<>();
+		PageDTO dto = new PageDTO(cri,productService.getTotal(map));
+		
+		map.put("dto", dto);
+		map.put("pno", pno);
+		map.put("sno", sno);
+		
+		PageDTO pageDTO = new PageDTO(cri,productService.getTotal(map));
+		
+				
 		ProductVO vo = productService.read(pno);
 		model.addAttribute("img", imgurMapper.getList());
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
+		model.addAttribute("pageMaker", pageDTO);
+
 	}
-	
 	@GetMapping("/list")
 	public void productList(Criteria cri,Long sno, Model model) {
 		
