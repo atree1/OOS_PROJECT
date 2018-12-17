@@ -3,13 +3,17 @@ package org.oos.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
 
+@Entity
 @Data
+@Table(name="tbl_member")
 public class MemberVO {
 
 	private String mid;
