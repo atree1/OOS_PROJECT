@@ -54,8 +54,9 @@ public class ProductController {
 			optList.add(optVO);
 
 		}
-		
-		String firstPath = "C:\\upload\\" + vo.getImgList().get(0).getIpath() + "\\" + vo.getImgList().get(0).getUuid() + "_" + vo.getImgList().get(0).getIname();
+
+		String firstPath = "C:\\upload\\" + vo.getImgList().get(0).getIpath() + "\\" + vo.getImgList().get(0).getUuid()
+				+ "_" + vo.getImgList().get(0).getIname();
 		try {
 			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN8521692284338889379",
 					firstPath, "0.7");
@@ -65,7 +66,7 @@ public class ProductController {
 				log.info("category:" + name);
 				catevo.setCatename(name);
 				log.info("catevo" + catevo);
-				log.info(""+cateList.add(catevo));
+				log.info("" + cateList.add(catevo));
 			});
 
 		} catch (IOException e) {
@@ -73,14 +74,7 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		
-		vo.getImgList().forEach(img -> {
-			String path = "C:\\upload\\" + img.getIpath() + "\\" + img.getUuid() + "_" + img.getIname();
-			log.info("=====================================================");
-			log.info(path);
-
-			
-			log.info("=====================================================");
-		});
+		
 		vo.setCateList(cateList);
 		vo.setOptList(optList);
 		int result = productService.register(vo);
