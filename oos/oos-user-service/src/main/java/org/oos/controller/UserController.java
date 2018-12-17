@@ -20,9 +20,12 @@ import org.oos.service.ProductService;
 import org.oos.service.ReplyService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -96,6 +99,49 @@ public class UserController {
 		model.addAttribute("qnaDetail", replyService.getDetailList(map));
 	}
 	
+	@GetMapping("/myStoreList")
+	public void myStore(String mid, Criteria cri, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<StoreVO> storeList = new ArrayList<>();
+		 
+		map.put("cri", cri);
+		map.put("mid", mid);
+		memberService.getMyStoreList(map).forEach(vo -> {
+			storeList.add(storeService.get(vo.getSno()));
+		});
+	
+		model.addAttribute("storeList", storeList);
+	}
+	
+	 @PostMapping("/myStoreList")
+	    public String myStoreRemove(String mid, Long sno) {
+		 
+		 
+		 	StoreVO vo = new StoreVO();
+		 	vo.setMid(mid);
+		 	vo.setSno(sno);
+	    	storeService.delStoreLike(vo);
+	    	
+	    	return "redirect:/user/myStoreList?mid="+mid;
+	 }
+	 
+	@PostMapping("/zzim/{sno}/{mid}")
+    public ResponseEntity<String> insertZzim(@PathVariable("mid") String mid,@PathVariable("sno") Long sno) {
+	 	StoreVO vo = new StoreVO();
+	 	vo.setMid(mid);
+	 	vo.setSno(sno);
+	 	
+	 	if(storeService.getStoreLike(vo).size() == 0) {
+	 		storeService.inStoreLike(vo);
+	 		return new ResponseEntity<String>("insert",HttpStatus.OK);
+	 	}else {
+	 		storeService.delStoreLike(vo);
+	 		return new ResponseEntity<String>("delete",HttpStatus.OK);
+	 	}
+	 	
+	 }
+
+	
 	@GetMapping("/mypage/qna")
 	public void qnaList(Criteria cri, String mid, String kind, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -123,6 +169,13 @@ public class UserController {
         
     }
     
+    @PostMapping("/mypage/orderDetail")
+    public String orderDetailRemove(long odno, long ono) {
+    	orderDetailService.delete(odno);
+    	
+    	return "redirect:/user/mypage/orderDetail?ono="+ono;
+    }
+    
     @GetMapping("/list")
     public void List(Criteria cri, String mid, Model model) {
     	
@@ -140,10 +193,10 @@ public class UserController {
 		map.put("mid", mid);
 		
 		List<StoreVO> store = storeService.getList(pageDTO);
-		
+		/*
 		store.forEach(vo -> {
-		//	vo.setImgList(storeService.getImg(vo.getSno());
-		});
+			vo.setImg(storeService.getImg(vo.getSno()));
+		});*/
 		
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
         	model.addAttribute("store", store);
@@ -193,25 +246,23 @@ public class UserController {
     }
     
     @PostMapping("/mypage/orderList")
-    public String remove(Long ono, RedirectAttributes rttr) {
+    public String remove(Long ono, String mid, RedirectAttributes rttr) {
         
         if(orderService.delete(ono) == 1) {
             rttr.addFlashAttribute("result", "success");
         }
-        return "redirect:/user/mypage/orderList?mid=member1";
-      }
+        return "redirect:/user/mypage/orderList?mid="+mid;
+    }
     
     @GetMapping("/mypage/modify")
-    public void get(String mid,Model model) {
-        model.addAttribute("member",memberService.get(mid));
+    public void get(Model model) {
+        /*model.addAttribute("member",memberService.get(mid));*/
     }
     
     
     @PostMapping("/mypage/modify")
     public String modify(MemberVO vo, RedirectAttributes rttr) {
-        log.info(""+vo);
-        log.info(""+memberService.modify(vo));
-        
+
         if(memberService.modify(vo) == 1){
             rttr.addFlashAttribute("modify", "success");
         }
@@ -240,9 +291,4 @@ public class UserController {
         model.addAttribute("cartList",cartService.getList(map));
     }
     
-    
-    @GetMapping("/login")
-    public void login() {
-        
-    }
 }

@@ -60,6 +60,7 @@ public class OrderController {
 		List<OrderDetailVO> list = orderDetailService.getList(ono);
 		
 		list.forEach(vo -> {
+			
 			cartList.forEach(cart -> {
 				if(cart.getOpno() == vo.getOpno()) {
 					cartService.remove(cart.getCno());
@@ -67,8 +68,8 @@ public class OrderController {
 			});
 			
 		});
-		 model.addAttribute("member", memberService.get(mid));
-		 model.addAttribute("order", list);
+		
+		model.addAttribute("order", list);
 	}
 	
 	@GetMapping("/list")
@@ -86,7 +87,8 @@ public class OrderController {
             ProductVO pVO=productService.read(Long.parseLong(sizeInfo[0]));
             
             pVO.getOptList().forEach(opt->{
-                if(opt.getOpno()==opno) {    
+                if(opt.getOpno().equals(opno)) {  
+
                     vo.setOption(opt);
                 }
             });
@@ -97,8 +99,8 @@ public class OrderController {
             vo.setSno(Long.parseLong(sizeInfo[3]));
             list.add(vo);
         }
-        log.info(list + "");
-        model.addAttribute("member", memberService.get(mid));
+
+       
         model.addAttribute("orderList",list);
     }
 	

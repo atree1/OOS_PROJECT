@@ -8,13 +8,18 @@ import java.util.Map;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductVO;
+import org.oos.domain.StoreVO;
 import org.oos.mapper.ImgurMapper;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,7 +42,7 @@ public class StoreController {
     private	ImgurMapper imgurMapper;
 	
 	@GetMapping("/list")
-	public void storeList(Criteria cri,Long sno, Model model) {
+	public void storeList(Criteria cri, Long sno, Model model) {
 		
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
@@ -53,21 +58,43 @@ public class StoreController {
             pageList.add(i);
         }
         
-        
+        model.addAttribute("img", imgurMapper.getList());
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", productService.getList(map));
 	}
 	
+
 	@GetMapping("/detail")
-	public void productRead(Long pno, Long sno,  Model model) {
+	public void productRead(Long pno, Long sno, String mid, Model model) {
 		
 		ProductVO vo = productService.read(pno);
+		
 		model.addAttribute("img", imgurMapper.getList());
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 	}
+	
+	
+	@PostMapping("/checkzzim/{sno}/{mid}")
+    public ResponseEntity<String> checkzzim(@PathVariable("mid") String mid,@PathVariable("sno") Long sno) {
+
+		if(mid != null) {
+        	StoreVO store = new StoreVO();
+        	store.setMid(mid);
+        	store.setSno(sno);
+    	 	
+        	if(storeService.getStoreLike(store).size() == 0) {
+        		return new ResponseEntity<String>("no",HttpStatus.OK);
+    	 	}else {
+    	 		return new ResponseEntity<String>("yes",HttpStatus.OK);
+    	 	}
+        }else {
+        	return new ResponseEntity<String>(HttpStatus.OK);
+        }
+		
+	 }
 	
 	@PostMapping("/autocomplete")
     @ResponseBody

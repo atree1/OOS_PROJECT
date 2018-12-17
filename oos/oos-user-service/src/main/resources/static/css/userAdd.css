@@ -495,15 +495,15 @@ input[type="radio"]:checked + label:before{
 }
 
 /* input file type */ 
-form {
+/* form {
 	width: 350px;
 	background: #fff;
 	border:1px solid #d7d7d7;
 	height:48px;
 	box-sizing: border-box;
-	/*margin: 0 auto;*/
-	/*padding: 2.5%;*/
-}
+	margin: 0 auto;
+	padding: 2.5%;
+} */
 
 form ol {
 	padding-left: 0;
@@ -520,7 +520,7 @@ form li {
 }
 
 form img {
-	height: 46px;
+	/* height: 46px; */
 	margin-left: 10px;
 	order: 1;
 }
@@ -532,7 +532,6 @@ form p {
 
 form button {
 	background-color: black;
-	background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.4) 40%, rgba(255, 0, 0, 0.4) 60%, rgba(255, 0, 0, 0));
 	color: #ccc;
 	padding: 5px 10px;
 	border-radius: 5px;
