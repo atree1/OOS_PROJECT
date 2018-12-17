@@ -16,5 +16,9 @@ public interface OrderDetailMapper {
 	
 	public int delete(Long odno);
 	
+	public int snoCount(Long sno);
+	
 	public int insert(OrderDetailVO vo);
+	
+	public List<OrderDetailVO> orderList(Map<String, Object> map);
 }

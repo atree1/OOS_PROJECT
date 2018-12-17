@@ -9,7 +9,7 @@ public interface OrderDetailService {
 	
 	public List<OrderDetailVO> getList(Long ono);
 	
-	public int count(Map<String, Object> map);
+	/*public int count(Map<String, Object> map);*/
 	
 	public OrderDetailVO get(Long odno);
 	
@@ -17,5 +17,9 @@ public interface OrderDetailService {
 	
 	public int delete(Long odno);
 	
+	public int snoCount(Long sno);
+	
 	public int insert(OrderDetailVO vo);
+	
+	public List<OrderDetailVO> orderList(Map<String, Object> map);
 }

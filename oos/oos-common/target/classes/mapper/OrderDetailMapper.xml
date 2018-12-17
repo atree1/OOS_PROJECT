@@ -27,9 +27,16 @@
 		value(#{ono}, #{pno}, #{qty}, #{opno}, #{pnum}, #{address}, #{addressDetail})
 	</insert>
 
-	<update id="modify">
+	<!-- <update id="modify">
 		update tbl_order_detail
 		set qty = #{qty}, opno = #{opno}
+		where odno = #{odno}
+	</update>
+	 -->
+	
+	<update id="modify">
+		update tbl_order_detail 
+		set dno = #{dno} and detail_state = #{detail_state}
 		where odno = #{odno}
 	</update>
 
@@ -37,4 +44,17 @@
 		update tbl_order_detail set del = "Y" 
 		where odno = #{odno}
 	</update>
+	
+	<select id="orderList" parameterType="map" resultType="org.oos.domain.OrderDetailVO">
+		select * from tbl_order_detail
+		where odno > 0 and sno = #{sno} and del='N'
+		order by odno desc
+		limit #{dto.cri.skip}, #{dto.cri.amount}
+	</select>	
+	
+	<select id="snoCount" resultType="int">
+		select count(*) from tbl_order_detail
+		where odno > 0 and sno = #{sno} and del='N'
+	</select>	
+	
 </mapper>

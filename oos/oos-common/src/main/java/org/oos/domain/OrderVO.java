@@ -10,6 +10,7 @@ public class OrderVO {
 	private Long ono;
 	private Long dno;
 	private Long total;
+	private Long sno;
 	
 	private String mid;
 	private String state;

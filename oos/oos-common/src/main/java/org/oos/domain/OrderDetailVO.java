@@ -15,8 +15,11 @@ public class OrderDetailVO {
 	private String addressDetail;
 	private String del;
 	private String mid;
+	private String detail_state;
 	private Long sno;
+	private Long dno;
 	
 	private ProductVO product;
 	private ProductOptionVO option;
+	private OrderVO order;
 }

@@ -68,5 +68,17 @@ public class OrderServiceImpl implements OrderService {
 		
 		return orderDetailMapper.delete(odno);
 	}
+
+	@Override
+	public List<OrderVO> orderList(Map<String, Object> map) {
+
+		return orderMapper.orderList(map);
+	}
+
+	@Override
+	public int orderCount(Map<String, Object> map) {
+		
+		return orderMapper.orderCount(map);
+	}
 	
 }
