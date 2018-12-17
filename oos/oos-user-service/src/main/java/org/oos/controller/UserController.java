@@ -199,7 +199,7 @@ public class UserController {
             rttr.addFlashAttribute("result", "success");
         }
         return "redirect:/user/mypage/orderList?mid=member1";
-        }
+      }
     
     @GetMapping("/mypage/modify")
     public void get(String mid,Model model) {

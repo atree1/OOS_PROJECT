@@ -5,9 +5,11 @@ import lombok.Data;
 @Data
 public class AuthDTO {
 
+	private String sns;
 	private String access_token;
-	private String type;
+	private String token_type;
 	private String refresh_token;
-	private Integer expires_in;
-	private String scope;
+	private String user_id;
+	private String user_pw;
+	private String del;
 }

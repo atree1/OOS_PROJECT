@@ -60,4 +60,24 @@
 		from tbl_store
 		where sno>0
 	</select>
+	
+	<select id="pNumCount" resultType="int">
+		select count(*) from tbl_product
+		where sno > 0 and del = 'N' and sno = #{sno}
+	</select>
+
+	<delete id="delStoreLike">
+		delete from tbl_store_like
+		where sno = #{sno} and mid=#{mid}
+	</delete>
+	
+	<insert id="inStoreLike">
+		insert into tbl_store_like(mid, sno)
+		value(#{mid},#{sno})
+	</insert>
+	
+	<select id="getStoreLike" resultType="org.oos.domain.StoreVO">
+		select * from tbl_store_like
+		where sno > 0 and mid = #{mid} and sno = #{sno}
+	</select>
 </mapper>

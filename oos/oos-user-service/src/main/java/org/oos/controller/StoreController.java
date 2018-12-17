@@ -53,7 +53,7 @@ public class StoreController {
             pageList.add(i);
         }
         
-        model.addAttribute("img", imgurMapper.getList());
+        
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
