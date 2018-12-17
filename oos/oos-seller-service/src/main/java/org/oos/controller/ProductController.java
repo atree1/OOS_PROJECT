@@ -9,19 +9,21 @@ import java.util.Map;
 import org.oos.domain.CategoryVO;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
-import org.oos.domain.ProductOptionVO;
+import org.oos.domain.ProductImgVO;
 import org.oos.domain.ProductVO;
 import org.oos.mapper.ImgurMapper;
 import org.oos.service.AutoMlService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -43,6 +45,22 @@ public class ProductController {
 	@Setter(onMethod_=@Autowired)
 	private ImgurMapper imgurMapper;
 	
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<ProductImgVO>> getAttachList(Long pno) {
+			log.info("getAttachList");
+		List<ProductImgVO> result = productService.read(pno).getImgList();
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	@PostMapping("/modify")
+	public void modifyPost(Criteria cri,ProductVO vo, RedirectAttributes rttr) {
+		
+		
+		
+		
+	}
+	
 	@GetMapping({"/read","/modify"})
 	public void productGet(Criteria cri,Long pno, Long sno, Model model) {
 
@@ -63,6 +81,7 @@ public class ProductController {
 		model.addAttribute("pageMaker", pageDTO);
 
 	}
+	
 	@GetMapping("/list")
 	public void productList(Criteria cri,Long sno, Model model) {
 		

@@ -108,6 +108,7 @@
 									</div>
 								
 								<form  role="form" action="/product/modify" method="get">
+										<input type='hidden' name='pno' th:value="${product.pno}"/>
 										<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}'/>
 										<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}'/>
 										<input type='hidden' name='sno' th:value='${store.sno}'/>
