@@ -64,9 +64,11 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public int delete(Long odno) {
+	public int delete(Long ono) {
 		
-		return orderDetailMapper.delete(odno);
+		orderDetailMapper.deleteAll(ono);
+		
+		return orderMapper.delete(ono);
 	}
 
 	@Override

@@ -112,6 +112,26 @@ public class StoreServiceImpl implements StoreService {
 		vo.setHashList(hashMapper.getList(vo.getSno()));
 		return vo;
 	}
-	
+
+	@Override
+	public int pNumCount(Long sno) {
+		return mapper.pNumCount(sno);
+	}
+
+	@Override
+	public int delStoreLike(StoreVO vo) {
+		return mapper.delStoreLike(vo);
+	}
+
+	@Override
+	public int inStoreLike(StoreVO vo) {
+		return mapper.inStoreLike(vo);
+	}
+
+	@Override
+	public List<StoreVO> getStoreLike(StoreVO vo) {
+		return mapper.getStoreLike(vo);
+	}
+
 	
 }
