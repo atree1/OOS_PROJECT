@@ -93,17 +93,8 @@
 										</div>
 								
 									<div class="optionDiv">
-									<span >
-										<div class="sizeDiv" style="float: left; width: 33%;">
-											<label>사이즈</label> <input name="size" type="text" 
-												class="form-control" required>
-										</div>
-										<div class="qtyDiv" style="float: left; width: 33%;">
-											<label>수량</label> <input name="qty" type="text" data-idx="0"
-												class="form-control" required>
-										</div>
-									<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button>
-										</span>
+									
+									
 									</div>
 									<div class="form-group uploadDiv">
 										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
@@ -162,20 +153,23 @@ $(document).ready(function(e){
 		span.remove();
 	});
 	
+	addOption();
+	
+	function addOption(){
+	var str ="";
+	
+		str +="<span class='opt'><input  name='size' type='text' class='form-control' required>";				
+		str +="<input  name='qty' type='text' class='form-control' required>";
+		str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
+
+		$('.optionDiv').append(str);
+	}
  	//옵션추가버튼
 	$("#optionAddBtn").on("click",function(e){
 		e.preventDefault();
 		
 		console.log("Option added");
-		
-		var str ="";
-		
-			str +="<span ><input name='size' type='text' class='form-control' required>";				
-			str +="<input name='qty' type='text' class='form-control' required>";
-			str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
-
-			$('.optionDiv').append(str);
-		
+		addOption();
 	}); 
 	
 	$("button[type='submit']").on("click",function(e){
@@ -195,7 +189,18 @@ $(document).ready(function(e){
 			str +="<input type='hidden' name='imgList["+i+"].ipath' value='"+jobj.data("path")+"'>";
 
 		});
-		
+		$(".optionDiv span").each(function(i,obj){
+			var jobj= $(obj);
+			str +="<input type='hidden' name='optList["+i+"].size' value='"+jobj[0].childNodes[0].value+"'>";
+			str +="<input type='hidden' name='optList["+i+"].qty' value='"+jobj[0].childNodes[1].value+"'>";
+			/* console.dir(jobj[0].childNodes[0].name);
+			console.dir(jobj[0].childNodes[0].value);
+
+			console.dir(jobj[0].childNodes[1].name);
+			console.dir(jobj[0].childNodes[1].value); */
+			
+		});
+		console.log(str);
 		formObj.append(str).submit();
 	
 	});

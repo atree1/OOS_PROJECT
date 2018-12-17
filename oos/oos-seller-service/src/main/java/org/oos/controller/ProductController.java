@@ -82,18 +82,9 @@ public class ProductController {
 	}
 
 	@PostMapping("/register")
-	public String productRegisterPost(ProductVO vo, String[] size, Long[] qty, RedirectAttributes rttr, Long sno) {
+	public String productRegisterPost(ProductVO vo, RedirectAttributes rttr, Long sno) {
 		List<CategoryVO> cateList = new ArrayList<>();
-		List<ProductOptionVO> optList = new ArrayList<>();
-
-		for (int i = 0; i < size.length; i++) {
-			ProductOptionVO optVO = new ProductOptionVO();
-			optVO.setSize(size[i]);
-			optVO.setQty(qty[i]);
-			optList.add(optVO);
-
-		}
-		
+		log.info(""+vo);
 		String firstPath = "C:\\upload\\" + vo.getImgList().get(0).getIpath() + "\\" + vo.getImgList().get(0).getUuid() + "_" + vo.getImgList().get(0).getIname();
 		try {
 			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN8521692284338889379",
@@ -114,14 +105,10 @@ public class ProductController {
 		
 		vo.getImgList().forEach(img -> {
 			String path = "C:\\upload\\" + img.getIpath() + "\\" + img.getUuid() + "_" + img.getIname();
-			log.info("=====================================================");
-			log.info(path);
-
 			
-			log.info("=====================================================");
 		});
 		vo.setCateList(cateList);
-		vo.setOptList(optList);
+
 		int result = productService.register(vo);
 
 		rttr.addFlashAttribute("result", result == 1 ? "SUCCESS" : "FAIL");
