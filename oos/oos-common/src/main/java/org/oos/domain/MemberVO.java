@@ -25,7 +25,7 @@ public class MemberVO {
 	private String birth;
 	private String email;
 	private String address;
-	private String addressDetail;
+	private String addressdetail;
 	
 	private String sns = "null";
 	private char permit = 'Y';
