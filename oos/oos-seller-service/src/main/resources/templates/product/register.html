@@ -1,12 +1,9 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/sellerLayout}">
 
+<div class="container" style="margin-top: 20px;"
+	layout:fragment="container">
 <style>
 	form {
 		width: 100%;
@@ -58,81 +55,121 @@
 	}
 </style>
 <div>
-	<form role="form" action="/product/register" method="post"> 
-	
-		<div class="form-group">
-			<label> 상품명 </label> <input id="pname" name="pname" type="text"
-				class="form-control" required>
-		</div>
-		<div class="form-group">
-			<label> 가격 </label> <input id="price" name="price" type="text"
-				class="form-control" required>
-		</div>
-		<div class="form-group">
-			<label>sno</label>
-			<input id="sno" name="sno" type="text" th:value="${store.sno}" readonly="readonly"
-				class="form-control" required>
-		</div>
-		
-		<div>
-			<div class="sizeDiv">
-				<label>size</label> 
-				<input name="size" type="text" class="form-control" required>
-			</div>
-			<div class="qtyDiv">
-				<label>qty</label>
-				<input name="qty" type="text" class="form-control" required>
-			</div>
-			<button id="optionAddBtn">추가</button>
-		</div>		
+        <div id="page-wrapper" class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">상품등록</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                       
+                        <div class="panel-heading">
+                           
+                        </div>
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+								 <form role="form" action="/product/register" method="post">
+									<div class="form-group">
+										<label>상품명</label> <input id="pname" name="pname" type="text"
+											class="form-control" required>
+									</div>
+									<div class="form-group">
+										<label>가격</label> <input id="price" name="price" type="text"
+											class="form-control" required>
+									</div>
+									<div class="form-group">
+										<label>상품설명</label>
+										<textarea id="content" name="content" class="form-control" rows="3"></textarea>
+									</div> 
+										
+										<div >
+										<button class="btn btn-success" id="optionAddBtn">+</button>
+										</div>
+								
+									<div class="optionDiv">
+									
+									
+									</div>
+									<div class="form-group uploadDiv">
+										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
+										 <input name="uploadFile" id="files" type="file" multiple>
+									</div>
+									<div class="uploadResult">
+										<ul>
 
-		<div class="form-group uploadDiv">
-			<label>FileAttach </label>
-			 <input name="uploadFile" id="files" type="file" multiple>
-		</div>
-		<div class="uploadResult">
-			<ul>
+										</ul>
+									</div>
+									<div class="form-group">
+										<div>
+											<button class="btn btn-success" type="submit">상품등록</button>
+										</div>
+									</div>
+									
+									<div >									
+									<label>sno</label>
+									<input id="sno" name="sno" type="text" th:value="${store.sno}" readonly="readonly" class="form-control" required>
+									</div>
+									</form>
+								<!-- /.col-lg-6 (nested) -->
+                            </div>
+                          </div>
+                         </div>
+                        <!-- /.panel-body -->
+      		           
+                       
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+        
+        
 
-			</ul>
-		</div>
-		
-
-			<div class="form-group">
-				<div>
-					<button type="submit">Register</button>
-				</div>
-			</div>
-		</form>
-</div>
-
+    </div>
+    <!-- /#wrapper -->
 <script src="../js/jquery.min.js"></script>
 <script th:inline="javascript">
 $(document).ready(function(e){
 	
 	
 	var formObj = $("form[role='form']");
+	var idx = 1;
 	
+	//옵션삭제
+	$(".optionDiv").on("click","button ",function(e){
+		
+		e.preventDefault();
+		console.log("remove");
+		var span=$(this).closest('span');
+		span.remove();
+	});
+	
+	addOption();
+	
+	function addOption(){
+	var str ="";
+	
+		str +="<span class='opt'><input  name='size' type='text' class='form-control' required>";				
+		str +="<input  name='qty' type='text' class='form-control' required>";
+		str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
+
+		$('.optionDiv').append(str);
+	}
  	//옵션추가버튼
 	$("#optionAddBtn").on("click",function(e){
 		e.preventDefault();
 		
 		console.log("Option added");
-		
-		var str ="";
-		var str2 ="";
-		var sizeDiv = $(".sizeDiv");
-		var qtyDiv = $(".qtyDiv");
-		
-		
-			str +="<input name='size' type='text' class='form-control' required>";
-		
-		sizeDiv.append(str);
-		console.log(str);
-		
-		
-			str2 +="<input name='qty' type='text' class='form-control' required>";
-		qtyDiv.append(str2);
-		console.log(str2);
+		addOption();
 	}); 
 	
 	$("button[type='submit']").on("click",function(e){
@@ -152,7 +189,18 @@ $(document).ready(function(e){
 			str +="<input type='hidden' name='imgList["+i+"].ipath' value='"+jobj.data("path")+"'>";
 
 		});
-		
+		$(".optionDiv span").each(function(i,obj){
+			var jobj= $(obj);
+			str +="<input type='hidden' name='optList["+i+"].size' value='"+jobj[0].childNodes[0].value+"'>";
+			str +="<input type='hidden' name='optList["+i+"].qty' value='"+jobj[0].childNodes[1].value+"'>";
+			/* console.dir(jobj[0].childNodes[0].name);
+			console.dir(jobj[0].childNodes[0].value);
+
+			console.dir(jobj[0].childNodes[1].name);
+			console.dir(jobj[0].childNodes[1].value); */
+			
+		});
+		console.log(str);
 		formObj.append(str).submit();
 	
 	});
@@ -244,7 +292,4 @@ $(document).ready(function(e){
 	});//end
 
 });
-</script>
-
-</body>
-</html>
+</script>  

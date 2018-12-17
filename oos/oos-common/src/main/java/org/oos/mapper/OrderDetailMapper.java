@@ -20,5 +20,9 @@ public interface OrderDetailMapper {
 	
 	public int insert(OrderDetailVO vo);
 	
+<<<<<<< HEAD
 	public List<OrderDetailVO> orderList(Map<String, Object> map);
+=======
+	public int deleteAll(Long ono);
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 }

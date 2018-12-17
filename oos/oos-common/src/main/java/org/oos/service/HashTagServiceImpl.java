@@ -21,4 +21,10 @@ public class HashTagServiceImpl implements HashTagService {
 		return mapper.getName();
 	}
 
+	@Override
+	public List<HashTagVO> getList() {
+		// TODO Auto-generated method stub
+		return mapper.getList();
+	}
+
 }

@@ -22,4 +22,9 @@
 	<delete id="deleteAll">
 		delete from tbl_product_img where pno=#{pno}
 	</delete>
+	
+	<select id="get" resultType="org.oos.domain.ProductImgVO">
+		select * from tbl_product_img
+		where uuid !='' and sno = #{sno};
+	</select>
 </mapper>

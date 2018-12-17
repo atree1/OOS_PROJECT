@@ -19,6 +19,8 @@ public class ProductVO {
 
 	private LocalDate regdate;
 	
+	private String sname; //목록에 상점이름띄울때
+	
 	private Date updatedate;
 	private List<ProductImgVO> imgList;
 	private List<ProductOptionVO> optList;
@@ -26,4 +28,5 @@ public class ProductVO {
 	private  char del;	
 	private int QuestionReplyCnt;
 	private int ReviewReplyCnt;
+	private String content;
 }

@@ -40,8 +40,8 @@ width:40px;
 				<div class="goods_detail_title displayTable">
 					<div class="table-cell">제품 상세설명</div>
 				</div>
-				<div class="goods_detail_text">
-					설명설명
+				<div class="goods_detail_text" th:text="${product.content}">
+					
 				</div>
 				<style>
 				.detail_tab_floatable {
@@ -345,11 +345,10 @@ width:40px;
 		
 		function setImg(){
 			
-			/* var imgList=[[${product.imgList}]];
+			var imgList=[[${product.imgList}]];
 			var str="";
-			var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname); */
-			/* $(".inner_main_img").attr("src","/display?fileName="+fileCallPath); */
-			
+			var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname); 
+		 $(".inner_main_img").attr("src","/display?fileName="+fileCallPath);
 		
 			$.each(img, function(index, item){
 				if(item.pno == product.pno){
@@ -357,7 +356,7 @@ width:40px;
 				} 
 			}); 
 			
-		/* 	for(img of imgList){
+			for(img of imgList){
 				
 				var thumbFileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
 
@@ -368,7 +367,7 @@ width:40px;
 		
 			}
 			
-			$(".gthumbs").html(str); */
+			$(".gthumbs").html(str); 
 		}
 		
 		$(".btn_order").on('click',function(e){

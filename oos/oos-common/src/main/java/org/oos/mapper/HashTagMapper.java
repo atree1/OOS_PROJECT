@@ -2,6 +2,8 @@ package org.oos.mapper;
 
 import java.util.List;
 
+import org.oos.domain.HashTagVO;
+
 
 
 public interface HashTagMapper {
@@ -10,6 +12,6 @@ public interface HashTagMapper {
 	
 	public int get(Long hno);
 	
-	
+	public List<HashTagVO> getList();
 
 }

@@ -142,7 +142,7 @@ public class UserController {
 		List<StoreVO> store = storeService.getList(pageDTO);
 		
 		store.forEach(vo -> {
-			vo.setImg(storeService.getImg(vo.getSno()));
+		//	vo.setImgList(storeService.getImg(vo.getSno());
 		});
 		
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
