@@ -24,5 +24,13 @@ public interface StoreService {
 	
 	public int modify(StoreVO vo);
 	
-	public int count(Criteria cri);
+	public int count(Criteria cri);	
+	
+	public int pNumCount(Long sno);
+	
+	public int delStoreLike(StoreVO vo);
+	
+	public int inStoreLike(StoreVO vo);
+	
+	public List<StoreVO> getStoreLike(StoreVO vo);
 }
