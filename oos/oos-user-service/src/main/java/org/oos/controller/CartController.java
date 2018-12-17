@@ -27,9 +27,9 @@ import lombok.extern.java.Log;
 @RequestMapping("/cart")
 @Log
 public class CartController {
+	
 	@Setter(onMethod_=@Autowired)
 	private CartService service;
-	
 	
 	@PostMapping(value = "/new", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> create(@RequestBody List<CartVO> vo) {
