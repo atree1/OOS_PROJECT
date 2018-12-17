@@ -3,7 +3,6 @@ package org.oos.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Criteria;
 import org.oos.domain.OrderDetailVO;
 
 public interface OrderDetailMapper {
@@ -19,10 +18,9 @@ public interface OrderDetailMapper {
 	public int snoCount(Long sno);
 	
 	public int insert(OrderDetailVO vo);
-	
-<<<<<<< HEAD
+
 	public List<OrderDetailVO> orderList(Map<String, Object> map);
-=======
+
 	public int deleteAll(Long ono);
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+
 }
