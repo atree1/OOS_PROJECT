@@ -56,8 +56,12 @@ public class ProductController {
 	@PostMapping("/modify")
 	public void modifyPost(Criteria cri,ProductVO vo, RedirectAttributes rttr) {
 		
+		int result = productService.update(vo);
 		
 		
+		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addFlashAttribute("amount", cri.getAmount());
 		
 	}
 	
