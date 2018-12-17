@@ -83,47 +83,36 @@
 										<label>가격</label> <input id="price" name="price" type="text" th:value="${product.price}"
 											class="form-control" readonly="readonly">
 									</div>
-								<!--<div class="form-group">
+									<div class="form-group">
 										<label>상품설명</label>
-										<textarea class="form-control" rows="3"></textarea>
-									</div> -->
-											<div >
-										<button class="btn btn-success" id="optionAddBtn">+</button>
-										</div>
-								
+										<textarea type="text" id="content" name="content" th:text="${product.content}" class="form-control" rows="3" readonly="readonly"></textarea>
+									</div> 
+																		
 									<div class="optionDiv">
 									<span >
+									<div >
 										<div class="sizeDiv" style="float: left; width: 33%;">
-											<label>사이즈</label> <input name="size" type="text" 
+											<label>사이즈</label> <input name="size" type="text" th:value="${product.optList[0].size}" 
 												class="form-control" readonly="readonly">
 										</div>
 										<div class="qtyDiv" style="float: left; width: 33%;">
-											<label>수량</label> <input name="qty" type="text" data-idx="0" 
+											<label>수량</label> <input name="qty" type="text" data-idx="0" th:value="${product.optList[0].qty}"
 												class="form-control" readonly="readonly">
 										</div>
-									<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button>
+									<div>
 										</span>
 									</div>
-									<div class="form-group uploadDiv">
-										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
-										 <input name="uploadFile" id="files" type="file" multiple>
-									</div>
-									<div class="uploadResult">
-										<ul>
-
-										</ul>
-									</div>
-									<div class="form-group">
-										<div>
-											
-										</div>
-									</div>
+								
+								
 									
 									<div >									
 									<label>sno</label>
 									<input id="sno" name="sno" type="text" th:value="${store.sno}" readonly="readonly" class="form-control" required>
 									</div>
 									</form>
+										<div class="uploadResult">
+										
+									</div>
 								<!-- /.col-lg-6 (nested) -->
                             </div>
                           </div>
@@ -147,143 +136,27 @@
 <script src="../js/jquery.min.js"></script>
 <script th:inline="javascript">
 $(document).ready(function(e){
-	
+	var pageMaker = [[${pageMaker}]]
 	
 	var formObj = $("form[role='form']");
 	var idx = 1;
 	
-	//옵션삭제
-	$(".optionDiv").on("click","button ",function(e){
+	setImg();
+	function setImg(){
 		
-		e.preventDefault();
-		console.log("remove");
-		var span=$(this).closest('span');
-		span.remove();
-	});
-	
- 	//옵션추가버튼
-	$("#optionAddBtn").on("click",function(e){
-		e.preventDefault();
-		
-		console.log("Option added");
-		
-		var str ="";
-		
-			str +="<span ><input name='size' type='text' class='form-control' required>";				
-			str +="<input name='qty' type='text' class='form-control' required>";
-			str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
-
-			$('.optionDiv').append(str);
-		
-	}); 
-	
-	$("button[type='submit']").on("click",function(e){
-		
-		e.preventDefault();
-		
-		console.log("submit click");
-	 	
+		var imgList=[[${product.imgList}]];
 		var str="";
-		 //이미지 출력
-		$(".uploadResult ul li").each(function(i,obj){		
-			var jobj= $(obj);
-			console.dir(jobj);
-			
-			str +="<input type='hidden' name='imgList["+i+"].iname' value='"+jobj.data("filename")+"'>";
-			str +="<input type='hidden' name='imgList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
-			str +="<input type='hidden' name='imgList["+i+"].ipath' value='"+jobj.data("path")+"'>";
-
-		});
+		$.each(imgList,function(i,img){
+		var fileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname); 
+	 $(".uploadResult").append("<img src='/display?fileName="+fileCallPath+"'>");
+		}
+		)
 		
-		formObj.append(str).submit();
-	
-	});
-	
-	var regex=new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	var maxSize=5242880;
-	function checkExtension(fileName,fileSize){
-		if(fileSize>=maxSize){
-			alert("파일 사이즈 초과");
-			return false;
-		}
-		if(regex.test(fileName)){
-			alert('해당 파일 업로드 불가');
-			return false;
-		}
-		return true;
+		
 	}
 	
 	
-	$("#files").change(function(e){
-		var formData=new FormData();
-
-		var inputFile = $("input[name='uploadFile']");
-		
-		var files = inputFile[0].files;
-		
-		console.log(files);
-		
-		for(var i=0;i<files.length;i++){
-			if(!checkExtension(files[i].name,files[i].size)){
-				return false;
-			}
-		//	console.log(files[i]);
-			formData.append("uploadFile",files[i]);
-		}
-			
-		$.ajax({
-			url:'/upload',
-			processData:false,
-			contentType:false,
-			data:formData,
-			type:'POST',
-			dataType:'json',
-			success:function(result){
-				console.log(result);
-				showUploadResult(result);
-			}
-		});
-	});
 	
-	function showUploadResult(uploadResultArr) {
-		if(!uploadResultArr||uploadResultArr.length==0){
-			return;
-		}
-		var uploadUL=$(".uploadResult ul");
-		var str="";
-		$(uploadResultArr).each(function(i,obj){
-			
-			
-				var fileCallPath =  encodeURIComponent( obj.ipath+ "/s_"+obj.uuid +"_"+obj.iname);
-				str += "<li data-path='"+obj.ipath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.iname+"'><div>";
-				str += "<span> "+ obj.iname+"</span>";
-				str += "<button type='button' data-file=\'"+fileCallPath+"\' class='quick_close_btn_20.png'>x</button><br>";
-				str += "<img src='/display?fileName="+fileCallPath+"'>";
-				str += "</div>";
-				str +"</li>";
-		});
-		uploadUL.append(str);
-	}
-	
-	//이미지삭제
-	$(".uploadResult").on("click","button",function(e){
-		console.log("delete file");
-		
-		var targetFile = $(this).data("file");
-	console.log(targetFile);
-		var targetLi = $(this).closest("li");
-		
-		$.ajax({
-			url:'/deleteFile',
-			data:{fileName:targetFile},
-			dataType:'text',
-			type:'POST',
-				success:function(result){
-					alert(result);
-				targetLi.remove();	
-				}
-		});
-	});//end
 
 });
 </script>  

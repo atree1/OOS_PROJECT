@@ -83,11 +83,12 @@
 										<label>가격</label> <input id="price" name="price" type="text"
 											class="form-control" required>
 									</div>
-								<!-- 	<div class="form-group">
+									<div class="form-group">
 										<label>상품설명</label>
-										<textarea class="form-control" rows="3"></textarea>
-									</div> -->
-											<div >
+										<textarea id="content" name="content" class="form-control" rows="3"></textarea>
+									</div> 
+										
+										<div >
 										<button class="btn btn-success" id="optionAddBtn">+</button>
 										</div>
 								
@@ -150,8 +151,32 @@ $(document).ready(function(e){
 	
 	
 	var formObj = $("form[role='form']");
+	var idx = 1;
+	
+	//옵션삭제
+	$(".optionDiv").on("click","button ",function(e){
+		
+		e.preventDefault();
+		console.log("remove");
+		var span=$(this).closest('span');
+		span.remove();
+	});
+	
+ 	//옵션추가버튼
+	$("#optionAddBtn").on("click",function(e){
+		e.preventDefault();
+		
+		console.log("Option added");
+		
+		var str ="";
+		
+			str +="<span ><input name='size' type='text' class='form-control' required>";				
+			str +="<input name='qty' type='text' class='form-control' required>";
+			str +="<button  class='btn btn-success' id='optionRemoveBtn'>삭제</button></span>";
 
- 	
+			$('.optionDiv').append(str);
+		
+	}); 
 	
 	$("button[type='submit']").on("click",function(e){
 		

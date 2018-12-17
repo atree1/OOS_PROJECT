@@ -35,8 +35,8 @@
 	 </select>
 
 	 <insert id="insert">
-	 	insert into tbl_product(pname,price,sno)
-	 	values(#{pname},#{price},#{sno})
+	 	insert into tbl_product(pname,price,sno,content)
+	 	values(#{pname},#{price},#{sno},#{content})
 	 	<selectKey resultType="Long" keyProperty="pno" order="AFTER"> 
 	 	select max(pno) from tbl_product
 	 	</selectKey>
