@@ -41,7 +41,6 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 			ProductOptionVO option = productOptionMapper.get(vo.getOpno());
 			vo.setProduct(product);
 			vo.setOption(option);
-			
 		});
 		
 		return list;
@@ -49,13 +48,13 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 
 	@Override
 	public OrderDetailVO get(Long odno) {
-		OrderDetailVO vo = orderDetailMapper.get(odno);
-		ProductVO product = productService.read(vo.getPno());
-		ProductOptionVO option = productOptionMapper.get(vo.getOpno());
-		vo.setProduct(product);
-		vo.setOption(option);
+//		OrderDetailVO vo = orderDetailMapper.get(odno);
+//		ProductVO product = productService.read(vo.getPno());
+//		ProductOptionVO option = productOptionMapper.get(vo.getOpno());
+//		vo.setProduct(product);
+//		vo.setOption(option);
 		
-		return vo;
+		return orderDetailMapper.getByOdno(odno);
 	}
 
 	@Override

@@ -4,6 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.StoreMapper">
+	<resultMap type="org.oos.domain.StoreHashTagVO" id="HashTag">
+		<result column="shno" property="shno" />
+		<result column="hno" property="hno" />
+		<result column="tag" property="tag" />
+		<result column="del" property="del" />
+	</resultMap>
+	<resultMap type="org.oos.domain.StoreImgVO" id="Image">
+		<result column="uuid" property="uuid" />
+		<result column="iname" property="iname" />
+		<result column="ipath" property="ipath" />
+	</resultMap>
+	<resultMap type="org.oos.domain.StoreVO" id="Store">
+		<result column="sno" property="sno" />
+		<result column="sname" property="sname" />
+		<result column="owner" property="owner" />
+		<result column="sinfo" property="sinfo" />
+		<result column="regdate" property="regdate" />
+		<result column="updatedate" property="updatedate" />
+		<result column="del" property="del" />
+		<result column="saddress" property="saddress" />
+		<result column="tel" property="tel" />
+
+		<collection property="imgList" resultMap="Image" />
+		<collection property="hashList" resultMap="HashTag" />
+	</resultMap>
+	
+	
+	<select id="getList2" resultMap="Store">
+		select * from tbl_store s left join tbl_store_img i
+		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
+		where s.sno
+		> 0 and s.del='N'
+		<if test="cri.category != null">
+			and s.sname like concat("%", #{cri.keyword} ,"%")
+		</if>
+		group by s.sno
+		order by s.sno desc
+		limit #{cri.skip}, #{cri.amount}
+
+	</select>
 
 	<select id="getList" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store
@@ -13,29 +53,38 @@
 		</if>
 		order by sno desc
 		limit #{cri.skip}, #{cri.amount}
+
 	</select>
 
+	<select id="getBySno" resultMap="Store">
+		select * from tbl_store s left join tbl_store_img i
+		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
+		where s.sno=#{sno}
+	</select>
 	<select id="get" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store where sno =
 		#{sno}
 	</select>
 	<select id="getBySid" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store where owner =
+		select * from tbl_store where
+		owner =
 		#{owner}
 	</select>
 
 	<insert id="insert">
 		insert into tbl_store(sname,owner,sinfo,saddress,tel)
 		values(#{sname},#{owner},#{sinfo},#{saddress},#{tel})
-			<selectKey resultType="Long" keyProperty="sno" order="AFTER"> 
-	 	select max(sno) from tbl_store
-	 	</selectKey>
+		<selectKey resultType="Long" keyProperty="sno" order="AFTER">
+			select max(sno) from tbl_store
+		</selectKey>
 	</insert>
 
 	<update id="modify">
 
-		update tbl_store set sname = #{sname}, owner = #{owner}, sinfo = #{sinfo},
-		saddress = #{saddress}, tel = #{tel}, updatedate = now()
+		update tbl_store set sname = #{sname}, owner =
+		#{owner}, sinfo = #{sinfo},
+		saddress = #{saddress}, tel = #{tel},
+		updatedate = now()
 		where sno =
 		#{sno}
 
@@ -58,26 +107,30 @@
 	<select id="getName" resultType="string">
 		select sname
 		from tbl_store
-		where sno>0
+		where
+		sno>0
 	</select>
-	
+
 	<select id="pNumCount" resultType="int">
-		select count(*) from tbl_product
+		select count(*) from
+		tbl_product
 		where sno > 0 and del = 'N' and sno = #{sno}
 	</select>
 
 	<delete id="delStoreLike">
 		delete from tbl_store_like
-		where sno = #{sno} and mid=#{mid}
+		where sno = #{sno} and
+		mid=#{mid}
 	</delete>
-	
+
 	<insert id="inStoreLike">
 		insert into tbl_store_like(mid, sno)
 		value(#{mid},#{sno})
 	</insert>
-	
+
 	<select id="getStoreLike" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store_like
+		select * from
+		tbl_store_like
 		where sno > 0 and mid = #{mid} and sno = #{sno}
 	</select>
 </mapper>

@@ -3,48 +3,276 @@
 	layout:decorate="~{/layout/shopLayout}">
 
 
-<div class="container" style="margin-top: 0px; width:100% !important; min-width:1100px;"
+<div class="container"
+	style="margin-top: 0px; width: 100% !important; min-width: 1100px;"
 	layout:fragment="container">
-<link rel="stylesheet" href="/css/imgSlider.css">
-<div id="banner" class="banner">
-  <ul>
-    <li> <img src="http://mutnam.com/web/main/pc/181217_main1.gif" alt="">
-    </li>
-    <li> <img src="http://mutnam.com/web/main/pc/181211_main5.jpg" alt="">
-    </li>
-    <li> <img src="http://mutnam.com/web/main/pc/181211_main2-1.jpg" alt="">
-    </li>
-    <li> <img src="http://mutnam.com/web/main/pc/181211_main6.jpg" alt="">
-    </li>
-    <li> <img src="http://mutnam.com/web/main/pc/181211_main3.jpg" alt="">
-    </li>
-    <li> <img src="http://mutnam.com/web/main/pc/181211_main4.jpg" alt="">
-    </li>
-  </ul>
-</div>
-<script src="/js/jQuery.autoSlider.js"></script> 
-<script>
-  $(function(){
-    $('.banner').autoSlider({
-      speed: 800, 
-      delay: 3000, 
-      dots: true, 
-      stay: true,
-      fluid: true 
-    });
-  });
-  </script>
-
-<div style="margin:0 auto; width:1100px !important">
-	<div class="todaySinsang" style="margin-top: 76px;">
-		<span style="background-color: #fff; padding: 0 10px;">오늘의 신상</span>
-		<div class="div_line_grey_2px"
-			style="margin-top: -8px; margin-bottom: 16px;"></div>
+	<link rel="stylesheet" href="/css/imgSlider.css">
+	<link rel="stylesheet" href="/css/submain.css">
+	<div id="banner" class="banner">
+		<ul>
+			<li><img src="http://mutnam.com/web/main/pc/181217_main1.gif"
+				alt=""></li>
+			<li><img src="http://mutnam.com/web/main/pc/181211_main5.jpg"
+				alt=""></li>
+			<li><img src="http://mutnam.com/web/main/pc/181211_main2-1.jpg"
+				alt=""></li>
+			<li><img src="http://mutnam.com/web/main/pc/181211_main6.jpg"
+				alt=""></li>
+			<li><img src="http://mutnam.com/web/main/pc/181211_main3.jpg"
+				alt=""></li>
+			<li><img src="http://mutnam.com/web/main/pc/181211_main4.jpg"
+				alt=""></li>
+		</ul>
 	</div>
+	<script src="/js/jQuery.autoSlider.js"></script>
+	<script>
+		$(function() {
+			$('.banner').autoSlider({
+				speed : 800,
+				delay : 3000,
+				dots : true,
+				stay : true,
+				fluid : true
+			});
+		});
+	</script>
 
-	<div style="width: 1100px; margin: 0 auto;">
-		<ul id="goodsList"
-			style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
+	<div style="margin: 0 auto; width: 1100px !important">
+		<div class="todaySinsang" style="margin: 40px 0 30px 0;">
+			<span style="background-color: #fff; padding: 0 10px;">베스트 상품</span>
+			<div class="div_line_grey_2px"
+				style="margin-top: -8px; margin-bottom: 16px;"></div>
+		</div>
+		<div id="hp_best" class="hp_best hp_galley_st">
+
+			<div class="hp_best_tab">
+				<div id="touchSlider_best_tab" class="touchSlider-box-tab inner">
+					<ul class="swiper-wrapper touchSlider-tab nav_list">
+						<li class="swiper-slide nav_item on"><a>전체</a></li>
+						<li class="swiper-slide nav_item"><a>패딩</a></li>
+						<li class="swiper-slide nav_item"><a>셔츠</a></li>
+						<li class="swiper-slide nav_item"><a>아우터</a></li>
+						<li class="swiper-slide nav_item"><a>구두</a></li>
+						<li class="swiper-slide nav_item"><a>재킷</a></li>
+						<li class="swiper-slide nav_item"><a>원피스</a></li>
+						<li class="swiper-slide nav_item"><a>운동화</a></li>
+						<li class="swiper-slide nav_item"><a>부츠</a></li>
+						<li class="swiper-slide nav_item"><a>벨트</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="touchSlider_best" class="touchSlider-box">
+				<div class="touchSlider" id="bestItemList">
+					<ul class="item-list-img">
+						<li><a class="showcase_con"> <span class="showcase_img">
+									<img
+									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
+									class="item_img lazy" style="display: inline;"> <span
+									class="num1">1</span>
+							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
+										개</span> <em>100</em>
+							</span>
+						</a> <a class="showcase_con"> <span class="showcase_img"> <img
+									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
+									class="item_img lazy" style="display: inline;"> <span
+									class="num1">1</span>
+							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
+										개</span> <em>100</em>
+							</span>
+						</a> <a class="showcase_con"> <span class="showcase_img"> <img
+									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
+									class="item_img lazy" style="display: inline;"> <span
+									class="num1">1</span>
+							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
+										개</span> <em>100</em>
+							</span>
+						</a> <a class="showcase_con"> <span class="showcase_img"> <img
+									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
+									class="item_img lazy" style="display: inline;"> <span
+									class="num1">1</span>
+							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
+										개</span> <em>100</em>
+							</span>
+						</a> <a class="showcase_con"> <span class="showcase_img"> <img
+									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
+									class="item_img lazy" style="display: inline;"> <span
+									class="num1">1</span>
+							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
+										개</span> <em>100</em>
+							</span>
+						</a> <a class="showcase_con"> <span class="showcase_img"> <img
+									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
+									class="item_img lazy" style="display: inline;"> <span
+									class="num1">1</span>
+							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
+										개</span> <em>100</em>
+							</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<div class="todaySinsang" style="margin: 40px 0 30px 0;">
+			<span style="background-color: #fff; padding: 0 10px;">베스트 상점</span>
+			<div class="div_line_grey_2px"
+				style="margin-top: -8px; margin-bottom: 16px;"></div>
+		</div>
+		<div class="item_list_wrap"
+			style="display: block; width: 980px; margin: 0 auto">
+			<ul class="item_list">
+				<li><div class="inner">
+						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
+							class="thumb lazy"
+							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
+							style="display: inline;"> <span class="title">청정난방!
+								가이타이너 컨벡터 히터</span></a>
+						<div class="info">
+
+							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
+								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
+								class="option"><span class="buy">구매 <strong>521</strong></span>
+							</span>
+						</div>
+					</div></li>
+				<li><div class="inner">
+						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
+							class="thumb lazy"
+							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
+							style="display: inline;"> <span class="title">청정난방!
+								가이타이너 컨벡터 히터</span></a>
+						<div class="info">
+
+							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
+								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
+								class="option"><span class="buy">구매 <strong>521</strong></span>
+							</span>
+						</div>
+					</div></li>
+				<li><div class="inner">
+						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
+							class="thumb lazy"
+							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
+							style="display: inline;"> <span class="title">청정난방!
+								가이타이너 컨벡터 히터</span></a>
+						<div class="info">
+
+							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
+								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
+								class="option"><span class="buy">구매 <strong>521</strong></span>
+							</span>
+						</div>
+					</div></li>
+			</ul>
+			<ul class="item_list">
+				<li><div class="inner">
+						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
+							class="thumb lazy"
+							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
+							style="display: inline;"> <span class="title">청정난방!
+								가이타이너 컨벡터 히터</span></a>
+						<div class="info">
+
+							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
+								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
+								class="option"><span class="buy">구매 <strong>521</strong></span>
+							</span>
+						</div>
+					</div></li>
+				<li><div class="inner">
+						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
+							class="thumb lazy"
+							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
+							style="display: inline;"> <span class="title">청정난방!
+								가이타이너 컨벡터 히터</span></a>
+						<div class="info">
+
+							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
+								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
+								class="option"><span class="buy">구매 <strong>521</strong></span>
+							</span>
+						</div>
+					</div></li>
+				<li><div class="inner">
+						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
+							class="thumb lazy"
+							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
+							style="display: inline;"> <span class="title">청정난방!
+								가이타이너 컨벡터 히터</span></a>
+						<div class="info">
+
+							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
+								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
+								class="option"><span class="buy">구매 <strong>521</strong></span>
+							</span>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+		<div class="todaySinsang" style="margin: 40px 0 30px 0;">
+			<span style="background-color: #fff; padding: 0 10px;">포커스 아이템</span>
+			<div class="div_line_grey_2px"
+				style="margin-top: -8px; margin-bottom: 16px;"></div>
+		</div>
+		<div class="today_left_area"
+			style="background-color: #e3e0e8; width: 1100px; padding:10px 0">
+			<ul class="goods_list_t1 goods_list_t6 ul_3col">
+				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
+						<span class="img_wrap_t19"> <img class="lazys"
+							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
+							style="display: inline;">
+					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
+						class="goods_price_04">34,160<em
+							class="font_14 font_normal">원</em>
+					</span>
+				</a></li>
+				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
+						<span class="img_wrap_t19"> <img class="lazys"
+							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
+							style="display: inline;">
+					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
+						class="goods_price_04">34,160<em
+							class="font_14 font_normal">원</em>
+					</span>
+				</a></li>
+				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
+						<span class="img_wrap_t19"> <img class="lazys"
+							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
+							style="display: inline;">
+					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
+						class="goods_price_04">34,160<em
+							class="font_14 font_normal">원</em>
+					</span>
+				</a></li>
+				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
+						<span class="img_wrap_t19"> <img class="lazys"
+							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
+							style="display: inline;">
+					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
+						class="goods_price_04">34,160<em
+							class="font_14 font_normal">원</em>
+					</span>
+				</a></li>
+				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
+						<span class="img_wrap_t19"> <img class="lazys"
+							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
+							style="display: inline;">
+					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
+						class="goods_price_04">34,160<em
+							class="font_14 font_normal">원</em>
+					</span>
+				</a></li>
+			</ul>
+		</div>
+
+
+		<div class="todaySinsang" style="margin-top: 76px;">
+			<span style="background-color: #fff; padding: 0 10px;">오늘의 신상</span>
+			<div class="div_line_grey_2px"
+				style="margin-top: -8px; margin-bottom: 16px;"></div>
+		</div>
+		<div style="width: 1100px; margin: 0 auto;">
+			<ul id="goodsList"
+				style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
 				<ul class="goods_ul" th:each="arr :${product}">
 					<li th:class="|goodsContainer store_${arr.sno}|"
 						style="margin-right: 5px;" th:id="|link_${arr.pno}|">
@@ -66,42 +294,47 @@
 						</div> <span class="mouseOverBorder"></span>
 					</li>
 				</ul>
-			<div class="notListMsg"></div>
-			<table id="goList" class="basketGoodsTableEnd" cellspacing="0" 
-			style="width: 100%; border: 1px solid #e5e5e5; margin-top:20px; cursor:pointer">
+				<div class="notListMsg"></div>
+				<table id="goList" class="basketGoodsTableEnd" cellspacing="0"
+					style="width: 100%; border: 1px solid #e5e5e5; margin-top: 20px; cursor: pointer">
 					<tr class="paymentOption height50 payMethodTR">
-						<td id="storePayMethod_0" class=" storeLengthCount" colspan="5" style="border-spacing: 10px; 
-							padding: 0px 20px; text-align:center; font-size:16px; ">더보기</td>
+						<td id="storePayMethod_0" class=" storeLengthCount" colspan="5"
+							style="border-spacing: 10px; padding: 0px 20px; text-align: center; font-size: 16px;">더보기</td>
 					</tr>
-			</table>
-		</ul>
-		
+				</table>
+			</ul>
+
+		</div>
+		<form id="mainForm"></form>
 	</div>
-	<form id="mainForm">
-</form>
-</div>
 </div>
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 	$(document).ready(function() {
-		
+
 		var mainForm = $("#mainForm");
-		
-		$("#goList").click(function(){
-			
-			window.location.href="/user/list";
-		});
-		
-		$(".goodsContainer").click(function(e){
-			var pno = $(this).attr("id").substring(5);
-			var sno = $(this).attr("class").substring(21);
-			mainForm.append("<input type='hidden' name='pno' value='"+pno+"'>");
-			mainForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
 	
-			mainForm.attr("action","/store/detail").submit();
+		$("#goList").click(function() {
+			window.location.href = "/user/list";
 		});
-	});
+	
+		$(".goodsContainer").click(
+			function(e) {
+				var pno = $(this).attr("id")
+						.substring(5);
+				var sno = $(this).attr("class")
+						.substring(21);
+				mainForm
+						.append("<input type='hidden' name='pno' value='"+pno+"'>");
+				mainForm
+						.append("<input type='hidden' name='sno' value='"+sno+"'>");
+
+				mainForm.attr("action",
+						"/store/detail")
+						.submit();
+			});
+		});
 	</script>
 </th:block>
 </html>

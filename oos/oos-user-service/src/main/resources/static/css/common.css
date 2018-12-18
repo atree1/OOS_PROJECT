@@ -9,6 +9,11 @@ body {
 	width:100%;
 }
 
+a{
+	color:#333;
+	text-decoration:none;
+}
+
 button, input, table, div, textarea, a, span {
 	font-family: 'Nanum Barun Gothic', '나눔바른고딕', 'nbg';
 	/*font-style: normal;

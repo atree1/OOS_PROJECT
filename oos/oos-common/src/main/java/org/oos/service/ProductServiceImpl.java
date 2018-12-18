@@ -14,6 +14,7 @@ import org.oos.mapper.ProductImgMapper;
 import org.oos.mapper.ProductMapper;
 import org.oos.mapper.ProductOptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
@@ -31,7 +32,6 @@ public class ProductServiceImpl implements ProductService {
 	@Setter(onMethod_=@Autowired)
 	private ProductOptionMapper optMapper;
 	
-	
 	@Setter(onMethod_=@Autowired)
 	private CategoryMapper cateMapper;
 	
@@ -42,26 +42,32 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<ProductVO> getList(Map<String, Object> map) {
+		List<ProductVO> list= pMapper.getList2(map);
+		
+//		for (ProductVO vo : list) {
+//			
+//			vo.setOptList(optMapper.getList(vo.getPno()));
+//			vo.setImgList(imgMapper.getList(vo.getPno()));
+//			
+//		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<ProductVO> getMainList(Map<String, Object> map) {
 		List<ProductVO> list= pMapper.getList(map);
-		
-		for (ProductVO vo : list) {
-			
-			vo.setOptList(optMapper.getList(vo.getPno()));
-			vo.setImgList(imgMapper.getList(vo.getPno()));
-			
-		}
-		
 		return list;
 	}
 	
 	@Override
 	public ProductVO read(Long pno) {
 	
-		ProductVO vo=pMapper.get(pno);
-		vo.setOptList(optMapper.getList(pno));
-		vo.setImgList(imgMapper.getList(pno));
-		
-		return vo;
+//		ProductVO vo=pMapper.get(pno);
+//		vo.setOptList(optMapper.getList(pno));
+//		vo.setImgList(imgMapper.getList(pno));
+//		
+		return pMapper.getByPno(pno);
 	}
 
 	@Override

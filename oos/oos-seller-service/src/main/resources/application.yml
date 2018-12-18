@@ -4,16 +4,18 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: oos
     password: 12345678
- 
+  
   thymeleaf:
     cache: false
-
-
+    
   servlet:
     multipart:
       max-file-size: 20971520
       max-request-size: 41943040
       file-size-threshold: 20971520
+      
+        
+      
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:/mapper/*.xml

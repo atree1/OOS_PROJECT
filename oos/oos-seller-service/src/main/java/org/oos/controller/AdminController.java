@@ -104,6 +104,7 @@ public class AdminController {
     		vo.setDno(dno);
     		log.info(vo+"");
     		orderDetailService.modify(vo);
+    		
     	}
     	
        return "redirect:/exam/manage?sno=1";
