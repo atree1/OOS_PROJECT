@@ -1,6 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 
@@ -13,8 +12,6 @@
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/userAdd.css" type="text/css" rel="stylesheet">
 <link href="/css/custom_bootstrap.css" type="text/css" rel="stylesheet" />
-<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <style>
 input[type="checkbox"], input[type="radio"]{
@@ -25,42 +22,33 @@ input[type="checkbox"], input[type="radio"]{
 }
 </style>
 <body>
-	<form id="signupForm" action="/oos/signup" method="post" name="form">
-		
+	<form id="signupForm" action="/oos/signup" method="post">
 		<div class="wishlistArea"
 			style="position: relative;left: 225px; width: 800px; margin-bottom: 68px; min-height: 600px;">
 		<input type='hidden' th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<input type='hidden' name="authList[0]" value="USER" />
 		<input type='hidden' name="pnum" id="pnumResult"/>
-			<table class="basketGoodsTableEnd" style="width: 760px;  border-top: 4px solid #e5e5e5;">
+			<table class="basketGoodsTableEnd" style="padding:20px; 
+								width: 760px;  border-top: 4px solid #e5e5e5;">
 				<div style="margin:0 auto; width:430px; padding: 20px 0">
 					<img src="/img/oos_logo.jpg" style="width: 300px; margin: 20px auto; display:block; ">
 					<img src="/img/step1.png">
+					
+				</div>
+				<div style="text-align:center; margin:120px 0 20px 0;">
+					<h1>SNS 간편 회원가입</h1>
+					<h3>SNS 가입시 추가 회원정보를 입력하여야 합니다.</h3>
 				</div>
 				<tbody>
-					<tr>
-						<td class="personalTd headTitle" style="">회원 아이디</td>
-						<td class="personalTd" style="position: relative;">
-						<input class="orderInfo" type="text" name="mid" maxlength="15" id="mid">
-						<button class="basketSwapBtn idCheck" 
-							 style="background: #ff7f7a; color:#fff; width:65px; height:30px;">중복검사</button>
-							 <span id="failID"></span></td>
-					</tr>
-					<tr>
-						<td class="personalTd headTitle" style="">회원 비밀번호</td>
-						<td class="personalTd" style="position: relative;">
-						<input type="password" id="pw1" name="mpw" maxlength="20" class="orderInfo"></td>
-					</tr>
-					<tr>
-						<td class="personalTd headTitle" style="">비밀번호 확인</td>
-						<td class="personalTd" style="position: relative;">
-						<input type="password" id="pw2" maxlength="20" class="orderInfo">
-						<span id="failPW"></span></td>
-					</tr>
+					<input type="hidden" name="mid" th:value="${info.user_id}"/>
+					<input type="hidden" id="mpw" name="mpw"/>
+					<input type="hidden" name="access_token" th:value="${info.access_token}"/>
+					<input type="hidden" name="sns" th:value="${info.sns}"/>
+					
 					<tr>
 						<td class="personalTd headTitle" style="">실명</td>
 						<td class="personalTd" style="position: relative;">
-						<input class="orderInfo" type="text" name="mname" id="mname" value="김김김">
+						<input class="orderInfo" type="text" name="mname"  value="김김김">
 						 <span id="failMNAME"></span></td>
 					</tr>
 					<tr>
@@ -79,8 +67,7 @@ input[type="checkbox"], input[type="radio"]{
 							<span class="dash">-</span> 
 							<input type="text" style="width:35px;" maxlength="4" class="addressInfo" id="pnum3"
 												onkeydown="onlyNumber(event)" onkeyup="removeChar(event)" value="5678">
-						</div>
-						<span id="failPHONE"></span>
+						</div><span id="failPHONE"></span>
 						</td>
 					</tr>
 					<tr>
@@ -105,26 +92,29 @@ input[type="checkbox"], input[type="radio"]{
 						<td class="personalTd" style="position: relative;">
 						<input type="hidden" id="email" name="email">
 						<input type="text" class="orderInfo"  id="email1" size="15" value="test"> @ 
-						<input type="text" class="orderInfo" id="email2" size="20">
-							<select class="orderInfo"  id="email_select" onChange="javascript:checkemailaddy();">
+						<input name="email2" type="text" class="orderInfo" id="email2" size="20">
+							<select name="email_select" class="orderInfo"  id="email_select" onChange="javascript:checkemailaddy();">
 							    <option value="" selected>선택하세요</option>
 							    <option value="naver.com">naver.com</option>
-							    <option value="daum.net">daum.net</option>
-							   <option value="gmail.com">gmail.com</option>
+							    <option value="hotmail.com">hotmail.com</option>
+							    <option value="hanmail.com">hanmail.com</option>
+							    <option value="yahoo.co.kr">yahoo.co.kr</option>
 							    <option value="1">직접입력</option>
 							</select><br/>
 							<span id="failEMAIL"></span>
 						</td>	
 						<script>
+
 						function checkemailaddy(){
-					        if ($("#email_select").val() == '1') {
-					        	$("#email_select").attr("readonly","readonly");
-					        	$("#email_select").val() == "";
-					        	$("#email_select").focus();
+							
+					        if ( $("#email_select").val() == '1') {
+					        	 $("#email2").attr("readonly","false");
+					        	 $("#email2").value = "";
+					        	 $("#email2").focus();
 					        }
 					        else {
-					        	$("#email2").attr("readonly","readonly");
-					        	$("#email2").val($("#email_select").val());
+					        	 $("#email2").attr("readonly","readonly");
+					            $("#email2").val($("#email_select").val());
 					        }
 					    }
 						</script>
@@ -135,27 +125,26 @@ input[type="checkbox"], input[type="radio"]{
 							<input style="width: 80px;" class="orderInfo addressInfo" 
 								id="roadAddr1" type="text" readonly="readonly"> 
 							 <button class="basketSwapBtn adressSearch" 
-							 style="background: #ff7f7a; color:#fff; width:65px; height:30px;">주소검색</button>
+							 style="background: #ff7f7a; color:#fff; width:60px; height:25px;">주소검색</button>
 							 <br>
 							 <input class="orderInfo addressInfo" type="text" name="address" 
-							 	value="서울 강남구 양재천로 169" id="roadAddr2"><span id="failADDRESS"></span>				 
+							 	value="서울 강남구 양재천로 169" id="roadAddr2">						 
 							 <br>
 							 <input type="text" class="orderInfo addressInfo" maxlength="15" name="addressdetail"
 							placeholder="상세 주소를 입력해주세요" value="101동" id="roadAddr3">
-							<span id="failDETAIL"></span>
 						</td>
 					</tr>
 					
 				</tbody>
 				
-				<table cellspacing="0" style=" width: 760px; height: 50px; margin-top:10px;">
-					<tbody>
-						<tr style="width: 800px;">
-							<td class="orderListTab basket1 active" id="signupBtn"
-								style="background:#ff7f7a;border-right: 1px solid #e4e4e4;">회원가입</td>
-						</tr>
-					</tbody>
-				</table>
+					<table cellspacing="0" style=" width: 760px; height: 50px; margin-top:10px;">
+						<tbody>
+							<tr style="width: 800px;">
+								<td class="orderListTab basket1 active" id="signupBtn"
+									style="background:#ff7f7a;border-right: 1px solid #e4e4e4;">SNS 회원가입</td>
+							</tr>
+						</tbody>
+					</table>
 				
 			</table>				
 		</div>	
@@ -166,49 +155,53 @@ input[type="checkbox"], input[type="radio"]{
 	<script th:inline="javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 	<script th:inline="javascript">
 	$(document).ready(function(){
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
+		
 		var signupForm = $("#signupForm");
 		var idCheck = "fail"
 		var successID;
 		var mid;
-		
+			
 		(function(){
 			appendYear();
 			appendMonth();
 			appendDay();
 		})();
+
+		function randomString() {
+			var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+			var string_length = 12;
+			var randomstring = '';
+			for (var i=0; i<string_length; i++) {
+				var rnum = Math.floor(Math.random() * chars.length);
+				randomstring += chars.substring(rnum,rnum+1);
+			}
+			return randomstring;
+		}
+
+		
 		
 		$("#signupBtn").click(function(e){
 			e.preventDefault();
-			if(mid != successID){
-				$("#failID").html("아이디 중복확인을 해주세요");
-				return;
-			}
 			
-			signupCheck("mname", "실명","failMNAME");
 			signupCheckDouble("email1", "email2", "이메일", "failEMAIL");
 			signupCheck("roadAddr2", "주소", "failADDRESS");
 			signupCheck("roadAddr3", "상세주소", "failDETAIL");
 			signupCheckDouble("pnum2","pnum3", "핸드폰 번호", "failPHONE");
 			signupCheckDouble("year","day", "생년월일", "failBIRTH");
 			signupCheckDouble("day","month", "생년월일", "failBIRTH");
-			
-			if($("#pw1").val() != $("#pw2").val()){
-				$("#failPW").html("비밀번호가 서로 다릅니다");
-				throw "stop";
-			}
-			
 			var pnum = String($("#pnum").val()) + 
 							String($("#pnum2").val()) + String($("#pnum3").val());
 			
+			$("#pnumResult").val(pnum);
+			
+			$("#mpw").val(randomString());
+
 			var email = $("#email1").val() + "@" + $("#email2").val();
 			
 			var birth = $("#year").val() + "/" + 
 			$("#month").val() + "/" + $("#day").val();
 			
 			$("#email").val(email);
-			$("#pnumResult").val(pnum);
 			$("#birth").val(birth);
 			$("#signupForm").submit();
 		});
@@ -224,58 +217,31 @@ input[type="checkbox"], input[type="radio"]{
 		    });
 		});
 		
-		function signupCheck(id, string, fail){
-			if($("#"+id).val().length == 0){
-				$("#"+fail).html(string+"를(을) 입력해주세요");
-				throw "stop";
-			}
-			
-		}
-		
-		function signupCheckDouble(id1, id2, string, fail){
-			if($("#"+id1).val().length == 0 || $("#"+id2).val().length == 0){
-				$("#"+fail).html(string+"를(을) 입력해주세요");
-				throw "stop";
-			}
-			
-		}
-		
 		function popupOpen(popUrl){
 			var popOption = "width=400, height=500, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 			window.open(popUrl,"",popOption);
 		}
 		
-		$(".idCheck").click(function(e){
-			e.preventDefault();
-			mid = $("#mid").val();
-			$.ajax({
-				type:"post",
-				url:"/oos/idCheck/"+mid,
-				beforeSend: function(xhr) {
-		            xhr.setRequestHeader(header, token);
-		        },
-				success: function(result, status, xhr){
-					if(result == "SUCCESS"){
-						alert("사용해도 되는 아이디입니다.");
-						idCheck = "true";
-						successID = mid;
-					}else if(result == "FAIL"){
-						alert('중복입니다. 다른 아이디를 입력해주세요.');
-						idCheck = "fail";
-					}
-				},
-				error: function(xhr,status, er){
-					if(error){
-						error(er);
-					}
-				}	
-			});
-		});
-		
 		function address(data){
 			$("#roadAddr1").val(data.postcode);
 			$("#roadAddr2").val(data.roadAddress);
 			$("#roadAddr3").val("");
+		}
+		
+		function signupCheck(id, string, fail){
+			if($("#"+id).val().length == 0){
+				$("#"+fail).html(string+"를(을) 입력해주세요");
+				throw "stop"
+			}
+		}
+		
+		function signupCheckDouble(id1, id2, string, fail){
+			
+			if($("#"+id1).val().length == 0 || $("#"+id2).val().length == 0){
+				$("#"+fail).html(string+"를(을) 입력해주세요");
+				
+				throw "stop"
+			}
 		}
 		
 		function appendYear(){
@@ -309,7 +275,6 @@ input[type="checkbox"], input[type="radio"]{
 				
 			}
 		} 
-		
 	})
 	
 	</script>

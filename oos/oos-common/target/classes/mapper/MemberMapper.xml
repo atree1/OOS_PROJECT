@@ -19,14 +19,19 @@
 	</select>
 	
 	<insert id="insert">
-		insert into tbl_member(mid,mpw,mname,pnum,birth,email,address) values(#{mid},#{mpw},#{mname},#{pnum},#{birth},#{email},#{address})
+		insert into tbl_member(mid,mpw,mname,pnum,birth,email,address) 
+		values(#{mid},#{mpw},#{mname},#{pnum},#{birth},#{email},#{address})
 	</insert>
 
 	<update id="modify">
-		update tbl_member set mpw = #{mpw}, mname =
-		#{mname},
-		pnum = #{pnum}, birth = #{birth}, email = #{email}, address =
-		#{address}
+		update tbl_member 
+		set pnum = #{pnum}, email = #{email}, address = #{address}, addressdetail = #{addressdetail}
+		where mid = #{mid}
+	</update>
+	
+	<update id="modifyPw">
+		update tbl_member 
+		set mpw = #{mpw}
 		where mid = #{mid}
 	</update>
 

@@ -20,6 +20,8 @@ public interface MemberMapper {
 	
 	public int modify(MemberVO vo);
 	
+	public int modifyPw(MemberVO vo);
+	
 	public int delete(String mid);
 	
 	public int changeAutority(MemberVO vo);

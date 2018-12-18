@@ -3,15 +3,21 @@ package org.oos.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
 
+@Entity
 @Data
+@Table(name="tbl_member")
 public class MemberVO {
-
+	
+	@Id
 	private String mid;
 	private String mpw;
 	private String mname;
@@ -19,7 +25,7 @@ public class MemberVO {
 	private String birth;
 	private String email;
 	private String address;
-	private String addressDetail;
+	private String addressdetail;
 	
 	private String sns = "null";
 	private char permit = 'Y';
