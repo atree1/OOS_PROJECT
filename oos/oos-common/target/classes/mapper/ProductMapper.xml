@@ -11,7 +11,10 @@
 	where sno=#{sno}
 </select>
 	<select id="getList" parameterType="map" resultType="org.oos.domain.ProductVO">
-		select * from tbl_product
+		select pno, pname, price, sname, p.del, s.sno 
+		from tbl_product p
+		join tbl_store s
+		on s.sno = p.sno
 		where pno>0
 		<if test="sno != null">
 		and sno=#{sno}
