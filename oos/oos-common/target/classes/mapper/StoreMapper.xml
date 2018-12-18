@@ -32,15 +32,16 @@
 	
 	
 	<select id="getList2" resultMap="Store">
-		select * from tbl_store s left join tbl_store_img i
-		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
-		where s.sno
-		> 0 and s.del='N'
+		select *
+		 from 
+		 	tbl_store s left join tbl_store_img i on s.sno =i.sno
+		 	 left join tbl_store_hashtag h on s.sno=h.sno
+		where 
+			s.sno> 0 and s.del='N'
 		<if test="cri.category != null">
 			and s.sname like concat("%", #{cri.keyword} ,"%")
 		</if>
-		group by s.sno
-		order by s.sno desc
+		group by s.sno desc
 		limit #{cri.skip}, #{cri.amount}
 
 	</select>
