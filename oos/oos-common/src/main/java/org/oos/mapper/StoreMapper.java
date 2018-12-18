@@ -9,7 +9,7 @@ import org.oos.domain.StoreVO;
 public interface StoreMapper {
 	
 	public List<StoreVO> getList(PageDTO dto);
-	
+	public List<StoreVO> getList2(PageDTO dto);
 	public List<String> getName();
 	
 	public StoreVO get(Long sno);

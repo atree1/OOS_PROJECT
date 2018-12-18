@@ -33,7 +33,7 @@ public class StoreServiceImpl implements StoreService {
 	private ProductImgMapper pImgMapper;
 	@Override
 	public List<StoreVO> getList(PageDTO dto) {
-		return mapper.getList(dto);
+		return mapper.getList2(dto);
 	}
 
 	@Override
