@@ -22,6 +22,7 @@
 				<ul id="goodsList"
 					style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
 					<ul class="goods_ul" th:each="arr :${product}">
+					
 						<li th:class="|goodsContainer store_${arr.sno}|"
 							style="margin-right: 5px;" th:id="|link_${arr.pno}|">
 							<div class="goodsImg"
@@ -31,9 +32,9 @@
 							</div>
 							<div class="goodsInfo" style="position: relative;">
 								<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
-								<div class="storeLocation"
+							<!-- 	<div class="storeLocation"
 									style="font-size: 13px; color: #9b9b9b; margin-top: 4px;"
-									th:text="${arr.sname}">SNAME</div>
+									th:text="${arr.sname}">SNAME</div> -->
 							</div>
 							<div style="margin: 0 15px;">
 								<span

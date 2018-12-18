@@ -210,7 +210,7 @@ public class UserController {
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
         	model.addAttribute("store", store);
         }else{
-        	model.addAttribute("product", productService.getMainList(map));
+        	model.addAttribute("product", productService.getList(map));
         }
 		
 		List<Integer> pageList = new ArrayList<>();
