@@ -4,12 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.ProductMapper">
-<<<<<<< HEAD
-	
-	<select id="getList" parameterType="map" resultType="org.oos.domain.ProductVO">
-		select * from tbl_product
-		where pno>0 and del='N'
-=======
 	<resultMap type="org.oos.domain.ProductOptionVO" id="Option">
 		<result column="opno" property="opno" />
 		<result column="size" property="size" />
@@ -53,10 +47,8 @@
 			where p.pno>0
 			    group by p.pno
 		)product join tbl_store s
-		
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-		<if test="sno != null">
 			on s.sno = product.sno
+		<if test="sno != null">
 			and s.sno=#{sno}
 		</if>
 		<if test="dto.cri.category != null">
@@ -114,33 +106,6 @@
 		pno=#{pno}
 	</select>
 
-<<<<<<< HEAD
-	 <insert id="insert">
-	 	insert into tbl_product(pname,price,sno,content)
-	 	values(#{pname},#{price},#{sno},#{content})
-	 	<selectKey resultType="Long" keyProperty="pno" order="AFTER"> 
-	 	select max(pno) from tbl_product
-	 	</selectKey>
-	 </insert>
-	 
-	 <update id="modify">
-	 	update tbl_product 
-	 	set pname=#{pname},price=#{price},content=#{content}
-	 	where pno=#{pno}
-	 </update>
-	 <update id="delete">
-	 	update tbl_product 
-	 	set del='Y'
-	 	where pno=${pno}
-	 </update>
-	 
-	 <select id="count" parameterType="map" resultType="int">
-	 	select count(*)
-	 	from tbl_product
-	 	where pno > 0
-	 	<if test="sno != null">
-		and sno=#{sno}
-=======
 	<insert id="insert">
 		insert into tbl_product(pname,price,sno,content)
 		values(#{pname},#{price},#{sno},#{content})
@@ -149,11 +114,13 @@
 		</selectKey>
 	</insert>
 
+
 	<update id="modify">
 		update tbl_product
-		set pname=#{pname},price=#{price}
-		where pno=${pno}
+		set pname=#{pname},price=#{price},content=#{content}
+		where pno=#{pno}
 	</update>
+	
 	<update id="delete">
 		update tbl_product
 		set del='Y'
@@ -166,7 +133,6 @@
 		where pno > 0
 		<if test="sno != null">
 			and sno=#{sno}
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 		</if>
 		<if test="cri != null and cri.category != null">
 			and pname like concat("%", #{cri.keyword} ,"%")
