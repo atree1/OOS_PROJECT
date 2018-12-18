@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.Criteria;
-import org.oos.domain.HashTagVO;
 import org.oos.domain.PageDTO;
+import org.oos.persistence.MemberRepository;
 import org.oos.service.HashTagService;
 import org.oos.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,8 +70,7 @@ public class HomeController {
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		
-		log.info(productService.getList(map)+"");
-		model.addAttribute("product", productService.getList(map));
+		model.addAttribute("product", productService.getMainList(map));
 	}
 	
 	@GetMapping("/oos")
