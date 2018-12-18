@@ -259,6 +259,18 @@ public class UserController {
         /*model.addAttribute("member",memberService.get(mid));*/
     }
     
+    @PostMapping("/modPw/{mid}/{pw}")
+    public ResponseEntity<String> modifyPw(@PathVariable("mid") String mid, @PathVariable("pw") String pw) {
+	 	MemberVO vo = new MemberVO();
+	 	vo.setMid(mid);
+	 	vo.setMpw(pw);
+    	if(memberService.modifyPw(vo) == 1) {
+    		return new ResponseEntity<String>("success",HttpStatus.OK);
+        }
+    	
+	 	return new ResponseEntity<String>(HttpStatus.OK);
+	 }
+    
     
     @PostMapping("/mypage/modify")
     public String modify(MemberVO vo, RedirectAttributes rttr) {

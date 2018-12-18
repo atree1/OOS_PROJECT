@@ -18,6 +18,8 @@ public interface MemberService {
 	
 	public int modify(MemberVO vo);
 	
+	public int modifyPw(MemberVO vo);
+	
 	public int remove(String mid);
 		
 	public int count(Criteria cri);

@@ -79,5 +79,10 @@ public class MemberServiceImpl implements MemberService {
 	public int removeSns(String mid) {
 		return mapper.deleteSns(mid);
 	}
+
+	@Override
+	public int modifyPw(MemberVO vo) {
+		return mapper.modifyPw(vo);
+	}
 }
 
