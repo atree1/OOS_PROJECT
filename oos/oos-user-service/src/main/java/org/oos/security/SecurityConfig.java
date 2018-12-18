@@ -39,8 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/css/**", "/js/**","/img/**", "/font/**", "**/favicon.ico", "/index").permitAll()
-				.antMatchers("/**","/user/list").permitAll()
-				.antMatchers("/order/**", "/user/**").hasRole("USER");
+				.antMatchers("/user/list").permitAll()
+				.antMatchers("/order/**", "/user/**","/user/mypage/**").hasRole("USER");
 		
 		http.formLogin().loginPage("/oos/login");
 		// access denied 걸리면  로그인페이지 갈거라고 선언
