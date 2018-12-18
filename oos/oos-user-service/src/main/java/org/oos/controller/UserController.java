@@ -12,6 +12,7 @@ import org.oos.domain.OrderVO;
 import org.oos.domain.PageDTO;
 import org.oos.domain.StoreVO;
 import org.oos.mapper.ImgurMapper;
+import org.oos.persistence.MemberRepository;
 import org.oos.service.CartService;
 import org.oos.service.MemberService;
 import org.oos.service.OrderDetailService;
@@ -22,6 +23,7 @@ import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +62,13 @@ public class UserController {
     
 	@Setter(onMethod_= @Autowired)
 	private ReplyService replyService;
+
+	@Autowired
+	PasswordEncoder pwEncoder;
+	
+	@Autowired
+	MemberRepository repo;
+	
     	
     @GetMapping("/mypage/reviewDetail")
 	public void reviewDetail(long pno, String mid, String kind, Model model) {
@@ -265,7 +274,9 @@ public class UserController {
     public ResponseEntity<String> modifyPw(@PathVariable("mid") String mid, @PathVariable("pw") String pw) {
 	 	MemberVO vo = new MemberVO();
 	 	vo.setMid(mid);
-	 	vo.setMpw(pw);
+	 	
+	 	String password = pwEncoder.encode(vo.getMpw());
+	 	vo.setMpw(password);
     	if(memberService.modifyPw(vo) == 1) {
     		return new ResponseEntity<String>("success",HttpStatus.OK);
         }
