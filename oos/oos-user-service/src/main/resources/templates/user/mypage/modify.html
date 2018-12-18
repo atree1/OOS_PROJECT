@@ -124,8 +124,30 @@
 					<tr>
 						<td class="personalTd headTitle" style="">이메일</td>
 						<td class="personalTd" style="position: relative;">
-						<input class="orderInfo"
-							type="text" id="inputEmail" maxlength="20" th:value="${member.email}"></td>
+						<input type="text" class="orderInfo"  id="email1" size="15" value="test"  style="width:100px;"> @ 
+						<input type="text" class="orderInfo" id="email2" size="20"  style="width:100px;">
+							<select id="email_select" class="orderInfo" onChange="javascript:checkemailaddy();">
+							    <option value="" selected>선택하세요</option>
+							    <option value="naver.com">naver.com</option>
+							    <option value="daum.net">daum.net</option>
+							    <option value="gmail.com">gmail.com</option>
+							    <option value="1">직접입력</option>
+							</select><br/>
+							<span id="failEMAIL"></span>
+						</td>	
+						<script>
+						function checkemailaddy(){
+					        if ($("#email_select").val() == '1') {
+					        	$("#email_select").attr("readonly","readonly");
+					        	$("#email_select").val() == "";
+					        	$("#email_select").focus();
+					        }
+					        else {
+					        	$("#email2").attr("readonly","readonly");
+					        	$("#email2").val($("#email_select").val());
+					        }
+					    }
+						</script>
 					</tr>
 					<tr>
 						<td class="personalTd headTitle" style="">주소</td>			
@@ -179,6 +201,12 @@
 	 	
 		(function(){
 			var tel = member.pnum;
+			var email1 = member.email.split("@")[0];
+			var email2 = member.email.split("@")[1];
+			
+			$("#email1").val(email1);
+			$("#email2").val(email2);
+			$("#email_select option[value='"+email2+"']").prop("selected",true);
 			
 			if(tel.substring(0,2) == "10"){
 				$("#pnum").val("010").prop("selected",true);
@@ -196,8 +224,9 @@
 		
 		$("#modifyBtn").click(function(){
 			var pnum = $("#pnum").val()+$("#pnum2").val() + $("#pnum3").val(); 
+			var email = $("#email1").val() + "@" + $("#email2").val();
 			$("#tel").val(pnum);
-			$("#email").val($("#inputEmail").val());
+			$("#email").val(email);
 			$("#address").val($("#roadAddr2").val());
 			$("#addressDetail").val($("#roadAddr3").val());
 			

@@ -105,27 +105,26 @@ input[type="checkbox"], input[type="radio"]{
 						<td class="personalTd" style="position: relative;">
 						<input type="hidden" id="email" name="email">
 						<input type="text" class="orderInfo"  id="email1" size="15" value="test"> @ 
-						<input name="email2" type="text" class="orderInfo" id="email2" size="20">
-							<select name="email_select" class="orderInfo"  id="email_select" onChange="javascript:checkemailaddy();">
+						<input type="text" class="orderInfo" id="email2" size="20">
+							<select class="orderInfo"  id="email_select" onChange="javascript:checkemailaddy();">
 							    <option value="" selected>선택하세요</option>
 							    <option value="naver.com">naver.com</option>
 							    <option value="daum.net">daum.net</option>
-							    <option value="google.com">google.comr</option>
+							   <option value="gmail.com">gmail.com</option>
 							    <option value="1">직접입력</option>
 							</select><br/>
 							<span id="failEMAIL"></span>
 						</td>	
 						<script>
-
 						function checkemailaddy(){
-					        if (form.email_select.value == '1') {
-					            form.email2.readonly = false;
-					            form.email2.value = '';
-					            form.email2.focus();
+					        if ($("#email_select").val() == '1') {
+					        	$("#email_select").attr("readonly","readonly");
+					        	$("#email_select").val() == "";
+					        	$("#email_select").focus();
 					        }
 					        else {
-					            form.email2.readonly = true;
-					            form.email2.value = form.email_select.value;
+					        	$("#email2").attr("readonly","readonly");
+					        	$("#email2").val($("#email_select").val());
 					        }
 					    }
 						</script>

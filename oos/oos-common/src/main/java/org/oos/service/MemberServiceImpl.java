@@ -11,11 +11,13 @@ import org.oos.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import groovy.util.logging.Log;
 import lombok.Setter;
 
 
 
 @Service
+@lombok.extern.java.Log
 public class MemberServiceImpl implements MemberService {
 
 	@Setter(onMethod_= @Autowired)
@@ -38,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int modify(MemberVO vo) {
+		log.info(vo+"");
 		return mapper.modify(vo);
 	}
 
