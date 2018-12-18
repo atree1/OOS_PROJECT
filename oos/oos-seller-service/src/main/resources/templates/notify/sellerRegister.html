@@ -1,0 +1,165 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/sellerLayout}">
+
+<div class="container" style="margin-top: 20px;"
+	layout:fragment="container">
+<style>
+	form {
+		width: 100%;
+	}
+	.uploadResult{
+		width:100%;
+		background-color: gray;
+	}
+	
+	.uploadResult ul{
+		display:flex;
+		flex-flow: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.uploadResult ul li{
+		list-style: none;
+		padding: 10px;
+		align-content: center;
+		text-align: center;
+	}
+	.uploadResult ul li img{
+		width: 100px;
+		heigh: 100px;
+	}
+	.uploadResult ul li span{
+		color:white;
+	}
+	.bigPictureWrapper{
+		position: absolute;
+		display: none;
+		justify-content: center;
+		align-items: center;
+		top: 0%;
+		width: 100%;
+		height: 100%;
+		background-color: gray;
+		z-index: 100;
+		background:rgba(255,255,255,0.5);
+	}
+	.bigPicture{
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.bigPicture img{
+		width: 600px;
+	}
+</style>
+<div>
+        <div id="page-wrapper" class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header" align="center">판매자 공지사항 등록</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                       
+                        <div class="panel-heading">
+                           
+                        </div>
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+								 <form role="form" id="registerList" action="/notify/sellerRegister" method="post">
+									<div class="form-group">
+										<label>제목</label> <input id="pname" name="pname" type="text"
+											class="form-control" required>
+									</div>
+
+
+									<div class="form-group">
+										<label>내용</label>
+										<textarea id="content" name="content" class="form-control" rows="7"></textarea>
+									</div> 
+										
+										<div >
+										<button class="btn btn-success" id="optionAddBtn">+</button>
+										</div>
+								
+									<div class="optionDiv">
+									
+									
+									</div>
+									<div class="form-group uploadDiv">
+										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
+										 <input name="uploadFile" id="files" type="file" multiple>
+									</div>
+									<div class="uploadResult">
+										<ul>
+
+										</ul>
+									</div>
+									<div class="form-group">
+										<div>
+											<button class="btn btn-success" type="submit">공지사항 등록</button>
+										</div>
+									</div>
+									
+									<div >									
+									<label>sno</label>
+									<input id="sbno" name="sbno" type="text" th:value="${register.sbno}" readonly="readonly" class="form-control" required>
+									</div>
+									</form>
+								<!-- /.col-lg-6 (nested) -->
+                            </div>
+                          </div>
+                         </div>
+                        <!-- /.panel-body -->
+      		           
+                       
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+        
+        
+
+    </div>
+    <!-- /#wrapper -->
+    
+<script src="/js/jquery.min.js"></script>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+
+$(document).ready(function(){
+	
+	var insertForm= ${"#registerList"}
+	var result = '<th:value ="${register.sbno}">
+	
+	
+	
+	$('.btn btn-success').click(function() {
+		
+		if (confirm("작성한 글을 공지사항으로 등록하시겠습니까?") == true){ 
+			insertForm.html("");
+			$("input[name='checkbox']:checked").each(function(index, item){
+				
+				orderForm.append("<input type='hidden' name='odno' value='"+item.value+"' >");
+			});
+			orderForm.attr("method", "post").attr("action","/exam/manage").submit(); 
+		}else{ 
+		    return;
+		}
+}
+	
+		
+	</script>
+</th:block>

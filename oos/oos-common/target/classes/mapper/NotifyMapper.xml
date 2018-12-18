@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.oos.mapper.NotifyMapper">
+  
+  <select id="getList" parameterType="map" resultType="org.oos.domain.NotifyVO">
+  select * from tbl_seller_notify
+  where sbno > 0 and sid = #{sid} and del = 'n'
+  order by sbno desc
+  limit #{dto.cri.skip}, #{dto.cri.amount}
+  </select>
+  
+  <delete id="delete">
+  update tbl_seller_notify
+  set del='y'
+  where sbno = #{sbno}
+  </delete>
+  
+  <update id="modify">
+  update tbl_seller_notify
+  set content = #{content}, title = #{title}, regdate=now(), updatedate = now() 
+  where sbno = #{sbno}	
+  </update>
+  
+  <insert id="register">
+  insert into tbl_seller_notify(title, content)
+		values(#{title},#{content})
+  </insert>
+  
+  <select id="get">
+  		select * from tbl_seller_notify
+		where sbno = #{sbno}
+  </select>
+  
+  <select id="sidCount" resultType="int">
+  		select count(*) from tbl_seller_notify
+		where sbno > 0 and sid = #{sid} and del = 'N'
+  </select>
+  
+  <select id="count" resultType="int">
+		select count(*) from tbl_seller_notify
+		where sno > 0 and sno = #{sno} and del='N'
+</select>	
+  
+  </mapper>
