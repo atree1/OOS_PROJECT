@@ -20,6 +20,7 @@
 		<result column="pno" property="pno" />
 		<result column="pname" property="pname" />
 		<result column="price" property="price" />
+		<result column="sname" property="sname" />
 		<result column="sno" property="sno" />
 		<result column="regdate" property="regdate" />
 		<result column="updatedate" property="updatedate" />

@@ -22,7 +22,6 @@
 				<ul id="goodsList"
 					style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
 					<ul class="goods_ul" th:each="arr :${product}">
-					
 						<li th:class="|goodsContainer store_${arr.sno}|"
 							style="margin-right: 5px;" th:id="|link_${arr.pno}|">
 							<div class="goodsImg"
