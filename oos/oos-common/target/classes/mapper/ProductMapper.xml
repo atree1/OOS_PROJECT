@@ -114,7 +114,6 @@
 		</selectKey>
 	</insert>
 
-
 	<update id="modify">
 		update tbl_product
 		set pname=#{pname},price=#{price},content=#{content}
