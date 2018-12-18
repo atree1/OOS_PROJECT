@@ -9,7 +9,7 @@ public interface ProductService {
 
 	
 	public List<ProductVO> getList(Map<String, Object> map);
-	public List<ProductVO> getMainList(Map<String, Object> map);
+
 	public ProductVO read(Long pno);
 	public int update(ProductVO vo);
 	public int remove(ProductVO vo);
