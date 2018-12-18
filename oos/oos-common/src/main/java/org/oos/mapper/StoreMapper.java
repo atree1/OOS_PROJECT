@@ -13,7 +13,7 @@ public interface StoreMapper {
 	public List<String> getName();
 	
 	public StoreVO get(Long sno);
-	
+	public StoreVO getBySno(Long sno);
 	public StoreVO getBySid(String sid);
 	
 	public int insert(StoreVO vo);

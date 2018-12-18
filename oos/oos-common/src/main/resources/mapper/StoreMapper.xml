@@ -4,7 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.StoreMapper">
-
+	<resultMap type="org.oos.domain.StoreHashTagVO" id="HashTag">
+	<result column="shno" property="shno"/>
+	<result column="hno" property="hno"/>
+	<result column="tag" property="tag"/>
+		<result column="del" property="del"/>
+</resultMap>
+<resultMap type="org.oos.domain.StoreImgVO" id="Image">
+	<result column="uuid" property="uuid"/>
+	<result column="iname" property="iname"/>
+	<result column="ipath" property="ipath"/>
+</resultMap>
+<resultMap type="org.oos.domain.StoreVO" id="Store">
+	<result column="sno" property="sno"/>
+	<result column="sname" property="sname"/>
+	<result column="owner" property="owner"/>
+	<result column="sinfo" property="sinfo"/>
+	<result column="regdate" property="regdate"/>
+	<result column="updatedate" property="updatedate"/>
+	<result column="del" property="del"/>
+	<result column="saddress" property="saddress"/>
+	<result column="tel" property="tel"/>
+	
+		<collection property="imgList" resultMap="Image"/>
+	<collection property="hashList" resultMap="HashTag"/>
+</resultMap>
+	
 	<select id="getList" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store
 		where sno > 0 and del='N'
@@ -13,8 +38,14 @@
 		</if>
 		order by sno desc
 		limit #{cri.skip}, #{cri.amount}
-	</select>
 
+	</select>
+	
+	<select id="getBySno" resultMap="Store">
+	select * from tbl_store s left join tbl_store_img i 
+	on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
+	where s.sno=#{sno}
+</select>
 	<select id="get" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store where sno =
 		#{sno}

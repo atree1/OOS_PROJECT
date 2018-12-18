@@ -38,10 +38,10 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public StoreVO get(Long sno) {
-		StoreVO vo= mapper.get(sno);
-		vo.setImgList(sImgMapper.get(vo.getSno()));
-		vo.setHashList(hashMapper.getList(vo.getSno()));
-		return vo;
+//		StoreVO vo= mapper.get(sno);
+//		vo.setImgList(sImgMapper.get(vo.getSno()));
+//		vo.setHashList(hashMapper.getList(vo.getSno()));
+		return mapper.getBySno(sno);
 	}
 
 	@Override

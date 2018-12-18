@@ -11,7 +11,9 @@ public interface CartMapper {
 	public int insert(CartVO vo);
 	public int delete(Long cno);
 	public List<CartVO> getList(Map<String, Object> map);
+	public List<CartVO> getListByMid(Map<String, Object> map);
 	public CartVO get(Long cno);
+	public CartVO getByCno(Long cno);
 	public int modify(CartVO vo);
 	public int count(Map<String, Object> map);
 	
