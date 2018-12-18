@@ -174,7 +174,6 @@ public class UserController {
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
-    	log.info(list+"");
         model.addAttribute("detail", list);
     }
     
@@ -207,10 +206,10 @@ public class UserController {
 			vo.setImg(storeService.getImg(vo.getSno()));
 		});*/
 		
+		
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
         	model.addAttribute("store", store);
         }else{
-        	log.info(""+productService.getList(map));
         	model.addAttribute("product", productService.getList(map));
         }
 		

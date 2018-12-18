@@ -58,7 +58,6 @@ public class ProductController {
 	@PostMapping("/autocomplete")
 	@ResponseBody
 	public List<String> autoComplete() {
-		log.info(productService.getName()+"");
 		List<String> list=productService.getName();
 		return list;
 	}
