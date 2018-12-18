@@ -75,7 +75,7 @@
 	</select>
 	
 	
-	<select id="getList" parameterType="map" resultMap="Product">
+	<!-- <select id="getList" parameterType="map" resultMap="Product">
 		select p.pno, p.pname, price, sname, p.del, s.sno ,p.regdate
 		from
 		tbl_product p join tbl_store s
@@ -102,7 +102,7 @@
 			</otherwise>
 		</choose>
 		limit #{dto.cri.skip} ,#{dto.cri.amount}
-	</select>
+	</select> -->
 
 	<select id="get" resultType="org.oos.domain.ProductVO">
 		select *
