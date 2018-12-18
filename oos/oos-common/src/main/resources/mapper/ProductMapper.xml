@@ -56,17 +56,17 @@
 			and s.sno=#{sno}
 		</if>
 		<if test="dto.cri.category != null">
-			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
+			and product.pname like concat("%", #{dto.cri.keyword} ,"%")
 		</if>
 		<choose>
 			<when test="dto.cri.orderby == '1'.toString()">
-				order by price desc
+				order by product.price desc
 			</when>
 			<when test="dto.cri.orderby == '2'.toString()">
-				order by price asc
+				order by product.price asc
 			</when>
 			<otherwise>
-				order by pno desc
+				order by product.pno desc
 			</otherwise>
 		</choose>
 		limit #{dto.cri.skip} ,#{dto.cri.amount}
