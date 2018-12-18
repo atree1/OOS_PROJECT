@@ -223,7 +223,7 @@
 
 			</tbody>
 			<div id="basketSSCTitle" style="display: none; padding: 30px 0px;">
-				<img src="../img/bg_cart_ssc_title_banner_01.png"
+				<img src="/img/bg_cart_ssc_title_banner_01.png"
 					style="width: 100%;">
 			</div>
 		</div>
@@ -232,7 +232,7 @@
 </div>
 <th:block layout:fragment="script">
 
-	<script src="../../js/function.js" th:inline="javascript"></script>
+	<script src="/js/function.js" th:inline="javascript"></script>
 	<script th:inline="javascript" 
 		src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 	<script th:inline="javascript">
@@ -252,7 +252,7 @@
 			getTotalSum();
 			
 			$.each(orderList, function(index, item){
-				var sum = 0;
+				/* var sum = 0;
 				
 				$.makeArray($(".sumPrice").map(function(){
 					if($(this).hasClass("pno_"+item.pno)){
@@ -267,7 +267,7 @@
 				$.each($('.thumb_'+ item.pno),function(){
 					$(this).attr("src","/display?fileName="+fileCallPath); 
 				});
-				
+				 */
 				$("#sumText_"+item.pno).html(sum);
 				
 			});

@@ -7,14 +7,17 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
 import org.oos.domain.Criteria;
+import org.oos.domain.MemberVO;
 import org.oos.domain.ProductImgVO;
 import org.oos.domain.ProductOptionVO;
 import org.oos.domain.ProductVO;
+import org.oos.persistence.MemberRepository;
+import org.oos.service.MemberService;
 import org.oos.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import lombok.Setter;
@@ -28,10 +31,23 @@ public class ProductServiceTests {
 
 	@Setter(onMethod_=@Autowired)
 	private ProductService service;
+	
+	@Setter(onMethod_=@Autowired)
+	private MemberService mService;
+	
+	@Autowired
+	PasswordEncoder pwEncoder;
+	
+	@Autowired
+	MemberRepository repo;
+	
+	
 	@Test
 	public void test1() {
-		
-		log.info(""+service.read(1L));
+		MemberVO vo = new MemberVO();
+		vo.setMid("member3");
+		vo.setMpw(pwEncoder.encode("1111"));
+		mService.modifyPw(vo);
 	}
 	
 	@Test

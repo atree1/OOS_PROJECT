@@ -33,17 +33,9 @@ public class KakaoLoginController {
 	public String kakaoLogin(@RequestParam("code") String code) throws Exception{
 
 	  JsonNode token =kakaoService.getAccessToken(code);
-	  log.info("=====" + code);
-	  log.info("=====" + token);
 	  
 	  JsonNode profile = kakaoService.getKakaoUserInfo(token.path("access_token").toString());
-	  System.out.println("profile: " + profile);
-//	  
-//	  MemberVO vo = kakaoService.changeData(profile);
-	 // memberService.register(vo);
 	  
-	 // System.out.println(vo.toString());
-		  
 	  return "redirect:/store/list?sno=1";
 	}
 }

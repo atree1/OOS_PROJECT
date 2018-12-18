@@ -182,6 +182,7 @@
             });
 			
 			$(".pageNum").click(function(e) {
+				  listForm.append("<input type='hidden' name='pageNum' id='pageNum'>");
 				$("#pageNum").val($(this).attr("id").substring(5));
 				listForm.submit();
 			});

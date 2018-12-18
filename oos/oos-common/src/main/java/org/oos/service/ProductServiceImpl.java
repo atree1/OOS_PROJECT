@@ -14,6 +14,7 @@ import org.oos.mapper.ProductImgMapper;
 import org.oos.mapper.ProductMapper;
 import org.oos.mapper.ProductOptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.Setter;
@@ -30,7 +31,6 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Setter(onMethod_=@Autowired)
 	private ProductOptionMapper optMapper;
-	
 	
 	@Setter(onMethod_=@Autowired)
 	private CategoryMapper cateMapper;
@@ -51,6 +51,12 @@ public class ProductServiceImpl implements ProductService {
 //			
 //		}
 		
+		return list;
+	}
+	
+	@Override
+	public List<ProductVO> getMainList(Map<String, Object> map) {
+		List<ProductVO> list= pMapper.getList(map);
 		return list;
 	}
 	
