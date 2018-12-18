@@ -12,6 +12,7 @@ import org.oos.domain.OrderVO;
 import org.oos.domain.PageDTO;
 import org.oos.domain.StoreVO;
 import org.oos.mapper.ImgurMapper;
+import org.oos.persistence.MemberRepository;
 import org.oos.service.CartService;
 import org.oos.service.MemberService;
 import org.oos.service.OrderDetailService;
@@ -22,6 +23,7 @@ import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +62,13 @@ public class UserController {
     
 	@Setter(onMethod_= @Autowired)
 	private ReplyService replyService;
+
+	@Autowired
+	PasswordEncoder pwEncoder;
+	
+	@Autowired
+	MemberRepository repo;
+	
     	
     @GetMapping("/mypage/reviewDetail")
 	public void reviewDetail(long pno, String mid, String kind, Model model) {
@@ -165,8 +174,8 @@ public class UserController {
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
+    	log.info(list+"");
         model.addAttribute("detail", list);
-        
     }
     
     @PostMapping("/mypage/orderDetail")
@@ -201,7 +210,7 @@ public class UserController {
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
         	model.addAttribute("store", store);
         }else{
-        	model.addAttribute("product", productService.getList(map));
+        	model.addAttribute("product", productService.getMainList(map));
         }
 		
 		List<Integer> pageList = new ArrayList<>();
@@ -226,14 +235,16 @@ public class UserController {
         map.put("cri",cri);
         PageDTO pageDTO = new PageDTO(cri,orderService.count(map)); 
         map.put("dto", pageDTO);
-        
+   
         List<OrderVO> order = orderService.getList(map);
+      
+        order.forEach(vo -> {
+        	List<OrderDetailVO> list  = orderDetailService.getList(vo.getOno());
+        	
+        	vo.setDetail(list.get(0));
+        });
         
         model.addAttribute("orderList", order);
-        
-        order.forEach(vo -> {
-        	vo.setDetail(orderDetailService.getList(vo.getOno()).get(0));
-        });
         
         List<Integer> pageList = new ArrayList<>();
         
@@ -263,7 +274,9 @@ public class UserController {
     public ResponseEntity<String> modifyPw(@PathVariable("mid") String mid, @PathVariable("pw") String pw) {
 	 	MemberVO vo = new MemberVO();
 	 	vo.setMid(mid);
-	 	vo.setMpw(pw);
+	 	
+	 	String password = pwEncoder.encode(vo.getMpw());
+	 	vo.setMpw(password);
     	if(memberService.modifyPw(vo) == 1) {
     		return new ResponseEntity<String>("success",HttpStatus.OK);
         }

@@ -9,4 +9,5 @@ public interface ProductOptionMapper {
 	public ProductOptionVO get(Long opno);
 	public int modifyQty(ProductOptionVO vo);
 	public int insert(ProductOptionVO vo);
+	public void deleteAll(Long pno);
 }

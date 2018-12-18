@@ -28,24 +28,24 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
     public List<CartVO> getList(Map<String, Object> map) {
-        List<CartVO> list=cartMapper.getList(map);
-        for (CartVO vo : list) {
-            
-            vo.setProduct(productMapper.get(vo.getPno()));
-            vo.setOpt(optMapper.get(vo.getOpno()));
-            vo.getProduct().setImgList(imgMapper.getList(vo.getPno()));
-        }
-        return list;
+//        List<CartVO> list=cartMapper.getList(map);
+//        for (CartVO vo : list) {
+//            
+//            vo.setProduct(productMapper.get(vo.getPno()));
+//            vo.setOpt(optMapper.get(vo.getOpno()));
+//            vo.getProduct().setImgList(imgMapper.getList(vo.getPno()));
+//        }
+        return cartMapper.getListByMid(map);
     }
 
 	@Override
 	@Transactional
 	public CartVO get(Long cno) {
-		CartVO vo=cartMapper.get(cno);
-		vo.setOpt(optMapper.get(vo.getOpno()));
-		vo.setProduct(productMapper.get(vo.getPno()));
-		vo.getProduct().setImgList(imgMapper.getList(vo.getPno()));
-		return vo;
+//		CartVO vo=cartMapper.get(cno);
+//		vo.setOpt(optMapper.get(vo.getOpno()));
+//		vo.setProduct(productMapper.get(vo.getPno()));
+//		vo.getProduct().setImgList(imgMapper.getList(vo.getPno()));
+		return cartMapper.getByCno(cno);
 	}
 
 	@Override

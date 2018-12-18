@@ -8,7 +8,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">판매중인상품</h1>
+                    <h1 class="page-header">상품문의</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -20,27 +20,21 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>상품번호</th>
+                                            <th>rno</th>
+                                            <th>제목</th>
                                             <th>상품명</th>
-                                            <th>가격</th>
+                                            <th>상품번호</th>
                                             <th>등록일</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                   
-                                        <tr th:each="product:${product}">
-                                            <td>
-                                            	<div>
-												<img th:class="|thumb_${product.pno}|"
-													style="width: 60px; display: inline-block; vertical-align: middle;">
-												</div>
-                                            </td>
-                                            <td th:text="${product.pno}"></td>
-                                            <td><a class="move" th:href="${product.pno}" th:text="${product.pname}"></a></td>
-                                            <td th:text="${product.price}"></td>
-                                            <td th:text="${product.regdate}"></td>    
+                                        <tr th:each="reply:${replyList}">
+                                            <td th:text="${reply.rno}"></td>
+                                            <!-- <td><a class="move" th:href="${product.pno}" th:text="${reply.title}"></a></td> -->
+                                            <td th:text="${reply.pno.pname}"></td>
+                                            <td th:text="${reply.regdate}"></td>    
                                         </tr>                                  
                                     </tbody>
                                 </table>
@@ -84,37 +78,6 @@ $(document).ready(function(){
 	
 	var actionForm = $("#actionForm");
 	var pageMaker = [[${pageMaker}]];
-	var product = [[${product}]];
-	
-	(function(){
-		
-		$.each(product, function(index, item){
-			console.log(item.imgList[0]);
-						
-			var img = item.imgList[0];
-						
-			var fileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
-			
-		 	 $.each($('.thumb_'+ item.pno),function(){
-		 		
-		 		 
-				$(this).attr("src","/display?fileName="+fileCallPath); 
-			});
-						
-		});
-		
-		
-	})();
-	
-	
-	$(".move").on("click",function(e){
-		
-		console.log("click...");
-		e.preventDefault();
-		actionForm.append("<input type='hidden' name='pno' value='"+$(this).attr("href")+"' >");
-		actionForm.attr("action","/product/read");
-		actionForm.submit();
-	});
 	
 	$(".paginate_button").click(function(e) {
 		

@@ -25,6 +25,10 @@
 	 <update id="modifyQty">
 	 	update tbl_product_option
 	 	set qty=#{qty}
-	 	where odno=#{odno}
+	 	where opno=#{opno}
 	 </update>
+	 
+	 <delete id="deleteAll">
+		delete from tbl_product_option where pno=#{pno}
+	</delete>	
 </mapper>

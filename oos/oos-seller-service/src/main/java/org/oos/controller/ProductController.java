@@ -53,20 +53,31 @@ public class ProductController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	@PostMapping("/remove")
+	public String remove(ProductVO vo, RedirectAttributes rttr, Long sno,Criteria cri) {
+		
+		int result = productService.remove(vo);
+		
+		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
+		
+		return "redirect:/product/list?sno="+storeService.get(sno).getSno();
+	}
+	
 	@PostMapping("/modify")
-	public void modifyPost(Criteria cri,ProductVO vo, RedirectAttributes rttr) {
+	public String modifyPost(Criteria cri,ProductVO vo, RedirectAttributes rttr, Long sno) {
 		
 		int result = productService.update(vo);
 		
 		
 		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addFlashAttribute("amount", cri.getAmount());
+		rttr.addAttribute("amount", cri.getAmount());
 		
+		return "redirect:/product/list?sno="+storeService.get(sno).getSno();
 	}
 	
 	@GetMapping({"/read","/modify"})
-	public void productGet(Criteria cri,Long pno, Long sno, Model model) {
+	public void productGet(Criteria cri,Long pno, Long sno,Long opno, Model model) {
 
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri,productService.getTotal(map));
@@ -74,6 +85,7 @@ public class ProductController {
 		map.put("dto", dto);
 		map.put("pno", pno);
 		map.put("sno", sno);
+		map.put("opno", opno);
 		
 		PageDTO pageDTO = new PageDTO(cri,productService.getTotal(map));
 		
