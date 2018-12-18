@@ -88,7 +88,7 @@
 					<tr th:if="${member.sns == 'null'}">
 						<td class="personalTd headTitle" style="">회원 비밀번호</td>
 						<td class="personalTd" style="position: relative;">
-						<button id="pwModBtn">비밀번호 변경하기</button></td>
+						<button id="pwModBtn" class="basketSwapBtn">비밀번호 변경하기</button></td>
 					</tr>
 					<tr th:if="${member.sns == 'null'}" class="modifyPw" style="display:none">
 						<td class="personalTd headTitle" style="">새 비밀번호</td>
@@ -99,7 +99,8 @@
 						<td class="personalTd headTitle" style="">비밀번호 확인</td>
 						<td class="personalTd" style="position: relative;">
 						<input type="password" maxlength="20"  class="orderInfo" >
-						<button id="pwMod" class="basketSwapBtn ">변경</button></td>
+						<button id="pwMod" class="basketSwapBtn" 
+						style="background: #ff7f7a; color:#fff; width:60px; height:25px;">변경</button></td>
 					</tr>
 					<tr>
 						<td class="personalTd headTitle" style="">휴대폰 번호</td>
