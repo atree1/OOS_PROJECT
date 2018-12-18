@@ -210,6 +210,7 @@ public class UserController {
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
         	model.addAttribute("store", store);
         }else{
+        	log.info(""+productService.getList(map));
         	model.addAttribute("product", productService.getList(map));
         }
 		

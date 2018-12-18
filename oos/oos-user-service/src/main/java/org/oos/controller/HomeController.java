@@ -70,7 +70,7 @@ public class HomeController {
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		
-		model.addAttribute("product", productService.getMainList(map));
+		model.addAttribute("product", productService.getList(map));
 	}
 	
 	@GetMapping("/oos")

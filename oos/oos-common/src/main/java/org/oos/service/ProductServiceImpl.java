@@ -53,13 +53,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return list;
 	}
-	
-	@Override
-	public List<ProductVO> getMainList(Map<String, Object> map) {
-		List<ProductVO> list= pMapper.getList(map);
-		return list;
-	}
-	
+
 	@Override
 	public ProductVO read(Long pno) {
 	
