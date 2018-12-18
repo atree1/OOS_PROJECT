@@ -41,7 +41,6 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 			ProductOptionVO option = productOptionMapper.get(vo.getOpno());
 			vo.setProduct(product);
 			vo.setOption(option);
-			
 		});
 		
 		return list;
