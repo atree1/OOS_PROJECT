@@ -9,7 +9,7 @@
 
 	<div class="menuRoot">
 		<div class="table-cell" style="">
-			<span style="color: #9b9b9b;">ë§ˆì´í˜ì´ì§€&nbsp;&nbsp;&nbsp; &gt; </span><span
+			<span style="color: #9b9b9b;">¸¶ÀÌÆäÀÌÁö&nbsp;&nbsp;&nbsp; &gt; </span><span
 				class="selectedMypageMenu">&nbsp; My REVIEW</span>
 		</div>
 	</div>
@@ -19,26 +19,26 @@
 		<div class="myPageLeftMenu" style="width: 160px; margin-left:20px; height: 315px;">
 		  <div class="" style="width: 100%; height: 65px;">
 		    <div class=""
-		         style="font-size: 32px; color: #333; line-height: 1.0;">ë§ˆì´í˜ì´ì§€</div>
+		         style="font-size: 32px; color: #333; line-height: 1.0;">¸¶ÀÌÆäÀÌÁö</div>
 		    <div style="font-size: 20px; color: #9b9b9b; margin-top: 10px;">MYPAGE</div>
 		  </div>
 		
 		  <div class="displayTable"
 		       style="width: 100%; height: 30px; margin-top: 30px;">
 		    <div class="table-cell myPageMenuClass" style="">
-		      <a class="myPageMenuA tradeList"  onclick="myPageMove(1)">ë‚´ ì •ë³´ ìˆ˜ì •</a>
+		      <a class="myPageMenuA tradeList"  onclick="myPageMove(1)">³» Á¤º¸ ¼öÁ¤</a>
 		    </div>
 		  </div>
 		  <div class="displayTable" style="width: 100%; height: 60px;">
 		    <div class="table-cell myPageMenuClass" style="">
 		      <a class="myPageMenuA orderSheetList"
-		         onclick="myPageMove(2)">ì£¼ë¬¸ë‚´ì—­</a>
+		         onclick="myPageMove(2)">ÁÖ¹®³»¿ª</a>
 		    </div>
 		  </div>
 		
 		  <div class="displayTable"
 		       style="width: 100%; height: 30px; color: #444; font-size: 14px;">
-		    <div class="table-cell myPageOrderList" style="">ë‚´ê°€ ì“´ ê¸€</div>
+		    <div class="table-cell myPageOrderList" style="">³»°¡ ¾´ ±Û</div>
 		  </div>
 		  <div class="displayTable" style="width: 100%; height: 30px;">
 		    <div class="table-cell" style="text-indent: 20px;">
@@ -57,8 +57,7 @@
 
 		<div class="wishlistArea"
 			style="position: relative; margin-top: -315px; left: 225px; width: 800px; margin-bottom: 68px; min-height: 600px;">
-			<div style="font-size: 20px; color: #202225; height: 40px;">My
-				Q&A</div>
+			<div style="font-size: 20px; color: #202225; height: 40px;">My REVIEW</div>
 
 			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;">
 				<colgroup>
@@ -71,11 +70,11 @@
 				<thead>
 					<tr
 						style="background-color: #fff; padding: 0px; text-align: center;'">
-						<th class="">ë¬¸ì˜ë²ˆí˜¸</th>
-						<th class="">ë¬¸ì˜ ìœ í˜•</th>
-						<th class="">ì œëª©</th>
-						<th class="">ì‘ì„±ì</th>
-						<th class="">ë“±ë¡ì¼</th>
+						<th class="">¹®ÀÇ¹øÈ£</th>
+						<th class="">¹®ÀÇ À¯Çü</th>
+						<th class="">Á¦¸ñ</th>
+						<th class="">ÀÛ¼ºÀÚ</th>
+						<th class="">µî·ÏÀÏ</th>
 					</tr>
 				</thead>
 				<tbody id="questionlist_tbody">
@@ -97,7 +96,10 @@
 			</div>
 		</div>
 	</div>
-
+	<form id="reviewForm" method="get">
+		<input type="hidden" name="pageNum" id="pageNum" />
+		<input type="hidden" name="mid"/>
+	</form>
 </div>
 
 
@@ -105,6 +107,7 @@
 	<script th:inline="javascript">
 	var reply = [[${reply}]];
 	var pageMaker = [[${pageMaker}]];
+	var reviewForm = $("#reviewForm");
 	(function(){
 
 		$("#pageNum").val(pageMaker.cri.pageNum);
@@ -112,7 +115,7 @@
 	})();
 	
 	$(".replyTitle").click(function() {
-		var popOption = "width=1300, height=700, resizable=no, scrollbars=no, status=no;"; //íŒì—…ì°½ ì˜µì…˜(optoin)
+		var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //ÆË¾÷Ã¢ ¿É¼Ç(optoin)
 	
 		var pno = $(this).data("pno");
 		var mid = $(this).data("mid");
@@ -122,7 +125,7 @@
 	
 	$(".pageNum").click(function(e) {
 		$("#pageNum").val($(this).attr("id").substring(5));
-		storeForm.submit();
+		reviewForm.submit();
 	});
 	
 	
