@@ -149,11 +149,11 @@
 		</selectKey>
 	</insert>
 
-	<update id="modify">
-		update tbl_product
-		set pname=#{pname},price=#{price}
-		where pno=${pno}
-	</update>
+ 	<update id="modify">
+	 	update tbl_product 
+	 	set pname=#{pname},price=#{price},content=#{content}
+	 	where pno=#{pno}
+	 </update>
 	<update id="delete">
 		update tbl_product
 		set del='Y'
