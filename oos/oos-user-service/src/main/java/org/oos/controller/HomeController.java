@@ -40,10 +40,13 @@ public class HomeController {
 	
 	@GetMapping("/test")
 	public void test() {
-		
-		
 	}
 	
+	@GetMapping("/")
+	public String home(){
+		
+		return "redirect:/main";
+	}
 
 	
 	@GetMapping("/aboutus")
