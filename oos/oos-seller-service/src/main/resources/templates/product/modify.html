@@ -74,7 +74,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-								 <form role="form" action="/product/register" method="post">
+								<form role="form" action="/product/modify" method="post">
 									<div class="form-group">
 										<label>상품명</label> <input id="pname" name="pname" type="text" th:value="${product.pname}"
 											class="form-control" required>
@@ -85,10 +85,10 @@
 									</div>
 									<div class="form-group">
 										<label>상품설명</label>
-										<textarea id="content" name="content" th:value="${product.content}" class="form-control" rows="3"></textarea>
+										<textarea id="content" name="content" th:text="${product.content}" class="form-control" rows="3"></textarea>
 									</div> 
 										
-										<div >
+										<div>
 										<button class="btn btn-success" id="optionAddBtn">+</button>
 										</div>
 								
@@ -105,16 +105,19 @@
 
 										</ul>
 									</div>
-									<div class="form-group">
-										<div>
-											<button class="btn btn-success" type="submit">상품등록</button>
-										</div>
-									</div>
-									
-									<div >									
+						
+									<div>									
 									<label>sno</label>
 									<input id="sno" name="sno" type="text" th:value="${store.sno}" readonly="readonly" class="form-control" required>
 									</div>
+									
+										<input type='hidden' name='pno' th:value="${product.pno}"/>
+										<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}'/>
+										<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}'/>
+										<input type='hidden' name='sno' th:value='${store.sno}'/>
+									<button class="btn btn-success" type="submit">상품수정</button>
+									<button class="btn btn-success" id="#removeBtn" data-oper="remove">삭
+									제</button>
 									</form>
 								<!-- /.col-lg-6 (nested) -->
                             </div>
@@ -131,24 +134,40 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-<form id="actionForm" role="form" action="/product/modify" method="post">	
-	<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}'/>
-	<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}'/>
-	<input type='hidden' name='sno' th:value='${store.sno}'/>
-</form>         
+	
+	
+        
         
 
     </div>
     <!-- /#wrapper -->
 <script src="../js/jquery.min.js"></script>
 <script th:inline="javascript">
-$(document).ready(function(e){
+$(document).ready(function(){
 	
 	
 	var formObj = $("form[role='form']");
 	var idx = 1;
 	var optList=[[${product.optList}]];
-	console.log(optList[0]);
+
+
+ 	$("button").on("click",function(e){
+		
+		e.preventDefault();
+		var operation = $(this).data("oper");
+		
+		console.log(operation);
+		
+		if(operation === "remove"){
+			formObj.attr("action","/product/remove");
+			alert("삭제되었습니다.");
+		}
+		else{
+			return;
+		}
+		formObj.submit();
+	});
+	
 	//옵션삭제
 	$(".optionDiv").on("click","button ",function(e){
 		

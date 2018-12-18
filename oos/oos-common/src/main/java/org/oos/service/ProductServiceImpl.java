@@ -69,7 +69,13 @@ public class ProductServiceImpl implements ProductService {
 	public int update(ProductVO vo) {
 
 		imgMapper.deleteAll(vo.getPno());
-
+		optMapper.deleteAll(vo.getPno());
+		vo.getOptList().forEach(opt->{
+			opt.setPno(vo.getPno());
+			optMapper.insert(opt);
+		});
+		
+		
 		if (vo.getImgList() == null) {
 			return pMapper.modify(vo);
 		}

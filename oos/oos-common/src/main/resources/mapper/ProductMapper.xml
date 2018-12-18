@@ -7,7 +7,7 @@
 	
 	<select id="getList" parameterType="map" resultType="org.oos.domain.ProductVO">
 		select * from tbl_product
-		where pno>0
+		where pno>0 and del='N'
 		<if test="sno != null">
 		and sno=#{sno}
 		</if>
@@ -44,8 +44,8 @@
 	 
 	 <update id="modify">
 	 	update tbl_product 
-	 	set pname=#{pname},price=#{price}
-	 	where pno=${pno}
+	 	set pname=#{pname},price=#{price},content=#{content}
+	 	where pno=#{pno}
 	 </update>
 	 <update id="delete">
 	 	update tbl_product 
