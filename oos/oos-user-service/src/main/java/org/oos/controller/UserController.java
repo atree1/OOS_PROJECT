@@ -165,8 +165,8 @@ public class UserController {
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
+    	log.info(list+"");
         model.addAttribute("detail", list);
-        
     }
     
     @PostMapping("/mypage/orderDetail")
@@ -226,14 +226,16 @@ public class UserController {
         map.put("cri",cri);
         PageDTO pageDTO = new PageDTO(cri,orderService.count(map)); 
         map.put("dto", pageDTO);
-        
+   
         List<OrderVO> order = orderService.getList(map);
+      
+        order.forEach(vo -> {
+        	List<OrderDetailVO> list  = orderDetailService.getList(vo.getOno());
+        	
+        	vo.setDetail(list.get(0));
+        });
         
         model.addAttribute("orderList", order);
-        
-        order.forEach(vo -> {
-        	vo.setDetail(orderDetailService.getList(vo.getOno()).get(0));
-        });
         
         List<Integer> pageList = new ArrayList<>();
         

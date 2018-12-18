@@ -5,7 +5,7 @@
 <meta name="_csrf" th:content="${_csrf.token}"/>
 <meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
 <title>상품 상세정보</title>
-<link href="../../css/common.css?20180918" type="text/css" rel="stylesheet">
+<link href="/css/common.css?20180918" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<style>
@@ -57,7 +57,7 @@ td {
 						<th>주문취소</th>
 					</tr>
 				</thead>
-				<tbody th:each="arr: ${detail}" class="orderInfo">
+				 <tbody th:each="arr: ${detail}" class="orderInfo">
 					<tr>
 						<td class="first_cell">
 							<div class="td_detail2" th:text="${arr.odno}"></div>
@@ -97,9 +97,10 @@ td {
 						</td>
 						<td class="cell">
 							<div class="td_status">
-								<span th:text="|송장번호 : [${arr.orderNum}]|">운송장 번호</span>
+								<span th:text="|송장번호 : [${arr.dno}]|">운송장 번호</span>
 								<p name="p_parcel">
-									<a th:href="|https://tracker.delivery/#/kr.epost/${arr.orderNum}|" target="_blank">배송조회</a>
+									<a th:href="|https://tracker.delivery/#/kr.epost/${arr.dno}|"
+									 target="_blank">배송조회</a>
 								</p>
 							</div>
 						</td>
@@ -111,7 +112,7 @@ td {
 				</tbody>
 			</table>
 		</div>
-		<div class="detail_table_info">
+		<!-- <div class="detail_table_info">
 			<p class="info_tit mart30">배송정보</p>
 			<table width="100%"  class="myPageSheetTable">
 				<colgroup>
@@ -141,7 +142,7 @@ td {
 				</tbody>
 			</table>
 			
-		</div>
+		</div> -->
 	</div>
 	<form id="orderDetailForm" method="post" action="/user/mypage/orderDetail">
 	
