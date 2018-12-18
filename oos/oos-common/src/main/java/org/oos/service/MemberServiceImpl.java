@@ -40,7 +40,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int modify(MemberVO vo) {
-		log.info(vo+"");
 		return mapper.modify(vo);
 	}
 
