@@ -56,6 +56,18 @@ public class NotifyController {
 
 	}
 	
+    @PostMapping("/sellerNotify")
+    public String remove(Long[] sbno, RedirectAttributes rttr) {
+        log.info(sbno+"");
+    	for(Long num : sbno) {
+    		if(service.delete(num) == 1) {
+                rttr.addFlashAttribute("result", "success");
+            }
+    	}
+        
+        return "redirect:/notify/sellerNotify?sid=seller1";}
+	
+    @PostMapping("/")
 	
 	
 	@GetMapping("/sellerRegister")
