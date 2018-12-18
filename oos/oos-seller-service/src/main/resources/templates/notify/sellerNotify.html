@@ -113,11 +113,11 @@
 
 	</div>
 
-	<form id="orderListForm">
+	<form id="notifyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' /> <input type='hidden'
-			name='sno' th:value='${orderList[0].sno}' />
+			name='sid' value='seller1' />
 	</form>
 </div>
 
@@ -158,33 +158,33 @@
 
 $(document).ready(function(){
 	
-		var orderForm = $("#orderListForm");
+		var notifyForm = $("#notifyForm");
 		var pageMaker = [[${pageMaker}]];
 	
 		$(".paginate_button").click(function(e) {
 	        $("#pageNum").val(String($(this).attr("id")).substring(5));
-	        orderForm.submit();
+	        notifyForm.submit();
 	    });
 	    
 	    $(".paginate_button previous").click(function(){
 	        $("#pageNum").val(Number(pageMaker.startPage) -1);
-	        orderForm.submit();
+	        notifyForm.submit();
 	    });
 	    
 	    $(".paginate_button next").click(function(){
 	        $("#pageNum").val(Number(pageMaker.endPage) + 1);
-	        orderForm.submit();
+	        notifyForm.submit();
 	    });
 	    
 		$('#remove-btn').click(function() {
 		
 			if (confirm("해당 주문건을 취소하시겠습니까?") == true){ 
-				orderForm.html("");
+				notifyForm.html("");
 				$("input[name='checkbox']:checked").each(function(index, item){
 					
-					orderForm.append("<input type='hidden' name='odno' value='"+item.value+"' >");
+					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");
 				});
-				orderForm.attr("method", "post").attr("action","/exam/manage").submit(); 
+				notifyForm.attr("method", "post").attr("action","/notify/sellerNotify?sid=seller1").submit(); 
 			}else{ 
 			    return;
 			}
@@ -192,7 +192,7 @@ $(document).ready(function(){
 	   
 		$("#modify-btn").click(function(){
 			if (confirm("해당 주문건을 수정하시겠습니까?") == true){ 
-				orderForm.html("");
+				notifyForm.html("");
 				$("input[name='checkbox']:checked").each(function(index, item){
 					
 					var shipNum = $("#ship_"+item.value).val();
@@ -202,7 +202,7 @@ $(document).ready(function(){
 					
 					
 					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
-					orderForm.append("<input type='hidden' name='option' value='"+val+"' >");
+					notifyForm.append("<input type='hidden' name='option' value='"+val+"' >");
 				});
 				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
 			}else{ 
