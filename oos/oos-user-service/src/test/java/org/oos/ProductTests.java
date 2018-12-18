@@ -74,7 +74,7 @@ public class ProductTests {
 	    parameters.put("criteria", cri);
 	    parameters.put("sno",1L);
 
-		log.info(""+mapper.getList(parameters));
+		log.info(""+mapper.getListBySno(parameters));
 	}
 	@Test
 	public void testP() {

@@ -10,6 +10,7 @@ public interface ProductMapper {
 	
 	public List<ProductVO> getList(Map<String, Object> map);
 	public ProductVO get(Long pno);
+	public List<ProductVO> getListBySno(Map<String, Object> map);
 	public int modify(ProductVO vo);
 	public int delete(ProductVO vo);
 	public int insert(ProductVO vo);

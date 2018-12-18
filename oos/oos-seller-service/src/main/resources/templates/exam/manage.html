@@ -254,7 +254,7 @@ $(document).ready(function(){
 					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
 					orderForm.append("<input type='hidden' name='option' value='"+val+"' >");
 				});
-				orderForm.attr("method", "post").attr("action","/exam/modify").submit();
+				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
 			}else{ 
 			    return;
 			}
