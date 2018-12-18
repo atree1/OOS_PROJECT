@@ -4,7 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.ProductMapper">
-	
+
+<select id="getListBySno" parameterType="map" resultType="org.oos.domain.ProductVO">
+	select * from tbl_product p left join tbl_product_img i 
+	on p.pno =i.pno left join tbl_product_option o on p.pno=o.pno
+	where sno=#{sno}
+</select>
 	<select id="getList" parameterType="map" resultType="org.oos.domain.ProductVO">
 		select * from tbl_product
 		where pno>0

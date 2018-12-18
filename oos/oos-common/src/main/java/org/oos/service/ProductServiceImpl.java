@@ -42,14 +42,14 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<ProductVO> getList(Map<String, Object> map) {
-		List<ProductVO> list= pMapper.getList(map);
+		List<ProductVO> list= pMapper.getListBySno(map);
 		
-		for (ProductVO vo : list) {
-			
-			vo.setOptList(optMapper.getList(vo.getPno()));
-			vo.setImgList(imgMapper.getList(vo.getPno()));
-			
-		}
+//		for (ProductVO vo : list) {
+//			
+//			vo.setOptList(optMapper.getList(vo.getPno()));
+//			vo.setImgList(imgMapper.getList(vo.getPno()));
+//			
+//		}
 		
 		return list;
 	}
