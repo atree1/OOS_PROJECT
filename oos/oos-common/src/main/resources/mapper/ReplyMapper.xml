@@ -18,11 +18,11 @@
 		limit #{cri.skip}, #{cri.amount}
 	</select>
 		
-	<!-- <select id="depthGetList" parameterType="map" resultType="org.oos.domain.ReplyVO">
+	<select id="depthGetList" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno>0 and mid = #{mid}
 		order by parent desc, depth asc
-	</select> -->
+	</select>
 	
 	<insert id="insert">
 		insert into tbl_reply(pno, mid, sid, content, title, kind)

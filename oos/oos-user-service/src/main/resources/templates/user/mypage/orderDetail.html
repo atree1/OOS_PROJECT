@@ -6,6 +6,7 @@
 <meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
 <title>상품 상세정보</title>
 <link href="/css/common.css?20180918" type="text/css" rel="stylesheet">
+<script src="/js/jquery.min.js"></script>
 </head>
 <body>
 	<style>
@@ -64,13 +65,15 @@ td {
 						</td>
 						<td class="cell">
 							<div class="td_info">
-								<p><a href="" th:text="${arr.product.imgList}"><img src="" class="thumb"></a></p>
+								<input type="hidden" class="hiddenImg" th:data-odno="${arr.odno}"
+								th:data-ipath="${arr.product.imgList[0].ipath}" 
+								th:data-uuid="${arr.product.imgList[0].uuid}" th:data-iname="${arr.product.imgList[0].iname}">
+								
 								<ul>
-									<li class="seller_info">
-									<a href="" th:text="${arr.product.sno}"></a>
-									</li>
 									<li class="tit_info">
-									<a th:href="|javascript:window.open('/store/detail?pno=${arr.pno}&sno=${arr.product.sno}')|" th:text="${arr.product.pname}"></a></li>
+								
+									<a th:href="|javascript:window.open('/store/detail?pno=${arr.pno}&sno=${arr.product.sno}')|"> 
+										<img src="" th:class="|img_${arr.odno}|"><br/><span th:text="${arr.product.pname}"></span></a></li>
 									<li th:text="|수량 : ${arr.qty} 개|"></li>
 								</ul>
 							</div>
@@ -149,13 +152,24 @@ td {
 	</form>
 </body>
 
-<script src="/js/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
 	var token = $("meta[name='_csrf']").attr("content");
 	var csrfName = $("meta[name='_csrf_name']").attr("content");
 	var ono = String([[${detail[0].ono}]]);
 	var tel = String([[${detail[0].pnum}]]);
+	
+
+	(function(){
+		$.each($(".hiddenImg"), function(index, item){
+			
+			var fileCallPath =  encodeURIComponent(
+					item.dataset.ipath+ "/s_"+ item.dataset.uuid +"_"+item.dataset.iname);
+			
+			var imgDiv= $('.img_'+item.dataset.odno);
+			imgDiv.attr("src","/display?fileName="+fileCallPath);
+		}); 
+	})();
 	
 	$("#pnum").val("0"+tel.substring(0,2));
 	$("#pnum2").val(tel.substring(2,6));
@@ -167,6 +181,10 @@ $(document).ready(function(){
 							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"'>")
 							.submit();
 	});
+	
+
+
+		
 });
 </script>
 
