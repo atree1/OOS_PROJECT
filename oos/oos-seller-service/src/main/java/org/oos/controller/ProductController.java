@@ -45,13 +45,6 @@ public class ProductController {
 	@Setter(onMethod_=@Autowired)
 	private ImgurMapper imgurMapper;
 	
-	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<List<ProductImgVO>> getAttachList(Long pno) {
-			log.info("getAttachList");
-		List<ProductImgVO> result = productService.read(pno).getImgList();
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
 	
 	@PostMapping("/remove")
 	public String remove(ProductVO vo, RedirectAttributes rttr, Long sno,Criteria cri) {
