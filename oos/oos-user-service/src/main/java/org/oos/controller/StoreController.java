@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +60,6 @@ public class StoreController {
             pageList.add(i);
         }
         
-        model.addAttribute("img", imgurMapper.getList());
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
@@ -67,22 +68,23 @@ public class StoreController {
 	
 
 	@GetMapping("/detail")
-	public void productRead(Long pno, Long sno, String mid, Model model) {
+	public void productRead(Long pno, Long sno, Model model) {
 		
 		ProductVO vo = productService.read(pno);
 		
-		model.addAttribute("img", imgurMapper.getList());
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 	}
 	
 	
-	@PostMapping("/checkzzim/{sno}/{mid}")
-    public ResponseEntity<String> checkzzim(@PathVariable("mid") String mid,@PathVariable("sno") Long sno) {
-
-		if(mid != null) {
+	@PostMapping("/checkzzim/{sno}")
+    public ResponseEntity<String> checkzzim(@PathVariable("sno") Long sno) {
+		
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	    
+		if(!name.equals("anonymousUser")) {
         	StoreVO store = new StoreVO();
-        	store.setMid(mid);
+        	store.setMid(name);
         	store.setSno(sno);
     	 	
         	if(storeService.getStoreLike(store).size() == 0) {

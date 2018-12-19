@@ -67,21 +67,25 @@
 		<if test="sno != null">
 			and s.sno=#{sno}
 		</if>
-		<if test="dto.cri.category != null">
+		<if test="dto != null">
+			<if test="dto.cri.category != null">
 			and product.pname like concat("%", #{dto.cri.keyword} ,"%")
+			</if>
+			<choose>
+				<when test="dto.cri.orderby == '1'.toString()">
+					order by product.price desc
+				</when>
+				<when test="dto.cri.orderby == '2'.toString()">
+					order by product.price asc
+				</when>
+				<otherwise>
+					order by product.pno desc
+				</otherwise>
+			</choose>
+			limit #{dto.cri.skip} ,#{dto.cri.amount}
 		</if>
-		<choose>
-			<when test="dto.cri.orderby == '1'.toString()">
-				order by product.price desc
-			</when>
-			<when test="dto.cri.orderby == '2'.toString()">
-				order by product.price asc
-			</when>
-			<otherwise>
-				order by product.pno desc
-			</otherwise>
-		</choose>
-		limit #{dto.cri.skip} ,#{dto.cri.amount}
+		
+		
 	</select>
 	
 	<select id="bestProductList" resultType="org.oos.domain.ProductVO" resultMap="Product">
@@ -160,12 +164,9 @@
 		limit #{dto.cri.skip} ,#{dto.cri.amount}
 	</select> -->
 
-	<select id="get" resultType="org.oos.domain.ProductVO">
-		select *
-		from tbl_product
-		where
-		pno=#{pno}
-	</select>
+<!-- 	<select id="get" resultType="org.oos.domain.ProductVO">
+		select * from tbl_product where pno=#{pno}
+	</select> -->
 
 	<insert id="insert">
 		insert into tbl_product(pname,price,sno,content)

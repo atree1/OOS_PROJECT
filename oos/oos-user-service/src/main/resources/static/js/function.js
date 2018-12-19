@@ -36,15 +36,12 @@ function myPageMove(num){
 	if(num == 1){
 		actionForm.attr("action","/user/mypage/modify").submit();
 	}else if(num == 2){
-		actionForm.append("<input type='hidden' name='mid' value='"+mid+"'>")
-					.attr("action","/user/mypage/orderList").submit();
+		actionForm.attr("action","/user/mypage/orderList").submit();
 	}else if(num == 3){
-		actionForm.append("<input type='hidden' name='mid' value='"+mid+"'>")
-				.append("<input type='hidden' name='kind' value='q'>");
+		actionForm.append("<input type='hidden' name='kind' value='q'>");
 		actionForm.attr("action","/user/mypage/qna").submit();
 	}else if(num == 4){
-		actionForm.append("<input type='hidden' name='mid' value='"+mid+"'>")
-					.append("<input type='hidden' name='kind' value='r'>")
+		actionForm.append("<input type='hidden' name='kind' value='r'>")
 					.attr("action","/user/mypage/review").submit();
 	}
 	
@@ -60,16 +57,12 @@ function goShoppingBasket(){
 
 	
 	$("#amount").val("6");
-	actionForm.attr("action", "/user/cart")
-				.append("<input type='hidden' name='mid' value='"+mid+"'>")
-	.submit();
+	actionForm.attr("action", "/user/cart").submit();
 }
 
 $(".fixedZzim").click(function(){
 	
-	actionForm.attr("action", "/user/myStoreList")
-	.append("<input type='hidden' name='mid' value='"+mid+"'>")
-	.submit();
+	actionForm.attr("action", "/user/myStoreList").submit();
 });
 
 function categoryClickFunc(cat){

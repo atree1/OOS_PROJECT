@@ -16,6 +16,7 @@ import org.oos.service.OrderService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,13 +49,14 @@ public class OrderController {
 	private ProductService productService;
 	
 	@GetMapping("/success")
-	public void successGET(Long ono, String mid, Model model) {
+	public void successGET(Long ono, Model model) {
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Criteria cri=new Criteria();
 		cri.setAmount(1000000);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("criteria", cri);
-		map.put("mid",mid);
+		map.put("mid",name);
 		
 		List<CartVO> cartList = cartService.getList(map);
 		List<OrderDetailVO> list = orderDetailService.getList(ono);
@@ -73,8 +75,9 @@ public class OrderController {
 	}
 	
 	@GetMapping("/list")
-    public void orderListGET(String mid, String[] info, Model model) {
- 
+    public void orderListGET(String[] info, Model model) {
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		
         List<OrderDetailVO> list=new ArrayList<>();
 
         for (String size : info) {
@@ -92,10 +95,11 @@ public class OrderController {
                     vo.setOption(opt);
                 }
             });
+            
             vo.setPno(Long.parseLong(sizeInfo[0]));
             vo.setProduct(pVO);
             vo.setQty(Long.parseLong(sizeInfo[2]));
-            vo.setMid(mid);
+            vo.setMid(name);
             vo.setSno(Long.parseLong(sizeInfo[3]));
             list.add(vo);
         }

@@ -211,6 +211,7 @@
 		$.each(cartList, function(index, item){
 			
 			var img = item.product.imgList[0];
+			console.log(item);
 			var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
 			
 			var imgDiv= $('.img_'+item.cno);
