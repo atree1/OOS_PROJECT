@@ -24,12 +24,12 @@
   where sbno = #{sbno}	
   </update>
   
-  <insert id="register">
-  insert into tbl_seller_notify(title, content)
-		values(#{title},#{content})
+  <insert id="insert">
+  insert into tbl_seller_notify(title, content, sid)
+		values(#{title},#{content},#{sid})
   </insert>
   
-  <select id="get">
+  <select id="get" resultType="org.oos.domain.NotifyVO">
   		select * from tbl_seller_notify
 		where sbno = #{sbno}
   </select>

@@ -14,7 +14,7 @@
         <div id="page-wrapper" class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header" align="center">판매자 공지사항 등록</h1>
+                    <h1 class="page-header" align="center">공지사항 수정</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -30,29 +30,35 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-								 <form role="form" action="/notify/sellerRegister" method="post">
-								 	
+								 	<form role="form" action="/notify/sellerModify" method="post">
 									<div class="form-group">
-										<label>제목</label> <input id="title" name="title" type="text"
-											class="form-control" required>
+										<label>제목</label> <input id="title" name="title" type="text" th:value="${notify.title}"
+											class="form-control">
 									</div>
 									<div class="form-group">
-										<label>작성자</label> <input id="sid" name="sid" type="text" th:value="${seller.sid}"
+										<label>작성자</label> <input id="sid" name="sid" type="text" th:value="${notify.sid}"
 											class="form-control" readonly="readonly">
 									</div>
 									
 									<div class="form-group">
 										<label>내용</label>
-										<textarea id="content" name="content" class="form-control" rows="7"></textarea>
+										<textarea id="content" name="content" class="form-control" rows="7" th:text="${notify.content}"></textarea>
 									</div> 
 																																				
 									<div class="form-group">
 										<div>
-											<button class="btn btn-success" type="submit">공지사항 등록</button>
+											<button class="btn btn-success" type='submit'>수정완료</button>
 										</div>
+										<div>
+											<button class="btn btn-success" id="cancelBtn">수정취소</button>
+										</div>	
 									</div>
-							
-								 </form>
+									<input type='hidden' name='sbno' th:value='${notify.sbno}'/>
+									<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
+									<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}' />
+									
+									</form>
+								
 								<!-- /.col-lg-6 (nested) -->
                             </div>
                           </div>
@@ -68,7 +74,13 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-        
+	<form id="notifyForm">
+		<input type='hidden' name='sbno' th:value='${notify.sbno}'/>
+		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
+		<input type='hidden' id='pageNum' name='pageNum'
+			th:value='${pageMaker.cri.pageNum}' />
+		<input type='hidden' name='sid' th:value='${seller.sid}'/>
+	</form>        
         
 
     </div>
@@ -80,8 +92,17 @@
 
 $(document).ready(function(){
 	
+	var notifyForm = $("#notifyForm");
 	
-}
+	$("#cancelBtn").on("click",function(e){
+		
+		e.preventDefault();
+		notifyForm.attr("action","/notify/sellerGet").attr("method","get").submit();
+		
+	});
+	
+	
+});
 	
 		
 	</script>

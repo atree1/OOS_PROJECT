@@ -14,18 +14,16 @@
 		style="align-item: left;float:right">
 		
 			<br/>
-				<button type="submit" data-oper='remove' id="remove-btn"
+			<form role="role" action="/notify/sellerRegister">
+				<input type='hidden' name='sid' th:value='${seller.sid}'/>
+				<button data-oper='remove' id="remove-btn"
 					class="form-control input-sm" placeholder=""
-					aria-controls="dataTables-example">삭제하기</button>
-				<button type="submit" data-oper='modify' value="수정하기"
-					class="form-control input-sm" id="modify-btn"
-					aria-controls="dataTables-example">수정하기</button>
-				<button type="submit" data-oper='remove' id="remove-btn"
+					aria-controls="dataTables-example">삭제하기</button>				
+				<button type="submit" data-oper='register' id="registerBtn"
 					class="form-control input-sm" placeholder=""
-					aria-controls="dataTables-example" onclick="location.href='sellerRegister'">등록하기</button>
-
-				<!-- 			<button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
- 						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button> -->
+					aria-controls="dataTables-example">등록하기</button></a>
+			</form>
+				
 
 	</div>
 
@@ -52,10 +50,6 @@
 							style="width: 110px;">제목</th>
 						<th class="sorting" tabindex="0"
 							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Engine version: activate to sort column ascending"
-							style="width: 150px;">내용</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
 							aria-label="CSS grade: activate to sort column ascending"
 							style="width: 150px;">등록일</th>
 						<th class="sorting" tabindex="0"
@@ -71,8 +65,7 @@
 						<td class="sorting"><input type="checkbox" name="checkbox"
 							th:value="${arr.sbno}"></td>
 						<td class="sbno" th:text=${arr.sbno}></td>
-						<td class="title" th:text=${arr.title}></td>
-						<td class="sbno" th:text=${arr.content}></td>
+						<td><a class="move" th:href="${arr.sbno}" th:text=${arr.title}></a></td>
 						<td class="ragdate"
 							th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 						<td class="updatedate"
@@ -116,39 +109,9 @@
 	<form id="notifyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
-			th:value='${pageMaker.cri.pageNum}' /> <input type='hidden'
-			name='sid' value='seller1' />
+			th:value='${pageMaker.cri.pageNum}' />
+		<input type='hidden' name='sid' th:value='${seller.sid}'/>
 	</form>
-</div>
-
-
-
-
-<div class="modal fade" id="modifyState" tabindex="-1" role="dialog"
-	aria-labelledby="modifyModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modifyModalLabel">배송중으로 상태를
-					변경하시겠습니까?</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				'배송하기'버튼을 누르면 해당 주문건은 배송하기로 변경됩니다. 정말로 변경하시겠습니까?
-				<!--해당 글 삭제하는 주소값받는 input 태그-->
-			</div>
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-primary" id="modifyState"
-					onclick=location.replace="modifyURL">배송중으로 전환하기</button>
-
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
 </div>
 
 
@@ -160,6 +123,15 @@ $(document).ready(function(){
 	
 		var notifyForm = $("#notifyForm");
 		var pageMaker = [[${pageMaker}]];
+		
+		$(".move").on("click",function(e){
+			
+			console.log("click...");
+			e.preventDefault();
+			notifyForm.append("<input type='hidden' name='sbno' value='"+$(this).attr("href")+"' >");
+			notifyForm.attr("action","/notify/sellerGet");
+			notifyForm.submit();
+		});
 	
 		$(".paginate_button").click(function(e) {
 	        $("#pageNum").val(String($(this).attr("id")).substring(5));
@@ -176,71 +148,25 @@ $(document).ready(function(){
 	        notifyForm.submit();
 	    });
 	    
-		$('#remove-btn').click(function() {
-		
+		$('#remove-btn').click(function(e) {
+			e.preventDefault();
 			if (confirm("해당 공지를 삭제하시겠습니까?") == true){ 
-				notifyForm.html("");
+				
 				$("input[name='checkbox']:checked").each(function(index, item){
 					
 					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");
 				});
-				notifyForm.attr("method", "post").attr("action","/notify/sellerNotify?sid=seller1").submit(); 
+				notifyForm.attr("method", "post").attr("action","/notify/remove").submit(); 
 			}else{ 
 			    return;
 			}
 		});
 	   
-		$("#modify-btn").click(function(){
-			if (confirm("해당 공지를 수정하시겠습니까?") == true){ 
-				notifyForm.html("");
-				$("input[name='checkbox']:checked").each(function(index, item){
-					
-					var shipNum = $("#ship_"+item.value).val();
-					if(String(shipNum) == ""){
-						shipNum = -1;
-					}
-					
-					
-					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
-					notifyForm.append("<input type='hidden' name='option' value='"+val+"' >");
-				});
-				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
-			}else{ 
-			    return;
-			}
-		});
-		
+	
 });
 
 	
-	
 
-/* 	    $('#modifyState').on('show.bs.modal', function(event){
-
-
-var button = $(event.relatedTarget);
-var modifyURL = button.data('title');
-var modal = $(this);
-var result = '<th:value = "${orderList.order.state}"/">';
-
-checkModal(result);
-
-function checkModal(result){
-	
-	if(result === ''){
-		return;
-	}
-	
-	if(parseInt(result) > 0){
-    	$(".modal-body").html("해당주문건"+ parseInt(result) + 배송주문으로 상태를 전환합니다.);
-
-	}
-	
-	$("#modifyState").modal("show");
-}
-
-})
-*/
 	</script>
 </th:block>
 </html>
