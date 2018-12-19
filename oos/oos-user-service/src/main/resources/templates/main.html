@@ -285,15 +285,13 @@
 	
 		(function(){
 			var img =  [[${bestP}]];
+			var product = [[${product}]];
 			
-			
-			$.each(img, function(index, item){
-				var fileCallPath =  encodeURIComponent(item.imgList[0].ipath+
-						"/s_"+ item.imgList[0].uuid +"_"+item.imgList[0].iname);
-				$.each($('.thumb_'+ item.pno),function(){
-					$(this).attr("src","/display?fileName="+fileCallPath); 
-				});
-			});
+			$.each(product, function(index, item){
+				img = item.imgList[0];
+				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+				$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
+			}); 
 			
 			
 		})();
