@@ -71,8 +71,9 @@ public class NotifyController {
 	
 	
 	@GetMapping("/sellerRegister")
-	public void insert() {
+	public void insert(String sid, Model model) {
 		
+  //  	model.addAttribute("sid", service.get(sbno).);
 		
 	}
 	
