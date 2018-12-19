@@ -117,20 +117,20 @@ public class UserController {
 		 
 		map.put("cri", cri);
 		map.put("mid", mid);
-		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
+		/*PageDTO pageDTO = new PageDTO(cri, memberService.getMyStoreCount(map));*/
 		
 		memberService.getMyStoreList(map).forEach(vo -> {
 			storeList.add(storeService.get(vo.getSno()));
 		});
 		
-		List<Integer> pageList = new ArrayList<>();
+		/*List<Integer> pageList = new ArrayList<>();
 	    
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
             pageList.add(i);
         }
         
 	    model.addAttribute("pageList", pageList);
-        model.addAttribute("pageMaker", pageDTO);
+        model.addAttribute("pageMaker", pageDTO);*/
 		model.addAttribute("storeList", storeList);
 	}
 	

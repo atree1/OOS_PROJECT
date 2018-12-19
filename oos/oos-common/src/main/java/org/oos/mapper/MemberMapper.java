@@ -12,8 +12,6 @@ public interface MemberMapper {
 
 	public List<MemberVO> getList(Criteria cri);
 	
-	public List<MemberVO> getAllList();
-	
 	public MemberVO get(String mid);
 	
 	public int insert(MemberVO vo);
@@ -29,7 +27,7 @@ public interface MemberMapper {
 	public int count(Criteria cri);
 
 	public List<StoreVO> getMyStoreList(Map<String, Object> map);
-	
+
 	public int getMyStoreCount(Map<String, Object> map);
 	
 	public int insertSnsAuth(AuthDTO dto);

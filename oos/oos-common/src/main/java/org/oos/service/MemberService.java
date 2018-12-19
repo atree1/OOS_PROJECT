@@ -23,9 +23,7 @@ public interface MemberService {
 	public int remove(String mid);
 		
 	public int count(Criteria cri);
-	
-	public List<MemberVO> getAllList();
-	
+
 	public List<StoreVO> getMyStoreList(Map<String, Object> map);
 	
 	public AuthDTO getSnsAuth(String user_id);
@@ -34,7 +32,4 @@ public interface MemberService {
 	
 	public int removeSns(String mid);
 	
-	public int getMyStoreCount(Map<String, Object> map);
-	
-
 }

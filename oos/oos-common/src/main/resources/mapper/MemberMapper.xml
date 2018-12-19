@@ -78,9 +78,5 @@
 		set del = 'Y'
 		where user_id = #{mid}
 	</update>
-	
-	<select id="getAllList" resultType="org.oos.domain.MemberVO">
-		select * from tbl_member
-		where mid !='' and del = 'N'
-	</select>
+
 </mapper>
