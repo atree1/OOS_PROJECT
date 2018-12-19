@@ -50,17 +50,15 @@
 	</select>
 	
 	<select id="getListByMid" parameterType="map" resultMap="Cart">
-		select
-			 *
-	 	from 
-	 		tbl_cart c left join tbl_product_option o on c.pno=o.pno
- 				left join tbl_product p on c.pno=p.pno
-		where 
-			c.cno > 0 and c.mid = #{mid}
-		order by 
-			c.cno desc
-		limit
-			 #{criteria.skip}, #{criteria.amount}
+		select i.pno, a.cno, a.mid, a.qty,a.price, a.opno, a.pname, a.size, i.uuid,i.ipath, i.iname from tbl_product_img i
+		join(select cno, mid, p.pno, c.qty, c.opno, p.price, p.pname, o.size
+		from tbl_cart c left join tbl_product_option o on c.pno=o.pno
+		 				left join tbl_product p on c.pno=p.pno
+				where  c.cno > 0 and c.mid = #{mid}) a
+		on(a.pno = i.pno)
+		where uuid != ''
+		group by i.pno
+		limit #{dto.cri.skip}, #{dto.cri.amount}
 	</select>
 	<select id="getByCno" resultMap="Cart">
 	select 

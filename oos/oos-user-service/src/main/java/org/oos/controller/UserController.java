@@ -348,11 +348,11 @@ public class UserController {
 	    
         Map<String, Object> map = new HashMap<String, Object>();
         
-        map.put("criteria", cri);
         map.put("mid",name);
         
     	PageDTO pageDTO = new PageDTO(cri, cartService.count(map));
-        
+
+        map.put("dto",pageDTO);
         List<Integer> pageList = new ArrayList<>();
         
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
