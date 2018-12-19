@@ -171,10 +171,9 @@ $(document).ready(function(e){
 		})
 	})();
 	(function() {
-		var sno=[[${store.sno}]];
-		console.log(sno);
-		$.getJSON("/store/getAttachList",{sno:sno},function(arr){
-			console.log(arr);
+	
+		var arr=[[${store.imgList}]]
+
 			var str="";
 			$(arr).each(function(i, obj){
 				var fileCallPath =  encodeURIComponent( obj.ipath+ "/s_"+obj.uuid +"_"+obj.iname);
@@ -185,8 +184,7 @@ $(document).ready(function(e){
 				str += "</div>";
 				str +"</li>";
 	
-				});
-			
+		
 			$(".uploadResult ul").html(str);
 		});
 	})();

@@ -45,13 +45,6 @@ public class ProductController {
 	@Setter(onMethod_=@Autowired)
 	private ImgurMapper imgurMapper;
 	
-	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<List<ProductImgVO>> getAttachList(Long pno) {
-			log.info("getAttachList");
-		List<ProductImgVO> result = productService.read(pno).getImgList();
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
 	
 	@PostMapping("/remove")
 	public String remove(ProductVO vo, RedirectAttributes rttr, Long sno,Criteria cri) {
@@ -131,7 +124,7 @@ public class ProductController {
 	public String productRegisterPost(ProductVO vo, RedirectAttributes rttr, Long sno) {
 		List<CategoryVO> cateList = new ArrayList<>();
 		log.info(""+vo);
-		String firstPath = "C:\\upload\\" + vo.getImgList().get(0).getIpath() + "\\" + vo.getImgList().get(0).getUuid() + "_" + vo.getImgList().get(0).getIname();
+		String firstPath = "\\\\HB03-14\\upload\\" + vo.getImgList().get(0).getIpath() + "\\" + vo.getImgList().get(0).getUuid() + "_" + vo.getImgList().get(0).getIname();
 		try {
 			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN8521692284338889379",
 					firstPath, "0.7");
