@@ -16,7 +16,7 @@ public class ProductVO {
 	private String pname;
 	private Long price;
 	private Long sno;
-
+	
 	private LocalDate regdate;
 	
 	private String sname; //목록에 상점이름띄울때
