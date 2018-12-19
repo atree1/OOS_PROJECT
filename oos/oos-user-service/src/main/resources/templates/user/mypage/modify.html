@@ -261,7 +261,7 @@
 			var pw = $("#newPw").val();
 			$.ajax({
 				type:"post",
-				url:"/user/modPw/"+member.mid+"/"+pw,
+				url:"/user/modPw/"+pw,
 				beforeSend: function(xhr) {
 		            xhr.setRequestHeader(header, token);
 		        },

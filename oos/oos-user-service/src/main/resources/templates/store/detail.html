@@ -258,7 +258,7 @@
 			if(mid != undefined){
 				$.ajax({
 					type:"post",
-					url:"/store/checkzzim/"+sno+"/"+mid,
+					url:"/store/checkzzim/"+sno,
 					beforeSend: function(xhr) {
 			            xhr.setRequestHeader(header, token);
 			        },
@@ -390,7 +390,7 @@
 			
 			$.ajax({
 				type:"post",
-				url:"/user/zzim/"+sno+"/"+mid,
+				url:"/user/zzim/"+sno,
 				beforeSend: function(xhr) {
 		            xhr.setRequestHeader(header, token);
 		        },

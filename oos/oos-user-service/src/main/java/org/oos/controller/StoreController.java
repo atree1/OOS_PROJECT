@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,12 +79,15 @@ public class StoreController {
 	}
 	
 	
-	@PostMapping("/checkzzim/{sno}/{mid}")
-    public ResponseEntity<String> checkzzim(@PathVariable("mid") String mid,@PathVariable("sno") Long sno) {
-
-		if(mid != null) {
+	@PostMapping("/checkzzim/{sno}")
+    public ResponseEntity<String> checkzzim(@PathVariable("sno") Long sno) {
+		
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    
+		if(!name.equals("anonymouse")) {
         	StoreVO store = new StoreVO();
-        	store.setMid(mid);
+        	store.setMid(name);
         	store.setSno(sno);
     	 	
         	if(storeService.getStoreLike(store).size() == 0) {
