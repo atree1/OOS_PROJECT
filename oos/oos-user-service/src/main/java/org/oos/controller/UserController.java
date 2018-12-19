@@ -23,6 +23,8 @@ import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +71,7 @@ public class UserController {
 	@Autowired
 	MemberRepository repo;
 	
-    	
+
     @GetMapping("/mypage/reviewDetail")
 	public void reviewDetail(long pno, String mid, String kind, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -261,7 +263,9 @@ public class UserController {
     
     @GetMapping("/mypage/modify")
     public void get(Model model) {
-        /*model.addAttribute("member",memberService.get(mid));*/
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+        model.addAttribute("member",memberService.get(name));
     }
     
     @PostMapping("/modPw/{mid}/{pw}")
@@ -286,7 +290,7 @@ public class UserController {
             rttr.addFlashAttribute("modify", "success");
         }
         
-        return "redirect:/user/mypage/modify?mid=member1";
+        return "redirect:/user/mypage/modify";
     }
     
     @GetMapping("/cart")
