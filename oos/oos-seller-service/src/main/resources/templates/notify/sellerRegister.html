@@ -51,13 +51,10 @@
 											<button class="btn btn-success" type="submit">공지사항 등록</button>
 										</div>
 									</div>
-<<<<<<< HEAD
+
 							
 								 </form>
-=======
-									
-									</form>
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+
 								<!-- /.col-lg-6 (nested) -->
                             </div>
                           </div>
@@ -85,26 +82,7 @@
 
 $(document).ready(function(){
 	
-	
-<<<<<<< HEAD
-=======
-	   
-	
-	$('.btn btn-success').click(function() {
-		
-		if (confirm("작성한 글을 공지사항으로 등록하시겠습니까?") == true){ 
-			insertForm.html("");
-			$("input[name='checkbox']:checked").each(function(index, item){
-				
-				orderForm.append("<input type='hidden' name='odno' value='"+item.value+"' >");
-			});
-			orderForm.attr("method", "post").attr("action","/exam/manage").submit(); 
-		}else{ 
-		    return;
-		}
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-}
-	
-		
+
+	});		
 	</script>
 </th:block>
