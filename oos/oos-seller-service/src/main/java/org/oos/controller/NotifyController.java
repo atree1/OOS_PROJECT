@@ -66,24 +66,23 @@ public class NotifyController {
     	}
         
         return "redirect:/notify/sellerNotify?sid=seller1";}
-	
-    @PostMapping("/")
-	
+		
 	
 	@GetMapping("/sellerRegister")
-	public void insert() {
+	public void insert(Model model) {
+		
 		
 		
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/sellerRegister")
 	public String register(NotifyVO vo, RedirectAttributes rttr) {
 		
 		log.info(""+ vo);
 		service.insert(vo);
 		rttr.addFlashAttribute("result", vo.getSbno());
 		
-		return "redirect:/notify/sellerNotify";
+		return "redirect:/notify/sellerNotify?sid=seller1";
 		
 	} 
 	

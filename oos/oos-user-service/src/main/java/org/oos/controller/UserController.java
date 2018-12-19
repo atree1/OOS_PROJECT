@@ -88,7 +88,7 @@ public class UserController {
 		
 		model.addAttribute("reply", replyService.getList(map));
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
-		
+		log.info(replyService.getList(map)+"");
 		List<Integer> pageList = new ArrayList<>();
 	    
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
