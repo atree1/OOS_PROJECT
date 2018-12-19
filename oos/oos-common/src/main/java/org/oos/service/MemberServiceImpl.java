@@ -16,8 +16,7 @@ import lombok.Setter;
 
 
 @Service
-@lombok.extern.java.Log
-public abstract class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl implements MemberService {
 
 	@Setter(onMethod_= @Autowired)
 	private MemberMapper mapper;
@@ -76,6 +75,12 @@ public abstract class MemberServiceImpl implements MemberService {
 	public int modifyPw(MemberVO vo) {
 		return mapper.modifyPw(vo);
 	}
+
+	@Override
+	public int getMyStoreCount(Map<String, Object> map) {
+		return mapper.getMyStoreCount(map);
+	}
+	
 
 }
 

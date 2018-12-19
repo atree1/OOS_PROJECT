@@ -32,4 +32,6 @@ public interface MemberService {
 	
 	public int removeSns(String mid);
 	
+	public int getMyStoreCount(Map<String, Object> map);
+	
 }
