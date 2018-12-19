@@ -66,24 +66,28 @@ public class NotifyController {
     	}
         
         return "redirect:/notify/sellerNotify?sid=seller1";}
-	
-    @PostMapping("/")
-	
+		
 	
 	@GetMapping("/sellerRegister")
-	public void insert() {
+<<<<<<< HEAD
+	public void insert(Model model) {
 		
+=======
+	public void insert(String sid, Model model) {
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+		
+  //  	model.addAttribute("sid", service.get(sbno).);
 		
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/sellerRegister")
 	public String register(NotifyVO vo, RedirectAttributes rttr) {
 		
 		log.info(""+ vo);
 		service.insert(vo);
 		rttr.addFlashAttribute("result", vo.getSbno());
 		
-		return "redirect:/notify/sellerNotify";
+		return "redirect:/notify/sellerNotify?sid=seller1";
 		
 	} 
 	

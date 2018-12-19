@@ -56,7 +56,7 @@
 			    group by p.pno
 		)product join tbl_store s
 			on s.sno = product.sno
-		 where s.sno > 0	
+		 where s.sno > 0 and product.del='N'	
 		<if test="sno != null">
 			and s.sno=#{sno}
 		</if>
