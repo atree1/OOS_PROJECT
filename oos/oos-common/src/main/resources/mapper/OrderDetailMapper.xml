@@ -68,7 +68,7 @@
 			</when>
 			<when test="range == 'week'">
 				<![CDATA[
-				date(od.regdate) >=date(subdate(now(),interval #{date} day )) and date(od.regdate)<= date(now()) 
+				date(od.regdate) >=date(subdate(now(),interval 7 day )) and date(od.regdate)<= date(now()) 
 				
 				]]>
 			</when>
