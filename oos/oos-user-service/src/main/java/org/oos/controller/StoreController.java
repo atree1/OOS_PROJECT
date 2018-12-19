@@ -60,7 +60,6 @@ public class StoreController {
             pageList.add(i);
         }
         
-        model.addAttribute("img", imgurMapper.getList());
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
@@ -69,11 +68,10 @@ public class StoreController {
 	
 
 	@GetMapping("/detail")
-	public void productRead(Long pno, Long sno, String mid, Model model) {
+	public void productRead(Long pno, Long sno, Model model) {
 		
 		ProductVO vo = productService.read(pno);
 		
-		model.addAttribute("img", imgurMapper.getList());
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 	}
@@ -82,10 +80,9 @@ public class StoreController {
 	@PostMapping("/checkzzim/{sno}")
     public ResponseEntity<String> checkzzim(@PathVariable("sno") Long sno) {
 		
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
-		if(!name.equals("anonymouse")) {
+		if(!name.equals("anonymousUser")) {
         	StoreVO store = new StoreVO();
         	store.setMid(name);
         	store.setSno(sno);

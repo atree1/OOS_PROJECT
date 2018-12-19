@@ -73,29 +73,32 @@ public class UserController {
 	
 
     @GetMapping("/mypage/reviewDetail")
-	public void reviewDetail(long pno, String kind, Model model) {
+	public void reviewDetail(long pno, String kind,Model model) {
+    	Map<String, Object> map = new HashMap<String, Object>();
     	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
-	    
-		Map<String, Object> map = new HashMap<String, Object>();
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    
+		if(!name.equals("anonymousUser")) {
+    		map.put("mid", name);
+    	}
+		
 		map.put("pno", pno);
-		map.put("mid", name);
 		map.put("kind", kind);
 		model.addAttribute("reviewDetail", replyService.getDetailList(map));
 	}
 	
 	@GetMapping("/mypage/review")
 	public void reviewList(Criteria cri, String kind, Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("cri", cri);
 		map.put("mid", name);
 		map.put("kind", kind);
 		
 		model.addAttribute("reply", replyService.getList(map));
+		
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
 		
 		List<Integer> pageList = new ArrayList<>();
@@ -111,8 +114,7 @@ public class UserController {
 	@GetMapping("/mypage/qnaDetail")
 	public void qnaDetail(long pno, String kind, Model model) {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", pno);
@@ -124,8 +126,7 @@ public class UserController {
 	@GetMapping("/myStoreList")
 	public void myStore(Criteria cri, Model model) {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<StoreVO> storeList = new ArrayList<>();
@@ -152,8 +153,7 @@ public class UserController {
 	 @PostMapping("/myStoreList")
     public String myStoreRemove(Long sno) {
 		 
-		 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		    String name = auth.getName();
+		 	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		    
 		 	StoreVO vo = new StoreVO();
 		 	vo.setMid(name);
@@ -164,9 +164,9 @@ public class UserController {
 	 }
 	 
 	@PostMapping("/zzim/{sno}")
-    public ResponseEntity<String> insertZzim(@PathVariable("sno") Long sno) {	 	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+    public ResponseEntity<String> insertZzim(@PathVariable("sno") Long sno) {	 
+		
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
 	 	StoreVO vo = new StoreVO();
 	 	vo.setMid(name);
@@ -187,8 +187,7 @@ public class UserController {
 	@GetMapping("/mypage/qna")
 	public void qnaList(Criteria cri, String kind, Model model) {
 		
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -267,8 +266,7 @@ public class UserController {
     @GetMapping("/mypage/orderList")
     public void orderDetailList(Criteria cri, Model model) {
     	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
         Map<String, Object> map = new HashMap<String, Object>();
        
@@ -299,8 +297,8 @@ public class UserController {
     
     @PostMapping("/mypage/orderList")
     public String remove(Long ono, RedirectAttributes rttr) {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
         if(orderService.delete(ono) == 1) {
             rttr.addFlashAttribute("result", "success");
@@ -310,16 +308,15 @@ public class UserController {
     
     @GetMapping("/mypage/modify")
     public void get(Model model) {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
         model.addAttribute("member",memberService.get(name));
     }
     
     @PostMapping("/modPw/{pw}")
     public ResponseEntity<String> modifyPw(@PathVariable("pw") String pw) {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
     	
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
     	
     	MemberVO vo = new MemberVO();
 	 	vo.setMid(name);
@@ -347,8 +344,7 @@ public class UserController {
     @GetMapping("/cart")
     public void list(Criteria cri, Model model) {
     	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
         Map<String, Object> map = new HashMap<String, Object>();
         
