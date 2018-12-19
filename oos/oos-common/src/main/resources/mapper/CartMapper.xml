@@ -49,18 +49,27 @@
 		limit #{criteria.skip}, #{criteria.amount}
 	</select>
 	
-	<select id="getListByMid" parameterType="map"
-		resultMap="Cart">
-		select * from tbl_cart c left join tbl_product_option o on c.pno=o.pno
- 		left join tbl_product p on c.pno=p.pno
-		where c.cno > 0 and c.mid = #{mid}
-		order by c.cno desc
-		limit #{criteria.skip}, #{criteria.amount}
+	<select id="getListByMid" parameterType="map" resultMap="Cart">
+		select
+			 *
+	 	from 
+	 		tbl_cart c left join tbl_product_option o on c.pno=o.pno
+ 				left join tbl_product p on c.pno=p.pno
+		where 
+			c.cno > 0 and c.mid = #{mid}
+		order by 
+			c.cno desc
+		limit
+			 #{criteria.skip}, #{criteria.amount}
 	</select>
 	<select id="getByCno" resultMap="Cart">
-	select * from tbl_cart c left join tbl_product_option o on c.pno=o.pno
- left join tbl_product p on c.pno=p.pno
- 	where cno = #{cno}
+	select 
+		* 
+	from 
+		tbl_cart c left join tbl_product_option o on c.pno=o.pno
+ 		left join tbl_product p on c.pno=p.pno
+ 	where 
+ 		cno = #{cno}
  
  </select>
 	<select id="get" resultType="org.oos.domain.CartVO">

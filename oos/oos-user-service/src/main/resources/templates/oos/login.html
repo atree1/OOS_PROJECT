@@ -31,7 +31,7 @@ input[type="checkbox"], input[type="radio"] {
 	<div class="" style="background-color: #ffffff;">
 		<div class="loginFormBox"
 			style="position: relative; background-color: #ffffff; margin-bottom: 30px;">
-			<img class="loginLogo" src="/img/oos_logo.jpg" style="width: 300px; margin-bottom:30px;">
+			<img class="loginLogo" src="/img/oos_logo.jpg" style="width: 300px; cursor:pointer; margin-bottom:30px;" onclick="location.href='/main'">
 			<form method="post" action="/oos/login" id="loginForm">
 				<input type="hidden" th:name="${_csrf.parameterName}"
 					th:value="${_csrf.token}"> <input class="loginInput"

@@ -64,50 +64,18 @@
 			<div id="touchSlider_best" class="touchSlider-box">
 				<div class="touchSlider" id="bestItemList">
 					<ul class="item-list-img">
-						<li><a class="showcase_con"> <span class="showcase_img">
-									<img
-									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
-									class="item_img lazy" style="display: inline;"> <span
-									class="num1">1</span>
-							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
-										개</span> <em>100</em>
-							</span>
-						</a> <a class="showcase_con"> <span class="showcase_img"> <img
-									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
-									class="item_img lazy" style="display: inline;"> <span
-									class="num1">1</span>
-							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
-										개</span> <em>100</em>
-							</span>
-						</a> <a class="showcase_con"> <span class="showcase_img"> <img
-									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
-									class="item_img lazy" style="display: inline;"> <span
-									class="num1">1</span>
-							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
-										개</span> <em>100</em>
-							</span>
-						</a> <a class="showcase_con"> <span class="showcase_img"> <img
-									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
-									class="item_img lazy" style="display: inline;"> <span
-									class="num1">1</span>
-							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
-										개</span> <em>100</em>
-							</span>
-						</a> <a class="showcase_con"> <span class="showcase_img"> <img
-									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
-									class="item_img lazy" style="display: inline;"> <span
-									class="num1">1</span>
-							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
-										개</span> <em>100</em>
-							</span>
-						</a> <a class="showcase_con"> <span class="showcase_img"> <img
-									src="http://image.iacstatic.co.kr/itemimage/17/8b/50/178b5039b2.jpg"
-									class="item_img lazy" style="display: inline;"> <span
-									class="num1">1</span>
-							</span> <span class="showcace_info"> <span class="text_type1">디즈니주먹왕랄프2
-										개</span> <em>100</em>
-							</span>
-						</a></li>
+						<li th:each="arr : ${bestP}">
+							<a class="showcase_con"> 
+								<span class="showcase_img">
+									<img class="item_img lazy" th:class="|thumb_${arr.pno}|" style="display: inline;"> 
+									<span class="num1">1</span>
+								</span> 
+								<span class="showcace_info"> 
+									<span class="text_type1" th:text="${arr.pname}">
+										PNAME</span><em th:text="${arr.price}">PRICE</em>
+								</span>
+							</a> 
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -315,6 +283,21 @@
 
 		var mainForm = $("#mainForm");
 	
+		(function(){
+			var img =  [[${bestP}]];
+			
+			
+			$.each(img, function(index, item){
+				var fileCallPath =  encodeURIComponent(item.imgList[0].ipath+
+						"/s_"+ item.imgList[0].uuid +"_"+item.imgList[0].iname);
+				$.each($('.thumb_'+ item.pno),function(){
+					$(this).attr("src","/display?fileName="+fileCallPath); 
+				});
+			});
+			
+			
+		})();
+		
 		$("#goList").click(function() {
 			window.location.href = "/user/list";
 		});
