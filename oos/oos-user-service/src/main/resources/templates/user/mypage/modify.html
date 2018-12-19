@@ -204,8 +204,7 @@
 	<script th:inline="javascript">
 	$(document).ready(function(){
 		
-	 	var member = [[${#authentication.principal.member}]];
-	 	
+	 	var member = [[${member}]];
 		(function(){
 			var tel = member.pnum;
 			var email1 = member.email.split("@")[0];
@@ -225,8 +224,8 @@
 				$("#pnum").val("019").prop("selected",true);
 			}
 			
-			$("#pnum2").val(tel.substring(2,6));
-			$("#pnum3").val(tel.substring(6)); 
+			$("#pnum2").val(tel.substring(3,7));
+			$("#pnum3").val(tel.substring(7)); 
 		})();
 		
 		$("#modifyBtn").click(function(){
@@ -262,7 +261,7 @@
 			var pw = $("#newPw").val();
 			$.ajax({
 				type:"post",
-				url:"/user/modPw/"+member.mid+"/"+pw,
+				url:"/user/modPw/"+pw,
 				beforeSend: function(xhr) {
 		            xhr.setRequestHeader(header, token);
 		        },

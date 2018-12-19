@@ -192,10 +192,8 @@
 									</button>
 								</div>
 							</div>
-							<div th:if="${status == 'yes'}" class="inner_btn_zzim on"
-							style="display:inline-block; margin-right:10px; margin-bottom:8px;"></div>
-						
-							<div th:if="${status != 'yes'}" class="inner_btn_zzim" th:id="${store.sno}" 
+							
+							<div class="inner_btn_zzim" th:id="${store.sno}" 
 							style="display:inline-block; margin-right:10px; margin-bottom:8px;"></div>
 							<button class="btn_order" style="display: inline-block;">장바구니에 담기</button>
 						</div>
@@ -224,8 +222,8 @@
 	$(document).ready(function() {
 		var storeDetailForm = $("#storeDetailForm");
 	    var product = [[${product}]];
-	    var store = [[${store}]];
-	    var sno = store.sno;
+	    var pno = [[${product.pno}]];
+	    var sno = [[${store.sno}]];
 	    var img = [[${img}]];
 	    var pageNum = 1;
 		var replyPageFooter = $(".replyPageFooter");
@@ -260,7 +258,7 @@
 			if(mid != undefined){
 				$.ajax({
 					type:"post",
-					url:"/store/checkzzim/"+sno+"/"+mid,
+					url:"/store/checkzzim/"+sno,
 					beforeSend: function(xhr) {
 			            xhr.setRequestHeader(header, token);
 			        },
@@ -317,10 +315,10 @@
 				if($(this).val() !=0){
 					var list = {
 							"mid" : mid,
-							"pno" : product.pno,
+							"pno" : pno,
 							"qty" : $(this).val(),
 							"opno" : $(this).attr("id"),
-							"sno" : store.sno
+							"sno" : sno
 					}
 					
 					jsonList.push(list);
@@ -392,7 +390,7 @@
 			
 			$.ajax({
 				type:"post",
-				url:"/user/zzim/"+sno+"/"+mid,
+				url:"/user/zzim/"+sno,
 				beforeSend: function(xhr) {
 		            xhr.setRequestHeader(header, token);
 		        },
@@ -417,11 +415,11 @@
 				var value = $("#"+item.opno+"").val();
 				if(value > 0){
 					storeDetailForm.append("<input type='hidden' name='info' id='info' value='"
-							+item.pno+"_"+item.opno+"_"+value+"_"+store.sno+"'>");
+							+pno+"_"+item.opno+"_"+value+"_"+sno+"'>");
 					
 				}
 			});
-			storeDetailForm.append("<input type='hidden' name='sno' value='"+store.sno+"'>");
+			storeDetailForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
 			if($("#info").val() == null){
 				alert("수량을 입력해 주세요");
 			}else{
@@ -549,7 +547,6 @@
 					rno : modifyRno,
 					title:modifyTitle.val(),
 					content:modifyContent.val(),
-					score:modifyScore.val(),
 					kind:kindValue
 			};
 			

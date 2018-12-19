@@ -14,6 +14,7 @@ public class ReplyVO {
 	private String sid;
 	private String title;
 	private String content;
+	private String state;
 	
 	private Date regdate;
 	private Date updatedate;
