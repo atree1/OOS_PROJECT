@@ -68,12 +68,5 @@ public class StoreController {
 		return "redirect:/exam/home";
 	}
 	
-	
-	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<List<StoreImgVO>> getAttachList(Long sno) {
-			log.info("getAttachList");
-		List<StoreImgVO> result = storeService.get(sno).getImgList();
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
+
 }
