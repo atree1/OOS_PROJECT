@@ -7,7 +7,10 @@
 
 	<select id="getList" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply 
-		where rno > 0 and pno = #{pno} and del='N' and kind = #{kind}
+		where rno > 0 and del='N' and kind = #{kind}
+		<if test="pno != null">
+			and pno = #{pno} 
+		</if>
 		order by parent desc, rno asc
 		limit #{cri.skip}, #{cri.amount}
 	</select>
