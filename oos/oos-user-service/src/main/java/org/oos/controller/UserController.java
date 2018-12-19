@@ -262,12 +262,14 @@ public class UserController {
     }
     
     @PostMapping("/mypage/orderList")
-    public String remove(Long ono, String mid, RedirectAttributes rttr) {
-        
+    public String remove(Long ono, RedirectAttributes rttr) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    
         if(orderService.delete(ono) == 1) {
             rttr.addFlashAttribute("result", "success");
         }
-        return "redirect:/user/mypage/orderList?mid="+mid;
+        return "redirect:/user/mypage/orderList";
     }
     
     @GetMapping("/mypage/modify")

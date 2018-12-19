@@ -222,8 +222,8 @@
 	$(document).ready(function() {
 		var storeDetailForm = $("#storeDetailForm");
 	    var product = [[${product}]];
-	    var store = [[${store}]];
-	    var sno = store.sno;
+	    var pno = [[${product.pno}]];
+	    var sno = [[${store.sno}]];
 	    var img = [[${img}]];
 	    var pageNum = 1;
 		var replyPageFooter = $(".replyPageFooter");
@@ -315,10 +315,10 @@
 				if($(this).val() !=0){
 					var list = {
 							"mid" : mid,
-							"pno" : product.pno,
+							"pno" : pno,
 							"qty" : $(this).val(),
 							"opno" : $(this).attr("id"),
-							"sno" : store.sno
+							"sno" : sno
 					}
 					
 					jsonList.push(list);
@@ -415,11 +415,11 @@
 				var value = $("#"+item.opno+"").val();
 				if(value > 0){
 					storeDetailForm.append("<input type='hidden' name='info' id='info' value='"
-							+item.pno+"_"+item.opno+"_"+value+"_"+store.sno+"'>");
+							+pno+"_"+item.opno+"_"+value+"_"+sno+"'>");
 					
 				}
 			});
-			storeDetailForm.append("<input type='hidden' name='sno' value='"+store.sno+"'>");
+			storeDetailForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
 			if($("#info").val() == null){
 				alert("수량을 입력해 주세요");
 			}else{
