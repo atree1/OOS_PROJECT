@@ -25,9 +25,10 @@
 						<li th:class="|goodsContainer store_${arr.sno}|"
 							style="margin-right: 5px;" th:id="|link_${arr.pno}|">
 							<div class="goodsImg"
-								style="position: relative; width: 270px; height: 353px;">
+								style="position: relative; width: 270px; height: 353px; line-height:200px;">
 								<img th:id="|img_${arr.pno}|" class="productImg"
-									style="width: 100%; display: block;">
+									style="width: 100%;position:absolute;
+									top:0;bottom:0;margin:auto;">
 							</div>
 							<div class="goodsInfo" style="position: relative;">
 								<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
