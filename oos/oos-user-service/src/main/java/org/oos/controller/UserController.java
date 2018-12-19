@@ -200,12 +200,7 @@ public class UserController {
     	map.put("dto", pageDTO);
 		map.put("mid", mid);
 		
-		List<StoreVO> store = storeService.getList(pageDTO);
-		/*
-		store.forEach(vo -> {
-			vo.setImg(storeService.getImg(vo.getSno()));
-		});*/
-		
+		List<StoreVO> store = storeService.getList(pageDTO);		
 		
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
         	model.addAttribute("store", store);
@@ -222,7 +217,6 @@ public class UserController {
         model.addAttribute("cri", cri);   
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-        model.addAttribute("img", imgurMapper.getList());
         
     }
     

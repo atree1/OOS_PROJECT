@@ -69,13 +69,9 @@ public class NotifyController {
 		
 	
 	@GetMapping("/sellerRegister")
-<<<<<<< HEAD
-	public void insert(Model model) {
-		
-=======
+
 	public void insert(String sid, Model model) {
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-		
+
   //  	model.addAttribute("sid", service.get(sbno).);
 		
 	}
