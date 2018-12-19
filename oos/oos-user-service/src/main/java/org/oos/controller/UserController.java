@@ -210,6 +210,10 @@ public class UserController {
     
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        model.addAttribute("info", auth);
+    	
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
         model.addAttribute("detail", list);
     }
@@ -268,6 +272,7 @@ public class UserController {
     	
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
+    	
         Map<String, Object> map = new HashMap<String, Object>();
        
         map.put("mid",name);
