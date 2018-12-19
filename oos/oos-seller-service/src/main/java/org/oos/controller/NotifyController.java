@@ -93,7 +93,6 @@ public class NotifyController {
             }
     	}
         
-<<<<<<< HEAD
         return "redirect:/notify/sellerNotify?sid="+sid;
         
     }
@@ -101,20 +100,9 @@ public class NotifyController {
     
 	@GetMapping("/sellerRegister")
 	public void insert(String sid,Model model) {
-=======
-        return "redirect:/notify/sellerNotify?sid=seller1";}
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 		
-<<<<<<< HEAD
 		model.addAttribute("seller", sellerService.get(sid));
     
-=======
-	
-	@GetMapping("/sellerRegister")
-	public void insert() {
-
-		
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 	}
 	
 	@PostMapping("/sellerRegister")
@@ -122,13 +110,9 @@ public class NotifyController {
 		
 		int result = service.insert(vo);
 		
-<<<<<<< HEAD
 		rttr.addFlashAttribute("result", result == 1? "SUCCESS":"FAIL");
 		
 		return "redirect:/notify/sellerNotify?sid="+vo.getSid();
-=======
-		return "redirect:/notify/sellerNotify?sid=seller1";
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 		
 	} 
 	
