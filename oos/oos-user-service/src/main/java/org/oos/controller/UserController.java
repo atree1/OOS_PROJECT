@@ -315,14 +315,13 @@ public class UserController {
     
     @PostMapping("/modPw/{pw}")
     public ResponseEntity<String> modifyPw(@PathVariable("pw") String pw) {
-    	
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
     	
     	MemberVO vo = new MemberVO();
 	 	vo.setMid(name);
-	 	
-	 	String password = pwEncoder.encode(vo.getMpw());
+	 	String password = pwEncoder.encode(pw);
 	 	vo.setMpw(password);
+	 	
     	if(memberService.modifyPw(vo) == 1) {
     		return new ResponseEntity<String>("success",HttpStatus.OK);
         }
