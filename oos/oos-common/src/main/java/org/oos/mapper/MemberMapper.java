@@ -30,6 +30,8 @@ public interface MemberMapper {
 
 	public List<StoreVO> getMyStoreList(Map<String, Object> map);
 	
+	public int getMyStoreCount(Map<String, Object> map);
+	
 	public int insertSnsAuth(AuthDTO dto);
 	
 	public AuthDTO getSnsAuth(String user_id);

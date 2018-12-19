@@ -18,7 +18,7 @@ import lombok.Setter;
 
 @Service
 @lombok.extern.java.Log
-public class MemberServiceImpl implements MemberService {
+public abstract class MemberServiceImpl implements MemberService {
 
 	@Setter(onMethod_= @Autowired)
 	private MemberMapper mapper;
@@ -53,7 +53,6 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.count(cri);
 	}
 
-
 	@Override
 	public int insertSnsAuth(AuthDTO dto) {
 		return mapper.insertSnsAuth(dto);
@@ -74,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getMyStoreList(map);
 	}
 
-	
+
 	@Override
 	public int removeSns(String mid) {
 		return mapper.deleteSns(mid);

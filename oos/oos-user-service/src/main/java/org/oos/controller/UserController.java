@@ -117,17 +117,26 @@ public class UserController {
 		 
 		map.put("cri", cri);
 		map.put("mid", mid);
+		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
+		
 		memberService.getMyStoreList(map).forEach(vo -> {
 			storeList.add(storeService.get(vo.getSno()));
 		});
-	
+		
+		List<Integer> pageList = new ArrayList<>();
+	    
+        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
+            pageList.add(i);
+        }
+        
+	    model.addAttribute("pageList", pageList);
+        model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("storeList", storeList);
 	}
 	
 	 @PostMapping("/myStoreList")
 	    public String myStoreRemove(String mid, Long sno) {
-		 
-		 
+
 		 	StoreVO vo = new StoreVO();
 		 	vo.setMid(mid);
 		 	vo.setSno(sno);

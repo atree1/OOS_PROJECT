@@ -33,5 +33,8 @@ public interface MemberService {
 	public int insertSnsAuth(AuthDTO dto);
 	
 	public int removeSns(String mid);
+	
+	public int getMyStoreCount(Map<String, Object> map);
+	
 
 }

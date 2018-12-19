@@ -57,6 +57,11 @@
 		where mid = #{mid}
 		limit #{cri.skip}, #{cri.amount}
 	</select>
+		
+	<select id="getMyStoreCount" resultType="int">
+		select count(*) from tbl_store_like
+		where lno > 0 and mid = #{mid}
+	</select>
 	
 	<insert id="insertSnsAuth">
 		insert into tbl_sns_auth(user_id, access_token, sns, user_pw)
