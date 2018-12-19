@@ -96,6 +96,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	public int snoCount(Long sno) {
 		return orderDetailMapper.snoCount(sno);
 	}
+
+	@Override
+	public int getTotal(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return orderDetailMapper.total(map);
+	}
 	
 	
 }

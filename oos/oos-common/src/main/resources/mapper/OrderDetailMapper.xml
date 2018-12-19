@@ -5,102 +5,148 @@
 
 <mapper namespace="org.oos.mapper.OrderDetailMapper">
 
-<resultMap type="org.oos.domain.ProductOptionVO" id="Option">
-	<result column="opno" property="opno"/>
-	<result column="size" property="size"/>
-	<result column="qty" property="qty"/>
-</resultMap>
+	<resultMap type="org.oos.domain.ProductOptionVO" id="Option">
+		<result column="opno" property="opno" />
+		<result column="size" property="size" />
+		<result column="qty" property="qty" />
+	</resultMap>
 
-<resultMap type="org.oos.domain.ProductVO" id="Product">
-	<result column="pno" property="pno"/>
-	<result column="pname" property="pname"/>
-	<result column="price" property="price"/>
-	<result column="sno" property="sno"/>
-	<result column="regdate" property="regdate"/>
-	<result column="updatedate" property="updatedate"/>
-	<result column="del" property="del"/>
-	<result column="questionreplycnt" property="questionReplyCnt"/>
-	<result column="reviewreplycnt" property="reviewReplyCnt"/>
-	<result column="content" property="content"/>
-</resultMap>
-<resultMap type="org.oos.domain.OrderDetailVO" id="OrderDetail">
-	<result column="odno" property="odno"/>
-	<result column="ono" property="ono"/>
-	<result column="pno" property="pno"/>
-	<result column="qty" property="qty"/>
-	<result column="opno" property="opno"/>
-	<result column="pnum" property="pnum"/>
-	<result column="address" property="address"/>
-	<result column="addressDetail" property="addressDetail"/>
-	<result column="dno" property="dno"/>
-	<result column="del" property="del"/>
-	<result column="sno" property="sno"/>
-	<result column="detail_state" property="detail_state"/>
-	<association property="option" resultMap="Option"/>
-	<association property="product" resultMap="Product"/>
-</resultMap>
-<select id="getByOdno" resultMap="OrderDetail">
-	select * from tbl_order_detail od left join tbl_product p 
-	on od.pno =p.pno left join tbl_product_option o on od.pno=o.pno
-	where od.odno=#{odno}
-</select>
+	<resultMap type="org.oos.domain.ProductVO" id="Product">
+		<result column="pno" property="pno" />
+		<result column="pname" property="pname" />
+		<result column="price" property="price" />
+		<result column="sno" property="sno" />
+		<result column="regdate" property="regdate" />
+		<result column="updatedate" property="updatedate" />
+		<result column="del" property="del" />
+		<result column="questionreplycnt" property="questionReplyCnt" />
+		<result column="reviewreplycnt" property="reviewReplyCnt" />
+		<result column="content" property="content" />
+	</resultMap>
+	<resultMap type="org.oos.domain.OrderDetailVO"
+		id="OrderDetail">
+		<result column="odno" property="odno" />
+		<result column="ono" property="ono" />
+		<result column="pno" property="pno" />
+		<result column="qty" property="qty" />
+		<result column="opno" property="opno" />
+		<result column="pnum" property="pnum" />
+		<result column="address" property="address" />
+		<result column="addressDetail" property="addressDetail" />
+		<result column="dno" property="dno" />
+		<result column="del" property="del" />
+		<result column="sno" property="sno" />
+		<result column="detail_state" property="detail_state" />
+		<association property="option" resultMap="Option" />
+		<association property="product" resultMap="Product" />
+	</resultMap>
+	<select id="getByOdno" resultMap="OrderDetail">
+		select
+		*
+		from
+		tbl_order_detail od
+		left join tbl_product p
+		on od.pno =p.pno left join tbl_product_option o
+		on od.pno=o.pno
+		where
+		od.odno=#{odno}
+	</select>
+	<select id="total" parameterType="map" resultType="Integer">
+
+		select
+		sum(od.qty*p.price)
+		from
+		tbl_order_detail od join tbl_product p on
+		od.pno=p.pno
+		where
+		<choose>
+
+			<when test=" range == 'day'">
+
+				date(od.regdate) =date(now())
+
+			</when>
+			<when test="range == 'week'">
+				<![CDATA[
+				date(od.regdate) >=date(subdate(now(),interval #{date} day )) and date(od.regdate)<= date(now()) 
+				
+				]]>
+			</when>
+			
+			<otherwise>
+			<![CDATA[
+			date(od.regdate) >=date_format(now(),'%Y-%m-01') and date(od.regdate)<=last_day(now()) 
+			]]>
+
+			</otherwise>
+		</choose>
+		and od.odno>0 and od.del='N' and od.sno=#{sno};
+	</select>
 	
-	<select id="getList"
- 		resultType="org.oos.domain.OrderDetailVO">
-		select * from tbl_order_detail 
+	
+	<select id="getList" resultType="org.oos.domain.OrderDetailVO">
+		select * from tbl_order_detail
 		where odno > 0 and ono = #{ono} and del='N'
 		order by odno desc
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from tbl_order_detail 
+		select count(*) from
+		tbl_order_detail
 		where odno > 0 and ono = #{ono} and del='N'
 	</select>
 
 	<select id="get" resultType="org.oos.domain.OrderDetailVO">
-		select * from tbl_order_detail 
-		where odno = #{odno}
+		select * from tbl_order_detail
+		where
+		odno = #{odno}
 	</select>
 
 	<insert id="insert">
-		insert into tbl_order_detail(ono, pno, qty, opno, pnum, address, addressDetail,sno) 
-		value(#{ono}, #{pno}, #{qty}, #{opno}, #{pnum}, #{address}, #{addressDetail},#{sno})
+		insert into tbl_order_detail(ono, pno, qty, opno,
+		pnum, address, addressDetail,sno)
+		value(#{ono}, #{pno}, #{qty},
+		#{opno}, #{pnum}, #{address},
+		#{addressDetail},#{sno})
 	</insert>
 
-	<!-- <update id="modify">
-		update tbl_order_detail
-		set qty = #{qty}, opno = #{opno}
-		where odno = #{odno}
-	</update>
-	 -->
-	
+	<!-- <update id="modify"> update tbl_order_detail set qty = #{qty}, opno 
+		= #{opno} where odno = #{odno} </update> -->
+
 	<update id="modify">
-		update tbl_order_detail 
-		set dno = #{dno} and detail_state = #{detail_state}
+		update tbl_order_detail
+		set dno = #{dno} and
+		detail_state = #{detail_state}
 		where odno = #{odno}
 	</update>
 
 	<update id="delete">
-		update tbl_order_detail set del = "Y" 
-		where odno = #{odno}
+		update tbl_order_detail set del = "Y"
+		where odno =
+		#{odno}
 	</update>
-	
-	<select id="orderList" parameterType="map" resultType="org.oos.domain.OrderDetailVO">
+
+	<select id="orderList" parameterType="map"
+		resultType="org.oos.domain.OrderDetailVO">
 		select * from tbl_order_detail
-		where odno > 0 and sno = #{sno} and del='N'
+		where odno > 0 and sno =
+		#{sno} and del='N'
 		order by odno desc
-		limit #{dto.cri.skip}, #{dto.cri.amount}
-	</select>	
-	
+		limit #{dto.cri.skip},
+		#{dto.cri.amount}
+	</select>
+
 	<update id="deleteAll">
-		update tbl_order_detail set del = "Y" 
-		where ono = #{ono}
+		update tbl_order_detail set del = "Y"
+		where ono =
+		#{ono}
 	</update>
-	
-	
+
+
 	<select id="snoCount" resultType="int">
-		select count(*) from tbl_order_detail
+		select count(*) from
+		tbl_order_detail
 		where odno > 0 and sno = #{sno} and del='N'
-	</select>	
-	
+	</select>
+
 </mapper>
