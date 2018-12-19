@@ -31,6 +31,7 @@ public class StoreServiceImpl implements StoreService {
 	@Setter(onMethod_=@Autowired)
 	private StoreImgMapper sImgMapper;
 	private ProductImgMapper pImgMapper;
+	
 	@Override
 	public List<StoreVO> getList(PageDTO dto) {
 		return mapper.getList2(dto);

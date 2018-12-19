@@ -21,11 +21,12 @@ public class CartServiceImpl implements CartService {
 	private CartMapper cartMapper;
 	@Setter(onMethod_=@Autowired)
 	private ProductMapper productMapper;
-	@Setter(onMethod_=@Autowired)
-	private ProductOptionMapper optMapper;
+/*	@Setter(onMethod_=@Autowired)
+	private ProductOptionMapper optMapper;*/
+/*	
 	@Setter(onMethod_=@Autowired)
 	private ProductImgMapper imgMapper;
-	
+	*/
 	@Override
     public List<CartVO> getList(Map<String, Object> map) {
 //        List<CartVO> list=cartMapper.getList(map);

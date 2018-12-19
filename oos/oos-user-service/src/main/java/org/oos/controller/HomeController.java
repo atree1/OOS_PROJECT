@@ -70,6 +70,7 @@ public class HomeController {
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		
+		model.addAttribute("bestP", productService.bestProductList());
 		model.addAttribute("product", productService.getList(map));
 	}
 	

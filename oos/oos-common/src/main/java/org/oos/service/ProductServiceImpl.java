@@ -111,7 +111,6 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		for (CategoryVO cate:vo.getCateList()) {
-			log.info("**********************");
 			cate.setPno(vo.getPno());
 			log.info("cate:"+cate);
 		
@@ -126,6 +125,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getTotal(Map<String, Object> map) {
 		return pMapper.count(map);
+	}
+
+	@Override
+	public List<ProductVO> bestProductList() {
+		return pMapper.bestProductList();
 	}
 
 }
