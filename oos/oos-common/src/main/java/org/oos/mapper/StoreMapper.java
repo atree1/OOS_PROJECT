@@ -1,6 +1,7 @@
 package org.oos.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;

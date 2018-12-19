@@ -192,10 +192,8 @@
 									</button>
 								</div>
 							</div>
-							<div th:if="${status == 'yes'}" class="inner_btn_zzim on"
-							style="display:inline-block; margin-right:10px; margin-bottom:8px;"></div>
-						
-							<div th:if="${status != 'yes'}" class="inner_btn_zzim" th:id="${store.sno}" 
+							
+							<div class="inner_btn_zzim" th:id="${store.sno}" 
 							style="display:inline-block; margin-right:10px; margin-bottom:8px;"></div>
 							<button class="btn_order" style="display: inline-block;">장바구니에 담기</button>
 						</div>
@@ -549,7 +547,6 @@
 					rno : modifyRno,
 					title:modifyTitle.val(),
 					content:modifyContent.val(),
-					score:modifyScore.val(),
 					kind:kindValue
 			};
 			
