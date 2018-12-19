@@ -132,19 +132,15 @@
 		$(document).ready(function() {
 			var listForm = $("#listForm");
 			var cri = [[${cri}]];
-			var img = [[${img}]];
+			var product = [[${product}]];
 			var pageMaker = [[${pageMaker}]];
 			
 			(function() {
-				/* if( [[${product}]] != null){
-					var goodsImg=[[${product}]];
-					$.each(goodsImg, function(index, item){
-						var img = item.imgList[0];
-					}); 
-				} */
-				
-				$.each(img, function(index, item){
-					$("#img_"+item.pno).attr("src",item.img);
+			
+				$.each(product, function(index, item){
+					img = item.imgList[0];
+					var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+					$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
 				}); 
 				
 				$("#pageNum").val(pageMaker.cri.pageNum);

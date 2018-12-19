@@ -50,7 +50,8 @@ public class UploadController {
 		String str = sdf.format(date);
 		return str.replace("-", File.separator);
 	}
-	@GetMapping(value="/download",produces= {MediaType.APPLICATION_OCTET_STREAM_VALUE})
+	
+	/*@GetMapping(value="/download",produces= {MediaType.APPLICATION_OCTET_STREAM_VALUE})
 	@ResponseBody
 	public ResponseEntity<byte[]> download(@RequestHeader("User-Agent")String userAgent,String fileName){
 		
@@ -65,7 +66,7 @@ public class UploadController {
 		int under=total.indexOf("_");
 		String totalOrigin=total.substring(under+1);
 		try {
-			File target=new File("C:\\upload\\"+total);
+			File target=new File("\\\\HB03-14\\upload\\"+total);
 			
 			HttpHeaders header=new HttpHeaders();
 			String downloadName=null;
@@ -92,14 +93,14 @@ public class UploadController {
 			
 		}
 		return result;
-	}
+	}*/
 
-	@PostMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	/*@PostMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<ProductImgVO>> upload(MultipartFile[] uploadFile) {
 		
 		List<ProductImgVO> list = new ArrayList<>();
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "\\\\HB03-14\\upload\\";
 
 		String uploadFolderPath = getFolder();
 		// make folder --------
@@ -153,14 +154,15 @@ public class UploadController {
 		} // end for
 		return new ResponseEntity<>(list, HttpStatus.OK);
 		
-	}
+	}*/
+	
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
 
 		//log.info("fileName: " + fileName);
 
-		File file = new File("c:\\upload\\"+ fileName);
+		File file = new File("\\\\HB03-14\\upload\\"+ fileName);
 
 		//log.info("file: " + file);
 
@@ -177,7 +179,8 @@ public class UploadController {
 		}
 		return result;
 	}
-	@PostMapping("/deleteFile")
+	
+	/*@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName,String type){
 		File file;
@@ -197,5 +200,5 @@ public class UploadController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);
-		}
+		}*/
 }
