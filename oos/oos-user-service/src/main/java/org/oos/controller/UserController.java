@@ -210,6 +210,10 @@ public class UserController {
     
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        model.addAttribute("info", auth);
+    	
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
         model.addAttribute("detail", list);
     }
@@ -268,6 +272,7 @@ public class UserController {
     	
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
 	    
+    	
         Map<String, Object> map = new HashMap<String, Object>();
        
         map.put("mid",name);
@@ -315,14 +320,13 @@ public class UserController {
     
     @PostMapping("/modPw/{pw}")
     public ResponseEntity<String> modifyPw(@PathVariable("pw") String pw) {
-    	
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
     	
     	MemberVO vo = new MemberVO();
 	 	vo.setMid(name);
-	 	
-	 	String password = pwEncoder.encode(vo.getMpw());
+	 	String password = pwEncoder.encode(pw);
 	 	vo.setMpw(password);
+	 	
     	if(memberService.modifyPw(vo) == 1) {
     		return new ResponseEntity<String>("success",HttpStatus.OK);
         }
@@ -348,11 +352,11 @@ public class UserController {
 	    
         Map<String, Object> map = new HashMap<String, Object>();
         
-        map.put("criteria", cri);
         map.put("mid",name);
         
     	PageDTO pageDTO = new PageDTO(cri, cartService.count(map));
-        
+
+        map.put("dto",pageDTO);
         List<Integer> pageList = new ArrayList<>();
         
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {

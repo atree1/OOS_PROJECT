@@ -45,6 +45,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		
 		return list;
 	}
+	
+	@Override
+	public List<OrderDetailVO> getListByOno(Long ono) {
+		
+		return orderDetailMapper.getListByOno(ono);
+	}
 
 	@Override
 	public OrderDetailVO get(Long odno) {
@@ -95,6 +101,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	@Override
 	public int snoCount(Long sno) {
 		return orderDetailMapper.snoCount(sno);
+	}
+
+	@Override
+	public int getTotal(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return orderDetailMapper.total(map);
 	}
 	
 	

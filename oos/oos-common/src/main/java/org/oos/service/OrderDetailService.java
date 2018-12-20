@@ -19,7 +19,13 @@ public interface OrderDetailService {
 	
 	public int snoCount(Long sno);
 	
+	public int getTotal(Map<String, Object> map);
+	
+	
+	
 	public int insert(OrderDetailVO vo);
 	
 	public List<OrderDetailVO> orderList(Map<String, Object> map);
+	
+	public List<OrderDetailVO> getListByOno(Long ono);
 }

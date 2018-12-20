@@ -37,10 +37,10 @@ function myPageMove(num){
 		actionForm.attr("action","/user/mypage/modify").submit();
 	}else if(num == 2){
 		actionForm.attr("action","/user/mypage/orderList").submit();
-	}else if(num == 3){
+	}else if(num == 4){
 		actionForm.append("<input type='hidden' name='kind' value='q'>");
 		actionForm.attr("action","/user/mypage/qna").submit();
-	}else if(num == 4){
+	}else if(num == 3){
 		actionForm.append("<input type='hidden' name='kind' value='r'>")
 					.attr("action","/user/mypage/review").submit();
 	}

@@ -1,10 +1,14 @@
 package org.oos;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.oos.domain.CartVO;
 import org.oos.mapper.CartMapper;
+import org.oos.mapper.OrderDetailMapper;
 import org.oos.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +27,20 @@ public class CartTests {
 	private CartService service;
 	@Setter(onMethod_=@Autowired)
 	private CartMapper mapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private OrderDetailMapper omapper;
+	
+
+	@Test
+	public void total() {
+		Map<String, Object> map=new HashMap<>();
+		map.put("sno", 2L);
+		map.put("date", 3);
+		map.put("range", "week");
+		log.info(""+omapper.total(map));
+	}
+	
 	
 	@Test
 	public void insert() {

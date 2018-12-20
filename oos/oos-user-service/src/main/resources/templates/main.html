@@ -238,41 +238,34 @@
 			<div class="div_line_grey_2px"
 				style="margin-top: -8px; margin-bottom: 16px;"></div>
 		</div>
-		<div style="width: 1100px; margin: 0 auto;">
-			<ul id="goodsList"
-				style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
-				<ul class="goods_ul" th:each="arr :${product}">
-					<li th:class="|goodsContainer store_${arr.sno}|"
-						style="margin-right: 5px;" th:id="|link_${arr.pno}|">
-						<div class="goodsImg"
-							style="position: relative; width: 270px; height: 353px;">
-							<img th:id="|img_${arr.pno}|" class="productImg"
-								style="width: 100%; display: block;">
-						</div>
-						<div class="goodsInfo" style="position: relative;">
-							<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
+		<div style="width: 1100px; margin: 0 auto; position: relative;">
+				<ul id="goodsList"
+					style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
+					<ul class="goods_ul" th:each="arr :${product}">
+						<li th:class="|goodsContainer store_${arr.sno}|"
+							style="margin-right: 5px;" th:id="|link_${arr.pno}|">
+							<div class="goodsImg"
+								style="position: relative; width: 270px; height: 353px;">
+								<img th:id="|img_${arr.pno}|" class="productImg"
+									style="width: 100%;position:absolute;
+									overflow:hidden;
+									top:0;bottom:50px;margin:auto;">
+							</div>
+							<div class="goodsInfo" style="position: relative;">
+								<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
 							<div class="storeLocation"
-								style="font-size: 13px; color: #9b9b9b; margin-top: 4px;"
-								th:text="${arr.sname}">SNAME</div>
-						</div>
-						<div style="margin: 0 15px;">
-							<span style="float: left; font-size: 12px; margin-top: 7px;"></span><span
-								style="float: right; font-size: 20px; font-weight: bold; margin-top: 7px;"
-								th:text="${arr.price}">PRICE</span>
-						</div> <span class="mouseOverBorder"></span>
-					</li>
+									style="font-size: 13px; color: #9b9b9b; margin-top: 4px;"
+									th:text="${arr.sname}">SNAME</div> 
+							</div>
+							<div style="margin: 0 15px;">
+								<span
+									style="float: right; font-size: 20px; font-weight: bold; margin-top: 7px;"
+									th:text="${arr.price}">PRICE</span>
+							</div> <span class="mouseOverBorder"></span>
+						</li>
+					</ul>
 				</ul>
-				<div class="notListMsg"></div>
-				<table id="goList" class="basketGoodsTableEnd" cellspacing="0"
-					style="width: 100%; border: 1px solid #e5e5e5; margin-top: 20px; cursor: pointer">
-					<tr class="paymentOption height50 payMethodTR">
-						<td id="storePayMethod_0" class=" storeLengthCount" colspan="5"
-							style="border-spacing: 10px; padding: 0px 20px; text-align: center; font-size: 16px;">더보기</td>
-					</tr>
-				</table>
-			</ul>
-
-		</div>
+			</div>
 		<form id="mainForm"></form>
 	</div>
 </div>

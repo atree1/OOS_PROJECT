@@ -211,7 +211,6 @@
 		$.each(cartList, function(index, item){
 			
 			var img = item.product.imgList[0];
-			console.log(item);
 			var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
 			
 			var imgDiv= $('.img_'+item.cno);
@@ -260,6 +259,9 @@
 		 $.ajax({
             type:"post",
             url: "/cart/delete/"+str,
+            beforeSend: function(xhr) {
+	            xhr.setRequestHeader(header, token);
+	        },
             success:function(result, status, xhr){
 
             	alert("삭제되었습니다");

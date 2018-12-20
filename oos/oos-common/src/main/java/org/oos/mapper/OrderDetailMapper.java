@@ -8,7 +8,11 @@ import org.oos.domain.OrderDetailVO;
 public interface OrderDetailMapper {
 
 	public List<OrderDetailVO> getList(Long ono);
+	
 	public OrderDetailVO getByOdno(Long odno);
+	
+	public List<OrderDetailVO> getListByOno(Long ono);
+	
 	public OrderDetailVO get(Long odno);
 	
 	public int modify(OrderDetailVO vo);
@@ -17,10 +21,13 @@ public interface OrderDetailMapper {
 	
 	public int snoCount(Long sno);
 	
+	public int total(Map<String, Object> map);
+	
 	public int insert(OrderDetailVO vo);
 
 	public List<OrderDetailVO> orderList(Map<String, Object> map);
 
 	public int deleteAll(Long ono);
-
+	
+	
 }

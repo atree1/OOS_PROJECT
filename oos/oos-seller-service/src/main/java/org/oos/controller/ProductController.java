@@ -72,6 +72,7 @@ public class ProductController {
 	@GetMapping({"/read","/modify"})
 	public void productGet(Criteria cri,Long pno, Long sno,Long opno, Model model) {
 
+		
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri,productService.getTotal(map));
 		

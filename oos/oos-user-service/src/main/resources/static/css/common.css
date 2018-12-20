@@ -2546,8 +2546,8 @@ input[type="radio"]:checked+label:before {
 }
 
 .inner_main_img {
-	width: 540px;
-	height: 720px;
+	max-width: 540px;
+	max-height: 720px;
 	float: left;
 	position: relative;
 }

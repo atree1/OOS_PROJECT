@@ -30,11 +30,12 @@
 	<div class="innerDetail_goods_info" style="padding-bottom: 50px;">
 		<div class="img_area"
 			style="border-right: 1px solid rgb(221, 221, 221);">
-			<div class="gthumbs" style="height: 720px; overflow-y: auto;">
+			<div class="gthumbs" style=" height:720px;overflow-y: auto;">
 
 			</div>
-			<div style="line-height: 200px">
-				<img width="540" style="vertical-align: middle;"
+			<div style="position: relative; width: 540px; height:720px;line-height:200px;">
+				<img style="width:100%;position:absolute;
+									top:0;bottom:0;margin:auto;"
 					class="inner_main_img" src="">
 			</div>
 			<div id="innerDetail_goods_detail" class="goods_detail">
@@ -95,7 +96,6 @@
 						style="position: relative;">
 
 					</ul>
-					페이지
 					<div class="replyPageFooter" style="text-align: center;"></div>
 
 				</div>
@@ -217,7 +217,7 @@
 </div>
 
 <th:block layout:fragment="script">
-	<script th:inline="javascript" th:src="@{../js/reply.js}"></script>
+	<script th:inline="javascript" th:src="@{/js/reply.js}"></script>
 	<script th:inline="javascript">
 	$(document).ready(function() {
 		var storeDetailForm = $("#storeDetailForm");
@@ -275,19 +275,20 @@
 		
 		function setImg(){
 			
-			/* var imgList=[[${product.imgList}]];
+			 var imgList=[[${product.imgList}]];
+			 console.log(imgList);
 			var str="";
-			var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname); */
-			/* $(".inner_main_img").attr("src","/display?fileName="+fileCallPath); */
+			var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname);
+			 $(".inner_main_img").attr("src","/display?fileName="+fileCallPath); 
 			
 		
-			/* $.each(img, function(index, item){
+			/*  $.each(img, function(index, item){
 				if(item.pno == product.pno){
 					$(".inner_main_img").attr("src",item.img);
 				} 
-			}); 
+			});  */
 			
-			for(img of imgList){
+			/* for(img of imgList){
 				
 				var thumbFileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
 
@@ -296,9 +297,9 @@
 						thumbFileCallPath+"' style='display:block;'>"
 				str += "<span class='img_edge'></span></div>"
 		
-			} */
+			}
 			
-			/* $(".gthumbs").html(str); */
+			$(".gthumbs").html(str); */
 		}
 		
 		//장바구니

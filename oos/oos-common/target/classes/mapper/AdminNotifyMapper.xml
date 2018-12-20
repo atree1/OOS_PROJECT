@@ -3,44 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="org.oos.mapper.NotifyMapper">
+  <mapper namespace="org.oos.mapper.AdminNotifyMapper">
   
-  <select id="getList" parameterType="map" resultType="org.oos.domain.NotifyVO">
-  select * from tbl_seller_notify
-  where sbno > 0 and sid = #{sid} and del = 'n'
-  order by sbno desc
+  <select id="getList" parameterType="map" resultType="org.oos.domain.AdminNotifyVO">
+  select * from tbl_admin_notify
+  where bno > 0 and sid = #{sid} and del = 'n'
+  order by bno desc
   limit #{dto.cri.skip}, #{dto.cri.amount}
   </select>
   
   <delete id="delete">
-  update tbl_seller_notify
+  update tbl_admin_notify
   set del='y'
-  where sbno = #{sbno}
+  where bno = #{bno}
   </delete>
   
   <update id="modify">
-  update tbl_seller_notify
+  update tbl_admin_notify
   set content = #{content}, title = #{title}, regdate=now(), updatedate = now() 
-  where sbno = #{sbno}	
+  where bno = #{bno}	
   </update>
   
   <insert id="insert">
-  insert into tbl_seller_notify(title, content, sid)
+  insert into tbl_admin_notify(title, content, sid)
 		values(#{title},#{content},#{sid})
   </insert>
   
-  <select id="get" resultType="org.oos.domain.NotifyVO">
-  		select * from tbl_seller_notify
-		where sbno = #{sbno}
+  <select id="get" resultType="org.oos.domain.AdminNotifyVO">
+  		select * from tbl_admin_notify
+		where bno = #{bno}
   </select>
   
   <select id="sidCount" resultType="int">
-  		select count(*) from tbl_seller_notify
-		where sbno > 0 and sid = #{sid} and del = 'N'
+  		select count(*) from tbl_admin_notify
+		where bno > 0 and sid = #{sid} and del = 'N'
   </select>
   
   <select id="count" resultType="int">
-		select count(*) from tbl_seller_notify
+		select count(*) from tbl_admin_notify
 		where sno > 0 and sno = #{sno} and del='N'
 </select>	
   

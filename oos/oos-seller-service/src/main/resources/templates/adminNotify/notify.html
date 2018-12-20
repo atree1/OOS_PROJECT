@@ -6,7 +6,7 @@
 <div class="container" style="margin-top: 20px;"
 	layout:fragment="container">
 
-	<h1 align='center'>스토어 공지</h1>
+	<h1 align='center'>최고관리자 공지</h1>
 	<br />
 
 	<div id="dataTables-example_wrapper"
@@ -14,7 +14,7 @@
 		style="align-item: left;float:right">
 		
 			<br/>
-			<form role="role" action="/notify/sellerRegister">
+			<form role="role" action="/adminNotify/register">
 				<input type='hidden' name='sid' th:value='${seller.sid}'/>
 				<button data-oper='remove' id="remove-btn"
 					class="form-control input-sm" placeholder=""
@@ -63,9 +63,9 @@
 
 					<tr class="gradeA odd" role="row" th:each=arr:${notify}>
 						<td class="sorting"><input type="checkbox" name="checkbox"
-							th:value="${arr.sbno}"></td>
-						<td class="sbno" th:text=${arr.sbno}></td>
-						<td><a class="move" th:href="${arr.sbno}" th:text=${arr.title}></a></td>
+							th:value="${arr.bno}"></td>
+						<td class="bno" th:text=${arr.bno}></td>
+						<td><a class="move" th:href="${arr.bno}" th:text=${arr.title}></a></td>
 						<td class="ragdate"
 							th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 						<td class="updatedate"
@@ -128,8 +128,8 @@ $(document).ready(function(){
 			
 			console.log("click...");
 			e.preventDefault();
-			notifyForm.append("<input type='hidden' name='sbno' value='"+$(this).attr("href")+"' >");
-			notifyForm.attr("action","/notify/sellerGet");
+			notifyForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"' >");
+			notifyForm.attr("action","/adminNotify/get");
 			notifyForm.submit();
 		});
 	
@@ -154,9 +154,9 @@ $(document).ready(function(){
 				
 				$("input[name='checkbox']:checked").each(function(index, item){
 					
-					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");
+					notifyForm.append("<input type='hidden' name='bno' value='"+item.value+"' >");
 				});
-				notifyForm.attr("method", "post").attr("action","/notify/remove").submit(); 
+				notifyForm.attr("method", "post").attr("action","/adminNotify/remove").submit(); 
 			}else{ 
 			    return;
 			}

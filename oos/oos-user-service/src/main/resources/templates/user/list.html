@@ -27,7 +27,9 @@
 							<div class="goodsImg"
 								style="position: relative; width: 270px; height: 353px;">
 								<img th:id="|img_${arr.pno}|" class="productImg"
-									style="width: 100%; display: block;">
+									style="width: 100%;position:absolute;
+									overflow:hidden;
+									top:0;bottom:50px;margin:auto;">
 							</div>
 							<div class="goodsInfo" style="position: relative;">
 								<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
