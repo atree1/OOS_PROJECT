@@ -11,7 +11,6 @@
 		<result column="qty" property="qty" />
 	</resultMap>
 
-<<<<<<< HEAD
 <resultMap type="org.oos.domain.ProductImgVO" id="Img">
 	<result column="uuid" property="uuid"/>
 	<result column="pno" property="pno"/>
@@ -50,54 +49,13 @@
 	<association property="img" resultMap="Img"/>
 </resultMap>
 
-<select id="getByOdno" resultMap="OrderDetail">
-	select * from tbl_order_detail od left join tbl_product p 
-	on od.pno =p.pno left join tbl_product_option o on od.pno=o.pno
-	where od.odno=#{odno}
-</select>
-=======
-	<resultMap type="org.oos.domain.ProductVO" id="Product">
-		<result column="pno" property="pno" />
-		<result column="pname" property="pname" />
-		<result column="price" property="price" />
-		<result column="sno" property="sno" />
-		<result column="regdate" property="regdate" />
-		<result column="updatedate" property="updatedate" />
-		<result column="del" property="del" />
-		<result column="questionreplycnt" property="questionReplyCnt" />
-		<result column="reviewreplycnt" property="reviewReplyCnt" />
-		<result column="content" property="content" />
-	</resultMap>
-	<resultMap type="org.oos.domain.OrderDetailVO"
-		id="OrderDetail">
-		<result column="odno" property="odno" />
-		<result column="ono" property="ono" />
-		<result column="pno" property="pno" />
-		<result column="qty" property="qty" />
-		<result column="opno" property="opno" />
-		<result column="pnum" property="pnum" />
-		<result column="address" property="address" />
-		<result column="addressDetail" property="addressDetail" />
-		<result column="dno" property="dno" />
-		<result column="del" property="del" />
-		<result column="sno" property="sno" />
-		<result column="detail_state" property="detail_state" />
-		<association property="option" resultMap="Option" />
-		<association property="product" resultMap="Product" />
-	</resultMap>
 	<select id="getByOdno" resultMap="OrderDetail">
-		select
-		*
-		from
-		tbl_order_detail od
-		left join tbl_product p
-		on od.pno =p.pno left join tbl_product_option o
-		on od.pno=o.pno
-		where
-		od.odno=#{odno}
+		select * from tbl_order_detail od left join tbl_product p 
+		on od.pno =p.pno left join tbl_product_option o on od.pno=o.pno
+		where od.odno=#{odno}
 	</select>
-	<select id="total" parameterType="map" resultType="Integer">
 
+	<select id="total" parameterType="map" resultType="Integer">
 		select
 		sum(od.qty*p.price)
 		from
@@ -105,30 +63,22 @@
 		od.pno=p.pno
 		where
 		<choose>
-
 			<when test=" range == 'day'">
-
 				date(od.regdate) =date(now())
-
 			</when>
 			<when test="range == 'week'">
 				<![CDATA[
 				date(od.regdate) >=date(subdate(now(),interval 7 day )) and date(od.regdate)<= date(now()) 
-				
 				]]>
 			</when>
-			
 			<otherwise>
 			<![CDATA[
 			date(od.regdate) >=date_format(now(),'%Y-%m-01') and date(od.regdate)<=last_day(now()) 
 			]]>
-
 			</otherwise>
 		</choose>
 		and od.odno>0 and od.del='N' and od.sno=#{sno};
 	</select>
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-	
 	
 	<select id="getList" resultType="org.oos.domain.OrderDetailVO">
 		select * from tbl_order_detail
