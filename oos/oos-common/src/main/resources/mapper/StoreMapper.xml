@@ -74,6 +74,9 @@
 		left join (select * from tbl_store_img) d
 		on d.sno = a.sno
 		where a.sno > 0
+		<if test="cri.category != null">
+			and a.sname like concat("%", #{cri.keyword} ,"%")
+		</if>
 		order by c.likeNum desc
 		limit #{cri.skip}, #{cri.amount}
 	</select>
