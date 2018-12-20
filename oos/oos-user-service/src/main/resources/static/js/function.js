@@ -66,8 +66,6 @@ $(".selectSearchLi").click(function(){
 });
 
 function goShoppingBasket(){
-
-	
 	$("#amount").val("6");
 	actionForm.attr("action", "/user/cart").submit();
 }
