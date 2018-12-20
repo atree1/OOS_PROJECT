@@ -11,6 +11,7 @@ public class ReplyVO {
 	private Long rno;
 	private Long pno;
 	private String mid;
+	private String sid;
 	private String title;
 	private String content;
 	private String state;
