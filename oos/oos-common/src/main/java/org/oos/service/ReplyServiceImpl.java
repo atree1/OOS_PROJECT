@@ -103,4 +103,16 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getRemove(rno);
 	}
 
+	@Override
+	public List<ReplyVO> sellerReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.sellerReply(map);
+	}
+
+	@Override
+	public int sellerInsert(ReplyVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.sellerInsert(vo);
+	}
+
 }
