@@ -314,8 +314,8 @@ public class UserController {
     @GetMapping("/mypage/modify")
     public void get(Model model) {
     	String name = SecurityContextHolder.getContext().getAuthentication().getName();
-    	
-        model.addAttribute("member",memberService.get(name));
+    	MemberVO member = memberService.get(name);
+        model.addAttribute("member",member);
     }
     
     @PostMapping("/modPw/{pw}")
