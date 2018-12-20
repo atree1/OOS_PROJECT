@@ -56,8 +56,7 @@ public class OrderController {
 		map.put("mid",name);
 		
 		List<CartVO> cartList = cartService.getList(map);
-		List<OrderDetailVO> list = orderDetailService.getList(ono);
-		log.info(cartList + "");
+		List<OrderDetailVO> list = orderDetailService.getListByOno(ono);
 		list.forEach(vo -> {
 			
 			cartList.forEach(cart -> {
@@ -67,7 +66,7 @@ public class OrderController {
 			});
 			
 		});
-		
+		log.info(list+"");
 		model.addAttribute("order", list);
 	}
 	

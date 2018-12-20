@@ -45,6 +45,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		
 		return list;
 	}
+	
+	@Override
+	public List<OrderDetailVO> getListByOno(Long ono) {
+		
+		return orderDetailMapper.getListByOno(ono);
+	}
 
 	@Override
 	public OrderDetailVO get(Long odno) {

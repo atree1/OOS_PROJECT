@@ -21,5 +21,6 @@ public class OrderDetailVO {
 	
 	private ProductVO product;
 	private ProductOptionVO option;
+	private ProductImgVO img;
 	private OrderVO order;
 }

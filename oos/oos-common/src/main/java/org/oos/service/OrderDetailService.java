@@ -22,4 +22,6 @@ public interface OrderDetailService {
 	public int insert(OrderDetailVO vo);
 	
 	public List<OrderDetailVO> orderList(Map<String, Object> map);
+	
+	public List<OrderDetailVO> getListByOno(Long ono);
 }
