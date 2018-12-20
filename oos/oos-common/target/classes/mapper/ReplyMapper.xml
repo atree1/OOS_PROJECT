@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.ReplyMapper">
+
 	<resultMap type="org.oos.domain.StoreVO" id="Store">
 		<result column="sno" property="sno" />
 		<result column="sid" property="sid" />
@@ -152,6 +153,4 @@
 		kind)
 		values(#{pno},#{sid},#{title},#{content},#{parent},#{kind})
 	</insert>
-	
-
 </mapper>
