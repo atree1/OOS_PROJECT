@@ -92,7 +92,7 @@
 												</table>
 											</td>
 											<td class="basketGoodsSumPrice">
-												<span th:class="|success price_${arr.option.pno}|" 
+												<span th:class="|success price_${arr.pno}|" 
 												th:data-price="${arr.product.price*arr.qty}" th:text="${arr.product.price*arr.qty}">PRICE
 												</span><strong>원</strong>
 											</td>
@@ -111,9 +111,9 @@
 										
 										<div class="payMethodInputArea" style="height: 54px;">
 											<div class="orderInfo"><strong  th:text="${member.mname}">NAME</strong></div>
-											<div class="orderInfo" th:text="${member.address}">Address</div>
-											<div class="orderInfo" th:text="${member.addressdetail}">AddressDetail</div>
-											<div class="orderInfo" th:text="${member.pnum}" style="color:#9b9b9b">전화번호</div>
+											<div class="orderInfo" th:text="${order[0].address}">Address</div>
+											<div class="orderInfo" th:text="${order[0].addressDetail}">AddressDetail</div>
+											<div class="orderInfo" th:text="${order[0].pnum}" style="color:#9b9b9b">전화번호</div>
 										
 										</div>
 										

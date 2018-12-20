@@ -67,7 +67,7 @@
 						<li th:each="arr : ${bestP}">
 							<a class="showcase_con"> 
 								<span class="showcase_img">
-									<img class="item_img lazy" th:class="|thumb_${arr.pno}|" style="display: inline;"> 
+									<img class="item_img lazy" th:id="|bestP_${arr.pno}|" style="display: inline;"> 
 									<span class="num1">1</span>
 								</span> 
 								<span class="showcace_info"> 
@@ -277,13 +277,20 @@
 		var mainForm = $("#mainForm");
 	
 		(function(){
-			var img =  [[${bestP}]];
+			var bestP =  [[${bestP}]];
 			var product = [[${product}]];
 			
 			$.each(product, function(index, item){
-				img = item.imgList[0];
+				var img = item.imgList[0];
 				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
 				$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
+			}); 
+			
+			$.each(bestP, function(index, item){
+				console.log(item);
+				var img = item.imgList[0];
+				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+				$("#bestP_"+item.pno).attr("src","/display?fileName="+fileCallPath);
 			}); 
 			
 			

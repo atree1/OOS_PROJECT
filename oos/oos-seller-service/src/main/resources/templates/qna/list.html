@@ -5,7 +5,50 @@
 
 <div class="container" style="margin-top: 20px;"
 	layout:fragment="container">
+<style>
+@media (min-width: 768px){
+	.modal {
+	  margin:0 0 0 250px;
+	}
+}
 
+.modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  right:100px;
+  border: 1px solid #888;
+  width: 700px; /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 	<h1 align='center'>상품문의</h1>
 	<br />
 
@@ -28,7 +71,7 @@
  						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button>
 
 	</div> -->
-
+<div id="page-wrapper">
 	<div class="row">
 		<div class="col-sm-12" align="center">
 			<table width="100%"
@@ -94,9 +137,6 @@
 				</tbody>
 			</table>
 		</div>
-
-
-
 	</div>
 
 	<div class="row">
@@ -121,44 +161,7 @@
 		</div>
 
 	</div>
-	<style>
-	.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-	</style>
+	
 	<button id="myBtn">Open Modal</button>
 
 <!-- The Modal -->
@@ -172,6 +175,8 @@
   
 
 </div>
+</div>	
+
 
 	<form id="replyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
@@ -218,29 +223,20 @@
 	<script th:inline="javascript">
 
 $(document).ready(function(){
-	// Get the modal
-	var modal = document.getElementById('myModal');
 
-	// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
-
-	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
 
-	// When the user clicks on the button, open the modal 
-	btn.onclick = function() {
-	  modal.style.display = "block";
-	}
+	$("#myBtn").click(function(){
+		 $("#myModal").attr("style","display:block");
+	});
 
-	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
-	  modal.style.display = "none";
+	 $("#myModal").attr("style","display:none");
 	}
 
-	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 	  if (event.target == modal) {
-	    modal.style.display = "none";
+		 $("#myModal").attr("style","display:none");
 	  }
 	}
 		var replyForm = $("#replyForm");
