@@ -163,15 +163,18 @@
 				$("#pageNum").val($(this).attr("id").substring(5));
 				storeForm.submit();
 			});
-			
-			popupOpen();
-			function popupOpen(){
+			console.log(pageMaker);
+			(function() {
+				if(pageMaker.cri.pageNum!=1){
+					
+					return;
+				}
+				var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+							
+				var sid = [[${store.owner}]];
 				
-				var popUrl ="http://localhost:8081/notify/sellerGet?amount=12&pageNum=1&sid=seller1&sno=57";
-				var popOption = "width=400, height=300, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
-				window.open(popUrl,"",popOption);
-			
-			}	
+				window.open("/store/popupList?sid="+sid, "", popOption);
+			})();
 			
 		});
 	</script>

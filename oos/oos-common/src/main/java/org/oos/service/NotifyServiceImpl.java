@@ -69,5 +69,17 @@ public class NotifyServiceImpl implements NotifyService{
 		return mapper.popupList(map);
 	}
 
+	@Override
+	public NotifyVO getPopup(Long sbno) {
+		// TODO Auto-generated method stub
+		return mapper.getPopup(sbno);
+	}
+
+	@Override
+	public int popupCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.popupCount(map);
+	}
+
 	
 }
