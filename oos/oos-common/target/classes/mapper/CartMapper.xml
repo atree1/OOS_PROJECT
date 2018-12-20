@@ -37,17 +37,18 @@
 		<result column="opno" property="opno" />
 		<result column="sno" property="sno" />
 		<collection property="product" resultMap="Product" />
-			<collection property="opt" resultMap="Option"/>
+		<collection property="opt" resultMap="Option"/>
 	</resultMap>
-	
+<!-- 	
 	<select id="getList" parameterType="map"
 		resultType="org.oos.domain.CartVO">
 		select * from tbl_cart
 		where cno > 0 and mid = #{mid}
-		order
-		by cno desc
-		limit #{criteria.skip}, #{criteria.amount}
-	</select>
+		order by cno desc
+		<if test="cri != null ">
+			limit #{cri.skip}, #{cri.amount}
+		</if>
+	</select> -->
 	
 	<select id="getListByMid" parameterType="map" resultMap="Cart">
 		select i.pno, a.cno, a.sno, a.mid, a.qty,a.price, a.opno, 
@@ -59,17 +60,16 @@
 		on(a.pno = i.pno)
 		where uuid != ''
 		group by i.pno
-		limit #{dto.cri.skip}, #{dto.cri.amount}
+		<if test="dto != null ">
+			limit #{dto.cri.skip}, #{dto.cri.amount}
+		</if>
 	</select>
+	
 	<select id="getByCno" resultMap="Cart">
-	select 
-		* 
-	from 
+	select * from 
 		tbl_cart c left join tbl_product_option o on c.pno=o.pno
  		left join tbl_product p on c.pno=p.pno
- 	where 
- 		cno = #{cno}
- 
+ 	where cno = #{cno}
  </select>
 	<select id="get" resultType="org.oos.domain.CartVO">
 		select * from tbl_cart

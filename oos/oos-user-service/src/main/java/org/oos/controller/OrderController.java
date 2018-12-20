@@ -52,15 +52,12 @@ public class OrderController {
 	public void successGET(Long ono, Model model) {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
-		Criteria cri=new Criteria();
-		cri.setAmount(1000000);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("criteria", cri);
 		map.put("mid",name);
 		
 		List<CartVO> cartList = cartService.getList(map);
 		List<OrderDetailVO> list = orderDetailService.getList(ono);
-		
+		log.info(cartList + "");
 		list.forEach(vo -> {
 			
 			cartList.forEach(cart -> {
