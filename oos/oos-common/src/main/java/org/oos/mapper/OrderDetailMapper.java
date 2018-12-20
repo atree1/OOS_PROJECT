@@ -22,12 +22,15 @@ public interface OrderDetailMapper {
 	public int snoCount(Long sno);
 	
 	public int total(Map<String, Object> map);
+
+	public int stateCount(Map<String, Object> map);
 	
 	public int insert(OrderDetailVO vo);
 
 	public List<OrderDetailVO> orderList(Map<String, Object> map);
 
 	public int deleteAll(Long ono);
+	
 	
 	
 }

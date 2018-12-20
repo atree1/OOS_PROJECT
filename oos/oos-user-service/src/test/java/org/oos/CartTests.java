@@ -36,7 +36,7 @@ public class CartTests {
 	public void total() {
 		Map<String, Object> map=new HashMap<>();
 		map.put("sno", 2L);
-		map.put("date", 3);
+		//map.put("date", 3);
 		map.put("range", "week");
 		log.info(""+omapper.total(map));
 	}
