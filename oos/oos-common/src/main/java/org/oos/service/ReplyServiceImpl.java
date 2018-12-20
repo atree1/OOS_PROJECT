@@ -82,13 +82,31 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	
 	@Override
-	public List<ReplyVO> getDetailList(Map<String, Object> map) {
-		return mapper.depthGetList(map);
+	public List<ReplyVO> getStoreReply(Map<String, Object> map) {
+		return mapper.getStoreReply(map);
 	}
 
 	@Override
 	public int myOrderCount(Map<String, Object> map) {
 		return mapper.myOrderCount(map);
+	}
+
+	@Override
+	public List<ReplyVO> getDetailList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.depthGetList(map);
+	}
+
+	@Override
+	public int getRemove(Long rno) {
+		// TODO Auto-generated method stub
+		return mapper.getRemove(rno);
+	}
+
+	@Override
+	public int getNewReplyCnt(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.countNewReply(map);
 	}
 
 }

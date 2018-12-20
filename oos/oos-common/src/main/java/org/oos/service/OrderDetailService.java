@@ -20,7 +20,7 @@ public interface OrderDetailService {
 	public int snoCount(Long sno);
 	
 	public int getTotal(Map<String, Object> map);
-	
+	public int getStateCount(Map<String, Object> map);
 	
 	
 	public int insert(OrderDetailVO vo);

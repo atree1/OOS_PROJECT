@@ -10,10 +10,13 @@ import org.oos.domain.PageDTO;
 import org.oos.domain.ReplyVO;
 import org.oos.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -27,14 +30,16 @@ public class QnaController {
 	private ReplyService replyService;
 	
 	@GetMapping("/list")
-	public void getList(Model model,String kind, Criteria cri) {
+	public void getList(Model model,String kind, Criteria cri, int sno) {
 		
 		Map<String,Object> map  = new HashMap<String, Object>();
 		map.put("kind", kind);
+		map.put("sno", sno);
 		PageDTO pageDTO = new PageDTO(cri, replyService.count(map));
 		map.put("dto", pageDTO);
 		
-		List<ReplyVO> reply = replyService.getList(map);
+		List<ReplyVO> reply = replyService.getStoreReply(map);
+		
 		model.addAttribute("replyList", reply);
 		log.info(reply+"");
 		List<Integer> pageList = new ArrayList<>();
@@ -47,6 +52,31 @@ public class QnaController {
 		model.addAttribute("pageMaker", pageDTO);
 		
 	}
+	
+	@PostMapping("/list")
+	public String remove(Long rno, RedirectAttributes rttr) {
+		
+		
+    		if(replyService.getRemove(rno) == 1) {
+                rttr.addFlashAttribute("result", "success");
+            }
+    	
+        
+        return "redirect:/qna/list?kind=q&sno=1";
+		
+	}
+	
+	//팝업창화면
+	@GetMapping("/qnaDetail")
+	public void qnaDetail(long pno, String kind, Model model) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+  
+		
+		map.put("pno", pno);
+		map.put("kind", kind);
+		model.addAttribute("replyList", replyService.getDetailList(map));
+}
 }
 
 

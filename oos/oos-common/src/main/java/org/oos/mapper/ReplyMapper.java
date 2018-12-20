@@ -17,7 +17,9 @@ public interface ReplyMapper {
 	
 	public List<ReplyVO> getList(Map<String, Object> map);
 	
-	public List<ReplyVO> depthGetList(Map<String, Object> map);
+	public List<ReplyVO> getStoreReply(Map<String, Object> map);
+	
+	public int countNewReply(Map<String, Object> map);
 	
 	public int depthInsert(ReplyVO vo);
 	
@@ -28,6 +30,10 @@ public interface ReplyMapper {
 	public int parentCount(Map<String, Object> map);
 	
 	public double scoreAverage(Map<String, Object> map);
+	
+	public List<ReplyVO> depthGetList(Map<String, Object> map);
+	
+	public int getRemove(Long rno);
 	
 	
 }

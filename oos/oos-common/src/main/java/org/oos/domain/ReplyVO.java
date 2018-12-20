@@ -22,4 +22,6 @@ public class ReplyVO {
 	private Long parent;
 	private int depth;
 	private double score;
+	
+	private StoreVO store;
 }
