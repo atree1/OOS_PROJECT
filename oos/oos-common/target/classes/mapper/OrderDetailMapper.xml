@@ -58,10 +58,8 @@
 		od.odno=#{odno}
 	</select>
 	<select id="stateCount" resultType="Integer">
-		select
-			count(*)
-		from
-			tbl_order_detail
+		select count(*)
+		from tbl_order_detail
 		where
 		<choose>
 			<when test=" state == 'ready'">
@@ -74,10 +72,7 @@
 			detail_state='배송완료' and
 			</when>
 		</choose>
-			odno>0 and del='N' and sno=1
-		
-		;
-
+			odno>0 and del='N' and sno=#{sno}
 	</select>
 	<select id="total" parameterType="map" resultType="Integer">
 		select
