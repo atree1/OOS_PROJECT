@@ -20,8 +20,6 @@
 
 					<div style="border-bottom: 4px solid #e5e5e5; width: 760px;"></div>
 						<div th:each="arr: ${orderList}">
-							
-			
 							 <table cellspacing="0" class="goods basketGoodsTableMiddle"
 								storeindex="0" storesid="4488" style="width: 760px;">
 								<tbody>
@@ -31,7 +29,7 @@
 												<input type="checkbox"></label>
 											</div>
 										</td>
-										<td class="height90 borderBottom " colspan="4"
+										 <td class="height90 borderBottom " colspan="4"
 											style="text-align: left; width: 150px;">
 											<div class="shoppingGoodsThumbnail">
 												<img th:class="|thumb_${arr.pno}|"
@@ -47,7 +45,7 @@
 												 <div class="basketStoreInfo"
 													style="font-size: 15px; margin-top: 6px;"
 													th:text="|사이즈 / ${arr.option.size}|">SIZE</div>
-											</div>
+											</div> 
 										</td>
 										<td class="borderRight" colspan="5"
 											style="border-spacing: 0px;">
@@ -246,7 +244,6 @@
 		var tel = member.pnum;
 		var totalCount = $(".optionPrice").data("price");
 		var sum = 0;
-		console.log(member);
 		(function(){
 			
 			getTotalSum();
@@ -260,14 +257,15 @@
 					}
 					
 				}));
-				/* 
+				 
 				var img =  item.product.imgList[0];
+				
 				var fileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
 				
 				$.each($('.thumb_'+ item.pno),function(){
 					$(this).attr("src","/display?fileName="+fileCallPath); 
 				});
-				 */
+				 
 				$("#sumText_"+item.pno).html(sum);
 				
 			});

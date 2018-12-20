@@ -50,7 +50,6 @@
 		  </div>
 		</div>
 
-
 		<div class="wishlistArea"
 			style="position: relative; margin-top: -315px; left: 225px; width: 800px; margin-bottom: 68px; min-height: 600px;">
 			<div style="font-size: 20px; color: #202225; height: 40px;">My Q&A</div>
@@ -69,18 +68,23 @@
 						<th class="">문의번호</th>
 						<th class="">문의 유형</th>
 						<th class="">제목</th>
-						<th class="">작성자</th>
+						<th class="">답변여부</th>
 						<th class="">등록일</th>
 					</tr>
 				</thead>
 				<tbody id="questionlist_tbody">
-					<tr class="height100" th:each=arr:${reply}>
+					<tr class="height60" th:each=arr:${reply}>
 						<td class="" th:text="${arr.rno}"></td>
-						<td class="" th:text="${arr.kind}"></td>
+						<td class="">QNA</td>
 						<td class="replyTitle" th:id="|ono_${arr.rno}|" 
 						th:data-pno="|${arr.pno}|" th:data-mid="|${arr.mid}|"
 							th:text="${arr.title}"></td>
-						<td class="" th:text="${arr.mid}"></td>
+						<td class="" th:if="${arr.state == 'complete'}">
+							<span style="color:#0288d1">답변완료</span>
+						</td>
+						<td class="" th:if="${arr.state == 'default'}">
+							<span style="color:#ffa000">답변대기</span>
+						</td>
 						<td class="" th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 				</tbody>
 			</table>

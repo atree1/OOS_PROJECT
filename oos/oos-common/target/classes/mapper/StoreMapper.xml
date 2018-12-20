@@ -104,7 +104,7 @@
 			and sname like concat("%", #{keyword} ,"%")
 		</if>
 	</select>
-
+	
 	<select id="getName" resultType="string">
 		select sname
 		from tbl_store

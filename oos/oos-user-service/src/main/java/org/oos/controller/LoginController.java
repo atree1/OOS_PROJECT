@@ -1,7 +1,6 @@
 package org.oos.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -78,7 +77,10 @@ public class LoginController {
 	@PostMapping(value= {"/with"})
 	public String with(MemberVO member) {
 	
-		memberService.getAllList().forEach(vo -> {
+		org.oos.domain.Criteria cri = new org.oos.domain.Criteria();
+		cri.setAmount(100000);
+		
+		memberService.getList(cri).forEach(vo -> {
 			
 			if(member.getSns().equals("null") && vo.getMid().equals(member.getMid())) {
 				memberService.remove(member.getMid());

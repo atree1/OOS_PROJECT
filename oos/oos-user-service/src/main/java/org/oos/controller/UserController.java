@@ -23,6 +23,8 @@ import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,26 +71,36 @@ public class UserController {
 	@Autowired
 	MemberRepository repo;
 	
-    	
+
     @GetMapping("/mypage/reviewDetail")
-	public void reviewDetail(long pno, String mid, String kind, Model model) {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public void reviewDetail(long pno, String kind,Model model) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    
+		if(!name.equals("anonymousUser")) {
+    		map.put("mid", name);
+    	}
+		
 		map.put("pno", pno);
-		map.put("mid", mid);
 		map.put("kind", kind);
 		model.addAttribute("reviewDetail", replyService.getDetailList(map));
 	}
 	
 	@GetMapping("/mypage/review")
-	public void reviewList(Criteria cri, String mid, String kind, Model model) {
+	public void reviewList(Criteria cri, String kind, Model model) {
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("cri", cri);
-		map.put("mid", mid);
+		map.put("mid", name);
 		map.put("kind", kind);
 		
 		model.addAttribute("reply", replyService.getList(map));
+		
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
-		log.info(replyService.getList(map)+"");
+		
 		List<Integer> pageList = new ArrayList<>();
 	    
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
@@ -100,46 +112,67 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage/qnaDetail")
-	public void qnaDetail(long pno, String mid, String kind, Model model) {
+	public void qnaDetail(long pno, String kind, Model model) {
+		
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", pno);
-		map.put("mid", mid);
+		map.put("mid", name);
 		map.put("kind", kind);
 		model.addAttribute("qnaDetail", replyService.getDetailList(map));
 	}
 	
 	@GetMapping("/myStoreList")
-	public void myStore(String mid, Criteria cri, Model model) {
+	public void myStore(Criteria cri, Model model) {
+		
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	    
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<StoreVO> storeList = new ArrayList<>();
 		 
 		map.put("cri", cri);
-		map.put("mid", mid);
+		map.put("mid", name);
+		PageDTO pageDTO = new PageDTO(cri, memberService.getMyStoreCount(map));
+		
 		memberService.getMyStoreList(map).forEach(vo -> {
 			storeList.add(storeService.get(vo.getSno()));
 		});
-	
+		
+		List<Integer> pageList = new ArrayList<>();
+	    
+        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
+            pageList.add(i);
+        }
+        
+	    model.addAttribute("pageList", pageList);
+        model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("storeList", storeList);
 	}
 	
 	 @PostMapping("/myStoreList")
-	    public String myStoreRemove(String mid, Long sno) {
+    public String myStoreRemove(Long sno) {
 		 
-		 
+		 	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		    
 		 	StoreVO vo = new StoreVO();
-		 	vo.setMid(mid);
+		 	vo.setMid(name);
 		 	vo.setSno(sno);
 	    	storeService.delStoreLike(vo);
 	    	
-	    	return "redirect:/user/myStoreList?mid="+mid;
+	    	return "redirect:/user/myStoreList";
 	 }
 	 
-	@PostMapping("/zzim/{sno}/{mid}")
-    public ResponseEntity<String> insertZzim(@PathVariable("mid") String mid,@PathVariable("sno") Long sno) {
+	@PostMapping("/zzim/{sno}")
+    public ResponseEntity<String> insertZzim(@PathVariable("sno") Long sno) {	 
+		
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	    
 	 	StoreVO vo = new StoreVO();
-	 	vo.setMid(mid);
+	 	vo.setMid(name);
 	 	vo.setSno(sno);
-	 	
+
+	    
 	 	if(storeService.getStoreLike(vo).size() == 0) {
 	 		storeService.inStoreLike(vo);
 	 		return new ResponseEntity<String>("insert",HttpStatus.OK);
@@ -152,10 +185,14 @@ public class UserController {
 
 	
 	@GetMapping("/mypage/qna")
-	public void qnaList(Criteria cri, String mid, String kind, Model model) {
+	public void qnaList(Criteria cri, String kind, Model model) {
+		
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("cri", cri);
-		map.put("mid", mid);
+		map.put("mid", name);
 		map.put("kind", kind);
 		
 		model.addAttribute("reply", replyService.getList(map));
@@ -173,6 +210,10 @@ public class UserController {
     
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        model.addAttribute("info", auth);
+    	
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
         model.addAttribute("detail", list);
     }
@@ -185,8 +226,11 @@ public class UserController {
     }
     
     @GetMapping("/list")
-    public void List(Criteria cri, String mid, Model model) {
+    public void List(Criteria cri, Model model) {
     	
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    
     	Map<String, Object> map = new HashMap<>();
     	map.put("cri", cri);
     	PageDTO pageDTO;
@@ -198,7 +242,10 @@ public class UserController {
     	}
     	
     	map.put("dto", pageDTO);
-		map.put("mid", mid);
+    	
+    	if(!name.equals("anonymousUser")) {
+    		map.put("mid", name);
+    	}
 		
 		List<StoreVO> store = storeService.getList(pageDTO);		
 		
@@ -221,11 +268,14 @@ public class UserController {
     }
     
     @GetMapping("/mypage/orderList")
-    public void orderDetailList(Criteria cri,String mid, Model model) {
-        
+    public void orderDetailList(Criteria cri, Model model) {
+    	
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	    
+    	
         Map<String, Object> map = new HashMap<String, Object>();
        
-        map.put("mid",mid);
+        map.put("mid",name);
         map.put("cri",cri);
         PageDTO pageDTO = new PageDTO(cri,orderService.count(map)); 
         map.put("dto", pageDTO);
@@ -251,26 +301,32 @@ public class UserController {
     }
     
     @PostMapping("/mypage/orderList")
-    public String remove(Long ono, String mid, RedirectAttributes rttr) {
-        
+    public String remove(Long ono, RedirectAttributes rttr) {
+
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	    
         if(orderService.delete(ono) == 1) {
             rttr.addFlashAttribute("result", "success");
         }
-        return "redirect:/user/mypage/orderList?mid="+mid;
+        return "redirect:/user/mypage/orderList";
     }
     
     @GetMapping("/mypage/modify")
     public void get(Model model) {
-        /*model.addAttribute("member",memberService.get(mid));*/
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+        model.addAttribute("member",memberService.get(name));
     }
     
-    @PostMapping("/modPw/{mid}/{pw}")
-    public ResponseEntity<String> modifyPw(@PathVariable("mid") String mid, @PathVariable("pw") String pw) {
-	 	MemberVO vo = new MemberVO();
-	 	vo.setMid(mid);
-	 	
-	 	String password = pwEncoder.encode(vo.getMpw());
+    @PostMapping("/modPw/{pw}")
+    public ResponseEntity<String> modifyPw(@PathVariable("pw") String pw) {
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+    	MemberVO vo = new MemberVO();
+	 	vo.setMid(name);
+	 	String password = pwEncoder.encode(pw);
 	 	vo.setMpw(password);
+	 	
     	if(memberService.modifyPw(vo) == 1) {
     		return new ResponseEntity<String>("success",HttpStatus.OK);
         }
@@ -286,19 +342,21 @@ public class UserController {
             rttr.addFlashAttribute("modify", "success");
         }
         
-        return "redirect:/user/mypage/modify?mid=member1";
+        return "redirect:/user/mypage/modify";
     }
     
     @GetMapping("/cart")
-    public void list(Criteria cri, String mid, Model model) {
+    public void list(Criteria cri, Model model) {
     	
+    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	    
         Map<String, Object> map = new HashMap<String, Object>();
         
-        map.put("criteria", cri);
-        map.put("mid",mid);
+        map.put("mid",name);
         
     	PageDTO pageDTO = new PageDTO(cri, cartService.count(map));
-        
+
+        map.put("dto",pageDTO);
         List<Integer> pageList = new ArrayList<>();
         
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {

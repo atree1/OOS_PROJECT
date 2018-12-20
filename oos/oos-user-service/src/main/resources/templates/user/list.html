@@ -27,7 +27,9 @@
 							<div class="goodsImg"
 								style="position: relative; width: 270px; height: 353px;">
 								<img th:id="|img_${arr.pno}|" class="productImg"
-									style="width: 100%; display: block;">
+									style="width: 100%;position:absolute;
+									overflow:hidden;
+									top:0;bottom:50px;margin:auto;">
 							</div>
 							<div class="goodsInfo" style="position: relative;">
 								<div class="goodsName" th:text="${arr.pname}" style="">PNAME</div>
@@ -77,10 +79,9 @@
 						<thead>
 							<tr style="background-color: #fff;">
 								<th class="">이미지</th>
-								<th class="">건물</th>
-								<th class="">층</th>
-								<th class="">호수</th>
 								<th class="">상호</th>
+								<th class="">주소</th>
+								<th class="">스토어찜수</th>
 								<th class="">상품수</th>
 								<th class="">관리</th>
 							</tr>
@@ -91,12 +92,12 @@
 									<div class="store_thumb">
 										<img class="goods_li_img" src=""></div>
 								</td>
-								<td class="borderBottom" th:text="${arr.building}">청평화</td>
-								<td class="borderBottom" th:text="${arr.floor}">5층</td>
-								<td class="borderBottom" th:text="${arr.room}">다2호</td>
 								<td class="borderBottom" style="padding: 1px 10px;">
 									<a class="linkClass" th:id="|sno_${arr.sno}|" 
 										style="color: #333; cursor:pointer" th:text="${arr.sname}">SNAME</a>
+								</td>
+								<td class="borderBottom" style="padding: 1px 10px;"
+									th:text="${arr.zzim}">
 								</td>
 								<td class="borderBottom"><span style="color: #ffa000;">6,964</span></td>
 								<td class="borderBottom">

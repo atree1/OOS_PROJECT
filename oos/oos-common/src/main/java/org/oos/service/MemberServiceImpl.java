@@ -11,13 +11,11 @@ import org.oos.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import groovy.util.logging.Log;
 import lombok.Setter;
 
 
 
 @Service
-@lombok.extern.java.Log
 public class MemberServiceImpl implements MemberService {
 
 	@Setter(onMethod_= @Autowired)
@@ -53,7 +51,6 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.count(cri);
 	}
 
-
 	@Override
 	public int insertSnsAuth(AuthDTO dto) {
 		return mapper.insertSnsAuth(dto);
@@ -65,15 +62,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> getAllList() {
-		return mapper.getAllList();
-	}
-
-	@Override
 	public List<StoreVO> getMyStoreList(Map<String, Object> map) {
 		return mapper.getMyStoreList(map);
 	}
-
 	
 	@Override
 	public int removeSns(String mid) {
@@ -84,5 +75,12 @@ public class MemberServiceImpl implements MemberService {
 	public int modifyPw(MemberVO vo) {
 		return mapper.modifyPw(vo);
 	}
+
+	@Override
+	public int getMyStoreCount(Map<String, Object> map) {
+		return mapper.getMyStoreCount(map);
+	}
+	
+
 }
 
