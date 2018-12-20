@@ -19,8 +19,8 @@
 	</select>
 	
 	<insert id="insert">
-		insert into tbl_member(mid,mpw,mname,pnum,birth,email,address) 
-		values(#{mid},#{mpw},#{mname},#{pnum},#{birth},#{email},#{address})
+		insert into tbl_member(mid,mpw,mname,pnum,birth,email,address,addressdetail) 
+		values(#{mid},#{mpw},#{mname},#{pnum},#{birth},#{email},#{address},#{addressdetail})
 	</insert>
 
 	<update id="modify">
