@@ -9,9 +9,9 @@ public interface AdminNotifyMapper {
 
 public List<AdminNotifyVO> getList(Map<String, Object> map);
 	
-	public AdminNotifyVO get(long bno);
+	public AdminNotifyVO get(Long bno);
 	
-	public int delete(long bno);
+	public int delete(Long bno);
 	
 	public int modify(AdminNotifyVO vo);
 	

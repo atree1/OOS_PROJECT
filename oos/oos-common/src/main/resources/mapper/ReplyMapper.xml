@@ -45,10 +45,19 @@
 		order by parent desc, depth asc
 	</select>
 	
+
 	<select id="sellerReply" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno > 0 and parent = #{parent}
 		order by parent desc, depth asc;
+
+	<select id="countNewReply" resultType="Integer">
+	select count(*) from tbl_reply r
+		join (select pno, pname, sno, questionreplycnt, reviewreplycnt from tbl_product
+		where del = 'N' and pno > 0) p
+		on p.pno = r.pno
+		where rno > 0 and del = 'N'
+		and sno =#{sno} and kind=#{kind};
 	</select>
 
 
@@ -69,7 +78,12 @@
 	<insert id="insert">
 		insert into tbl_reply(pno, mid, sid, content, title,
 		kind)
-		values(#{pno},#{mid},#{sid},#{content},#{title},#{kind})
+		<if test="sid != null">
+			values(#{pno},#{sid},#{content},#{title},#{kind})
+		</if>
+		<if test="mid != null">
+			values(#{pno},#{mid},#{content},#{title},#{kind})
+		</if>
 	</insert>
 
 	<select id="get" resultType="org.oos.domain.ReplyVO">

@@ -7,7 +7,7 @@
   
   <select id="getList" parameterType="map" resultType="org.oos.domain.NotifyVO">
   select * from tbl_seller_notify
-  where sbno > 0 and sid = #{sid} and del = 'n'
+  where sbno > 0 and sid = #{sid} and del = 'n' and state ='OFF'
   order by sbno desc
   limit #{dto.cri.skip}, #{dto.cri.amount}
   </select>
@@ -43,5 +43,27 @@
 		select count(*) from tbl_seller_notify
 		where sno > 0 and sno = #{sno} and del='N'
 </select>	
-  
+	
+	<update id="popupSwitch" parameterType="map">
+		update tbl_seller_notify
+		set state = #{switch}
+		where sbno =#{sbno}
+	</update>
+	  	
+  	<select id="popupList" resultType="org.oos.domain.NotifyVO">
+  		select * from tbl_seller_notify
+ 		 where sbno > 0 and sid = #{sid} and del = 'n' and state ='ON'
+  		 order by updatedate desc
+  	</select>
+  	
+  	<select id="getPopup" resultType="org.oos.domain.NotifyVO">
+  		select * from tbl_seller_notify
+		where sbno = #{sbno} and state='ON'
+  	</select>
+  	
+  	  <select id="popupCount" resultType="int">
+  		select count(*) from tbl_seller_notify
+		where sbno > 0 and sid = #{sid} and del = 'N' and state='ON'
+  </select>
+  	
   </mapper>

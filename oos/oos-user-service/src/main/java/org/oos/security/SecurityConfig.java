@@ -42,13 +42,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/user/list").permitAll()
 				.antMatchers("/order/**", "/user/**","/user/mypage/**").hasRole("USER");
 		
-		http.formLogin().loginPage("/oos/login");
+		http.formLogin().loginPage("/oos/login")
+	      .defaultSuccessUrl("/main");
 		// access denied 걸리면  로그인페이지 갈거라고 선언
 		
 		http.rememberMe().key("oos")
 			.userDetailsService(userDetailsService())
 			.tokenRepository(getJDBCReopsitory())
 			.tokenValiditySeconds(60*60*24*15);
+	
 		http.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/main");
 		
 	}	

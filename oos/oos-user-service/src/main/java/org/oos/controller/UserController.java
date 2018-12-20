@@ -247,10 +247,8 @@ public class UserController {
     		map.put("mid", name);
     	}
 		
-		List<StoreVO> store = storeService.getList(pageDTO);		
-		
-		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
-        	model.addAttribute("store", store);
+		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {	
+        	model.addAttribute("store", storeService.getStoreList(pageDTO));
         }else{
         	model.addAttribute("product", productService.getList(map));
         }

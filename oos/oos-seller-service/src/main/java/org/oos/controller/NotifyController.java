@@ -33,6 +33,21 @@ public class NotifyController {
 	@Setter(onMethod_=@Autowired)
 	private SellerService sellerService;
 	
+	@PostMapping("/popup")
+    public String popupState(Long[] sbno,String swi,String sid) {
+        log.info(sbno+"");
+        log.info("sid:"+sid);
+        Map<String, Object> map =new HashMap<>();
+        map.put("switch", swi);
+        for(Long num : sbno) {
+        	
+        	map.put("sbno", num);
+    		service.popupSwitch(map);
+        }
+        return "redirect:/notify/sellerNotify?sid="+sid;
+        
+    }
+	
 	@PostMapping("/sellerModify")
 	public String sellerModifyPost(NotifyVO vo,Criteria cri, RedirectAttributes rttr){
 		
@@ -80,6 +95,7 @@ public class NotifyController {
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("seller", sellerService.get(sid));
+		model.addAttribute("popupList",service.popupList(map));
 
 	}
 	

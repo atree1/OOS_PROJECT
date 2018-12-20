@@ -13,11 +13,10 @@
 		</div>
 
 		<div class="store_container">
-			<div>
+			<div style="width:1000px; margin:0 auto">
 				<div style="display: inline-block;">
-					<img width="500"
-						src="https://img9.sinsangmarket.co.kr/lib/imageResizer.php?f=http://likethat.kr/odprogram/upfiles/ssmWholesaleStore/u_153301791982229500_821303600.jpg&amp;h=300&amp;w=648"
-						style="display: block;">
+					<img width="500" id="storeImg"
+					style="display: block;width:auto; height:300px;">
 				</div>
 				<div class="main_store_info">
 					<div style="font-size: 17px; color: #9b9b9b; margin-bottom: 6px;"
@@ -29,8 +28,7 @@
 						style="font-size: 17px; color: #333; line-height: 1.0; margin-bottom: 30px;"
 						th:text=${store.tel}>TEL</div>
 					<div class="tradeBtnWrapClass" style="position: relative;">
-						<button class="storeHomeTradeBtn" onclick="requestAddTrade(0)"
-							style="position: absolute; left: 200px; display: block;">
+						<button class="storeHomeTradeBtn">
 							<div class="tradeBtnImg"></div>
 							<span class="tradeStatusBtn">+ 찜리스트 추가</span>
 						</button>
@@ -116,7 +114,7 @@
 			
 			(function(){
 
-				/* $.each(goodsImg, function(index, item){
+				 $.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
 					
 					var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
@@ -124,7 +122,13 @@
 					var imgDiv= $('#img_'+item.pno);
 					imgDiv.attr("src","/display?fileName="+fileCallPath); 
 				}); 
-				*/
+				 
+				
+						console.log();
+				var fileCallPath =  encodeURIComponent(store.imgList[0].ipath+ "/"+
+						store.imgList[0].uuid +"_"+store.imgList[0].iname);
+				 $('#storeImg').attr("src","/display?fileName="+fileCallPath); 
+				 
 				$("#storeTel").html(store.tel.substring(0,3) + "-" + 
 						store.tel.substring(3,7) + "-" + store.tel.substring(7));
 			
@@ -163,6 +167,18 @@
 				$("#pageNum").val($(this).attr("id").substring(5));
 				storeForm.submit();
 			});
+			console.log(pageMaker);
+			(function() {
+				if(pageMaker.cri.pageNum!=1){
+					
+					return;
+				}
+				var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+							
+				var sid = [[${store.owner}]];
+				
+				window.open("/store/popupList?sid="+sid, "", popOption);
+			})();
 			
 		});
 	</script>

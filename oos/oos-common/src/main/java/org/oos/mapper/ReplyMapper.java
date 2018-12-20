@@ -19,6 +19,8 @@ public interface ReplyMapper {
 	
 	public List<ReplyVO> getStoreReply(Map<String, Object> map);
 	
+	public int countNewReply(Map<String, Object> map);
+	
 	public int depthInsert(ReplyVO vo);
 	
 	public int myOrderCount(Map<String, Object> map);

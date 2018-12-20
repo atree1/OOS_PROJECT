@@ -1,0 +1,68 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품 상세정보</title>
+</head>
+<body>
+	<div class="myPageContentArea" style="position: relative; width: 780px; min-height: 600px;">
+		<div style="font-size: 20px; color: #202225; height: 40px; border-bottom: 1px solid #bebebe;">Seller Notify</div>
+		<div
+			style="font-size: 14px; width: 100%; height: 50px; position: relative; border-bottom: 1px solid #eee;">
+			<div
+				style="position: absolute; left: 40px; top: 15px; font-size: 20px; text-align: center;">
+				제목 : <span class="writeTitle" th:text="${popup.title}"></span>
+			</div>
+			
+		</div>
+ 		
+			<div class="questionDetail">
+				<div style="background-color: #fafafa; font-size: 14px; color: #202225; border-bottom: 1px solid #eee; min-height: 100px; line-height: 1.4;">
+					<div style="padding: 30px 15px 15px 15px;background-color: #ffffff; padding-left: 40px;">
+						<span class="qnaType"
+							style="font-weight: bold;"
+							th:text="${popup.content}">&gt;&gt;&gt;구매자</span>
+					</div>
+				</div>
+			</div>
+			
+			<div>
+				<button id="listBtn">공지사항 목록</button>
+			</div>
+		
+		<div class="buttonArea" style="text-align: center;">
+			<button type='submit' class="backList" id="backList"
+				onclick='javascript:self.close();' style="margin-top: 25px;">팝업 닫기</button>
+		</div>
+		
+<form id="notifyForm">
+		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
+		<input type='hidden' id='pageNum' name='pageNum'
+			th:value='${pageMaker.cri.pageNum}' />
+		<input type='hidden' name='sid' th:value='${seller.sid}'/>
+</form>        		
+		
+<script src="/js/jquery.min.js"></script>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+
+$(document).ready(function(){
+	
+	var notifyForm = $("#notifyForm");
+		
+	$("#listBtn").on("click",function(e){
+		
+		e.preventDefault();
+		notifyForm.attr("action","/store/popupList").attr("method","get").submit();
+		
+	});
+	
+	
+});
+	
+		
+	</script>
+</th:block>			
+</div>
+</body>
+</html>

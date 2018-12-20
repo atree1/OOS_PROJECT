@@ -6,12 +6,12 @@ body {
 	margin: 0px;
 	font-size: 12px;
 	line-height: 140%;
-	width:100%;
+	width: 100%;
 }
 
-a{
-	color:#333;
-	text-decoration:none;
+a {
+	color: #333;
+	text-decoration: none;
 }
 
 button, input, table, div, textarea, a, span {
@@ -95,30 +95,30 @@ button, input, table, div, textarea, a, span {
 	color: #ff7f7a;
 }
 
-.ui-autocomplete {  
-  position:absolute; cursor:default;
-  z-index:99 !important;     
+.ui-autocomplete {
+	position: absolute;
+	cursor: default;
+	z-index: 99 !important;
 }
+
 .header {
 	width: 1100px;
 	margin: 0 auto;
 }
 
-.categoryMenu {
+.Top_Menu, .Bottom_Menu, .Shoes_Menu {	
 	position: absolute;
-	width: 1100px;
-	height: 411px;
-	padding: 20px;
+	width: 100%;
+	top: 52px;
+	padding: 0 20px;;
 	background-color: rgb(255, 255, 255);
 	z-index: 100;
 	margin-left: -1px;
 	border-width: 0px 1px 1px;
 	border-right-style: solid;
 	border-bottom-style: solid;
-	border-left-style: solid;
 	border-right-color: rgb(225, 225, 225);
 	border-bottom-color: rgb(225, 225, 225);
-	border-left-color: rgb(225, 225, 225);
 	border-image: initial;
 	border-top-style: initial;
 	border-top-color: initial;
@@ -587,7 +587,6 @@ ul.date_pick li input {
 	background-color: #fff;
 }
 
-
 .innerMenu {
 	width: 1100px;
 	margin: 0 auto;
@@ -672,10 +671,6 @@ ul.date_pick li input {
 	font-size: 24px;
 	width: 1100px;
 	text-align: center;
-}
-
-.menuMouseOver.hover {
-	text-decoration: underline;
 }
 
 .div_line_grey_2px {
@@ -892,16 +887,16 @@ div.darken:hover span {
 	cursor: pointer;
 }
 
-.buildingLi {
+.TopLi {
 	float: left;
 	/*width:105px;*/
 	text-align: center;
 	font-size: 16px;
 	padding-top: 3px;
-	margin-left: 45px;
+	margin: 0 45px 10px 0;
 }
 
-.buildingLi:hover {
+.TopLi:hover {
 	color: #ff7f7a;
 	cursor: pointer;
 }
@@ -3164,7 +3159,7 @@ input[type="radio"]:checked+label:before {
 	position: relative;
 	text-align: center;
 	display: inline-block;
-	width: 597px;
+	width: 600px;
 }
 
 .store_info_text {
@@ -3174,7 +3169,6 @@ input[type="radio"]:checked+label:before {
 }
 
 .storeHomeTradeBtn {
-	position: absolute;
 	left: 200px;
 	display: block;
 	text-align: center;
@@ -3255,7 +3249,7 @@ input[type="radio"]:checked+label:before {
 .tradeBtnWrapClass {
 	position: relative;
 	height: 80px;
-	padding: 0px 200px 30px 200px;
+	padding: 0px 100px 30px 200px;
 }
 
 .main_img .img_edge {
@@ -3947,36 +3941,76 @@ input[type="radio"]:checked+label:before {
 	background: url('../img/btn_home_nv_menu_01_on.svg') no-repeat;
 }
 
-#tradeSinsang .textImg {
-	width: 78px;
+#ShopSinsang .textImg {
+	width: 70px;
 	height: 22px;
-	background: url('../img/btn_home_nv_menu_02_off.svg') no-repeat;
+	background: url('../img/btn_home_nv_menu_05_off.png') no-repeat;
+	background-size: 68px;
 	margin: 0 auto;
 }
 
-#tradeSinsang .textImg:hover {
-	background: url('../img/btn_home_nv_menu_02_over.svg') no-repeat;
+#ShopSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_05_over.png') no-repeat;
+	background-size: 68px;
 	cursor: pointer;
 }
 
-#tradeSinsang .textImg.active {
-	background: url('../img/btn_home_nv_menu_02_on.svg') no-repeat;
+#ShopSinsang .textImg.active {
+	background: url('../img/btn_home_nv_menu_05_on.svg') no-repeat;
 }
 
-#buildingSinsang .textImg {
-	width: 78px;
+#TopSinsang .textImg {
+	width: 45px;
 	height: 22px;
-	background: url('../img/btn_home_nv_menu_03_off.svg') no-repeat;
+	background: url('../img/btn_home_nv_menu_02_off.png') no-repeat;
+	background-size: 43px;
 	margin: 0 auto;
 }
 
-#buildingSinsang .textImg:hover {
-	background: url('../img/btn_home_nv_menu_03_over.svg') no-repeat;
+#TopSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_02_over.png') no-repeat;
+	background-size: 43px;
 	cursor: pointer;
 }
 
-#buildingSinsang .textImg.active {
+#TopSinsang .textImg.active {
+	background: url('../img/btn_home_nv_menu_02_on.png') no-repeat;
+}
+
+#BottomSinsang .textImg {
+	width: 45px;
+	height: 22px;
+	background: url('../img/btn_home_nv_menu_03_off.png') no-repeat;
+	background-size: 43px;
+	margin: 0 auto;
+}
+
+#BottomSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_03_over.png') no-repeat;
+	background-size: 43px;
+	cursor: pointer;
+}
+
+#BottomSinsang .textImg.active {
 	background: url('../img/btn_home_nv_menu_03_on.svg') no-repeat;
+}
+
+#ShoesSinsang .textImg {
+	width: 45px;
+	height: 22px;
+	background: url('../img/btn_home_nv_menu_04_off.png') no-repeat;
+	background-size: 43px;
+	margin: 0 auto;
+}
+
+#ShoesSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_04_over.png') no-repeat;
+	background-size: 43px;
+	cursor: pointer;
+}
+
+#ShoesSinsang .textImg.active {
+	background: url('../img/btn_home_nv_menu_04_on.svg') no-repeat;
 }
 
 #sinsangChoice .textImg {
@@ -5172,7 +5206,6 @@ input[type="radio"]:checked+label:before {
 	-webkit-animation-delay: 0.75s;
 	-moz-animation-delay: 0.75s;
 }
-
 
 /* 교혼문의에서 활용할 셀렉트 박스 */
 .questionSelectbox {

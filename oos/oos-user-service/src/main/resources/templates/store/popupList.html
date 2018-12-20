@@ -1,0 +1,77 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품 상세정보</title>
+</head>
+<body>
+	<div class="myPageContentArea" style="position: relative; width: 780px; min-height: 600px;">
+		<div style="font-size: 20px; color: #202225; height: 40px; border-bottom: 1px solid #bebebe;">Seller Notify</div>
+		
+ 		<div class="wishlistArea"
+			style="left: 225px; width: 500px; margin-bottom: 68px; min-height: 600px;">
+			<div style="font-size: 20px; color: #202225; height: 40px;">List</div>
+
+			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;">
+				
+				<thead>
+					<tr style="background-color: #fff; padding: 0px; text-align: center;'">						
+						<th class="">제목</th>						
+						<th class="">등록일</th>
+					</tr>
+				</thead>
+				<tbody id="questionlist_tbody">
+					<tr class="height60" th:each="arr:${popupList}" style="text-align: center;">						
+						<td><a class="move" th:href="${arr.sbno}" th:text=${arr.title}></a></td>				
+						<td class="" th:text="${#dates.format(arr.updatedate,'yyyy-MM-dd')}"></td>
+				</tbody>
+			</table>
+			
+			<div style="text-align:center;">
+				<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
+				<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
+					<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
+				<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
+			</div>
+		</div>
+		
+		
+		<div class="buttonArea" style="text-align: center;">
+			<button type='submit' class="backList" id="backList"
+				onclick='javascript:self.close();' style="margin-top: 25px;">목록
+				돌아가기</button>
+		</div>
+
+<form id="notifyForm">
+		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
+		<input type='hidden' id='pageNum' name='pageNum'
+			th:value='${pageMaker.cri.pageNum}' />
+		<input type='hidden' name='sid' th:value='${seller.sid}'/>
+</form>
+
+<script src="/js/jquery.min.js"></script>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+
+$(document).ready(function(){
+	
+	var notifyForm = $("#notifyForm");
+	
+	$(".move").on("click",function(e){
+		
+		console.log("click...");
+		e.preventDefault();
+		notifyForm.append("<input type='hidden' name='sbno' value='"+$(this).attr("href")+"' >");
+		notifyForm.attr("action","/store/popup");
+		notifyForm.submit();
+	});
+	
+	
+});
+	
+		
+	</script>
+</th:block>	
+</div>
+</body>
+</html>

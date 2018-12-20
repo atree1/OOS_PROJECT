@@ -23,7 +23,7 @@ public interface ReplyService {
 	public ReplyPageDTO getListPage(Map<String, Object> map);
 	
 	public int count(Map<String, Object> map);
-	
+	public int getNewReplyCnt(Map<String, Object> map);
 	public int myOrderCount(Map<String, Object> map);
 	
 	public List<ReplyVO> getDetailList(Map<String, Object> map);

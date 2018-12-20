@@ -17,8 +17,8 @@ public class StoreVO {
 	private Date updatedate;
 	private char del;
 	
-	private int productNum; //총 상품 개수
-	private int zzim; //찜 개수
+	private int pdNum; //총 상품 개수
+	private int likeNum; //찜 개수
 	private String mid; // 찜목록 가져올때 쓰려고
 	
 	private List<StoreImgVO> imgList;
