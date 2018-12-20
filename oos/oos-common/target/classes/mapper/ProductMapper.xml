@@ -90,9 +90,9 @@
 	
 	<select id="bestProductList" resultType="org.oos.domain.ProductVO" resultMap="Product">
 		<![CDATA[
-		select cateno, catename, c.pno, b.pname, b.price, b.uuid, b.ipath, b.iname from tbl_category c
-		join(select d.pno, pname, price, uuid, ipath, iname, count(*) cnt from tbl_order_detail d
-			join(select p.pno, pname, price, uuid, ipath, iname from tbl_product p
+		select cateno, b.sno, catename, c.pno, b.pname, b.price, b.uuid, b.ipath, b.iname from tbl_category c
+		join(select d.pno, pr.sno, pname, price, uuid, ipath, iname, count(*) cnt from tbl_order_detail d
+			join(select p.pno, p.sno, pname, price, uuid, ipath, iname from tbl_product p
 					join(select * from tbl_product_img
 						 where uuid != "" group by pno) i
 					on i.pno = p.pno

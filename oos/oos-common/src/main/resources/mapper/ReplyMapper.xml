@@ -72,7 +72,13 @@
 	<insert id="insert">
 		insert into tbl_reply(pno, mid, sid, content, title,
 		kind)
-		values(#{pno},#{mid},#{sid},#{content},#{title},#{kind})
+		<if test="sid != null">
+			values(#{pno},#{sid},#{content},#{title},#{kind})
+		</if>
+		<if test="mid != null">
+			values(#{pno},#{mid},#{content},#{title},#{kind})
+		</if>
+		
 	</insert>
 
 	<select id="get" resultType="org.oos.domain.ReplyVO">

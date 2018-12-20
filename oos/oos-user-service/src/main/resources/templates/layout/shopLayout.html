@@ -25,7 +25,7 @@
 			<div class="sinsangLogoArea"
 				onmouseover="javascript:$('.textImg').removeClass('hover')">
 				<div class="logo">
-					<a href="/" style="text-decoration: none; color: #9a9a9a;">
+					<a href="/main" style="text-decoration: none; color: #9a9a9a;">
 						<div class="logoInner" style="cursor: pointer; font-size: 13px;">
 							<img src="/img/oos_logo.jpg" style="width: 200px;">
 						</div>
@@ -123,24 +123,22 @@
 				<table class="innerMenuTable" cellspacing="0">
 					<tbody>
 						<tr>
-							<td id="allSinsang" class="menuMouseOver"
-								style="padding-right: 20px;"
-								onclick="javascript:location.href='/user/list'">
-								<div class="textImg" style="margin-top: 3px;"></div>
-							</td>
-
-							<td id="TopSinsang" class="menuMouseOver"
-								style="width: 166px; padding: 0px;"
-								onmouseover="categoryMenuShow(1)">
-								<div class="textImg" style="margin-top: 3px;"></div>
-							</td>
-							<td id="sinsangChoice" class="menuMouseOver"
-								style="width: 167px; padding: 0px;"
-								onmouseover="categoryMenuShow(3)"
-								onmouseout="javascript:$('.sinsangChoiceMenu').hide()"
-								onclick="sinsangChoiceMove()">
-								<div class="textImg" style="margin-top: 3px;"></div>
-							</td>
+					<td id="allSinsang" class="bigCategory" style="padding-right:20px;" data-cat="all">
+						<div class="textImg active" style="margin-top:3px;"></div>
+					</td>
+                    <td id="TopSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="top"
+                    	onmouseover="javascript:categoryMenuShow(1)" onmouseout="javascript:$('.Top_Menu').hide()">
+                    	<div class="textImg" style="margin-top:3px;"></div>
+                    </td>
+					<td id="BottomSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="bottom"
+						onmouseover="categoryMenuShow(2)" onmouseout="javascript:$('.Bottom_Menu').hide()">
+						<div class="textImg" style="margin-top:3px;"></div>
+					</td>
+                    <td id="ShoesSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="shoes"
+						onmouseover="categoryMenuShow(3)" onmouseout="javascript:$('.Shoes_Menu').hide()">
+						<div class="textImg" style="margin-top:3px;"></div>
+					</td>
+                     <td style="width:400px; padding:0px;" onmouseover="javascript:$('.textImg').removeClass('hover')"></td>
 							<td style="width: 400px; padding: 0px; cursor:unset;"></td>
 
 							<td style="width: 60px;" sec:authorize="hasRole('ROLE_USER')">
@@ -191,23 +189,36 @@
 						</tr>
 					</tbody>
 				</table>
+					
+				<div class="Top_Menu" onmouseover="javascript:$('.Top_Menu').show()" 
+					onmouseout="javascript:$('.Top_Menu').hide()">
+	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
+	                    <li class="TopLi" data-cat="">패딩</li>
+	                    <li class="TopLi" data-cat="knit">니트</li>
+	                    <li class="TopLi" data-cat="jacket">재킷</li>
+	                    <li class="TopLi" data-cat="outer">아우터</li>
+	                    <li class="TopLi" data-cat="shirt">셔츠</li>
+	                    <li class="TopLi" data-cat="">원피스</li>
+	                </ul>
+	            </div>
+	            <div class="Bottom_Menu" onmouseover="javascript:$('.Bottom_Menu').show()" 
+					onmouseout="javascript:$('.Bottom_Menu').hide()">
+	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
+	                    <li class="TopLi" data-cat="">청바지</li>
+	                    <li class="TopLi" data-cat="">바지</li>
+	                    <li class="TopLi" data-cat="">치마</li>
+	                </ul>
+	            </div>
+	            <div class="Shoes_Menu" onmouseover="javascript:$('.Shoes_Menu').show()" 
+					onmouseout="javascript:$('.Shoes_Menu').hide()" >
+	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
+	                    <li class="TopLi" data-cat="">운동화</li>
+	                    <li class="TopLi" data-cat="boots">부츠</li>
+	                    <li class="TopLi" data-cat="">구두</li>
+	                </ul>
+	            </div>
 			</div>
-			<div class="categoryMenu">
-				<div class="Top_Menu">
-					<ul style="color: #9b9b9b; margin:0px;">
-						<li class="TopLi" onclick="buildingClickFunc('theot')">디오트</li>
-						<li class="TopLi" onclick="buildingClickFunc('cph')">청평화</li>
-						<li class="TopLi" onclick="buildingClickFunc('uus')">유어스</li>
-						<li class="TopLi" onclick="buildingClickFunc('apm')">APM</li>
-						<li class="TopLi" onclick="buildingClickFunc('luxe')">LUXE</li>
-						<li class="TopLi" onclick="buildingClickFunc('designerclub')">디자이너크럽</li>
-						<li class="TopLi" onclick="buildingClickFunc('nuzzon')">누죤</li>
-						<li class="TopLi" onclick="buildingClickFunc('queens')">퀸즈스퀘어</li>
-						<li class="TopLi" onclick="buildingClickFunc('team204')">팀204</li>
-						<li class="TopLi" onclick="buildingClickFunc('shoesC')">신발상가 C동</li>
-					</ul>
-				</div>
-			</div>
+			
 		</div>
 		<div id="overlay_t"></div>
 
@@ -261,8 +272,8 @@
 		<input type='hidden' name='pageNum' value='1' />
 	</form>
 	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="/js/menuhover.js" type="text/javascript"></script>
 	<script src="/js/function.js" type="text/javascript"></script>
+	<script src="/js/menuhover.js" type="text/javascript"></script>
 	<th:block script layout:fragment="script">
 		<script th:inline="javascript">
 			

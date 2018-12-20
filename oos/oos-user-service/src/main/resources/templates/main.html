@@ -64,11 +64,13 @@
 			<div id="touchSlider_best" class="touchSlider-box">
 				<div class="touchSlider" id="bestItemList">
 					<ul class="item-list-img">
-						<li th:each="arr : ${bestP}">
-							<a class="showcase_con"> 
+						<li th:each="arr,index : ${bestP}">
+						<div th:text="${index.count}"
+						style="padding:0 0 5px 25px; font-size:14px; font-weight:bold">index</div>
+							<a class="showcase_con" th:data-sno="${arr.sno}"> 
 								<span class="showcase_img">
-									<img class="item_img lazy" th:id="|bestP_${arr.pno}|" style="display: inline;"> 
-									<span class="num1">1</span>
+									<img class="item_img lazy" th:id="|bestP_${arr.pno}|" 
+									style="display: inline;"> 
 								</span> 
 								<span class="showcace_info"> 
 									<span class="text_type1" th:text="${arr.pname}">
@@ -287,7 +289,6 @@
 			}); 
 			
 			$.each(bestP, function(index, item){
-				console.log(item);
 				var img = item.imgList[0];
 				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
 				$("#bestP_"+item.pno).attr("src","/display?fileName="+fileCallPath);
@@ -295,6 +296,14 @@
 			
 			
 		})();
+		
+		$(".showcase_con").click(function(){
+			mainForm.append("<input type='hidden' name='pno' value='"+
+							$(this).find("img").attr("id").substring(6)+"'>")
+					.append("<input type='hidden' name='sno' value='"+
+							$(this).data("sno")+"'>")		
+					.attr("action","/store/detail").submit();
+		});
 		
 		$("#goList").click(function() {
 			window.location.href = "/user/list";

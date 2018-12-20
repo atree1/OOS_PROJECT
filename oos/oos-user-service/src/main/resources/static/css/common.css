@@ -6,12 +6,12 @@ body {
 	margin: 0px;
 	font-size: 12px;
 	line-height: 140%;
-	width:100%;
+	width: 100%;
 }
 
-a{
-	color:#333;
-	text-decoration:none;
+a {
+	color: #333;
+	text-decoration: none;
 }
 
 button, input, table, div, textarea, a, span {
@@ -95,30 +95,30 @@ button, input, table, div, textarea, a, span {
 	color: #ff7f7a;
 }
 
-.ui-autocomplete {  
-  position:absolute; cursor:default;
-  z-index:99 !important;     
+.ui-autocomplete {
+	position: absolute;
+	cursor: default;
+	z-index: 99 !important;
 }
+
 .header {
 	width: 1100px;
 	margin: 0 auto;
 }
 
-.categoryMenu {
+.Top_Menu, .Bottom_Menu, .Shoes_Menu {	
 	position: absolute;
 	width: 100%;
-	top:52px;
-	padding: 20px 20px 10px 20px;;
+	top: 52px;
+	padding: 0 20px;;
 	background-color: rgb(255, 255, 255);
 	z-index: 100;
 	margin-left: -1px;
 	border-width: 0px 1px 1px;
 	border-right-style: solid;
 	border-bottom-style: solid;
-	border-left-style: solid;
 	border-right-color: rgb(225, 225, 225);
 	border-bottom-color: rgb(225, 225, 225);
-	border-left-color: rgb(225, 225, 225);
 	border-image: initial;
 	border-top-style: initial;
 	border-top-color: initial;
@@ -587,7 +587,6 @@ ul.date_pick li input {
 	background-color: #fff;
 }
 
-
 .innerMenu {
 	width: 1100px;
 	margin: 0 auto;
@@ -672,10 +671,6 @@ ul.date_pick li input {
 	font-size: 24px;
 	width: 1100px;
 	text-align: center;
-}
-
-.menuMouseOver.hover {
-	text-decoration: underline;
 }
 
 .div_line_grey_2px {
@@ -3947,39 +3942,58 @@ input[type="radio"]:checked+label:before {
 	background: url('../img/btn_home_nv_menu_01_on.svg') no-repeat;
 }
 
-#tradeSinsang .textImg {
-	width: 78px;
-	height: 22px;
-	background: url('../img/btn_home_nv_menu_02_off.svg') no-repeat;
-	margin: 0 auto;
-}
-
-#tradeSinsang .textImg:hover {
-	background: url('../img/btn_home_nv_menu_02_over.svg') no-repeat;
-	cursor: pointer;
-}
-
-#tradeSinsang .textImg.active {
-	background: url('../img/btn_home_nv_menu_02_on.svg') no-repeat;
-}
-
 #TopSinsang .textImg {
-	width: 78px;
+	width: 45px;
 	height: 22px;
-	background: url('../img/btn_home_nv_menu_03_off.png') no-repeat;
-	background-size:43px;
+	background: url('../img/btn_home_nv_menu_02_off.png') no-repeat;
+	background-size: 43px;
 	margin: 0 auto;
 }
 
 #TopSinsang .textImg:hover {
-	background: url('../img/btn_home_nv_menu_03_over.png') no-repeat;
-	background-size:60px;
-	background-size:43px;
+	background: url('../img/btn_home_nv_menu_02_over.png') no-repeat;
+	background-size: 43px;
 	cursor: pointer;
 }
 
 #TopSinsang .textImg.active {
+	background: url('../img/btn_home_nv_menu_02_on.png') no-repeat;
+}
+
+#BottomSinsang .textImg {
+	width: 45px;
+	height: 22px;
+	background: url('../img/btn_home_nv_menu_03_off.png') no-repeat;
+	background-size: 43px;
+	margin: 0 auto;
+}
+
+#BottomSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_03_over.png') no-repeat;
+	background-size: 43px;
+	cursor: pointer;
+}
+
+#BottomSinsang .textImg.active {
 	background: url('../img/btn_home_nv_menu_03_on.svg') no-repeat;
+}
+
+#ShoesSinsang .textImg {
+	width: 45px;
+	height: 22px;
+	background: url('../img/btn_home_nv_menu_04_off.png') no-repeat;
+	background-size: 43px;
+	margin: 0 auto;
+}
+
+#ShoesSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_04_over.png') no-repeat;
+	background-size: 43px;
+	cursor: pointer;
+}
+
+#ShoesSinsang .textImg.active {
+	background: url('../img/btn_home_nv_menu_04_on.svg') no-repeat;
 }
 
 #sinsangChoice .textImg {
@@ -5175,7 +5189,6 @@ input[type="radio"]:checked+label:before {
 	-webkit-animation-delay: 0.75s;
 	-moz-animation-delay: 0.75s;
 }
-
 
 /* 교혼문의에서 활용할 셀렉트 박스 */
 .questionSelectbox {
