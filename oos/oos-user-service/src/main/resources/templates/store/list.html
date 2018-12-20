@@ -116,7 +116,7 @@
 			
 			(function(){
 
-				/* $.each(goodsImg, function(index, item){
+				 $.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
 					
 					var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
@@ -124,7 +124,7 @@
 					var imgDiv= $('#img_'+item.pno);
 					imgDiv.attr("src","/display?fileName="+fileCallPath); 
 				}); 
-				*/
+				
 				$("#storeTel").html(store.tel.substring(0,3) + "-" + 
 						store.tel.substring(3,7) + "-" + store.tel.substring(7));
 			
@@ -163,6 +163,15 @@
 				$("#pageNum").val($(this).attr("id").substring(5));
 				storeForm.submit();
 			});
+			
+			popupOpen();
+			function popupOpen(){
+				
+				var popUrl ="http://localhost:8081/notify/sellerGet?amount=12&pageNum=1&sid=seller1&sno=57";
+				var popOption = "width=400, height=300, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+				window.open(popUrl,"",popOption);
+			
+			}	
 			
 		});
 	</script>

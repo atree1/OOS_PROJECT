@@ -13,6 +13,7 @@ public class NotifyVO {
 	private String del;
 	private String title,content;
 	private Date updatedate, regdate;
+	private String state;
 	
 	
 }

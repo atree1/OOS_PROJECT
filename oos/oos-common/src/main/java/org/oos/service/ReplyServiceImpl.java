@@ -103,4 +103,10 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getRemove(rno);
 	}
 
+	@Override
+	public int getNewReplyCnt(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.countNewReply(map);
+	}
+
 }

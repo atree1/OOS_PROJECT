@@ -44,6 +44,17 @@
 		where pno=#{pno} and del='N' and kind=#{kind} and rno>0 and mid = #{mid}
 		order by parent desc, depth asc
 	</select>
+	
+	<select id="countNewReply" resultType="Integer">
+	select count(*) from tbl_reply r
+		join (select pno, pname, sno, questionreplycnt, reviewreplycnt from tbl_product
+		where del = 'N' and pno > 0) p
+		on p.pno = r.pno
+		where rno > 0 and del = 'N'
+		and sno =#{sno} and kind=#{kind};
+	
+	
+	</select>
 
 
 
