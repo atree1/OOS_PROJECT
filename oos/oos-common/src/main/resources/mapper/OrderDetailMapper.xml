@@ -74,7 +74,7 @@
 			detail_state='배송완료' and
 			</when>
 		</choose>
-			odno>0 and del='N' and sno=1
+			odno>0 and del='N' and sno=#{sno}
 		
 		;
 

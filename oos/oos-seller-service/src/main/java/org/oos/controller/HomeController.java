@@ -51,7 +51,9 @@ public class HomeController {
 		}
 		for (String str : state) {
 			map.put("state",str);
-			model.addAttribute(str,replyService.getNewReplyCnt(map));	
+			log.info("state:"+str);
+			
+			model.addAttribute(str,detailService.getStateCount(map));	
 		}
 		
 		for (String str : range) {
