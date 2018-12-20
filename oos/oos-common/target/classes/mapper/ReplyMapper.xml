@@ -50,7 +50,7 @@
 	<select id="sellerReply" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno > 0 and parent = #{parent}
-		order by parent desc, depth asc;
+		order by parent desc, depth asc
 
 	<select id="countNewReply" resultType="Integer">
 	select count(*) from tbl_reply r
@@ -58,10 +58,8 @@
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno
 		where rno > 0 and del = 'N'
-		and sno =#{sno} and kind=#{kind};
+		and sno =#{sno} and kind=#{kind}
 	</select>
-
-
 
 	<select id="getStoreReply" parameterType="map"
 		resultMap="Reply">
@@ -89,8 +87,7 @@
 
 	<select id="get" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
-		where rno =
-		#{rno}
+		where rno = #{rno}
 	</select>
 
 	<update id="update">
@@ -139,7 +136,7 @@
 		select ifnull(avg(score),0)
 		from tbl_reply
 		where pno = #{pno}
-		and kind='R' and del='N';
+		and kind='R' and del='N'
 	</select>
 	
 	<update id="getRemove">
