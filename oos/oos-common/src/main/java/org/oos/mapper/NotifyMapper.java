@@ -9,9 +9,9 @@ public interface NotifyMapper {
 	
 	public List<NotifyVO> getList(Map<String, Object> map);
 	
-	public NotifyVO get(long sbno);
+	public NotifyVO get(Long sbno);
 	
-	public int delete(long sbno);
+	public int delete(Long sbno);
 	
 	public int modify(NotifyVO vo);
 	
@@ -19,5 +19,8 @@ public interface NotifyMapper {
 	
 	public int sidCount(Map<String, Object> map);
 	
+	public int popupSwitch(Map<String, Object> map);
+	
+	public List<NotifyVO> popupList(Map<String,Object> map);
 
 } 

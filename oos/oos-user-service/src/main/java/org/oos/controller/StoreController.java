@@ -10,13 +10,12 @@ import org.oos.domain.PageDTO;
 import org.oos.domain.ProductVO;
 import org.oos.domain.StoreVO;
 import org.oos.mapper.ImgurMapper;
+import org.oos.service.NotifyService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +41,19 @@ public class StoreController {
 	
 	@Setter(onMethod_= @Autowired)
     private	ImgurMapper imgurMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private NotifyService notifyService;
+	
+	@GetMapping("/popup")
+	public void popupGet(Long sbno, String sid,Model model) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+	
+    	map.put("sid", sid);
+    	map.put("sbno", sbno);
+				
+		model.addAttribute("popup", notifyService.get(sbno));
+	}
 	
 	@GetMapping("/list")
 	public void storeList(Criteria cri, Long sno, Model model) {
