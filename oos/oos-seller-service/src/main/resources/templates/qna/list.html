@@ -9,7 +9,7 @@
 	<h1 align='center'>상품문의</h1>
 	<br />
 
-	<div id="dataTables-example_wrapper"
+	<!-- <div id="dataTables-example_wrapper"
 		class="dataTables_wrapper form-inline dt-bootstrap no-footer"
 		style="align-item: left;float:right">
 		
@@ -24,10 +24,10 @@
 					class="form-control input-sm" placeholder=""
 					aria-controls="dataTables-example" onclick="location.href='sellerRegister'">등록하기</button>
 
-				<!-- 			<button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
- 						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button> -->
+							<button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
+ 						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button>
 
-	</div>
+	</div> -->
 
 	<div class="row">
 		<div class="col-sm-12" align="center">
@@ -66,12 +66,16 @@
 							aria-controls="dataTables-example" rowspan="1" colspan="1"
 							aria-label="CSS grade: activate to sort column ascending"
 							style="width: 150px;">등록일</th>
+						<th class="sorting" tabindex="0"
+							aria-controls="dataTables-example" rowspan="1" colspan="1"
+							aria-label="CSS grade: activate to sort column ascending"
+							style="width: 150px;">삭제</th>	
 
 					</tr>
 				</thead>
 				<tbody>
 
-					<tr class="gradeA odd" role="row" th:each=arr:${replyList}>
+					<tr class="replyData" role="row" th:each=arr:${replyList}>
 						<td class="rno" th:text=${arr.rno}></td>
 						<td class="kind" th:text=${arr.kind}></td>
 						<td class="kind" th:text=${arr.pno}></td>
@@ -80,6 +84,8 @@
 						<td class="state" th:text=${arr.state}></td>
 						<td class="ragdate"
 							th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
+						<td><button type="submit" data-oper='remove' class="remove-btn" 
+ 						style="width:80px; color:#fff; background-color: teal;" th:data-rno="${arr.rno}">댓글삭제</button></td>
 
 
 						<!-- <td class=""><button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
@@ -115,39 +121,90 @@
 		</div>
 
 	</div>
+	<style>
+	.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+	</style>
+	<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
 
 	<form id="replyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' /> 
-			<input type='hidden' name='kind' th:value='${replyList[0].kind}' />
+		<input type='hidden' name='kind' th:value='${replyList[0].kind}' />
+		<input type='hidden' name='sno' th:value='${replyList[0].store.sno}' />
 	</form>
 </div>
 
 
 
 
-<div class="modal fade" id="modifyState" tabindex="-1" role="dialog"
-	aria-labelledby="modifyModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+<div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modifyModalLabel">배송중으로 상태를
-					변경하시겠습니까?</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class=modal-title>상품 문의 댓글</h4>
 			</div>
 			<div class="modal-body">
-				'배송하기'버튼을 누르면 해당 주문건은 배송하기로 변경됩니다. 정말로 변경하시겠습니까?
-				<!--해당 글 삭제하는 주소값받는 input 태그-->
+				<div class="form-group" th:each = arr:${replyList}>
+					<label for="rno">댓글 번호</label>
+					<input class="form-control" id="rno" name="rno" th:value="${arr.rno}" readonly>
+					<label for="rno">상품명</label>
+					<input class="form-control" id="pname" name="pname" th:value="${arr.product.pname}" readonly >
+					<label for="rno">댓글 내용</label>
+					<input class="form-control" id="replyContent" name="replyContent" th:value="${arr.content}" readonly>
+					<label for="rno">작성자</label>
+					<input class="form-control" id="writer" name="writer" th:value="${arr.mid}" readonly>
+				</div>
 			</div>
 			<div class="modal-footer">
-
-				<button type="button" class="btn btn-primary" id="modifyState"
-					onclick=location.replace="modifyURL">배송중으로 전환하기</button>
-
+				<button type="button" class="btn btn-primary" id="register">댓글 등록하기</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
@@ -160,7 +217,31 @@
 	<script th:inline="javascript">
 
 $(document).ready(function(){
-	
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on the button, open the modal 
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
 		var replyForm = $("#replyForm");
 		var pageMaker = [[${pageMaker}]];
 	
@@ -179,15 +260,14 @@ $(document).ready(function(){
 	        replyForm.submit();
 	    });
 	    
-		$('#remove-btn').click(function() {
+		$('.remove-btn').click(function(e) {
 		
 			if (confirm("해당 공지를 삭제하시겠습니까?") == true){ 
-				notifyForm.html("");
-				$("input[name='checkbox']:checked").each(function(index, item){
-					
-					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");
-				});
-				notifyForm.attr("method", "post").attr("action","/notify/sellerNotify?sid=seller1").submit(); 
+				console.log()
+				replyForm.html("");
+				replyForm.attr("method", "post")
+				.append("<input type='hidden' name='rno' value='"+$(this).attr("data-rno")+"' >")
+				.attr("action","/qna/list?kind=q&sno=1").submit(); 
 			}else{ 
 			    return;
 			}
@@ -212,38 +292,34 @@ $(document).ready(function(){
 			    return;
 			}
 		});
-		
+		/* 	$('#modifyState').on('show.bs.modal', function(event){
+
+
+		var button = $(event.relatedTarget);
+		var modifyURL = button.data('title');
+		var modal = $(this);
+		var result = '<th:value = "${orderList.order.state}"/">';
+
+		checkModal(result);
+
+		function checkModal(result){
+			
+			if(result === ''){
+				return;
+			}
+			
+			if(parseInt(result) > 0){
+		    	$(".modal-body").html("해당주문건"+ parseInt(result) + 배송주문으로 상태를 전환합니다.);
+
+			}
+			
+			$("#modifyState").modal("show");
+		}
+
+		})
+		*/
 });
- */
-	
-	
 
-/* 	    $('#modifyState').on('show.bs.modal', function(event){
-
-
-var button = $(event.relatedTarget);
-var modifyURL = button.data('title');
-var modal = $(this);
-var result = '<th:value = "${orderList.order.state}"/">';
-
-checkModal(result);
-
-function checkModal(result){
-	
-	if(result === ''){
-		return;
-	}
-	
-	if(parseInt(result) > 0){
-    	$(".modal-body").html("해당주문건"+ parseInt(result) + 배송주문으로 상태를 전환합니다.);
-
-	}
-	
-	$("#modifyState").modal("show");
-}
-
-})
-*/
 	</script>
 </th:block>
 </html>

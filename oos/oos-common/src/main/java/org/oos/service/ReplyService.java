@@ -18,11 +18,15 @@ public interface ReplyService {
 	
 	public List<ReplyVO> getList(Map<String, Object> map);	
 	
-	public List<ReplyVO> getDetailList(Map<String, Object> map);
+	public List<ReplyVO> getStoreReply(Map<String, Object> map);
 	
 	public ReplyPageDTO getListPage(Map<String, Object> map);
 	
 	public int count(Map<String, Object> map);
 	
 	public int myOrderCount(Map<String, Object> map);
+	
+	public List<ReplyVO> getDetailList(Map<String, Object> map);
+	
+	public int getRemove(Long rno);
 }
