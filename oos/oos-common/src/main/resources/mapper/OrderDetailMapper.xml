@@ -88,7 +88,7 @@
 
 	<select id="getListByOno"
  		resultMap="OrderDetail">
-	select odno, od.ono, p.pno, od.qty, od.opno, pnum, address, pname, price addressDetail,
+	select odno, od.ono, o.size, p.pno, od.qty, od.opno, pnum, address, pname, price addressDetail,
 		uuid, ipath, iname from tbl_order_detail od left join tbl_product p 
 	on od.pno =p.pno left join tbl_product_option o on od.pno=o.pno left join tbl_product_img i
     on od.pno = i.pno
