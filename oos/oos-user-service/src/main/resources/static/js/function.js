@@ -5,6 +5,18 @@ var header = $("meta[name='_csrf_header']").attr("content");
 var csrfName = $("meta[name='_csrf_name']").attr("content");
 var mid = $("#userMid").val();
 
+function slideUp(){
+	$(".MultipleSelectBox").slideUp();
+	$(".layoutSelectBox").removeClass("open");
+	$("#searchOptionSelect").addClass("open");
+}
+
+function slideDown(){
+	$(".MultipleSelectBox").slideDown();
+	$(".layoutSelectBox").addClass("open");
+	$("#searchOptionSelect").removeClass("open");
+}
+
 $(".goSearch").click(function(){
 	
 	var keyword = $("#searchText").val();

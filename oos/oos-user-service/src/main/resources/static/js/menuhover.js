@@ -9,14 +9,12 @@ $("#searchOptionSelect").click(function(){
 });    
 
 
-$(".Top_Menu").hover(
-        function () {
-            $(this).show();
-        },
-        function () {
-            $(this).hide();
-        }
-    );
+$(".bigCategory, .TopLi").click(function(){
+	actionForm.html("");
+	actionForm.attr("action","/user/list")
+			.append("<input type='hidden' name='cate' value='"+$(this).data("cat")+"'>")
+			.submit();
+});
 
 
 function categoryMenuShow(num){
@@ -25,6 +23,8 @@ function categoryMenuShow(num){
         $(".Top_Menu").show();
     }else if(num == 2){
         $(".Bottom_Menu").show();
+    }else if(num == 3){
+        $(".Shoes_Menu").show();
     }
 
 }

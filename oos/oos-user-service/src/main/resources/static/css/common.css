@@ -117,10 +117,8 @@ button, input, table, div, textarea, a, span {
 	border-width: 0px 1px 1px;
 	border-right-style: solid;
 	border-bottom-style: solid;
-	border-left-style: solid;
 	border-right-color: rgb(225, 225, 225);
 	border-bottom-color: rgb(225, 225, 225);
-	border-left-color: rgb(225, 225, 225);
 	border-image: initial;
 	border-top-style: initial;
 	border-top-color: initial;
@@ -673,10 +671,6 @@ ul.date_pick li input {
 	font-size: 24px;
 	width: 1100px;
 	text-align: center;
-}
-
-.menuMouseOver.hover {
-	text-decoration: underline;
 }
 
 .div_line_grey_2px {
@@ -3949,7 +3943,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #TopSinsang .textImg {
-	width: 78px;
+	width: 45px;
 	height: 22px;
 	background: url('../img/btn_home_nv_menu_02_off.png') no-repeat;
 	background-size: 43px;
@@ -3967,7 +3961,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #BottomSinsang .textImg {
-	width: 78px;
+	width: 45px;
 	height: 22px;
 	background: url('../img/btn_home_nv_menu_03_off.png') no-repeat;
 	background-size: 43px;
@@ -3985,7 +3979,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #ShoesSinsang .textImg {
-	width: 78px;
+	width: 45px;
 	height: 22px;
 	background: url('../img/btn_home_nv_menu_04_off.png') no-repeat;
 	background-size: 43px;
