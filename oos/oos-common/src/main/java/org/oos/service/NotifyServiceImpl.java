@@ -26,13 +26,13 @@ public class NotifyServiceImpl implements NotifyService{
 	}
 
 	@Override
-	public NotifyVO get(long sbno) {
+	public NotifyVO get(Long sbno) {
 		// TODO Auto-generated method stub
 		return mapper.get(sbno);
 	}
 
 	@Override
-	public int delete(long sbno) {
+	public int delete(Long sbno) {
 		// TODO Auto-generated method stub
 		return mapper.delete(sbno);
 	}
@@ -53,6 +53,20 @@ public class NotifyServiceImpl implements NotifyService{
 	public int sidCount(Map<String, Object> map) {
 		
 		return mapper.sidCount(map);
+	}
+
+	@Override
+	public int popupSwitch(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.popupSwitch(map);
+	}
+
+
+
+	@Override
+	public List<NotifyVO> popupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.popupList(map);
 	}
 
 	

@@ -25,13 +25,13 @@ public class AdminNotifyServiceImpl implements AdminNotifyService {
 	}
 
 	@Override
-	public AdminNotifyVO get(long bno) {
+	public AdminNotifyVO get(Long bno) {
 		// TODO Auto-generated method stub
 		return mapper.get(bno);
 	}
 
 	@Override
-	public int delete(long bno) {
+	public int delete(Long bno) {
 		// TODO Auto-generated method stub
 		return mapper.delete(bno);
 	}
