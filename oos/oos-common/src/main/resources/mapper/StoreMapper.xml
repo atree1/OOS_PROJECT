@@ -77,7 +77,17 @@
 		<if test="cri.category != null">
 			and a.sname like concat("%", #{cri.keyword} ,"%")
 		</if>
-		order by c.likeNum desc
+		<choose>
+			<when test="cri.orderby == '1'.toString()">
+				order by c.likeNum desc
+			</when>
+			<when test="cri.orderby == '2'.toString()">
+				order by pdNum desc
+			</when>
+			<otherwise>
+				order by a.sno desc
+			</otherwise>
+		</choose>
 		limit #{cri.skip}, #{cri.amount}
 	</select>
 
