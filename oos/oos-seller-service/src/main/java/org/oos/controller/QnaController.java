@@ -10,6 +10,7 @@ import org.oos.domain.PageDTO;
 import org.oos.domain.ReplyVO;
 import org.oos.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,6 +65,18 @@ public class QnaController {
         return "redirect:/qna/list?kind=q&sno=1";
 		
 	}
+	
+	//팝업창화면
+	@GetMapping("/qnaDetail")
+	public void qnaDetail(long pno, String kind, Model model) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+  
+		
+		map.put("pno", pno);
+		map.put("kind", kind);
+		model.addAttribute("replyList", replyService.getDetailList(map));
+}
 }
 
 

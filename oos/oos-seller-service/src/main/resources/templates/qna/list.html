@@ -119,10 +119,10 @@
 				<tbody>
 
 					<tr class="replyData" role="row" th:each=arr:${replyList}>
-						<td class="rno" th:text=${arr.rno}></td>
+						<td class="rno"  th:text=${arr.rno}></td>
 						<td class="kind" th:text=${arr.kind}></td>
-						<td class="kind" th:text=${arr.pno}></td>
-						<td class="title" th:text=${arr.title}></td>
+						<td class="pno" th:text=${arr.pno}></td>
+						<td class="title" th:text=${arr.title} th:data-mid="|${arr.mid}|" th:data-pno="|${arr.pno}|" th:data-kind="|${arr.kind}|"></td>
 						<td class="mid" th:text=${arr.mid}></td>
 						<td class="state" th:text=${arr.state}></td>
 						<td class="ragdate"
@@ -171,6 +171,15 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <p>Some text in the Modal..</p>
+    <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class=modal-title>상품 문의 댓글</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group" th:each = arr:${replyList}>
+					<label for="rno">댓글 번호</label>
+					<input class="form-control" id="rno" name="rno" th:text="${arr.rno}" readonly>
+				</div>
   </div>
   
 
@@ -189,7 +198,7 @@
 
 
 
-
+<!-- 
 <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -215,18 +224,23 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 
 <script src="/js/jquery.min.js"></script>
 <th:block layout:fragment="script">
-	<script th:inline="javascript">
+<script th:inline="javascript">
 
 $(document).ready(function(){
 
-	var span = document.getElementsByClassName("close")[0];
+	/* var span = document.getElementsByClassName("close")[0]; */
 
-	$("#myBtn").click(function(){
+	
+/* 	$(".title").click(function(){
+		
+		
+		
+		console.log("hello");
 		 $("#myModal").attr("style","display:block");
 	});
 
@@ -235,10 +249,11 @@ $(document).ready(function(){
 	}
 
 	window.onclick = function(event) {
-	  if (event.target == modal) {
+	  if (event.target == $("#myModal")) {
 		 $("#myModal").attr("style","display:none");
 	  }
-	}
+	} */
+	
 		var replyForm = $("#replyForm");
 		var pageMaker = [[${pageMaker}]];
 	
@@ -289,34 +304,18 @@ $(document).ready(function(){
 			    return;
 			}
 		});
-		/* 	$('#modifyState').on('show.bs.modal', function(event){
-
-
-		var button = $(event.relatedTarget);
-		var modifyURL = button.data('title');
-		var modal = $(this);
-		var result = '<th:value = "${orderList.order.state}"/">';
-
-		checkModal(result);
-
-		function checkModal(result){
+		
+		$(".title").click(function() {
+			var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+		
+			var pno = $(this).data("pno");
+			var mid = $(this).data("mid");
+			var kind = $(this).data("kind");
 			
-			if(result === ''){
-				return;
-			}
-			
-			if(parseInt(result) > 0){
-		    	$(".modal-body").html("해당주문건"+ parseInt(result) + 배송주문으로 상태를 전환합니다.);
+			window.open("/qna/qnaDetail?kind="+kind+"&pno="+pno+"&mid="+mid, "replyList", popOption);
+		});
+	});
 
-			}
-			
-			$("#modifyState").modal("show");
-		}
-
-		})
-		*/
-});
-
-	</script>
+</script>
 </th:block>
 </html>
