@@ -22,7 +22,6 @@
 	<resultMap type="org.oos.domain.StoreVO" id="Store">
 		<result column="sno" property="sno" />
 		<result column="sname" property="sname" />
-		<result column="zzim" property="zzim" />
 		<collection property="imgList" resultMap="Image" />
 	</resultMap>
 	
@@ -110,30 +109,7 @@
 		order by cateno asc, cnt desc
 		limit 0, 6
 	</select>
-	
-	<select id="bestStoreList" resultType="org.oos.domain.StoreVO" resultMap="Store">
-		<![CDATA[
-		select * from tbl_store_img c
-		join(select pr.sno, pr.sname, pr.zzim, count(*) cnt from tbl_order_detail d
-					join(select a.pno, a.sno, a.sname, b.zzim from (select pno, p.sno, sname from tbl_product p
-		join(select sno, sname from tbl_store
-		where sno > 0 and del = 'N') s
-		on p.sno = s.sno
-		where p.pno > 0 and del = 'N') a
-		join(select sno, count(*) zzim from tbl_store_like
-		where lno > 0
-		group by sno) b
-		on a.sno = b.sno
-		group by a.sno) pr
-					on pr.pno = d.pno                    
-					where odno > 0 and del = 'N'
-					and to_days(now()) - to_days(d.regdate) <= 7
-					group by d.pno) d
-		on c.sno = d.sno
-		where uuid != ""
-		limit 0, 6
-		]]>
-	</select>
+
 	
 	<!-- <select id="getList" parameterType="map" resultMap="Product">
 		select p.pno, p.pname, price, sname, p.del, s.sno ,p.regdate

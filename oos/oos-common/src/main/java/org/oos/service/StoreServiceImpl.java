@@ -134,5 +134,10 @@ public class StoreServiceImpl implements StoreService {
 		return mapper.getStoreLike(vo);
 	}
 
+	@Override
+	public List<StoreVO> getStoreList(PageDTO dto) {
+		return mapper.getStoreList(dto);
+	}
+
 	
 }

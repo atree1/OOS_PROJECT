@@ -71,39 +71,43 @@
 							<col width="80">
 							<col width="140">
 							<col width="80">
-							<col width="70">
-							<col width="225">
-							<col width="90">
 							<col width="100">
+							<col width="90">
+							<col width="70">
+							<col width="70">
 						</colgroup>
 						<thead>
 							<tr style="background-color: #fff;">
 								<th class="">이미지</th>
 								<th class="">상호</th>
 								<th class="">주소</th>
+								<th class="">연락처</th>
 								<th class="">스토어찜수</th>
 								<th class="">상품수</th>
-								<th class="">관리</th>
 							</tr>
 						</thead>
 						<tbody id="storeSearchList_tbody">
 							<tr id="trade_13695" class="height90" th:each="arr : ${store}">
+							
 								<td class="borderBottom">
 									<div class="store_thumb">
-										<img class="goods_li_img" src=""></div>
+										<img class="goods_li_img" th:id="|thumb_${arr.sno}|" style="height:80px;"></div>
 								</td>
 								<td class="borderBottom" style="padding: 1px 10px;">
 									<a class="linkClass" th:id="|sno_${arr.sno}|" 
 										style="color: #333; cursor:pointer" th:text="${arr.sname}">SNAME</a>
 								</td>
 								<td class="borderBottom" style="padding: 1px 10px;"
-									th:text="${arr.zzim}">
+									th:text="${arr.saddress}">
 								</td>
-								<td class="borderBottom"><span style="color: #ffa000;">6,964</span></td>
-								<td class="borderBottom">
-									<button class="optionModifi" style="width: 100px;">
-										스토어찜 추가
-									</button>
+								<td class="borderBottom" style="padding: 1px 10px;"
+									th:text="${arr.tel}">
+								</td>
+								<td class="borderBottom" style="padding: 1px 10px;"
+									th:text="${arr.likeNum}">
+								</td>
+								<td class="borderBottom" style="color: #ffa000;padding: 1px 10px;"
+									th:text="${arr.pdNum}">
 								</td>
 							</tr>
 						</tbody>
@@ -114,9 +118,10 @@
 		
 	</div>
 	
+	<div th:text="${pageMaker}"></div>
 	<div style="text-align:center;">
 		<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
-		<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
+		<div class="showPage" style="display:inline-block; vertical-align:top;" th:each="page : ${pageList}">
 			<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
 		<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
 	</div>
@@ -135,14 +140,29 @@
 			var cri = [[${cri}]];
 			var product = [[${product}]];
 			var pageMaker = [[${pageMaker}]];
+			var store = [[${store}]];
+			
 			
 			(function() {
-			
-				$.each(product, function(index, item){
-					img = item.imgList[0];
-					var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
-					$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
-				}); 
+				
+				if(product){
+					$.each(product, function(index, item){
+						var img = item.imgList[0];
+						var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+						$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
+					}); 
+				};
+				
+				if(store){
+					$.each(store, function(index, item){
+						var img = item.imgList[0];
+						if(img){
+							var fileCallPath =  encodeURIComponent(img.ipath+"/s_"+img.uuid +"_"+img.iname);
+							$("#thumb_"+item.sno).attr("src","/display?fileName="+fileCallPath);
+						}
+					});
+				};
+				
 				
 				$("#pageNum").val(pageMaker.cri.pageNum);
 				$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
@@ -186,7 +206,6 @@
 			
 			$(".linkClass").click(function(e){
 				e.preventDefault();
-				var sno = $(this).attr("id").substring(4);
 				listForm.attr("action","/store/list")
 						.append("<input type='hidden' name='sno' value='"+sno+"'>").submit();
 			});
