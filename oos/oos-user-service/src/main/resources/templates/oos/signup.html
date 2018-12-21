@@ -20,8 +20,18 @@
 input[type="checkbox"], input[type="radio"]{
 	display:unset;
 }
+
+
+input, select{
+	font-size:12px;
+	color:#5b5b5b
+}
 .personalTd{
 	border:none
+}
+
+.orderInfo{
+	border :1px solid #e1e1e1;
 }
 </style>
 <body>
@@ -34,7 +44,8 @@ input[type="checkbox"], input[type="radio"]{
 		<input type='hidden' name="pnum" id="pnumResult"/>
 			<table class="basketGoodsTableEnd" style="width: 760px;  border-top: 4px solid #e5e5e5;">
 				<div style="margin:0 auto; width:430px; padding: 20px 0">
-					<img src="/img/oos_logo.jpg" style="width: 300px; margin: 20px auto; display:block; ">
+					<img src="/img/oos_logo.jpg" onclick="location.href='/main'"
+					style="width: 300px; margin: 20px auto; cursor:pointer; display:block; ">
 					<img src="/img/step1.png">
 				</div>
 				<tbody>
@@ -67,17 +78,17 @@ input[type="checkbox"], input[type="radio"]{
 						<td class="personalTd headTitle" style="">휴대폰 번호</td>
 						<td class="personalTd" style="position: relative;">
 						<div style="margin:10px 0 0 3px">
-							<select class="addressInfo" id="pnum" style="width:60px;"> 
+							<select class="orderInfo" id="pnum" style="width:70px;"> 
 								<option value="010">010</option> 
 								<option value="011">011</option> 
 								<option value="016">016</option> 
 								<option value="019">019</option> 
 							</select> 
 							<span class="dash">-</span> 
-							<input type="text" style="width:35px;" maxlength="4" class="addressInfo" id="pnum2"
+							<input type="text" style="width:70px;" maxlength="4" class="orderInfo" id="pnum2"
 												onkeydown="onlyNumber(event)" onkeyup="removeChar(event)" value="1234"> 
 							<span class="dash">-</span> 
-							<input type="text" style="width:35px;" maxlength="4" class="addressInfo" id="pnum3"
+							<input type="text" style="width:70px;" maxlength="4" class="orderInfo" id="pnum3"
 												onkeydown="onlyNumber(event)" onkeyup="removeChar(event)" value="5678">
 						</div>
 						<span id="failPHONE"></span>

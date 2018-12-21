@@ -86,7 +86,8 @@
 					<tr class="height100" th:each=arr:${storeList}>
 						<td ><img th:id="|img_${arr.sno}|" class="storeImg"
 									style="width: 100%; display: block;"></td>
-						<td th:text="${arr.sname}">상호명</td>
+						<td th:text="${arr.sname}" style="cursor:pointer"
+						 th:onclick="|location.href='/store/list?sno=${arr.sno}'|">상호명</td>
 						<td th:text="${arr.saddress}">주소</td>
 						<td th:text="${arr.tel}">연락처</td>
 						<td class=""><button class="optionModifi" style="width:50px;" th:id="${arr.sno}">삭제</button></td>
@@ -126,11 +127,13 @@
 			(function() {
 				
 				$.each(store, function(index, item){
+			
 					img = item.imgList[0];
 					if(img != null){
 						var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
-						$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
+						$("#img_"+item.sno).attr("src","/display?fileName="+fileCallPath);
 					}
+					
 				}); 
 				
 				$("#pageNum").val(pageMaker.cri.pageNum);

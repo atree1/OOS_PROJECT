@@ -61,11 +61,17 @@ input {
 .joinInput{
 	height:30px;
 }
+
+::-webkit-scrollbar {width: 12px; height: 12px;  }
+::-webkit-scrollbar-button:start:decrement, 
+::-webkit-scrollbar-button:end:increment {display: block; width: 12px;height: 12px; background: url() rgba(0,0,0,.05);}
+::-webkit-scrollbar-track {     background: #ff7f7a; }
+::-webkit-scrollbar-thumb {  background:#ff7f7a;  }
 </style>
 <div class="myPageContentArea" style="position: relative;">
 	
 		<div class="orderlistArea"
-			style="left: 225px; width: 600px; margin: 68px 0; min-height: 600px;">
+			style="left: 225px; width: 600px;">
 
 			<table class="myPageSheetTable" style="width: 569px; margin:0 auto">
 				<colgroup>
@@ -135,13 +141,18 @@ input {
                     <tr>
                     	<td class="personalTd headTitle" style="">연락처</td>
                     	<td class="personalTd" style="position:relative;">
-                    		<input type="text" readonly="readonly" class="joinInput">
+                    		<input type="hidden" id="hiddenPnum" th:value="${detail[0].pnum}">
+                    		<input type="text" id="pnum" readonly="readonly" class="joinInput">
                     	</td>
                     </tr>
                     <tr>
                     	<td class="personalTd headTitle" style="">주소</td>
                     	<td class="personalTd" style="position:relative;">
-                    		<input type="text" readonly="readonly" class="joinInput">
+                    		<input type="hidden" id="hiddenAddress" 
+                    			th:value="${detail[0].address}">
+                    		<input type="hidden" id="hiddenDetail" 
+                    			th:value="${detail[0].addressDetail}">
+                    		<input type="text" id="address" readonly="readonly" class="joinInput">
                     	</td>
                     </tr>
            </table>
@@ -157,9 +168,8 @@ $(document).ready(function(){
 	var token = $("meta[name='_csrf']").attr("content");
 	var csrfName = $("meta[name='_csrf_name']").attr("content");
 	var ono = String([[${detail[0].ono}]]);
-	var tel = String([[${detail[0].pnum}]]);
+	var tel = $("#hiddenPnum").val();
 	
-
 	(function(){
 		$.each($(".hiddenImg"), function(index, item){
 			
@@ -169,11 +179,13 @@ $(document).ready(function(){
 			var imgDiv= $('.img_'+item.dataset.odno);
 			imgDiv.attr("src","/display?fileName="+fileCallPath);
 		}); 
+		
+	 	$("#pnum").val(tel.substring(0,3) +" - "+ 
+				String(tel.substring(3,7)) +" - "+ String(tel.substring(7))); 
+	 	$("#address").val($("#hiddenAddress").val()+" "+$("#hiddenDetail").val())
 	})();
-	console.log(tel);
-	$("#pnum").val("0"+tel.substring(0,2));
-	$("#pnum2").val(tel.substring(2,6));
-	$("#pnum3").val(tel.substring(6)); 
+	
+	
 	
 	$(".orderRemove").click(function(){
 		$("#orderDetailForm").append("<input type='hidden' name='odno' value='"+$(this).attr("id")+"'>")

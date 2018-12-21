@@ -4,7 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.MemberMapper">
-
+	<resultMap type="org.oos.domain.ProductImgVO" id="Image">
+		<result column="uuid" property="uuid" />
+		<result column="pno" property="pno"/>
+		<result column="iname" property="iname" />
+		<result column="ipath" property="ipath" />
+	</resultMap>
+	<resultMap type="org.oos.domain.StoreVO" id="Store">
+		<result column="sno" property="sno" />
+		<result column="sname" property="sname" />
+		<result column="mid" property="mid" />
+		<result column="saddress" property="saddress" />
+		<result column="tel" property="tel" />
+		<collection property="imgList" resultMap="Image" />
+	</resultMap>
+	
 	<select id="getList" resultType="org.oos.domain.MemberVO">
 		select* from tbl_member
 		where mid !=''
@@ -52,7 +66,7 @@
 	where mid != '' and del = 'N'
 	</select>
 	
-	<select id="getMyStoreList" resultType="org.oos.domain.StoreVO">
+	<select id="getMyStoreList" resultMap="Store">
 		select mid, l.sno, sname, saddress, tel, uuid, ipath, iname from tbl_store_like l
 		right join tbl_store s
 		on l.sno = s.sno
