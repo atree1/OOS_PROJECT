@@ -1,6 +1,5 @@
 package org.oos.domain;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.Data;
@@ -15,5 +14,7 @@ public class NotifyVO {
 	private Date updatedate, regdate;
 	private String state;
 	
+	private String sname;
+	private Long sno;
 	
 }

@@ -156,12 +156,12 @@
 <script th:inline="javascript">
 	$(document).ready(function() {
 		
-		console.log('a');
+	
 		new Morris.Donut({
 			element : "donut",
 			data : [ {
 				label : "일매출",
-				value : [[${day}]]
+				value : [[${day}]] 
 			} ]
 		});
 		new Morris.Donut({

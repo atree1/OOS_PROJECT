@@ -36,12 +36,15 @@
 		</div>
 		
 		
-		<div class="buttonArea" style="text-align: center;">
-			<button type='submit' class="backList" id="backList"
-				onclick='javascript:self.close();' style="margin-top: 25px;">목록
-				돌아가기</button>
+		
+		<form name="frm" method="post" action="">
+		<div>		
+		 <div><input class="PopupCheck" type="checkbox" name="pop"></div>
+         <div style="font-size:11px;">1일동안 이 창을 열지 않음</div>
+		 <div  style="font-size:11px;"><a id="closeBtn"  href="#" onfocus="this.blur()">[닫기]</a></div>
 		</div>
-
+		</form>
+	
 <form id="notifyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
@@ -49,14 +52,18 @@
 		<input type='hidden' name='sid' th:value='${seller.sid}'/>
 </form>
 
+
 <script src="/js/jquery.min.js"></script>
 <th:block layout:fragment="script">
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>
 	<script th:inline="javascript">
 
 $(document).ready(function(){
 	
 	var notifyForm = $("#notifyForm");
-	
+	var popupList =[[${popupList}]];
+	  
+	  
 	$(".move").on("click",function(e){
 		
 		console.log("click...");
@@ -66,7 +73,61 @@ $(document).ready(function(){
 		notifyForm.submit();
 	});
 	
-	
+	function setCookie(name, value, expiredays){
+	    var todayDate = new Date();
+	        todayDate.setDate (todayDate.getDate() + expiredays);
+	        document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+	 }
+	var cookieList = function(cookieName) {
+		
+		var cookie = $.cookie(cookieName);
+		
+		var items = cookie ? cookie.split(/,/) : new Array();
+
+		return {
+		    "add": function(val) {
+		      
+		        items.push(val);
+		        
+		        $.cookie(cookieName, items.join(','));
+		    },
+		    "remove": function (val) { 
+		        
+		        indx = items.indexOf(val); 
+		        if(indx!=-1) items.splice(indx, 1); 
+		        $.cookie(cookieName, items.join(','));
+			 },
+		    "clear": function() {
+		        items = null;
+		        
+		        $.cookie(cookieName, null);
+		    },
+		    "items": function() {
+		        
+		        return items;
+		    }
+		  }
+		}  
+
+	console.log(popupList[0].sno);
+	 
+		$("#closeBtn").click(function (e){
+			e.preventDefault();
+	        if (document.frm.pop.checked){
+	        	console.log('popclose')
+	        	$.cookie('popOpen', $.cookie(popupList[0].sno);
+	        	
+	        /* 	if($.cookie("popOpen")!== null){
+	        	$.cookie('popOpen',popupList.sno);
+	        	}
+	        	else{
+	        		$.cookie('popOpen', $.cookie(popupList[0].sno);
+	        	}	 */
+	        }
+	   self.close();
+	});
+
+		
 });
 	
 		

@@ -77,7 +77,8 @@
 	</select>
 	<select id="total" parameterType="map" resultType="Integer">
 		select
-		sum(od.qty*p.price)
+		ifnull((sum(od.qty*p.price)),0)
+		
 		from
 		tbl_order_detail od join tbl_product p on
 		od.pno=p.pno

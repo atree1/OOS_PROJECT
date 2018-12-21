@@ -30,6 +30,8 @@ public class HomeController {
 	public void test() {
 		
 	}
+	
+
 	@GetMapping("/main")
 	public void storeMain(String sid, Model model) {
 		log.info("register get~");

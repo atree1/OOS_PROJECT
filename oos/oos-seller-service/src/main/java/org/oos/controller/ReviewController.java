@@ -24,16 +24,16 @@ import lombok.extern.java.Log;
 
 @Log
 @Controller
-@RequestMapping("/qna/*")
-public class QnaController {
+@RequestMapping("/rev/*")
+public class ReviewController { 
 	
 	@Setter(onMethod_=@Autowired)
 	private ReplyService replyService;
-	
+
 	//화면리스트
 	@GetMapping("/list")
 	public void getList(Model model,String kind, Criteria cri, int sno) {
-		
+
 		Map<String,Object> map  = new HashMap<String, Object>();
 		map.put("kind", kind);
 		map.put("sno", sno);
@@ -65,28 +65,28 @@ public class QnaController {
             }
     	
         
-        return "redirect:/qna/list?kind=q&sno=1";
+        return "redirect:/rev/list?kind=r&sno=1";
 		
 	}
 	
 	//팝업창화면
-	@GetMapping("/qnaDetail")
+	@GetMapping("/reviewDetail")
 	public void qnaDetail(long pno, int parent, Model model) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
   
 		
 		map.put("pno", pno);
-		map.put("kind", "q");
+		map.put("kind", "r");
 		map.put("parent", parent);
 		model.addAttribute("replyList", replyService.sellerReply(map));
 }
 	//팝업창화면 댓글등록하기
-	@PostMapping("/qnaDetail")
+	@PostMapping("/reviewDetail")
 	public String popInsert(ReplyVO vo) {
 		int count = replyService.sellerInsert(vo);
 		
-    	return "redirect:/qna/qnaDetail?pno="+vo.getPno()+"&parent="+vo.getParent();
+    	return "redirect:/rev/reviewDetail?pno="+vo.getPno()+"&parent="+vo.getParent();
 	}
 }
 
