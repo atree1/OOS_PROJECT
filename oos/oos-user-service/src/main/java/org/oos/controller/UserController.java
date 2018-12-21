@@ -260,13 +260,7 @@ public class UserController {
    
         List<OrderVO> order = orderService.getList(map);
       
-        order.forEach(vo -> {
-        	List<OrderDetailVO> list  = orderDetailService.getList(vo.getOno());
-        	
-        	vo.setDetail(list.get(0));
-        });
-        
-        model.addAttribute("orderList", order);
+       model.addAttribute("orderList", order);
         
         List<Integer> pageList = new ArrayList<>();
         
