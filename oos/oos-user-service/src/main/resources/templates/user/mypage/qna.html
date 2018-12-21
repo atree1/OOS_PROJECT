@@ -59,8 +59,8 @@
 					<col width="80">
 					<col width="150">
 					<col width="350">
-					<col width="80">
 					<col width="150">
+					<col width="80">
 				</colgroup>
 				<thead>
 					<tr
@@ -69,8 +69,8 @@
 						<th class="">문의 유형</th>
 						<th class="">상품명</th>
 						<th class="">제목</th>
-						<th class="">답변여부</th>
 						<th class="">등록일</th>
+						<th class="">답변여부</th>
 					</tr>
 				</thead>
 				<tbody id="questionlist_tbody">
@@ -81,13 +81,13 @@
 						<td class="replyTitle go" th:id="|ono_${arr.rno}|" 
 						th:data-pno="|${arr.pno}|" th:data-parent="|${arr.parent}|"
 							th:text="${arr.title}"></td>
+						<td th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 						<td th:if="${arr.state == 'Y'}">
 							<span style="color:#0288d1">답변완료</span>
 						</td>
 						<td th:if="${arr.state == 'N'}">
 							<span style="color:#ffa000">답변대기</span>
 						</td>
-						<td th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 				</tbody>
 			</table>
 			<div style="width: 800px; height: 28px; margin: 20px 0;"></div>
