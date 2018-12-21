@@ -152,9 +152,14 @@
 		where rno=#{rno}
 	</update>
 	
+	<update id="stateUpdate">
+		update tbl_reply set state='Y'
+		where parent=#{parent}
+	</update>
+	
 	<insert id="sellerInsert">
-		insert into tbl_reply(pno, sid, title, content, parent, kind, depth)
-		values(#{pno},#{sid},#{title},#{content},#{parent},#{kind}, #{depth})
+		insert into tbl_reply(pno, sid, content, title, parent, kind, depth)
+		values(#{pno},#{sid},#{content},#{title},#{parent},#{kind}, #{depth})		
 	</insert>
 
 </mapper>

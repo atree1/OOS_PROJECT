@@ -37,6 +37,8 @@ public interface ReplyMapper {
 	
 	public List<ReplyVO> sellerReply(Map<String, Object> map);
 	
+	public int stateUpdate(Long parent);
+	
 	public int sellerInsert(ReplyVO vo);
 	
 	

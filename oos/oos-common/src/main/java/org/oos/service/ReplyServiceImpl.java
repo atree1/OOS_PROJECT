@@ -106,9 +106,12 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.sellerReply(map);
 	}
 
+	@Transactional
 	@Override
 	public int sellerInsert(ReplyVO vo) {
-		// TODO Auto-generated method stub
+		
+		mapper.stateUpdate(vo.getParent());
+		
 		return mapper.sellerInsert(vo);
 	}
 	

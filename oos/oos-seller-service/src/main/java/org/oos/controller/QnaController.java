@@ -84,7 +84,6 @@ public class QnaController {
 	//팝업창화면 댓글등록하기
 	@PostMapping("/qnaDetail")
 	public String popInsert(ReplyVO vo) {
-		log.info(vo+"");
 		int count = replyService.sellerInsert(vo);
 		
     	return "redirect:/qna/qnaDetail?kind=q&pno="+vo.getPno()+"&parent="+vo.getParent();
