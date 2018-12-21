@@ -3,9 +3,9 @@ package org.oos.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-import org.hibernate.Criteria;
 import org.oos.domain.AuthDTO;
 import org.oos.domain.MemberVO;
 import org.oos.persistence.MemberRepository;
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -46,6 +47,7 @@ public class LoginController {
 		
 	}
 	
+	
 	@PostMapping(value="/snsSignup")
 	public void getSns(AuthDTO dto, Model model) {
 		dto.setAccess_token(dto.getAccess_token().replaceAll("\\p{Z}", "+"));
@@ -68,10 +70,11 @@ public class LoginController {
 		
 	}
 	
-	@PostMapping(value= {"/logout"})
+	/*@PostMapping(value= {"/logout"})
 	public String logout() {
 		return "redirect:/main";
-	}
+	}*/
+
 	
 	@Transactional
 	@PostMapping(value= {"/with"})

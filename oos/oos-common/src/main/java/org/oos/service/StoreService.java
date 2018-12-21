@@ -13,6 +13,8 @@ public interface StoreService {
 	
 	public List<StoreVO> getStoreList(PageDTO dto);
 	
+	public List<StoreVO> getBestStore();
+	
 	public List<String> getName();
 	
 	public List<ProductImgVO> getImg(Long sno);
@@ -24,7 +26,6 @@ public interface StoreService {
 	public int register(StoreVO vo);
 	
 	public int remove(Long sno);
-	
 	
 	public int upVisitCnt(Long sno);
 	

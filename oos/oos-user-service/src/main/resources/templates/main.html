@@ -90,93 +90,29 @@
 		<div class="item_list_wrap"
 			style="display: block; width: 980px; margin: 0 auto">
 			<ul class="item_list">
-				<li><div class="inner">
-						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
-							class="thumb lazy"
-							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
-							style="display: inline;"> <span class="title">청정난방!
-								가이타이너 컨벡터 히터</span></a>
+				<li th:each="arr : ${bestS}">
+					<div class="inner">
+						<div style="height:180px; overflow:hidden">
+							<img class="thumb" th:id="|bestS_${arr.sno}|" style="display: inline;"> 
+							<span class="title" th:text="${arr.sname}">청정난방! 가이타이너 컨벡터 히터</span>
+						</div>
 						<div class="info">
-
-							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
-								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
-								class="option"><span class="buy">구매 <strong>521</strong></span>
+							<span class="tags"> 
+								<span class="tag" th:text="${arr.tel}"> 최대 1.5% 적립 </span>
+								<!-- <span class="tag">
+									<span class="ico_bar"></span>무료배송
+								</span> -->
+							</span>
+							<span class="option">
+								<span class="buy">구매 
+									<strong th:text="${arr.odNum}">odNum</strong>
+								</span>
 							</span>
 						</div>
-					</div></li>
-				<li><div class="inner">
-						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
-							class="thumb lazy"
-							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
-							style="display: inline;"> <span class="title">청정난방!
-								가이타이너 컨벡터 히터</span></a>
-						<div class="info">
-
-							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
-								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
-								class="option"><span class="buy">구매 <strong>521</strong></span>
-							</span>
-						</div>
-					</div></li>
-				<li><div class="inner">
-						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
-							class="thumb lazy"
-							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
-							style="display: inline;"> <span class="title">청정난방!
-								가이타이너 컨벡터 히터</span></a>
-						<div class="info">
-
-							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
-								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
-								class="option"><span class="buy">구매 <strong>521</strong></span>
-							</span>
-						</div>
-					</div></li>
+					</div>
+				</li>
 			</ul>
-			<ul class="item_list">
-				<li><div class="inner">
-						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
-							class="thumb lazy"
-							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
-							style="display: inline;"> <span class="title">청정난방!
-								가이타이너 컨벡터 히터</span></a>
-						<div class="info">
-
-							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
-								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
-								class="option"><span class="buy">구매 <strong>521</strong></span>
-							</span>
-						</div>
-					</div></li>
-				<li><div class="inner">
-						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
-							class="thumb lazy"
-							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
-							style="display: inline;"> <span class="title">청정난방!
-								가이타이너 컨벡터 히터</span></a>
-						<div class="info">
-
-							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
-								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
-								class="option"><span class="buy">구매 <strong>521</strong></span>
-							</span>
-						</div>
-					</div></li>
-				<li><div class="inner">
-						<span class="sm_akill bt_smileclub">스마일클럽</span> <a><img
-							class="thumb lazy"
-							src="http://image.iacstatic.co.kr/allkill/item/2018/12/20181217095900591r.jpg"
-							style="display: inline;"> <span class="title">청정난방!
-								가이타이너 컨벡터 히터</span></a>
-						<div class="info">
-
-							<span class="tags"> <span class="tag"> 최대 1.5% 적립 </span>
-								<span class="tag"><span class="ico_bar"></span>무료배송</span></span><span
-								class="option"><span class="buy">구매 <strong>521</strong></span>
-							</span>
-						</div>
-					</div></li>
-			</ul>
+			
 		</div>
 		<div class="todaySinsang" style="margin: 40px 0 30px 0;">
 			<span style="background-color: #fff; padding: 0 10px;">포커스 아이템</span>
@@ -186,51 +122,17 @@
 		<div class="today_left_area"
 			style="background-color: #e3e0e8; width: 1100px; padding:10px 0">
 			<ul class="goods_list_t1 goods_list_t6 ul_3col">
-				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
-						<span class="img_wrap_t19"> <img class="lazys"
-							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
-							style="display: inline;">
-					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
-						class="goods_price_04">34,160<em
-							class="font_14 font_normal">원</em>
-					</span>
-				</a></li>
-				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
-						<span class="img_wrap_t19"> <img class="lazys"
-							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
-							style="display: inline;">
-					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
-						class="goods_price_04">34,160<em
-							class="font_14 font_normal">원</em>
-					</span>
-				</a></li>
-				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
-						<span class="img_wrap_t19"> <img class="lazys"
-							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
-							style="display: inline;">
-					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
-						class="goods_price_04">34,160<em
-							class="font_14 font_normal">원</em>
-					</span>
-				</a></li>
-				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
-						<span class="img_wrap_t19"> <img class="lazys"
-							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
-							style="display: inline;">
-					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
-						class="goods_price_04">34,160<em
-							class="font_14 font_normal">원</em>
-					</span>
-				</a></li>
-				<li><a href="http://prod.danawa.com/info/?pcode=4363515">
-						<span class="img_wrap_t19"> <img class="lazys"
-							src="http://img.danawa.com/prod_img/500000/515/363/img/4363515_1.jpg"
-							style="display: inline;">
-					</span> <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> <span
-						class="goods_price_04">34,160<em
-							class="font_14 font_normal">원</em>
-					</span>
-				</a></li>
+				<li>
+					<a>
+						<span class="img_wrap_t19"> 
+							<img style="display: inline;">
+						</span> 
+						<strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> 
+						<span class="goods_price_04">34,160
+							<em class="font_14 font_normal">원</em>
+						</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 
@@ -280,6 +182,7 @@
 	
 		(function(){
 			var bestP =  [[${bestP}]];
+			var bestS =  [[${bestS}]];
 			var product = [[${product}]];
 			
 			$.each(product, function(index, item){
@@ -294,8 +197,19 @@
 				$("#bestP_"+item.pno).attr("src","/display?fileName="+fileCallPath);
 			}); 
 			
-			
+			$.each(bestS, function(index, item){
+				var img = item.imgList[0];
+				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+				$("#bestS_"+item.sno).attr("src","/display?fileName="+fileCallPath);
+			}); 
 		})();
+		
+		$(".item_list .inner").click(function(){
+			
+			mainForm.append("<input type='hidden' name='sno' value='"+
+					$(this).find(".thumb").attr("id").substring(6)+"'>")
+					.attr("action","/store/list").submit();
+		});
 		
 		$(".showcase_con").click(function(){
 			mainForm.append("<input type='hidden' name='pno' value='"+

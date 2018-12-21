@@ -29,6 +29,7 @@
 		<result column="tel" property="tel" />
 		<result column="likeNum" property="likeNum" />
 		<result column="pdNum" property="pdNum" />
+		<result column="odNum" property="odNum" />
 		<collection property="imgList" resultMap="Image" />
 		<collection property="hashList" resultMap="HashTag" />
 	</resultMap>
@@ -92,9 +93,23 @@
 		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
 		where s.sno=#{sno}
 	</select>
-	<select id="get" resultType="org.oos.domain.StoreVO">
+	
+<!-- 	<select id="get" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store where sno = #{sno}
+	</select> -->
+	
+	<select id="getBestStore" resultMap="Store">
+		select s.sno, s.tel, s.sname, uuid, iname, ipath, odNum from tbl_store s
+		left join tbl_store_img i
+		on i.sno = s.sno
+		left join (select sno, count(*) odNum from tbl_order_detail
+					where odno > 0 and del = 'N' group by sno) d
+		on s.sno = d.sno
+		where s.sno > 0 and s.del = 'N' and uuid !=""
+		order by odNum desc
+		limit 0, 6
 	</select>
+	
 	<select id="getBySid" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store where
 		owner = #{owner}

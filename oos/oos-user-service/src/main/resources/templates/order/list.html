@@ -52,10 +52,8 @@
 											<table cellspacing="0" style="width: 100%;">
 												<tbody>
 													<tr class="height60 optionClass">
-
 														<td class=" upDownTd">
 															<div class="upDownDiv">
-
 																<input class="upDownNumArea" type="text" name="price"
 																	th:value="|${arr.qty}개|" placeholder="0"
 																	style="ime-mode: disabled;">
@@ -91,8 +89,9 @@
 										style="padding: 0 30px; border-spacing: 10px;">
 										
 										<div class="payMethodInputArea" style="height: 54px;">
-											<div><strong  th:text="${member.mname}">NAME</strong></div>
 										
+											<div><input class="orderInfo addressInfo" style="width:100px"
+											 type="text" id="orderName" th:value="${member.mname}"></div>
 										<table class="data-row">
 											<colgroup>
 												<col>
@@ -280,8 +279,8 @@
 				$("#pnum").val("019").prop("selected",true);
 			}
 			
-			$("#pnum2").val(tel.substring(5,9));
-			$("#pnum3").val(tel.substring(9));
+			$("#pnum2").val(tel.substring(3,7));
+			$("#pnum3").val(tel.substring(7));
 			
 		})();
 
@@ -312,7 +311,8 @@
 						product: item.product,
 						qty: item.qty,
 						opno: item.opno,
-						sno: item.sno,
+						qty: item.qty,
+						name:  $("#orderName").val(),
 						address: $("#roadAddr2").val(),
 						addressDetail: $("#roadAddr3").val(),
 						pnum: $("#pnum option:selected").val()+$("#pnum2").val()+$("#pnum3").val()

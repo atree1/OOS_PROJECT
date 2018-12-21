@@ -11,6 +11,7 @@ public class OrderDetailVO {
 	private Long qty;
 	private Long opno;
 	private String pnum;
+	private String name;
 	private String address;
 	private String addressDetail;
 	private String del;

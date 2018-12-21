@@ -14,9 +14,9 @@
 
 		<div class="store_container">
 			<div style="width:1000px; margin:0 auto">
-				<div style="display: inline-block;">
-					<img width="500" id="storeImg"
-					style="display: block;width:auto; height:300px;">
+				<div style="display: inline-block; overflow:hidden; height:200px;">
+					<img id="storeImg"
+					style="display: block;width:auto; width:350px">
 				</div>
 				<div class="main_store_info">
 					<div style="font-size: 17px; color: #9b9b9b; margin-bottom: 6px;"
@@ -27,12 +27,14 @@
 					<div id="storeTel"
 						style="font-size: 17px; color: #333; line-height: 1.0; margin-bottom: 30px;"
 						th:text=${store.tel}>TEL</div>
+						
 					<div class="tradeBtnWrapClass" style="position: relative;">
 						<button class="storeHomeTradeBtn">
 							<div class="tradeBtnImg"></div>
 							<span class="tradeStatusBtn">+ 찜리스트 추가</span>
 						</button>
 					</div>
+					
 					<div style="line-height: 1.0 position:relative;">
 						<span style="color: #9b9b9b; font-size: 14px; margin-right: 5px;">찜목록 추가수</span><span
 							class="store_info_text" style="margin-right: 15px;">242</span><span
@@ -123,8 +125,6 @@
 					imgDiv.attr("src","/display?fileName="+fileCallPath); 
 				}); 
 				 
-				
-						console.log();
 				var fileCallPath =  encodeURIComponent(store.imgList[0].ipath+ "/"+
 						store.imgList[0].uuid +"_"+store.imgList[0].iname);
 				 $('#storeImg').attr("src","/display?fileName="+fileCallPath); 
@@ -132,12 +132,64 @@
 				$("#storeTel").html(store.tel.substring(0,3) + "-" + 
 						store.tel.substring(3,7) + "-" + store.tel.substring(7));
 			
-				
 				$("#pageNum").val(pageMaker.cri.pageNum);
 				$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
+				
+				if(pageMaker.cri.pageNum!=1){
+					return;
+				}
+				
+				var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+				var sid = [[${store.owner}]];
+				
+				window.open("/store/popupList?sid="+sid, "store", popOption);
+				
+
+				if(mid != undefined){
+					$.ajax({
+						type:"post",
+						url:"/store/checkzzim/"+store.sno,
+						beforeSend: function(xhr) {
+				            xhr.setRequestHeader(header, token);
+				        },
+				        success:function(result,status,xhr){
+							if(result == "yes"){
+								$(".storeHomeTradeBtn").addClass("on");
+								$(".tradeStatusBtn").html("찜리스트 추가됨");
+							}else if(result == "no"){
+								$(".storeHomeTradeBtn").removeClass("on");						
+							}
+						},
+					});
+				}
+				
 			})();
 			
-		
+			$(".storeHomeTradeBtn").click(function(){
+				if(mid == null){
+					alert("로그인 후 이용할 수 있습니다.");
+					return;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"/user/zzim/"+store.sno,
+					beforeSend: function(xhr) {
+			            xhr.setRequestHeader(header, token);
+			        },
+			        success:function(result,status,xhr){
+						if(result == "insert"){
+							$(".storeHomeTradeBtn").addClass("on");
+							$(".tradeStatusBtn").html("찜리스트 추가됨");
+						}else if(result == "delete"){
+							$(".storeHomeTradeBtn").removeClass("on");
+
+							$(".tradeStatusBtn").html("+ 찜리스트 추가");
+						}
+					},
+				});
+			});			
+			
 			$(".pageControlLeft").click(function(){
 				$("#pageNum").val(Number(pageMaker.startPage) -1);
 				storeForm.submit();
@@ -167,18 +219,6 @@
 				$("#pageNum").val($(this).attr("id").substring(5));
 				storeForm.submit();
 			});
-			console.log(pageMaker);
-			(function() {
-				if(pageMaker.cri.pageNum!=1){
-					
-					return;
-				}
-				var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-							
-				var sid = [[${store.owner}]];
-				
-				window.open("/store/popupList?sid="+sid, "", popOption);
-			})();
 			
 		});
 	</script>
