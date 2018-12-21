@@ -66,7 +66,7 @@ public class UploadController {
 		int under=total.indexOf("_");
 		String totalOrigin=total.substring(under+1);
 		try {
-			File target=new File("\\\\HB03-14\\upload\\"+total);
+			File target=new File("\\\\HB03-26\\upload\\"+total);
 			
 			HttpHeaders header=new HttpHeaders();
 			String downloadName=null;
@@ -100,7 +100,7 @@ public class UploadController {
 	public ResponseEntity<List<ProductImgVO>> upload(MultipartFile[] uploadFile) {
 		
 		List<ProductImgVO> list = new ArrayList<>();
-		String uploadFolder = "\\\\HB03-14\\upload\\";
+		String uploadFolder = "\\\\HB03-26\\upload\\";
 
 		String uploadFolderPath = getFolder();
 		// make folder --------
@@ -162,7 +162,7 @@ public class UploadController {
 
 		//log.info("fileName: " + fileName);
 
-		File file = new File("\\\\HB03-14\\upload\\"+ fileName);
+		File file = new File("\\\\HB03-26\\upload\\"+ fileName);
 
 		//log.info("file: " + file);
 
