@@ -134,10 +134,11 @@ public class UserController {
 		map.put("cri", cri);
 		map.put("mid", name);
 		PageDTO pageDTO = new PageDTO(cri, memberService.getMyStoreCount(map));
-		
-		memberService.getMyStoreList(map).forEach(vo -> {
+	
+		/*memberService.getMyStoreList(map).forEach(vo -> {
 			storeList.add(storeService.get(vo.getSno()));
-		});
+		});*/
+		
 		
 		List<Integer> pageList = new ArrayList<>();
 	    
@@ -147,7 +148,7 @@ public class UserController {
         
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("storeList", storeList);
+		model.addAttribute("storeList", memberService.getMyStoreList(map));
 	}
 	
 	 @PostMapping("/myStoreList")
