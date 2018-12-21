@@ -39,11 +39,11 @@
 	</select>
 
 		
-	<select id="depthGetList" parameterType="map" resultType="org.oos.domain.ReplyVO">
+<!-- 	<select id="depthGetList" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno>0 and mid = #{mid}
 		order by parent desc, depth asc
-	</select>
+	</select> -->
 	
 
 	<select id="sellerReply" parameterType="map" resultType="org.oos.domain.ReplyVO">
@@ -64,7 +64,7 @@
 
 	<select id="getStoreReply" parameterType="map"
 		resultMap="Reply">
-		select rno, p.pno, p.pname, p.sno, mid, content, title, regdate, kind, state, parent from tbl_reply r
+		select rno, p.pno, p.pname, p.sno, mid, content, title, regdate, kind, state,score, parent from tbl_reply r
 		join (select pno, pname, sno, questionreplycnt, reviewreplycnt from tbl_product
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno

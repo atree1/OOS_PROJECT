@@ -27,6 +27,8 @@ public interface StoreMapper {
 	
 	public int modify(StoreVO vo);
 	
+	public int upVisitCnt(Long sno);
+	
 	public int delete(Long sno);
 	
 	public int count(Criteria cri);

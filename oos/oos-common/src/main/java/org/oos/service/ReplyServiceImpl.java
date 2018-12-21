@@ -88,11 +88,11 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.myOrderCount(map);
 	}
 
-	@Override
+	/*@Override
 	public List<ReplyVO> getDetailList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return mapper.depthGetList(map);
-	}
+	}*/
 
 	@Override
 	public int getRemove(Long rno) {

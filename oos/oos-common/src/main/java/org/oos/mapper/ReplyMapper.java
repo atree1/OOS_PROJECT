@@ -31,7 +31,8 @@ public interface ReplyMapper {
 	
 	public double scoreAverage(Map<String, Object> map);
 	
-	public List<ReplyVO> depthGetList(Map<String, Object> map);
+	/*
+	public List<ReplyVO> depthGetList(Map<String, Object> map);*/
 	
 	public int getRemove(Long rno);
 	

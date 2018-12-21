@@ -25,6 +25,9 @@ public interface StoreService {
 	
 	public int remove(Long sno);
 	
+	
+	public int upVisitCnt(Long sno);
+	
 	public int modify(StoreVO vo);
 	
 	public int count(Criteria cri);	
@@ -36,4 +39,6 @@ public interface StoreService {
 	public int inStoreLike(StoreVO vo);
 	
 	public List<StoreVO> getStoreLike(StoreVO vo);
+	
+	
 }

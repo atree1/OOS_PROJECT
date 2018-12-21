@@ -26,7 +26,8 @@ public interface ReplyService {
 	public int getNewReplyCnt(Map<String, Object> map);
 	public int myOrderCount(Map<String, Object> map);
 	
-	public List<ReplyVO> getDetailList(Map<String, Object> map);
+	/*
+	public List<ReplyVO> getDetailList(Map<String, Object> map);*/
 	
 	public int getRemove(Long rno);
 	

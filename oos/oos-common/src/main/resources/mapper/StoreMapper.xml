@@ -120,7 +120,9 @@
 	<update id="delete">
 		update tbl_store set del='Y' where sno = #{sno}
 	</update>
-
+	<update id="upVisitCnt">
+		update tbl_store set visitcnt=visitcnt+1 where sno = #{sno}
+	</update>
 	<select id="count" resultType="int">
 		select count(*) from tbl_store
 		where sno > 0 and del = 'N'
