@@ -9,6 +9,9 @@
 		<result column="sno" property="sno" />
 		<result column="sid" property="sid" />
 	</resultMap>
+	<resultMap type="org.oos.domain.ProductVO" id="Product">
+		<result column="pname" property="pname" />
+	</resultMap>
 	<resultMap type="org.oos.domain.ReplyVO" id="Reply">
 		<result column="rno" property="rno" />
 		<result column="pno" property="pno" />
@@ -23,18 +26,14 @@
 		<result column="depth" property="depth" />
 		<result column="score" property="score" />
 		<collection property="store" resultMap="Store" />
+		<collection property="product" resultMap="Product" />
 	</resultMap>
 	
 	<select id="getList" parameterType="map"
 		resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where rno > 0 and del='N' and kind = #{kind}
-		<if test="pno != null">
-			and pno = #{pno}
-		</if>
-		<if test="mid != null">
-			and mid = #{mid}
-		</if>
+		and pno = #{pno}
 		order by parent desc, rno asc
 		limit #{cri.skip}, #{cri.amount}
 	</select>
@@ -64,7 +63,7 @@
 
 	<select id="getStoreReply" parameterType="map"
 		resultMap="Reply">
-		select rno, p.pno, p.sno, mid, content, title, regdate, kind, state, parent from tbl_reply r
+		select rno, p.pno, p.pname, p.sno, mid, content, title, regdate, kind, state, parent from tbl_reply r
 		join (select pno, pname, sno, questionreplycnt, reviewreplycnt from tbl_product
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno

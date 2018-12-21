@@ -24,4 +24,5 @@ public class ReplyVO {
 	private double score;
 	
 	private StoreVO store;
+	private ProductVO product;
 }
