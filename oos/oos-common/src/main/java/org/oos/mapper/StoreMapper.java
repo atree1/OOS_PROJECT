@@ -17,7 +17,7 @@ public interface StoreMapper {
 	
 	public List<StoreVO> getStoreList(PageDTO dto);
 	
-	public StoreVO get(Long sno);
+/*	public StoreVO get(Long sno);*/
 	
 	public StoreVO getBySno(Long sno);
 	

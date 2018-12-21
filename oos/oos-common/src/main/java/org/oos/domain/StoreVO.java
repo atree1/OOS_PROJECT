@@ -20,6 +20,7 @@ public class StoreVO {
 	private int pdNum; //총 상품 개수
 	private int likeNum; //찜 개수
 	private String mid; // 찜목록 가져올때 쓰려고
+	private int odNum; //총 주문개수
 	
 	private List<StoreImgVO> imgList;
 	private List<StoreHashTagVO> hashList;

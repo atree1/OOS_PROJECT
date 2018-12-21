@@ -25,7 +25,6 @@ public interface StoreService {
 	
 	public int remove(Long sno);
 	
-	
 	public int upVisitCnt(Long sno);
 	
 	public int modify(StoreVO vo);
