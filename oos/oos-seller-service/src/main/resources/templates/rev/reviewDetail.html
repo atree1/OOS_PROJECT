@@ -71,10 +71,10 @@
 						onclick='javascript:self.close();' style="margin-top: 25px;">목록
 						돌아가기</button>
 				</div>
-	<form role="form" id="qnaForm" method="post">
+	<form role="form" id="reviewForm" method="post">
 		<input type="hidden" name="pno" id="pno" th:value=${replyList[0].pno}>
  		<input type="hidden" name="sid" id="sid" th:value="seller1">
-		<input type="hidden" name="kind" id="kind" th:value="q">
+		<input type="hidden" name="kind" id="kind" value="r">
 		<input type="hidden" name="title" id="title" value="null">
 		<input type="hidden" name="content" id="content">
 		<input type="hidden" name="parent" id="parent" th:value=${replyList[0].parent}>
@@ -89,7 +89,7 @@
 	
 		$(document).ready(function(){
 			var rep = [[${replyList[0]}]];
-			var qnaForm = $("#qnaForm");
+			var reviewForm = $("#reviewForm");
 			
 			$(".repleRegiBtn").on("click",function(e){
 
@@ -97,8 +97,8 @@
 					
 				if (confirm("댓글을 남기시겠습니까?") == true){   
 						
-					qnaForm.attr("method", "post")
-					.attr("action","/qna/qnaDetail").submit(); 
+					reviewForm.attr("method", "post")
+					.attr("action","/rev/reviewDetail").submit(); 
 					
 				}else{   //취소
 				    return;

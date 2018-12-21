@@ -282,7 +282,7 @@ $(document).ready(function(){
 				replyForm.html("");
 				replyForm.attr("method", "post")
 				.append("<input type='hidden' name='rno' value='"+$(this).attr("data-rno")+"' >")
-				.attr("action","/qna/list?kind=q&sno=1").submit(); 
+				.attr("action","/rev/list?kind=r&sno=1").submit(); 
 			}else{ 
 			    return;
 			}
@@ -314,7 +314,7 @@ $(document).ready(function(){
 			var pno = $(this).data("pno");
 			var parent = $(this).data("parent");
 			
-			window.open("/qna/qnaDetail?pno="+pno+"&parent="+parent, "replyList", popOption);
+			window.open("/rev/reviewDetail?pno="+pno+"&parent="+parent, "replyList", popOption);
 		});
 	});
 
