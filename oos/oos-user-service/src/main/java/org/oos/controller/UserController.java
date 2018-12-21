@@ -93,13 +93,13 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("cri", cri);
 		map.put("mid", name);
 		map.put("kind", kind);
 		
-		model.addAttribute("reply", replyService.getList(map));
-		
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
+		map.put("dto", pageDTO);
+
+		model.addAttribute("reply", replyService.getStoreReply(map));
 		
 		List<Integer> pageList = new ArrayList<>();
 	    
@@ -118,14 +118,14 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("cri", cri);
 		map.put("mid", name);
 		map.put("kind", kind);
 		
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
 		map.put("dto", pageDTO);
-
+		
 		model.addAttribute("reply", replyService.getStoreReply(map));
+		
 		List<Integer> pageList = new ArrayList<>();
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
             pageList.add(i);
@@ -136,15 +136,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage/qnaDetail")
-	public void qnaDetail(long pno, String kind, Model model) {
-		
+	public void qnaDetail(long pno, String kind, String parent, Model model) {
+
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", pno);
-		map.put("mid", name);
 		map.put("kind", kind);
-		model.addAttribute("qnaDetail", replyService.getDetailList(map));
+		map.put("parent", parent);
+		model.addAttribute("qnaDetail", replyService.sellerReply(map));
 	}
 	
 	@GetMapping("/myStoreList")

@@ -582,7 +582,11 @@
 				return;
 			}
 			
-			scoreValue = $("#score option:selected").val();
+			if(kindValue == "q"){
+				scoreValue = 0;
+			}else(kindValue == "r"){
+				scoreValue = $("#score option:selected").val();
+			}
 			
 			if($(".replyTextarea").val() == "" || $(".replytitlearea").val() == ""){
 				alert("덧글을 입력해주세요");	
