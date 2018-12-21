@@ -110,6 +110,30 @@ public class UserController {
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 	}
+
+	@GetMapping("/mypage/qna")
+	public void qnaList(Criteria cri, String kind, Model model) {
+		
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("cri", cri);
+		map.put("mid", name);
+		map.put("kind", kind);
+		
+		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
+		map.put("dto", pageDTO);
+
+		model.addAttribute("reply", replyService.getStoreReply(map));
+		List<Integer> pageList = new ArrayList<>();
+        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
+            pageList.add(i);
+        }
+
+	    model.addAttribute("pageList", pageList);
+        model.addAttribute("pageMaker", pageDTO);
+	}
 	
 	@GetMapping("/mypage/qnaDetail")
 	public void qnaDetail(long pno, String kind, Model model) {
@@ -133,11 +157,7 @@ public class UserController {
 		 
 		map.put("cri", cri);
 		map.put("mid", name);
-		PageDTO pageDTO = new PageDTO(cri, memberService.getMyStoreCount(map));
-		
-		memberService.getMyStoreList(map).forEach(vo -> {
-			storeList.add(storeService.get(vo.getSno()));
-		});
+		PageDTO pageDTO = new PageDTO(cri, memberService.getMyStoreCount(map));		
 		
 		List<Integer> pageList = new ArrayList<>();
 	    
@@ -147,7 +167,7 @@ public class UserController {
         
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("storeList", storeList);
+		model.addAttribute("storeList", memberService.getMyStoreList(map));
 	}
 	
 	 @PostMapping("/myStoreList")
@@ -183,30 +203,6 @@ public class UserController {
 	 	
 	 }
 
-	
-	@GetMapping("/mypage/qna")
-	public void qnaList(Criteria cri, String kind, Model model) {
-		
-		String name = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("cri", cri);
-		map.put("mid", name);
-		map.put("kind", kind);
-		
-		model.addAttribute("reply", replyService.getList(map));
-		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
-		
-		List<Integer> pageList = new ArrayList<>();
-	    
-        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
-            pageList.add(i);
-        }
-
-	    model.addAttribute("pageList", pageList);
-        model.addAttribute("pageMaker", pageDTO);
-	}
     
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {

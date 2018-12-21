@@ -4,9 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.ReplyMapper">
+
 	<resultMap type="org.oos.domain.StoreVO" id="Store">
 		<result column="sno" property="sno" />
 		<result column="sid" property="sid" />
+	</resultMap>
+	<resultMap type="org.oos.domain.ProductVO" id="Product">
+		<result column="pname" property="pname" />
 	</resultMap>
 	<resultMap type="org.oos.domain.ReplyVO" id="Reply">
 		<result column="rno" property="rno" />
@@ -22,18 +26,14 @@
 		<result column="depth" property="depth" />
 		<result column="score" property="score" />
 		<collection property="store" resultMap="Store" />
+		<collection property="product" resultMap="Product" />
 	</resultMap>
 	
 	<select id="getList" parameterType="map"
 		resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where rno > 0 and del='N' and kind = #{kind}
-		<if test="pno != null">
-			and pno = #{pno}
-		</if>
-		<if test="mid != null">
-			and mid = #{mid}
-		</if>
+		and pno = #{pno}
 		order by parent desc, rno asc
 		limit #{cri.skip}, #{cri.amount}
 	</select>
@@ -49,28 +49,38 @@
 	<select id="sellerReply" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno > 0 and parent = #{parent}
+<<<<<<< HEAD
 		order by parent desc, depth asc;
 		</select>
 
+=======
+		order by parent desc, depth asc
+	</select>
+	
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 	<select id="countNewReply" resultType="Integer">
 	select count(*) from tbl_reply r
 		join (select pno, pname, sno, questionreplycnt, reviewreplycnt from tbl_product
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno
 		where rno > 0 and del = 'N'
-		and sno =#{sno} and kind=#{kind};
+		and sno =#{sno} and kind=#{kind}
 	</select>
-
-
 
 	<select id="getStoreReply" parameterType="map"
 		resultMap="Reply">
-		select rno, p.pno, p.sno, mid, content, title, regdate, kind, state, parent from tbl_reply r
+		select rno, p.pno, p.pname, p.sno, mid, content, title, regdate, kind, state, parent from tbl_reply r
 		join (select pno, pname, sno, questionreplycnt, reviewreplycnt from tbl_product
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno
 		where rno > 0 and del = 'N'
-		and sno = #{sno} and kind=#{kind}
+		<if test="sno != null">
+			and sno = #{sno}
+		</if>
+		<if test="mid != null">
+			and mid = #{mid}
+		</if>
+		and kind=#{kind}
 		and depth = 0
 		order by rno desc
 		limit #{dto.cri.skip}, #{dto.cri.amount}
@@ -89,8 +99,7 @@
 
 	<select id="get" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
-		where rno =
-		#{rno}
+		where rno = #{rno}
 	</select>
 
 	<update id="update">
@@ -139,7 +148,7 @@
 		select ifnull(avg(score),0)
 		from tbl_reply
 		where pno = #{pno}
-		and kind='R' and del='N';
+		and kind='R' and del='N'
 	</select>
 	
 	<update id="getRemove">
@@ -153,5 +162,8 @@
 		kind)
 		values(#{pno},#{sid},#{title},#{content},#{parent},#{kind})
 	</insert>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 </mapper>

@@ -53,8 +53,12 @@
 	</select>
 	
 	<select id="getMyStoreList" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store_like
-		where mid = #{mid}
+		select mid, l.sno, sname, saddress, tel, uuid, ipath, iname from tbl_store_like l
+		right join tbl_store s
+		on l.sno = s.sno
+		left join tbl_store_img i
+		on i.sno = s.sno
+		where l.lno > 0 and  del = 'N' and mid = #{mid}
 		limit #{cri.skip}, #{cri.amount}
 	</select>
 		

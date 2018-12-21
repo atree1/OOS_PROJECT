@@ -88,7 +88,7 @@ public class AdminController {
     		Long odno = Long.parseLong(list[0]);
     		Long dno = Long.parseLong(list[1]);
     		String state = list[2];
-    		
+    		        
     		if(state.equals("ready")) {
     			state = "준비중";
     		}else if(state.equals("shipping")){

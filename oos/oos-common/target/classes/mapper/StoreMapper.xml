@@ -33,23 +33,19 @@
 		<collection property="hashList" resultMap="HashTag" />
 	</resultMap>
 	
-	
 	<select id="getList2" resultMap="Store">
-		select *
-		 from 
+		select * from 
 		 	tbl_store s left join tbl_store_img i on s.sno =i.sno
 		 	 left join tbl_store_hashtag h on s.sno=h.sno
-		where 
-			s.sno> 0 and s.del='N'
+		where s.sno> 0 and s.del='N'
 		<if test="cri.category != null">
 			and s.sname like concat("%", #{cri.keyword} ,"%")
 		</if>
 		group by s.sno desc
 		limit #{cri.skip}, #{cri.amount}
-
 	</select>
 
-<!-- 	<select id="getList" resultType="org.oos.domain.StoreVO">
+<!-- <select id="getList" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store
 		where sno > 0 and del='N'
 		<if test="cri.category != null">
@@ -97,13 +93,11 @@
 		where s.sno=#{sno}
 	</select>
 	<select id="get" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store where sno =
-		#{sno}
+		select * from tbl_store where sno = #{sno}
 	</select>
 	<select id="getBySid" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store where
-		owner =
-		#{owner}
+		owner = #{owner}
 	</select>
 
 	<insert id="insert">
@@ -120,15 +114,11 @@
 		#{owner}, sinfo = #{sinfo},
 		saddress = #{saddress}, tel = #{tel},
 		updatedate = now()
-		where sno =
-		#{sno}
-
+		where sno = #{sno}
 	</update>
 
 	<update id="delete">
-
 		update tbl_store set del='Y' where sno = #{sno}
-
 	</update>
 
 	<select id="count" resultType="int">
@@ -142,8 +132,7 @@
 	<select id="getName" resultType="string">
 		select sname
 		from tbl_store
-		where
-		sno>0
+		where sno>0
 	</select>
 
 	<select id="pNumCount" resultType="int">
