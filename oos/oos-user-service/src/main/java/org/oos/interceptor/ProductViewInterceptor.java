@@ -28,7 +28,7 @@ public class ProductViewInterceptor extends HandlerInterceptorAdapter{
 		Object result=modelAndView.getModel().get("product");
 		ProductVO productVO=(ProductVO)result;
 		
-		log.info(""+result);
+		log.info("result"+result);
 		if(result==null) {
 			return;
 		}

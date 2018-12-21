@@ -19,11 +19,12 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	private ProductViewInterceptor productViewInterceptor;
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(storeViewInterceptor)
-				.addPathPatterns("/store/list");
-	
 		registry.addInterceptor(productViewInterceptor)
-		.addPathPatterns("/store/detatil");
+		.addPathPatterns("/store/detail");
+		registry.addInterceptor(storeViewInterceptor)
+				.addPathPatterns("/store/list").addPathPatterns("/store/detail");;
+	
+		
 		
 	}
 }
