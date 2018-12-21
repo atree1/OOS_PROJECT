@@ -139,5 +139,11 @@ public class StoreServiceImpl implements StoreService {
 		return mapper.getStoreList(dto);
 	}
 
+	@Override
+	public int upVisitCnt(Long sno) {
+		// TODO Auto-generated method stub
+		return mapper.upVisitCnt(sno);
+	}
+
 	
 }
