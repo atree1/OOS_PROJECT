@@ -76,8 +76,9 @@
 				<tbody id="questionlist_tbody">
 					<tr class="height60" th:each=arr:${reply}>
 						<td>QNA</td>
-						<td th:text="${arr.product.pname}">상품명</td>
-						<td class="replyTitle" th:id="|ono_${arr.rno}|" 
+						<td class="replyTitle" th:text="${arr.product.pname}"
+							th:onclick="|location.href='/store/detail?pno=${arr.pno}'|">상품명</td>
+						<td class="replyTitle go" th:id="|ono_${arr.rno}|" 
 						th:data-pno="|${arr.pno}|" th:data-parent="|${arr.parent}|"
 							th:text="${arr.title}"></td>
 						<td th:if="${arr.state == 'Y'}">
@@ -117,9 +118,8 @@
 			$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
 		})();
 		
-		 $(".replyTitle").click(function(){
-			var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-		
+		 $(".go").click(function(){
+			
 			var pno = $(this).data("pno");
 			var parent = $(this).data("parent");
 			location.href="/user/mypage/qnaDetail?pno="+pno+"&parent="+parent;

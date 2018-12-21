@@ -80,9 +80,10 @@
 				<tbody id="questionlist_tbody">
 					<tr class="height60" th:each=arr:${reply}>
 						<td class="">REVIEW</td>
-						<td class="" th:text="${arr.product.pname}"
-						 onclick="location.href=''"></td>
-						<td class="replyTitle" th:id="|ono_${arr.rno}|" th:data-pno="|${arr.pno}|" th:data-mid="|${arr.mid}|"
+						<td class="replyTitle" th:text="${arr.product.pname}"
+						 th:onclick="|location.href='/store/detail?pno=${arr.pno}'|"></td>
+						<td class="replyTitle go" th:id="|ono_${arr.rno}|" 
+						th:data-pno="|${arr.pno}|" th:data-parent="|${arr.parent}|"
 							th:text="${arr.title}"></td>
 						<td class="" style="color:#43a047" th:text="${arr.score}"></td>
 						<td class="" th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
@@ -116,13 +117,12 @@
 		$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
 	})();
 	
-	$(".replyTitle").click(function() {
-		var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-	
-		var pno = $(this).data("pno");
-		var mid = $(this).data("mid");
+	$(".go").click(function() {
 		
-		window.open("/user/mypage/reviewDetail?kind=r&pno="+pno+"&mid="+mid, "review", popOption);
+		var pno = $(this).data("pno");
+		var parent = $(this).data("parent");
+		
+		location.href="/user/mypage/reviewDetail?pno="+pno+"&parent="+parent;
 	});
 	
 	$(".pageNum").click(function(e) {
