@@ -137,40 +137,79 @@
 			
 				$("#pageNum").val(pageMaker.cri.pageNum);
 				$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
-<<<<<<< HEAD
-			})(); 
-=======
 				
 				if(pageMaker.cri.pageNum!=1){
 					return;
 				}
 				
-				var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-				var sid = [[${store.owner}]];
-				
-				window.open("/store/popupList?sid="+sid, "store", popOption);
-				
+				var cookieList = function(cookieName) {
+					
+					var cookie = $.cookie(cookieName);
+					
+					var items = cookie ? cookie.split(/,/) : new Array();
 
+					return {
+					    "add": function(val) {
+					      
+					        items.push(val);
+					        
+					        $.cookie(cookieName, items.join(','));
+					    },
+					    "remove": function (val) { 
+					        
+					        indx = items.indexOf(val); 
+					        if(indx!=-1) items.splice(indx, 1); 
+					        $.cookie(cookieName, items.join(','));
+						 },
+					    "clear": function() {
+					        items = null;
+					        
+					        $.cookie(cookieName, null);
+					    },
+					    "items": function() {
+					        
+					        return items;
+					    }
+					  }
+					}  
+				 
+				 
+				 var cookieValue=cookieList("popupOpen").items();
+				 console.dir(cookieValue);
+			
+				 $(cookieValue).each(function(i,value){
+					 
+					 cookieList("popupOpen");
+					console.log("cok:"+value);
+					 if (parseInt(value)!==store.sno){
+						 
+					    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+							
+							var sid = [[${store.owner}]];
+							
+							window.open("/store/popupList?sid="+sid, "store", popOption);
+					    } 
+				});
+				 
 				if(mid != undefined){
-					$.ajax({
-						type:"post",
-						url:"/store/checkzzim/"+store.sno,
-						beforeSend: function(xhr) {
-				            xhr.setRequestHeader(header, token);
-				        },
-				        success:function(result,status,xhr){
-							if(result == "yes"){
-								$(".storeHomeTradeBtn").addClass("on");
-								$(".tradeStatusBtn").html("찜리스트 추가됨");
-							}else if(result == "no"){
-								$(".storeHomeTradeBtn").removeClass("on");						
-							}
-						},
-					});
-				}
-				
-			})();
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+						$.ajax({
+							type:"post",
+							url:"/store/checkzzim/"+store.sno,
+							beforeSend: function(xhr) {
+					            xhr.setRequestHeader(header, token);
+					        },
+					        success:function(result,status,xhr){
+								if(result == "yes"){
+									$(".storeHomeTradeBtn").addClass("on");
+									$(".tradeStatusBtn").html("찜리스트 추가됨");
+								}else if(result == "no"){
+									$(".storeHomeTradeBtn").removeClass("on");						
+								}
+							},
+						});
+					}
+
+			})(); 
 			
 			$(".storeHomeTradeBtn").click(function(){
 				if(mid == null){
@@ -226,76 +265,7 @@
 				$("#pageNum").val($(this).attr("id").substring(5));
 				storeForm.submit();
 			});
-<<<<<<< HEAD
-			console.log(pageMaker);
-			
-			console.log(store.sno);
-			
-			(function() {
-				if(pageMaker.cri.pageNum!=1){
-					
-					return;
-				}
-				
-				var cookieList = function(cookieName) {
-					
-					var cookie = $.cookie(cookieName);
-					
-					var items = cookie ? cookie.split(/,/) : new Array();
-
-					return {
-					    "add": function(val) {
-					      
-					        items.push(val);
-					        
-					        $.cookie(cookieName, items.join(','));
-					    },
-					    "remove": function (val) { 
-					        
-					        indx = items.indexOf(val); 
-					        if(indx!=-1) items.splice(indx, 1); 
-					        $.cookie(cookieName, items.join(','));
-						 },
-					    "clear": function() {
-					        items = null;
-					        
-					        $.cookie(cookieName, null);
-					    },
-					    "items": function() {
-					        
-					        return items;
-					    }
-					  }
-					}  
-				 
-				 
-				 var cookieValue=cookieList("popupOpen").items();
-				 console.dir(cookieValue);
-			
-				 $(cookieValue).each(function(i,value){
-					 
-					 cookieList("popupOpen");
-					console.log("cok:"+value);
-					 if (parseInt(value)!==store.sno){
-						 
-					    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-							
-							var sid = [[${store.owner}]];
-							
-							window.open("/store/popupList?sid="+sid, "", popOption);
-					    } 
-				})
-			
-				
-				
-				
-			})();
-=======
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-			
-			
-			
-			
+		
 									
 		});
 	</script>

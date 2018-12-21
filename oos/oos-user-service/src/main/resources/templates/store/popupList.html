@@ -115,7 +115,7 @@ $(document).ready(function(){
 			e.preventDefault();
 	        if (document.frm.pop.checked){
 	        	console.log('popclose')
-	        	cookieList("popupOpen").add(popupList[0].sno);
+	        	$.cookie('popOpen', $.cookie(popupList[0].sno);
 	        	
 	        /* 	if($.cookie("popOpen")!== null){
 	        	$.cookie('popOpen',popupList.sno);
