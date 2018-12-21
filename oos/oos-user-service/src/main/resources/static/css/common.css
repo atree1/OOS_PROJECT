@@ -3183,6 +3183,19 @@ input[type="radio"]:checked+label:before {
 	cursor: pointer;
 }
 
+
+.tradeBtnWrapClass .on {
+	color: #ff7a7a;
+	border: 2px solid #ff7a7a;
+}
+
+.tradeBtnWrapClass .on .tradeBtnImg {
+	background: url('../img/detail_store_add_on_ic_1x.png') no-repeat;
+	background-size: 19px 20px;
+	width: 19px;
+	height: 20px;
+}
+
 .storeHomeTradeNoHoverBtn {
 	position: absolute;
 	left: 200px;
@@ -3213,6 +3226,7 @@ input[type="radio"]:checked+label:before {
 	color: #ff7a7a;
 	border: 2px solid #ff7a7a;
 }
+
 
 .storeHomeTradeBtn:hover .tradeBtnImg {
 	background: url('../img/detail_store_add_on_ic_1x.png') no-repeat;

@@ -9,6 +9,7 @@ import org.oos.domain.PageDTO;
 import org.oos.persistence.MemberRepository;
 import org.oos.service.HashTagService;
 import org.oos.service.ProductService;
+import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,15 @@ public class HomeController {
 	private ProductService productService;
 	
 	@Setter(onMethod_=@Autowired)
+	private StoreService storeService;
+	
+	@Setter(onMethod_=@Autowired)
 	private HashTagService hashTagService;
 	
 	@PostMapping("/hashTag")
 	@ResponseBody
 	public List<String> autoComplete() {
-		
 		List<String> getName=hashTagService.getName();
-		log.info(""+getName);
 		return getName;
 	}
 	
@@ -45,14 +47,12 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(){
-		
 		return "redirect:/aboutus";
 	}
 
 	
 	@GetMapping("/aboutus")
 	public void aboutus(Model model) {
-		
 		
 	}
 	
@@ -70,6 +70,7 @@ public class HomeController {
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		
+		model.addAttribute("bestS", storeService.getBestStore());
 		model.addAttribute("bestP", productService.bestProductList());
 		model.addAttribute("product", productService.getList(map));
 	}
