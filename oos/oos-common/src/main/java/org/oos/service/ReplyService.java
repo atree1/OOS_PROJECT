@@ -29,4 +29,8 @@ public interface ReplyService {
 	public List<ReplyVO> getDetailList(Map<String, Object> map);
 	
 	public int getRemove(Long rno);
+	
+	public List<ReplyVO> sellerReply(Map<String, Object> map);
+	
+	public int sellerInsert(ReplyVO vo);
 }

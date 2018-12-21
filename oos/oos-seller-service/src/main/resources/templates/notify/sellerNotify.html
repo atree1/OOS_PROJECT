@@ -9,7 +9,7 @@
 	<h1 align='center'>스토어 공지</h1>
 	<br />
 	<!-- 등록된 팝업 리스트 -->
-	<button data-oper='popupRemove' id="popup-remove"
+	<button data-oper='popup' id="popup-remove"
 					class="form-control input-sm" placeholder=""
 					aria-controls="dataTables-example" data-swi="OFF" >팝업해제</button>	
 	<div class="row">
@@ -73,7 +73,7 @@
 			<form role="role" action="/notify/sellerRegister">
 				<input type='hidden' name='sid' th:value='${seller.sid}'/>
 				
-				<button data-oper='popupRemove' data-swi="ON" id="popup-btn"
+				<button data-oper='popup' data-swi="ON" id="popup-btn"
 					class="form-control input-sm" placeholder=""
 					aria-controls="dataTables-example">팝업등록</button>	
 					
@@ -223,7 +223,7 @@ $(document).ready(function(){
 			}
 		});
 		
-		$("button[data-oper='popupRemove']").click(function(e){
+		$("button[data-oper='popup']").click(function(e){
 			
 			e.preventDefault();
 			
@@ -235,7 +235,7 @@ $(document).ready(function(){
 					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");	
 					
 				});
-				notifyForm.append("<input type='hidden' name='swi' value='"+swi+"' >");
+				notifyForm.append("<input type='hidden' name='swi' value='"+swi+"'>");
 				notifyForm.attr("method","post").attr("action","/notify/popup").submit();
 			}else{
 				return;

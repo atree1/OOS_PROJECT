@@ -57,16 +57,17 @@
 			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;">
 				<colgroup>
 					<col width="80">
+					<col width="150">
+					<col width="350">
 					<col width="80">
-					<col width="300">
-					<col width="100">
-					<col width="200">
+					<col width="150">
 				</colgroup>
 				<thead>
 					<tr
 						style="background-color: #fff; padding: 0px; text-align: center;'">
-						<th class="">문의번호</th>
+						
 						<th class="">문의 유형</th>
+						<th class="">상품명</th>
 						<th class="">제목</th>
 						<th class="">답변여부</th>
 						<th class="">등록일</th>
@@ -74,18 +75,18 @@
 				</thead>
 				<tbody id="questionlist_tbody">
 					<tr class="height60" th:each=arr:${reply}>
-						<td class="" th:text="${arr.rno}"></td>
-						<td class="">QNA</td>
+						<td>QNA</td>
+						<td th:text="${arr.product.pname}">상품명</td>
 						<td class="replyTitle" th:id="|ono_${arr.rno}|" 
 						th:data-pno="|${arr.pno}|" th:data-mid="|${arr.mid}|"
 							th:text="${arr.title}"></td>
-						<td class="" th:if="${arr.state == 'complete'}">
+						<td th:if="${arr.state == 'Y'}">
 							<span style="color:#0288d1">답변완료</span>
 						</td>
-						<td class="" th:if="${arr.state == 'default'}">
+						<td th:if="${arr.state == 'N'}">
 							<span style="color:#ffa000">답변대기</span>
 						</td>
-						<td class="" th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
+						<td th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 				</tbody>
 			</table>
 			<div style="width: 800px; height: 28px; margin: 20px 0;"></div>

@@ -122,7 +122,8 @@
 						<td class="rno"  th:text=${arr.rno}></td>
 						<td class="kind" th:text=${arr.kind}></td>
 						<td class="pno" th:text=${arr.pno}></td>
-						<td class="title" th:text=${arr.title} th:data-mid="|${arr.mid}|" th:data-pno="|${arr.pno}|" th:data-kind="|${arr.kind}|"></td>
+						<td class="title" th:text=${arr.title} th:data-pno="|${arr.pno}|" th:data-kind="|${arr.kind}|" th:data-parent="|${arr.parent}|"></td>
+						
 						<td class="mid" th:text=${arr.mid}></td>
 						<td class="state" th:text=${arr.state}></td>
 						<td class="ragdate"
@@ -162,12 +163,11 @@
 
 	</div>
 	
-	<button id="myBtn">Open Modal</button>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<!-- <div id="myModal" class="modal">
 
-  <!-- Modal content -->
+  Modal content
   <div class="modal-content">
     <span class="close">&times;</span>
     <p>Some text in the Modal..</p>
@@ -184,7 +184,7 @@
   
 
 </div>
-</div>	
+</div>	 -->
 
 
 	<form id="replyForm">
@@ -309,10 +309,10 @@ $(document).ready(function(){
 			var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 		
 			var pno = $(this).data("pno");
-			var mid = $(this).data("mid");
+			var parent = $(this).data("parent");
 			var kind = $(this).data("kind");
 			
-			window.open("/qna/qnaDetail?kind="+kind+"&pno="+pno+"&mid="+mid, "replyList", popOption);
+			window.open("/qna/qnaDetail?kind="+kind+"&pno="+pno+"&parent="+parent, "replyList", popOption);
 		});
 	});
 

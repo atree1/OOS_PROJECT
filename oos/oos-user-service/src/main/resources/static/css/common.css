@@ -3159,7 +3159,7 @@ input[type="radio"]:checked+label:before {
 	position: relative;
 	text-align: center;
 	display: inline-block;
-	width: 597px;
+	width: 600px;
 }
 
 .store_info_text {
@@ -3169,7 +3169,6 @@ input[type="radio"]:checked+label:before {
 }
 
 .storeHomeTradeBtn {
-	position: absolute;
 	left: 200px;
 	display: block;
 	text-align: center;
@@ -3250,7 +3249,7 @@ input[type="radio"]:checked+label:before {
 .tradeBtnWrapClass {
 	position: relative;
 	height: 80px;
-	padding: 0px 200px 30px 200px;
+	padding: 0px 100px 30px 200px;
 }
 
 .main_img .img_edge {
@@ -3940,6 +3939,24 @@ input[type="radio"]:checked+label:before {
 
 #allSinsang .textImg.active {
 	background: url('../img/btn_home_nv_menu_01_on.svg') no-repeat;
+}
+
+#ShopSinsang .textImg {
+	width: 70px;
+	height: 22px;
+	background: url('../img/btn_home_nv_menu_05_off.png') no-repeat;
+	background-size: 68px;
+	margin: 0 auto;
+}
+
+#ShopSinsang .textImg:hover {
+	background: url('../img/btn_home_nv_menu_05_over.png') no-repeat;
+	background-size: 68px;
+	cursor: pointer;
+}
+
+#ShopSinsang .textImg.active {
+	background: url('../img/btn_home_nv_menu_05_on.svg') no-repeat;
 }
 
 #TopSinsang .textImg {

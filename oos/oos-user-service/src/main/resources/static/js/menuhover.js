@@ -16,6 +16,14 @@ $(".bigCategory, .TopLi").click(function(){
 			.submit();
 });
 
+$(".AllCategory").click(function(){
+	actionForm.html("");
+	actionForm.attr("action","/user/list")
+			.append("<input type='hidden' name='keyword'>")
+			.append("<input type='hidden' name='category' value='select2'>")
+			.submit();
+});
+
 
 function categoryMenuShow(num){
 

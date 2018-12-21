@@ -1,11 +1,8 @@
 package org.oos.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.oos.domain.AmountVO;
-import org.oos.domain.Criteria;
 import org.oos.domain.ReplyPageDTO;
 import org.oos.domain.ReplyVO;
 import org.oos.mapper.ProductMapper;
@@ -103,6 +100,18 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getRemove(rno);
 	}
 
+	@Override
+	public List<ReplyVO> sellerReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.sellerReply(map);
+	}
+
+	@Override
+	public int sellerInsert(ReplyVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.sellerInsert(vo);
+	}
+	
 	@Override
 	public int getNewReplyCnt(Map<String, Object> map) {
 		// TODO Auto-generated method stub

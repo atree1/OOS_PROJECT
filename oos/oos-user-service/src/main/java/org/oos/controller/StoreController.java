@@ -12,6 +12,7 @@ import org.oos.domain.StoreVO;
 import org.oos.mapper.ImgurMapper;
 import org.oos.service.NotifyService;
 import org.oos.service.ProductService;
+import org.oos.service.SellerService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,24 +46,55 @@ public class StoreController {
 	@Setter(onMethod_=@Autowired)
 	private NotifyService notifyService;
 	
-	@GetMapping("/popup")
-	public void popupGet(Long sbno, String sid,Model model) {
-    	Map<String, Object> map = new HashMap<String, Object>();
+	@Setter(onMethod_=@Autowired)
+	private SellerService sellerService;
 	
+	@GetMapping("/popupList")
+	public void popupList(Criteria cri, String sid, Model model) {
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("cri", cri);
+		map.put("sid", sid);
+		
+		model.addAttribute("popupList", notifyService.popupList(map));
+		log.info(notifyService.popupList(map)+"");
+		PageDTO pageDTO = new PageDTO(cri,notifyService.popupCount(map)); 
+		
+		List<Integer> pageList = new ArrayList<>();
+	    
+        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
+            pageList.add(i);
+        }
+
+	    model.addAttribute("pageList", pageList);
+        model.addAttribute("pageMaker", pageDTO);
+        model.addAttribute("seller", sellerService.get(sid));
+	}
+	
+	@GetMapping("/popup")
+	public void popupGet(Criteria cri, Long sbno, String sid,Model model) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	PageDTO pageDTO = new PageDTO(cri, notifyService.popupCount(map));
     	map.put("sid", sid);
     	map.put("sbno", sbno);
+    	map.put("dto", pageDTO);
 				
-		model.addAttribute("popup", notifyService.get(sbno));
+		model.addAttribute("popup", notifyService.getPopup(sbno));
+		model.addAttribute("seller", sellerService.get(sid));
+		model.addAttribute("pageMaker", pageDTO);
 	}
 	
 	@GetMapping("/list")
-	public void storeList(Criteria cri, Long sno, Model model) {
+	public void storeList(Criteria cri,String sid, Long sbno, Long sno, Model model) {
 		
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
 		
 		map.put("dto", dto);
 		map.put("sno", sno);
+		map.put("sid", sid);
 		
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
         
@@ -76,6 +108,7 @@ public class StoreController {
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", productService.getList(map));
+		
 	}
 	
 

@@ -11,6 +11,8 @@ public interface StoreService {
 	
 	public List<StoreVO> getList(PageDTO dto);
 	
+	public List<StoreVO> getStoreList(PageDTO dto);
+	
 	public List<String> getName();
 	
 	public List<ProductImgVO> getImg(Long sno);
@@ -18,6 +20,7 @@ public interface StoreService {
 	public StoreVO get(Long sno);
 	
 	public StoreVO getBySid(String sid);
+	
 	public int register(StoreVO vo);
 	
 	public int remove(Long sno);

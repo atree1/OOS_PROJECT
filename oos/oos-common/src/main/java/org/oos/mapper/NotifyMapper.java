@@ -23,4 +23,7 @@ public interface NotifyMapper {
 	
 	public List<NotifyVO> popupList(Map<String,Object> map);
 
+	public NotifyVO getPopup(Long sbno);
+	
+	public int popupCount(Map<String, Object> map);
 } 
