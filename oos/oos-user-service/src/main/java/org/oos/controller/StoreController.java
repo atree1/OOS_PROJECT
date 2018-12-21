@@ -57,9 +57,8 @@ public class StoreController {
 
 		map.put("cri", cri);
 		map.put("sid", sid);
-<<<<<<< HEAD
-		
-		
+
+				
 		log.info(notifyService.popupList(map)+"");
 		PageDTO pageDTO = new PageDTO(cri,notifyService.popupCount(map)); 
 		
@@ -73,22 +72,7 @@ public class StoreController {
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
         model.addAttribute("seller", sellerService.get(sid));
-=======
 
-		model.addAttribute("popupList", notifyService.popupList(map));
-		log.info(notifyService.popupList(map) + "");
-		PageDTO pageDTO = new PageDTO(cri, notifyService.popupCount(map));
-
-		List<Integer> pageList = new ArrayList<>();
-
-		for (int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++) {
-			pageList.add(i);
-		}
-
-		model.addAttribute("pageList", pageList);
-		model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("seller", sellerService.get(sid));
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 	}
 
 	@GetMapping("/popup")
@@ -140,18 +124,7 @@ public class StoreController {
 		log.info(sViewCookie);
 		checkVisit(sViewCookie, sno);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
-<<<<<<< HEAD
-        
-        List<Integer> pageList = new ArrayList<>();
-        
-        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
-            pageList.add(i);
-        }
-        
-        model.addAttribute("popupList", notifyService.popupList(map));
-        model.addAttribute("pageList", pageList);
-        model.addAttribute("pageMaker", pageDTO);
-=======
+
 
 		List<Integer> pageList = new ArrayList<>();
 
@@ -161,7 +134,6 @@ public class StoreController {
 
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("pageMaker", pageDTO);
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", productService.getList(map));
 
