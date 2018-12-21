@@ -70,7 +70,6 @@ public class UserController {
 	
 	@Autowired
 	MemberRepository repo;
-	
 
     @GetMapping("/mypage/reviewDetail")
 	public void reviewDetail(long pno, String parent, Model model) {
@@ -183,7 +182,6 @@ public class UserController {
 	 	StoreVO vo = new StoreVO();
 	 	vo.setMid(name);
 	 	vo.setSno(sno);
-
 	    
 	 	if(storeService.getStoreLike(vo).size() == 0) {
 	 		storeService.inStoreLike(vo);
@@ -215,9 +213,7 @@ public class UserController {
     
     @GetMapping("/list")
     public void List(Criteria cri, Model model) {
-    	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+
 	    
     	Map<String, Object> map = new HashMap<>();
     	map.put("cri", cri);
@@ -230,10 +226,6 @@ public class UserController {
     	}
     	
     	map.put("dto", pageDTO);
-    	
-    	if(!name.equals("anonymousUser")) {
-    		map.put("mid", name);
-    	}
 		
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {	
         	model.addAttribute("store", storeService.getStoreList(pageDTO));

@@ -14,9 +14,9 @@
 
 		<div class="store_container">
 			<div style="width:1000px; margin:0 auto">
-				<div style="display: inline-block;">
-					<img width="500" id="storeImg"
-					style="display: block;width:auto; height:300px;">
+				<div style="display: inline-block; overflow:hidden; height:200px;">
+					<img id="storeImg"
+					style="display: block;width:auto; width:350px">
 				</div>
 				<div class="main_store_info">
 					<div style="font-size: 17px; color: #9b9b9b; margin-bottom: 6px;"
@@ -27,12 +27,14 @@
 					<div id="storeTel"
 						style="font-size: 17px; color: #333; line-height: 1.0; margin-bottom: 30px;"
 						th:text=${store.tel}>TEL</div>
+						
 					<div class="tradeBtnWrapClass" style="position: relative;">
 						<button class="storeHomeTradeBtn">
 							<div class="tradeBtnImg"></div>
 							<span class="tradeStatusBtn">+ 찜리스트 추가</span>
 						</button>
 					</div>
+					
 					<div style="line-height: 1.0 position:relative;">
 						<span style="color: #9b9b9b; font-size: 14px; margin-right: 5px;">찜목록 추가수</span><span
 							class="store_info_text" style="margin-right: 15px;">242</span><span

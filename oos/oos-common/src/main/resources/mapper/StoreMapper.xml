@@ -99,7 +99,7 @@
 	</select> -->
 	
 	<select id="getBestStore" resultMap="Store">
-		select s.sno, s.sname, uuid, iname, ipath, odNum from tbl_store s
+		select s.sno, s.tel, s.sname, uuid, iname, ipath, odNum from tbl_store s
 		left join tbl_store_img i
 		on i.sno = s.sno
 		left join (select sno, count(*) odNum from tbl_order_detail
