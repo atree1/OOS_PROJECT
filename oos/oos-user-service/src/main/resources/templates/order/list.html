@@ -90,7 +90,8 @@
 										
 										<div class="payMethodInputArea" style="height: 54px;">
 										
-											<div><input type="text" id="orderName" th:value="${member.mname}">NAME</div>
+											<div><input class="orderInfo addressInfo" style="width:100px"
+											 type="text" id="orderName" th:value="${member.mname}"></div>
 										<table class="data-row">
 											<colgroup>
 												<col>
@@ -278,8 +279,8 @@
 				$("#pnum").val("019").prop("selected",true);
 			}
 			
-			$("#pnum2").val(tel.substring(5,9));
-			$("#pnum3").val(tel.substring(9));
+			$("#pnum2").val(tel.substring(3,7));
+			$("#pnum3").val(tel.substring(7));
 			
 		})();
 
@@ -308,7 +309,7 @@
 						pno: item.pno,
 						mid : member.mid,
 						product: item.product,
-						qty: item.qty,\
+						qty: item.qty,
 						opno: item.opno,
 						qty: item.qty,
 						name:  $("#orderName").val(),

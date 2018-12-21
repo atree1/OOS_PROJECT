@@ -110,7 +110,7 @@
 										style="padding: 0 30px; border-spacing: 10px;">
 										
 										<div class="payMethodInputArea" style="height: 54px;">
-											<div class="orderInfo"><strong  th:text="${member.mname}">NAME</strong></div>
+											<div class="orderInfo"><strong  th:text="${order[0].name}">NAME</strong></div>
 											<div class="orderInfo" th:text="${order[0].address}">Address</div>
 											<div class="orderInfo" th:text="${order[0].addressDetail}">AddressDetail</div>
 											<div class="orderInfo" th:text="${order[0].pnum}" style="color:#9b9b9b">전화번호</div>
