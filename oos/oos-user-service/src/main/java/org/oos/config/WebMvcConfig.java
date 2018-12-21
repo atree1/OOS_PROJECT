@@ -1,5 +1,6 @@
 package org.oos.config;
 
+import org.oos.interceptor.ProductViewInterceptor;
 import org.oos.interceptor.StoreViewInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,10 +14,16 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Autowired
 	@Qualifier(value = "storeViewInterceptor")
 	private StoreViewInterceptor storeViewInterceptor;
-
+	@Autowired
+	@Qualifier(value = "productViewInterceptor")
+	private ProductViewInterceptor productViewInterceptor;
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(storeViewInterceptor)
 				.addPathPatterns("/store/list");
+	
+		registry.addInterceptor(productViewInterceptor)
+		.addPathPatterns("/store/detatil");
+		
 	}
 }
