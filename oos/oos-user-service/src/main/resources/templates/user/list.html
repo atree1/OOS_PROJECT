@@ -85,7 +85,7 @@
 							</tr>
 						</thead>
 						<tbody id="storeSearchList_tbody">
-							<tr id="trade_13695" class="height90" th:each="arr : ${store}">
+							<tr class="height90" th:each="arr : ${store}">
 
 								<td class="borderBottom">
 									<div class="store_thumb">
@@ -93,14 +93,16 @@
 											style="height: 80px;">
 									</div>
 								</td>
-								<td class="borderBottom" style="padding: 1px 10px;"><a
-									class="linkClass" th:id="|sno_${arr.sno}|"
-									style="color: #333; cursor: pointer" th:text="${arr.sname}">SNAME</a>
+								<td class="borderBottom" style="padding: 1px 10px;">
+									<a class="linkClass" th:id="|sno_${arr.sno}|"
+										style="color: #333; cursor: pointer">
+										<strong th:text="${arr.sname}">SNAME</strong>
+									</a>
 								</td>
 								<td class="borderBottom" style="padding: 1px 10px;"
 									th:text="${arr.saddress}"></td>
-								<td class="borderBottom" style="padding: 1px 10px;"
-									th:text="${arr.tel}"></td>
+								<td class="borderBottom" th:id="|tel_${arr.sno}|" 
+									style="padding: 1px 10px;"></td>
 								<td class="borderBottom" style="padding: 1px 10px;"
 									th:text="${arr.likeNum}"></td>
 								<td class="borderBottom"
@@ -163,6 +165,9 @@
 							var fileCallPath =  encodeURIComponent(img.ipath+"/s_"+img.uuid +"_"+img.iname);
 							$("#thumb_"+item.sno).attr("src","/display?fileName="+fileCallPath);
 						}
+						
+						$("#tel_"+item.sno).html(item.tel.substring(0,3)+
+								"-"+item.tel.substring(3,7)+"-"+item.tel.substring(7));
 					});
 				};
 				

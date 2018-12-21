@@ -121,7 +121,7 @@
 
 				 $.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
-					console.log(img);
+					
 					var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
 					
 					var imgDiv= $('#img_'+item.pno);
@@ -129,15 +129,16 @@
 				}); 
 				 
 				var fileCallPath =  encodeURIComponent(store.imgList[0].ipath+ "/"+
-						store.imgList[0].uuid +"_"+store.imgList[0].iname);
-				 $('#storeImg').attr("src","/display?fileName="+fileCallPath); 
+							store.imgList[0].uuid +"_"+store.imgList[0].iname);
+				 
+				$('#storeImg').attr("src","/display?fileName="+fileCallPath); 
 				 
 				$("#storeTel").html(store.tel.substring(0,3) + "-" + 
-						store.tel.substring(3,7) + "-" + store.tel.substring(7));
-			
+							store.tel.substring(3,7) + "-" + store.tel.substring(7));
+				
 				$("#pageNum").val(pageMaker.cri.pageNum);
 				$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
-				
+					
 				if(pageMaker.cri.pageNum!=1){
 					return;
 				}
@@ -145,14 +146,11 @@
 				var cookieList = function(cookieName) {
 					
 					var cookie = $.cookie(cookieName);
-					
 					var items = cookie ? cookie.split(/,/) : new Array();
 
 					return {
 					    "add": function(val) {
-					      
 					        items.push(val);
-					        
 					        $.cookie(cookieName, items.join(','));
 					    },
 					    "remove": function (val) { 
@@ -163,7 +161,6 @@
 						 },
 					    "clear": function() {
 					        items = null;
-					        
 					        $.cookie(cookieName, null);
 					    },
 					    "items": function() {
@@ -180,11 +177,9 @@
 				 $(cookieValue).each(function(i,value){
 					 
 					 cookieList("popupOpen");
-					console.log("cok:"+value);
 					 if (parseInt(value)!==store.sno){
 						 
 					    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-							
 							var sid = [[${store.owner}]];
 							
 							window.open("/store/popupList?sid="+sid, "store", popOption);
@@ -249,7 +244,6 @@
 			$(".goodsContainer").click(function(e){
 				var pno = $(this).attr("id").substring(5);
 				var sno = $(this).prev("input").attr("id").substring(4);
-				console.log(sno);
 				storeForm.append("<input type='hidden' name='pno' value='"+pno+"'>");
 				storeForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
 				storeForm.attr("action","/store/detail").submit();

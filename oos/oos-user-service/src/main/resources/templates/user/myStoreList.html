@@ -2,6 +2,12 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/shopLayout}">
 <div class="container" style="" layout:fragment="container">
+<style>
+.oos:hover{
+	color:#000;
+	text-decoration:underline;
+}
+</style>
 	<div class="menuRoot">
 		<div class="table-cell" style="">
 			<span style="color: #9b9b9b;">마이페이지&nbsp;&nbsp;&nbsp; &gt; </span><span
@@ -84,9 +90,9 @@
 				</thead>
 				<tbody id="orderList_tbody">
 					<tr class="height100" th:each=arr:${storeList}>
-						<td ><img th:id="|img_${arr.sno}|" class="storeImg"
+						<td><img th:id="|img_${arr.sno}|" class="storeImg"
 									style="width: 100%; display: block;"></td>
-						<td th:text="${arr.sname}" style="cursor:pointer"
+						<td  class="oos" th:text="${arr.sname}" style="cursor:pointer"
 						 th:onclick="|location.href='/store/list?sno=${arr.sno}'|">상호명</td>
 						<td th:text="${arr.saddress}">주소</td>
 						<td th:text="${arr.tel}">연락처</td>
@@ -127,7 +133,7 @@
 			(function() {
 				
 				$.each(store, function(index, item){
-			
+					
 					img = item.imgList[0];
 					if(img != null){
 						var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
