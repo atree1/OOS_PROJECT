@@ -69,7 +69,13 @@
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno
 		where rno > 0 and del = 'N'
-		and sno = #{sno} and kind=#{kind}
+		<if test="sno != null">
+			and sno = #{sno}
+		</if>
+		<if test="mid != null">
+			and mid = #{mid}
+		</if>
+		and kind=#{kind}
 		and depth = 0
 		order by rno desc
 		limit #{dto.cri.skip}, #{dto.cri.amount}
