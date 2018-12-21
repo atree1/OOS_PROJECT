@@ -58,7 +58,7 @@ public class StoreController {
 		map.put("cri", cri);
 		map.put("sid", sid);
 		
-		model.addAttribute("popupList", notifyService.popupList(map));
+		
 		log.info(notifyService.popupList(map)+"");
 		PageDTO pageDTO = new PageDTO(cri,notifyService.popupCount(map)); 
 		
@@ -67,7 +67,8 @@ public class StoreController {
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
             pageList.add(i);
         }
-
+        
+        model.addAttribute("popupList", notifyService.popupList(map));
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
         model.addAttribute("seller", sellerService.get(sid));
@@ -104,6 +105,7 @@ public class StoreController {
             pageList.add(i);
         }
         
+        model.addAttribute("popupList", notifyService.popupList(map));
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));

@@ -12,6 +12,16 @@
   limit #{dto.cri.skip}, #{dto.cri.amount}
   </select>
   
+  <select id="popupList" resultType="org.oos.domain.NotifyVO">
+  		 select n.* ,s.sname ,s.sno
+ 		 from tbl_seller_notify n left join tbl_store s
+		 on n.sid = s.owner
+ 		 where n.sid=#{sid} and n.sbno>0 and n.del='N' and n.state='ON'
+		 order by updatedate desc
+  	</select>
+  	
+
+  
   <delete id="delete">
   update tbl_seller_notify
   set del='y'
@@ -49,13 +59,7 @@
 		set state = #{switch}
 		where sbno =#{sbno}
 	</update>
-	  	
-  	<select id="popupList" resultType="org.oos.domain.NotifyVO">
-  		select * from tbl_seller_notify
- 		 where sbno > 0 and sid = #{sid} and del = 'n' and state ='ON'
-  		 order by updatedate desc
-  	</select>
-  	
+	  	 	
   	<select id="getPopup" resultType="org.oos.domain.NotifyVO">
   		select * from tbl_seller_notify
 		where sbno = #{sbno} and state='ON'
