@@ -50,6 +50,7 @@
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno > 0 and parent = #{parent}
 		order by parent desc, depth asc;
+		</select>
 
 	<select id="countNewReply" resultType="Integer">
 	select count(*) from tbl_reply r
@@ -153,5 +154,4 @@
 		values(#{pno},#{sid},#{title},#{content},#{parent},#{kind})
 	</insert>
 	
-
 </mapper>
