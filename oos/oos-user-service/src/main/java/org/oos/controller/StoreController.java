@@ -85,19 +85,8 @@ public class StoreController {
 		model.addAttribute("seller", sellerService.get(sid));
 		model.addAttribute("pageMaker", pageDTO);
 	}
-
-	@GetMapping("/list")
-	public void storeList(@CookieValue(value = "sViewCookie", required = false) String sViewCookie, Criteria cri,
-			String sid, Long sbno, Long sno, Model model) {
-
-		Map<String, Object> map = new HashMap<>();
-		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
-
-		map.put("dto", dto);
-		map.put("sno", sno);
-		map.put("sid", sid);
+	private void checkVisit(String sViewCookie,Long sno) {
 		boolean check = false;
-		log.info(sViewCookie);
 		if (sViewCookie != null) {
 			String[] numbers = sViewCookie.split("_");
 
@@ -118,6 +107,20 @@ public class StoreController {
 		if (!check) {
 			storeService.upVisitCnt(sno);
 		}
+	}
+	@GetMapping("/list")
+	public void storeList(@CookieValue(value = "sViewCookie", required = false) String sViewCookie, Criteria cri,
+			String sid, Long sbno, Long sno, Model model) {
+
+		Map<String, Object> map = new HashMap<>();
+		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
+
+		map.put("dto", dto);
+		map.put("sno", sno);
+		map.put("sid", sid);
+		
+		log.info(sViewCookie);
+		checkVisit(sViewCookie, sno);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 
 		List<Integer> pageList = new ArrayList<>();
@@ -134,10 +137,10 @@ public class StoreController {
 	}
 
 	@GetMapping("/detail")
-	public void productRead(Long pno, Long sno, Model model) {
+	public void productRead(@CookieValue(value = "pViewCookie", required = false) String pViewCookie,Long pno, Long sno, Model model) {
 
 		ProductVO vo = productService.read(pno);
-
+	
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 	}

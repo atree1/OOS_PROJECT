@@ -6,7 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.oos.domain.StoreVO;
+import org.oos.domain.ProductVO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -15,7 +15,7 @@ import lombok.extern.java.Log;
 
 @Log
 @Component
-public class StoreViewInterceptor extends HandlerInterceptorAdapter{
+public class ProductViewInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -25,8 +25,8 @@ public class StoreViewInterceptor extends HandlerInterceptorAdapter{
 		log.info("cookie checker................................................");
 		boolean check=false;
 		
-		Object result=modelAndView.getModel().get("store");
-		StoreVO storeVO=(StoreVO)result;
+		Object result=modelAndView.getModel().get("product");
+		ProductVO productVO=(ProductVO)result;
 		
 		log.info(""+result);
 		if(result==null) {
@@ -35,20 +35,20 @@ public class StoreViewInterceptor extends HandlerInterceptorAdapter{
 		
 		
 		Loop1:for (int i=0;i<cks.length;i++) {
-			if(cks[i].getName().equals("sViewCookie")) {
+			if(cks[i].getName().equals("pViewCookie")) {
 				check=true;
-				log.info("sVcookievalue:"+cks[i].getValue());
+				log.info("pVcookievalue:"+cks[i].getValue());
 				
 				String[] values=cks[i].getValue().split("_");
 				for (String val : values) {
 				
-					if(val.equals(""+storeVO.getSno())) {
+					if(val.equals(""+productVO.getPno())) {
 						break Loop1;
 				}
 				}
 			
-				String value=(String)(cks[i].getValue())+"_"+storeVO.getSno();
-				Cookie viewCookie=new Cookie("sViewCookie",URLEncoder.encode(value,"UTF-8"));
+				String value=(String)(cks[i].getValue())+"_"+productVO.getPno();
+				Cookie viewCookie=new Cookie("pViewCookie",URLEncoder.encode(value,"UTF-8"));
 				response.addCookie(viewCookie);
 				log.info(cks[i].getValue());
 				break;
@@ -58,9 +58,9 @@ public class StoreViewInterceptor extends HandlerInterceptorAdapter{
 		if(check==false) {
 		
 			
-			Cookie viewCookie=new Cookie("sViewCookie",URLEncoder.encode(""+storeVO.getSno(), "UTF-8"));
-			viewCookie.setMaxAge(60*60*24);
-			response.addCookie(viewCookie);
+			Cookie pviewCookie=new Cookie("pViewCookie",URLEncoder.encode(""+productVO.getPno(), "UTF-8"));
+			pviewCookie.setMaxAge(60*60*24);
+			response.addCookie(pviewCookie);
 		
 		
 		}
