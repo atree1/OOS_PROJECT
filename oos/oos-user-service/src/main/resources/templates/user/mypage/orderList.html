@@ -108,7 +108,7 @@
 					<tr class="height100" th:each=arr:${orderList}>
 						<td class="" th:text="${arr.ono}"></td>
 						<td class="" th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
-						<td class="" th:text="${arr.detail.product.pname}"></td>
+						<td class="" th:text="${arr.product.pname}"></td>
 						<td th:id="|ono_${arr.ono}|" class="orderDetail"><button
 							type="button" class="btn btn-info basketSwapBtn" style="width:70px;">상세보기</button></td>
 						<td class="" th:text="|${arr.total}원|">주문금액</td>
@@ -202,7 +202,7 @@
 		}));
 	
 		$(".orderDetail").click(function() {
-			var popOption = "width=811, height=642, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+			var popOption = "width=630, height=642, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 			window.open("/user/mypage/orderDetail?ono="
 					+ $(this).attr("id").substring(4), "order",
 					popOption);

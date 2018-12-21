@@ -62,29 +62,32 @@
 			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;">
 				<colgroup>
 					<col width="80">
+					<col width="150">
+					<col width="350">
 					<col width="80">
-					<col width="300">
-					<col width="100">
-					<col width="200">
+					<col width="150">
 				</colgroup>
 				<thead>
 					<tr
 						style="background-color: #fff; padding: 0px; text-align: center;'">
-						<th class="">문의번호</th>
 						<th class="">문의 유형</th>
-						<th class="">제목</th>
+						<th class="">상품명</th>
+						<th class="">리뷰내용</th>
 						<th class="">별점</th>
 						<th class="">등록일</th>
 					</tr>
 				</thead>
 				<tbody id="questionlist_tbody">
 					<tr class="height60" th:each=arr:${reply}>
-						<td class="" th:text="${arr.rno}"></td>
 						<td class="">REVIEW</td>
-						<td class="replyTitle" th:id="|ono_${arr.rno}|" th:data-pno="|${arr.pno}|" th:data-mid="|${arr.mid}|"
+						<td class="replyTitle" th:text="${arr.product.pname}"
+						 th:onclick="|location.href='/store/detail?pno=${arr.pno}'|"></td>
+						<td class="replyTitle go" th:id="|ono_${arr.rno}|" 
+						th:data-pno="|${arr.pno}|" th:data-parent="|${arr.parent}|"
 							th:text="${arr.title}"></td>
 						<td class="" style="color:#43a047" th:text="${arr.score}"></td>
 						<td class="" th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
+					</tr>
 				</tbody>
 			</table>
 			<div style="width: 800px; height: 28px; margin: 20px 0;"></div>
@@ -114,13 +117,12 @@
 		$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
 	})();
 	
-	$(".replyTitle").click(function() {
-		var popOption = "width=800, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-	
-		var pno = $(this).data("pno");
-		var mid = $(this).data("mid");
+	$(".go").click(function() {
 		
-		window.open("/user/mypage/reviewDetail?kind=r&pno="+pno+"&mid="+mid, "review", popOption);
+		var pno = $(this).data("pno");
+		var parent = $(this).data("parent");
+		
+		location.href="/user/mypage/reviewDetail?pno="+pno+"&parent="+parent;
 	});
 	
 	$(".pageNum").click(function(e) {

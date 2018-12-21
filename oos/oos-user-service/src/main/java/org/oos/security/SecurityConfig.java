@@ -51,7 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.tokenRepository(getJDBCReopsitory())
 			.tokenValiditySeconds(60*60*24*15);
 	
-		http.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/main");
+		http.logout().logoutUrl("/logout").invalidateHttpSession(true)
+		.logoutSuccessUrl("/main");
 		
 	}	
 	

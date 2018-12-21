@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,29 +35,29 @@ import lombok.extern.java.Log;
 @RequestMapping("/store/*")
 public class StoreController {
 
-	@Setter(onMethod_=@Autowired)
+	@Setter(onMethod_ = @Autowired)
 	private ProductService productService;
-	
-	@Setter(onMethod_=@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
 	private StoreService storeService;
-	
-	@Setter(onMethod_= @Autowired)
-    private	ImgurMapper imgurMapper;
-	
-	@Setter(onMethod_=@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
+	private ImgurMapper imgurMapper;
+
+	@Setter(onMethod_ = @Autowired)
 	private NotifyService notifyService;
-	
-	@Setter(onMethod_=@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
 	private SellerService sellerService;
-	
+
 	@GetMapping("/popupList")
 	public void popupList(Criteria cri, String sid, Model model) {
-		
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("cri", cri);
 		map.put("sid", sid);
+<<<<<<< HEAD
 		
 		
 		log.info(notifyService.popupList(map)+"");
@@ -72,32 +73,74 @@ public class StoreController {
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
         model.addAttribute("seller", sellerService.get(sid));
+=======
+
+		model.addAttribute("popupList", notifyService.popupList(map));
+		log.info(notifyService.popupList(map) + "");
+		PageDTO pageDTO = new PageDTO(cri, notifyService.popupCount(map));
+
+		List<Integer> pageList = new ArrayList<>();
+
+		for (int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++) {
+			pageList.add(i);
+		}
+
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("pageMaker", pageDTO);
+		model.addAttribute("seller", sellerService.get(sid));
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 	}
-	
+
 	@GetMapping("/popup")
-	public void popupGet(Criteria cri, Long sbno, String sid,Model model) {
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	PageDTO pageDTO = new PageDTO(cri, notifyService.popupCount(map));
-    	map.put("sid", sid);
-    	map.put("sbno", sbno);
-    	map.put("dto", pageDTO);
-				
+	public void popupGet(Criteria cri, Long sbno, String sid, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		PageDTO pageDTO = new PageDTO(cri, notifyService.popupCount(map));
+		map.put("sid", sid);
+		map.put("sbno", sbno);
+		map.put("dto", pageDTO);
+
 		model.addAttribute("popup", notifyService.getPopup(sbno));
 		model.addAttribute("seller", sellerService.get(sid));
 		model.addAttribute("pageMaker", pageDTO);
 	}
-	
+	private void checkVisit(String sViewCookie,Long sno) {
+		boolean check = false;
+		if (sViewCookie != null) {
+			String[] numbers = sViewCookie.split("_");
+
+			String bno = "" + sno;
+			log.info(bno);
+
+			for (String number : numbers) {
+				log.info(number);
+
+				if (number.equals(bno)) {
+					check = true;
+					log.info("" + check);
+					break;
+				}
+			}
+
+		}
+		if (!check) {
+			storeService.upVisitCnt(sno);
+		}
+	}
 	@GetMapping("/list")
-	public void storeList(Criteria cri,String sid, Long sbno, Long sno, Model model) {
-		
+	public void storeList(@CookieValue(value = "sViewCookie", required = false) String sViewCookie, Criteria cri,
+			String sid, Long sbno, Long sno, Model model) {
+
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
-		
+
 		map.put("dto", dto);
 		map.put("sno", sno);
 		map.put("sid", sid);
 		
+		log.info(sViewCookie);
+		checkVisit(sViewCookie, sno);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
+<<<<<<< HEAD
         
         List<Integer> pageList = new ArrayList<>();
         
@@ -108,48 +151,57 @@ public class StoreController {
         model.addAttribute("popupList", notifyService.popupList(map));
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
+=======
+
+		List<Integer> pageList = new ArrayList<>();
+
+		for (int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++) {
+			pageList.add(i);
+		}
+
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("pageMaker", pageDTO);
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", productService.getList(map));
-		
+
 	}
-	
 
 	@GetMapping("/detail")
-	public void productRead(Long pno, Long sno, Model model) {
-		
+	public void productRead(@CookieValue(value = "pViewCookie", required = false) String pViewCookie,Long pno, Long sno, Model model) {
+
 		ProductVO vo = productService.read(pno);
-		
+	
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 	}
-	
-	
+
 	@PostMapping("/checkzzim/{sno}")
-    public ResponseEntity<String> checkzzim(@PathVariable("sno") Long sno) {
-		
-    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
-	    
-		if(!name.equals("anonymousUser")) {
-        	StoreVO store = new StoreVO();
-        	store.setMid(name);
-        	store.setSno(sno);
-    	 	
-        	if(storeService.getStoreLike(store).size() == 0) {
-        		return new ResponseEntity<String>("no",HttpStatus.OK);
-    	 	}else {
-    	 		return new ResponseEntity<String>("yes",HttpStatus.OK);
-    	 	}
-        }else {
-        	return new ResponseEntity<String>(HttpStatus.OK);
-        }
-		
-	 }
-	
+	public ResponseEntity<String> checkzzim(@PathVariable("sno") Long sno) {
+
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		if (!name.equals("anonymousUser")) {
+			StoreVO store = new StoreVO();
+			store.setMid(name);
+			store.setSno(sno);
+
+			if (storeService.getStoreLike(store).size() == 0) {
+				return new ResponseEntity<String>("no", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("yes", HttpStatus.OK);
+			}
+		} else {
+			return new ResponseEntity<String>(HttpStatus.OK);
+		}
+
+	}
+
 	@PostMapping("/autocomplete")
-    @ResponseBody
-    public List<String> autoComplete() {
-        
-        List<String> list=storeService.getName();
-        return list;
-    }
+	@ResponseBody
+	public List<String> autoComplete() {
+
+		List<String> list = storeService.getName();
+		return list;
+	}
 }

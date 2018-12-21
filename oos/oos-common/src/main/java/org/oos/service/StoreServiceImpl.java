@@ -107,7 +107,6 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public StoreVO getBySid(String sid) {
-		// TODO Auto-generated method stub
 		StoreVO vo=mapper.getBySid(sid);
 		vo.setImgList(sImgMapper.get(vo.getSno()));
 		vo.setHashList(hashMapper.getList(vo.getSno()));
@@ -137,6 +136,16 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<StoreVO> getStoreList(PageDTO dto) {
 		return mapper.getStoreList(dto);
+	}
+
+	@Override
+	public int upVisitCnt(Long sno) {
+		return mapper.upVisitCnt(sno);
+	}
+
+	@Override
+	public List<StoreVO> getBestStore() {
+		return mapper.getBestStore();
 	}
 
 	

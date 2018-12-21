@@ -60,7 +60,7 @@
 										<td class="height90 borderBottom " colspan="4"
 											style="text-align: left;">
 											<div class="shoppingGoodsThumbnail" style="display: inline-block;">
-												<img th:class="|thumb_${arr.product.pno}|" style="width: 60px; display: inline-block; vertical-align: middle;">
+												<img th:class="|thumb_${arr.product.pno}|" style="width: 40px; display: inline-block; vertical-align: middle;">
 											</div>
 											<div style="display: inline-block; margin-left: 6px; width:200px; vertical-align: middle;">
 												<div class="basketGoodsName" style="width: 360px;">
@@ -103,20 +103,15 @@
 							cellspacing="0" style="width: 760px;  border-top: 4px solid #e5e5e5;">
 							
 							<tbody>
-						
 								<tr class="paymentOption" style="height: 102px;">
-								
 									<td class="" colspan="6"
 										style="padding: 0 30px; border-spacing: 10px;">
-										
 										<div class="payMethodInputArea" style="height: 54px;">
-											<div class="orderInfo"><strong  th:text="${member.mname}">NAME</strong></div>
+											<div class="orderInfo"><strong  th:text="${order[0].name}">NAME</strong></div>
 											<div class="orderInfo" th:text="${order[0].address}">Address</div>
 											<div class="orderInfo" th:text="${order[0].addressDetail}">AddressDetail</div>
 											<div class="orderInfo" th:text="${order[0].pnum}" style="color:#9b9b9b">전화번호</div>
-										
 										</div>
-										
 									</td>
 								</tr>
 							</tbody>
@@ -153,12 +148,13 @@
 				var opno = item.opno;
 			
 					var eachPrice = $(".basketGoodsSumPrice").find('.price_'+pno);
-					
+				
 					$.each(eachPrice, function(index, item){
 						sum += Number(item.dataset["price"]);
+						
 					}); 
 					
-					var img =  item.product.imgList[0];
+					var img =  item.img;
 					var fileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
 					
 					$.each($('.thumb_'+ item.pno),function(){
@@ -171,7 +167,7 @@
 			});  
 			 
 			
-			 $.each($(".success"), function(index, item){ 
+		 	 $.each($(".success"), function(index, item){ 
 				 totalSum += Number(item.dataset["price"]);
 			 });
 			 

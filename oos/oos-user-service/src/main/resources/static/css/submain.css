@@ -87,8 +87,9 @@
 
 .item_list_wrap .item_list li {
 	float: left;
-	width: 320px;
-	margin-left: 10px
+	width: 310px;
+	margin-right: 10px;
+	margin-bottom: 10px
 }
 
 .item_list_wrap .item_list li:first-child {
@@ -98,7 +99,8 @@
 .item_list_wrap .item_list .inner {
 	position: relative;
 	border: 1px solid #eee;
-	background: #fff
+	background: #fff;
+	cursor:pointer;
 }
 
 .item_list_wrap .item_list li:hover .inner {
@@ -113,49 +115,22 @@
 	text-decoration: none
 }
 
-.item_list_wrap .item_list .bt_smileclub {
-	display: inline-block;
-	overflow: hidden;
-	background: url(//pics.auction.co.kr/pc/hp/new_homepage.png) no-repeat;
-	color: rgba(0, 0, 0, 0);
-	line-height: 999em
-}
 
-.item_list_wrap .item_list .bt_smileclub.sm_akill {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	width: 40px;
-	height: 58px;
-	background-position: 0 -136px
-}
-
-.item_list_wrap .item_list .emblem-bigs--badge {
-	display: block;
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	right: 0;
-	width: 66px;
-	height: 80px;
-	background:
-		url(//pics.auction.co.kr/pc/bigsmile/sp_big-smile--badge.png) -230px 0
-		no-repeat;
-	text-indent: -9999px
-}
 .item_list_wrap .item_list .bigsmile .bt_smileclub, .item_list_wrap .item_list .emblem-bigs--badge+.bt_smileclub
 	{
 	display: none
 }
 
 .item_list_wrap .item_list .thumb {
-	width: 318px;
-	height: 165px
+	width: 308px;
+	/* height: 165px */
 }
 
 .item_list_wrap .item_list .title {
 	display: block;
 	overflow: hidden;
+	position:absolute;
+	top:180px;
 	height: 19px;
 	margin: 12px 13px 0;
 	font-size: 15px;
@@ -237,7 +212,7 @@
 .item_list_wrap .item_list .tags {
 	display: block;
 	height: 18px;
-	margin: 10px -1px 0;
+	margin: 35px -1px 0;
 	padding: 8px 1px 10px;
 	border-top: 1px solid #f3f3f3
 }

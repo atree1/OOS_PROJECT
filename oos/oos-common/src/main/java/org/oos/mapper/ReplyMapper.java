@@ -31,11 +31,14 @@ public interface ReplyMapper {
 	
 	public double scoreAverage(Map<String, Object> map);
 	
-	public List<ReplyVO> depthGetList(Map<String, Object> map);
+	/*
+	public List<ReplyVO> depthGetList(Map<String, Object> map);*/
 	
 	public int getRemove(Long rno);
 	
 	public List<ReplyVO> sellerReply(Map<String, Object> map);
+	
+	public int stateUpdate(Long parent);
 	
 	public int sellerInsert(ReplyVO vo);
 	

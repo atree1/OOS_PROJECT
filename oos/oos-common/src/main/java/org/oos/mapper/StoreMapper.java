@@ -17,7 +17,9 @@ public interface StoreMapper {
 	
 	public List<StoreVO> getStoreList(PageDTO dto);
 	
-	public StoreVO get(Long sno);
+	public List<StoreVO> getBestStore();
+	
+/*	public StoreVO get(Long sno);*/
 	
 	public StoreVO getBySno(Long sno);
 	
@@ -26,6 +28,8 @@ public interface StoreMapper {
 	public int insert(StoreVO vo);
 	
 	public int modify(StoreVO vo);
+	
+	public int upVisitCnt(Long sno);
 	
 	public int delete(Long sno);
 	

@@ -81,7 +81,7 @@
 							<div class="star">
 								<select class="score" id="score"
 									style="border: 0px; height: 28px;">
-									<option th:value="5">★★★★★</option>
+									<option th:value="5" selected>★★★★★</option>
 									<option th:value="4">★★★★</option>
 									<option th:value="3">★★★</option>
 									<option th:value="2">★★</option>
@@ -107,8 +107,8 @@
 				<div class="more_goods">
 					<div class="goods_name" th:text="${product.pname}">PNAME</div>
 					<div class="detail_store_name">
-						<span class="store" th:text="${store.saddress}">ADDRESS</span> / <span
-							th:text="${store.tel}">TEL</span>
+						<span class="store" th:text="${product.store.sname}">SNAME</span> / <span
+							th:text="${product.store.tel}">TEL</span>
 					</div>
 					<div class="goods_price" th:text="${product.price}">PRICE</div>
 					<div class="div_line_1px" style="width: 100%; margin-bottom: 30px;"></div>
@@ -193,7 +193,7 @@
 								</div>
 							</div>
 							
-							<div class="inner_btn_zzim" th:id="${store.sno}" 
+							<div class="inner_btn_zzim" th:id="${product.sno}" 
 							style="display:inline-block; margin-right:10px; margin-bottom:8px;"></div>
 							<button class="btn_order" style="display: inline-block;">장바구니에 담기</button>
 						</div>
@@ -223,7 +223,7 @@
 		var storeDetailForm = $("#storeDetailForm");
 	    var product = [[${product}]];
 	    var pno = [[${product.pno}]];
-	    var sno = [[${store.sno}]];
+	    var sno = [[${product.sno}]];
 	    var img = [[${img}]];
 	    var pageNum = 1;
 		var replyPageFooter = $(".replyPageFooter");
@@ -582,9 +582,9 @@
 				return;
 			}
 			
-			if(kindValue == "q"){
+			if(kindValue == "Q"){
 				scoreValue = 0;
-			}else(kindValue == "r"){
+			}else if(kindValue == "R"){
 				scoreValue = $("#score option:selected").val();
 			}
 			

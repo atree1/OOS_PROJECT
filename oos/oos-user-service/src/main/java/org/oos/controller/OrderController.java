@@ -59,14 +59,15 @@ public class OrderController {
 		List<OrderDetailVO> list = orderDetailService.getListByOno(ono);
 		list.forEach(vo -> {
 			
-			cartList.forEach(cart -> {
-				if(cart.getOpno() == vo.getOpno()) {
+		cartList.forEach(cart -> {
+			log.info(cart.getOpno() + " : " + vo.getOpno());
+				if(cart.getOpno().equals(vo.getOpno())) {
 					cartService.remove(cart.getCno());
 				}
 			});
 			
 		});
-		log.info(list+"");
+		
 		model.addAttribute("order", list);
 	}
 	

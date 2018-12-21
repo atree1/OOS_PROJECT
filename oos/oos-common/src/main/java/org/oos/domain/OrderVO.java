@@ -1,6 +1,7 @@
 package org.oos.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -19,4 +20,6 @@ public class OrderVO {
 	private char del;
 	
 	private OrderDetailVO detail;
+	
+	private ProductVO product; // 대표상품 가져오기
 }

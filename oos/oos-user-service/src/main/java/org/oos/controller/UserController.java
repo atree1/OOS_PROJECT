@@ -70,35 +70,28 @@ public class UserController {
 	
 	@Autowired
 	MemberRepository repo;
-	
 
     @GetMapping("/mypage/reviewDetail")
-	public void reviewDetail(long pno, String kind,Model model) {
+	public void reviewDetail(long pno, String parent, Model model) {
     	Map<String, Object> map = new HashMap<String, Object>();
     	
-    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
-    
-		if(!name.equals("anonymousUser")) {
-    		map.put("mid", name);
-    	}
-		
+    	map.put("parent", parent);
 		map.put("pno", pno);
-		map.put("kind", kind);
-		model.addAttribute("reviewDetail", replyService.getDetailList(map));
+		map.put("kind", "r");
+		model.addAttribute("reviewDetail", replyService.sellerReply(map));
 	}
 	
 	@GetMapping("/mypage/review")
-	public void reviewList(Criteria cri, String kind, Model model) {
+	public void reviewList(Criteria cri, Model model) {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("mid", name);
-		map.put("kind", kind);
+		map.put("kind", "r");
 		
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
 		map.put("dto", pageDTO);
-
 		model.addAttribute("reply", replyService.getStoreReply(map));
 		
 		List<Integer> pageList = new ArrayList<>();
@@ -112,20 +105,20 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage/qna")
-	public void qnaList(Criteria cri, String kind, Model model) {
+	public void qnaList(Criteria cri, Model model) {
 		
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("cri", cri);
 		map.put("mid", name);
-		map.put("kind", kind);
+		map.put("kind", "q");
 		
 		PageDTO pageDTO = new PageDTO(cri,replyService.myOrderCount(map)); 
 		map.put("dto", pageDTO);
-		
+
 		model.addAttribute("reply", replyService.getStoreReply(map));
-		
 		List<Integer> pageList = new ArrayList<>();
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
             pageList.add(i);
@@ -136,13 +129,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage/qnaDetail")
-	public void qnaDetail(long pno, String kind, String parent, Model model) {
-
-		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	public void qnaDetail(long pno, String parent, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", pno);
-		map.put("kind", kind);
+		map.put("kind", "q");
 		map.put("parent", parent);
 		model.addAttribute("qnaDetail", replyService.sellerReply(map));
 	}
@@ -191,7 +182,6 @@ public class UserController {
 	 	StoreVO vo = new StoreVO();
 	 	vo.setMid(name);
 	 	vo.setSno(sno);
-
 	    
 	 	if(storeService.getStoreLike(vo).size() == 0) {
 	 		storeService.inStoreLike(vo);
@@ -223,9 +213,7 @@ public class UserController {
     
     @GetMapping("/list")
     public void List(Criteria cri, Model model) {
-    	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
+
 	    
     	Map<String, Object> map = new HashMap<>();
     	map.put("cri", cri);
@@ -238,10 +226,6 @@ public class UserController {
     	}
     	
     	map.put("dto", pageDTO);
-    	
-    	if(!name.equals("anonymousUser")) {
-    		map.put("mid", name);
-    	}
 		
 		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {	
         	model.addAttribute("store", storeService.getStoreList(pageDTO));
@@ -276,13 +260,7 @@ public class UserController {
    
         List<OrderVO> order = orderService.getList(map);
       
-        order.forEach(vo -> {
-        	List<OrderDetailVO> list  = orderDetailService.getList(vo.getOno());
-        	
-        	vo.setDetail(list.get(0));
-        });
-        
-        model.addAttribute("orderList", order);
+       model.addAttribute("orderList", order);
         
         List<Integer> pageList = new ArrayList<>();
         
