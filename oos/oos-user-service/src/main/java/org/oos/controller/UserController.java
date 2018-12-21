@@ -73,18 +73,13 @@ public class UserController {
 	
 
     @GetMapping("/mypage/reviewDetail")
-	public void reviewDetail(long pno, String kind,Model model) {
+	public void reviewDetail(long pno, String kind, String parent, Model model) {
     	Map<String, Object> map = new HashMap<String, Object>();
     	
-    	String name = SecurityContextHolder.getContext().getAuthentication().getName();
-    
-		if(!name.equals("anonymousUser")) {
-    		map.put("mid", name);
-    	}
-		
+    	map.put("parent", parent);
 		map.put("pno", pno);
 		map.put("kind", kind);
-		model.addAttribute("reviewDetail", replyService.getDetailList(map));
+		model.addAttribute("reviewDetail", replyService.sellerReply(map));
 	}
 	
 	@GetMapping("/mypage/review")
@@ -136,15 +131,13 @@ public class UserController {
 	}
 	
 	@GetMapping("/mypage/qnaDetail")
-	public void qnaDetail(long pno, String kind, Model model) {
-		
-		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+	public void qnaDetail(long pno, String kind, String parent, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", pno);
-		map.put("mid", name);
 		map.put("kind", kind);
-		model.addAttribute("qnaDetail", replyService.getDetailList(map));
+		map.put("parent", parent);
+		model.addAttribute("qnaDetail", replyService.sellerReply(map));
 	}
 	
 	@GetMapping("/myStoreList")

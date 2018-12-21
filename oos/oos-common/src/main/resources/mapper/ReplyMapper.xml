@@ -39,11 +39,11 @@
 	</select>
 
 		
-	<select id="depthGetList" parameterType="map" resultType="org.oos.domain.ReplyVO">
+<!-- 	<select id="depthGetList" parameterType="map" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
 		where pno=#{pno} and del='N' and kind=#{kind} and rno>0 and mid = #{mid}
 		order by parent desc, depth asc
-	</select>
+	</select> -->
 	
 
 	<select id="sellerReply" parameterType="map" resultType="org.oos.domain.ReplyVO">
