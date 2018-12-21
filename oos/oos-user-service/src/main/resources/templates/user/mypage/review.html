@@ -62,16 +62,16 @@
 			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;">
 				<colgroup>
 					<col width="80">
+					<col width="150">
+					<col width="350">
 					<col width="80">
-					<col width="300">
-					<col width="100">
-					<col width="200">
+					<col width="150">
 				</colgroup>
 				<thead>
 					<tr
 						style="background-color: #fff; padding: 0px; text-align: center;'">
-						<th class="">문의번호</th>
 						<th class="">문의 유형</th>
+						<th class="">상품명</th>
 						<th class="">제목</th>
 						<th class="">별점</th>
 						<th class="">등록일</th>
@@ -79,12 +79,14 @@
 				</thead>
 				<tbody id="questionlist_tbody">
 					<tr class="height60" th:each=arr:${reply}>
-						<td class="" th:text="${arr.rno}"></td>
 						<td class="">REVIEW</td>
+						<td class="" th:text="${arr.product.pname}"
+						 onclick="location.href=''"></td>
 						<td class="replyTitle" th:id="|ono_${arr.rno}|" th:data-pno="|${arr.pno}|" th:data-mid="|${arr.mid}|"
 							th:text="${arr.title}"></td>
 						<td class="" style="color:#43a047" th:text="${arr.score}"></td>
 						<td class="" th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
+					</tr>
 				</tbody>
 			</table>
 			<div style="width: 800px; height: 28px; margin: 20px 0;"></div>
