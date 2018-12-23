@@ -44,7 +44,9 @@
 		<collection property="optList" resultMap="Option" />
 		<collection property="cateList" resultMap="Category" />
 	</resultMap>
-
+	<update id="upVisitCnt">
+		update tbl_product set visitcnt=visitcnt+1 where pno = #{pno}
+	</update>
 	<select id="getByPno" resultMap="Product">
 		select p.pno, p.pname, p.price, s.sno, tel, p.questionreplycnt, p.reviewreplycnt,
 		p.content, uuid, iname, ipath, o.opno, o.size, o.qty, sname from tbl_product p 
