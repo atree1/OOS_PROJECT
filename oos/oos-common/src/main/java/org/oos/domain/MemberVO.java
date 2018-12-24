@@ -1,5 +1,6 @@
 package org.oos.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,6 +27,8 @@ public class MemberVO {
 	private String email;
 	private String address;
 	private String addressdetail;
+	private Date regdate;
+	
 	
 	private String sns = "null";
 	private char permit = 'Y';

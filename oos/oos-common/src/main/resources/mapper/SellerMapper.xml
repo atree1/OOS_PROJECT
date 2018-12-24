@@ -5,10 +5,29 @@
 
 <mapper namespace="org.oos.mapper.SellerMapper">
 
-	<select id="getList" resultType="org.oos.domain.SellerVO">
-		select * from tbl_seller
-		where sid !='' and del='N' order by regdate desc
-		limit #{skip},#{amount}
+		
+	<select id="getSellerList" resultMap="Seller">
+		select *  from tbl_seller s
+		left join tbl_seller_auth a
+		on s.sid = a.sid
+		where s.sid != ""
+		<if test="dto != null">
+			<if test="dto.cri.keyword != null">
+				and s.sid like concat("%", #{dto.cri.keyword} ,"%")
+			</if>
+		order by regdate desc
+		limit #{dto.cri.skip}, #{dto.cri.amount}
+		</if>
+	</select>
+	
+	<select id="getSellerCount" resultType="int">
+		select count(*)  from tbl_seller s
+		left join tbl_seller_auth a
+		on s.sid = a.sid
+		where s.sid != ""
+		<if test="dto.cri.keyword != null">
+			and s.sid like concat("%", #{dto.cri.keyword} ,"%")
+		</if>
 	</select>
 	
 	<select id="get" resultType="org.oos.domain.SellerVO">

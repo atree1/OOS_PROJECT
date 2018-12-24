@@ -10,6 +10,7 @@
 		<result column="iname" property="iname" />
 		<result column="ipath" property="ipath" />
 	</resultMap>
+	
 	<resultMap type="org.oos.domain.StoreVO" id="Store">
 		<result column="sno" property="sno" />
 		<result column="sname" property="sname" />
@@ -19,12 +20,49 @@
 		<collection property="imgList" resultMap="Image" />
 	</resultMap>
 	
-	<select id="getList" resultType="org.oos.domain.MemberVO">
-		select* from tbl_member
-		where mid !=''
-		and del = 'N'
+	<resultMap type="org.oos.domain.MemberAuth" id="Auth">
+		<result column="ano" property="ano" />
+		<result column="auth" property="auth" />
+	</resultMap>
+	
+	<resultMap type="org.oos.domain.MemberVO" id="Member">
+		<result column="mid" property="mid" />
+		<result column="mname" property="mname" />
+		<result column="mpw" property="mpw" />
+		<result column="pnum" property="pnum" />
+		<result column="birth" property="birth" />
+		<result column="email" property="email" />
+		<result column="address" property="address" />
+		<result column="addressdetail" property="addressdetail" />
+		<result column="sns" property="sns" />
+		<result column="regdate" property="regdate" />
+		<result column="permit" property="permit" />
+		<result column="del" property="del" />
+		<collection property="authList" resultMap="Auth" />
+	</resultMap>
+	
+	<select id="getUserList" resultMap="Member">
+		select *  from tbl_member m
+		left join tbl_member_auth a
+		on m.mid = a.mid
+		where m.mid != "" and del = 'N'
+		<if test="dto != null">
+			<if test="dto.cri.keyword != null">
+				and m.mid like concat("%", #{dto.cri.keyword} ,"%")
+			</if>
 		order by regdate desc
-		limit #{skip}, #{amount}
+		limit #{dto.cri.skip}, #{dto.cri.amount}
+		</if>
+	</select>
+
+	<select id="getUserCount" resultType="int">
+		select *  from tbl_member m
+		left join tbl_member_auth a
+		on m.mid = a.mid
+		where m.mid != "" and del = 'N'
+		<if test="dto.cri.keyword != null">
+			and m.mid like concat("%", #{dto.cri.keyword} ,"%")
+		</if>
 	</select>
 
 	<select id="get" resultType="org.oos.domain.MemberVO">

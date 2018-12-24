@@ -56,7 +56,7 @@ public class LoginController {
 	
 	@PostMapping(value="/idCheck/{id}")
 	public ResponseEntity<String> idCheck(@PathVariable("id") String id) {
-		log.info(memberService.get(id)+"");
+		
 		if(memberService.get(id) == null) {
 			return new ResponseEntity<>("SUCCESS",HttpStatus.OK);
 		}else {
@@ -70,20 +70,16 @@ public class LoginController {
 		
 	}
 	
-	/*@PostMapping(value= {"/logout"})
-	public String logout() {
-		return "redirect:/main";
-	}*/
-
-	
 	@Transactional
 	@PostMapping(value= {"/with"})
 	public String with(MemberVO member) {
 	
 		org.oos.domain.Criteria cri = new org.oos.domain.Criteria();
-		cri.setAmount(100000);
 		
-		memberService.getList(cri).forEach(vo -> {
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		memberService.getUserList(map).forEach(vo -> {
 			
 			if(member.getSns().equals("null") && vo.getMid().equals(member.getMid())) {
 				memberService.remove(member.getMid());
@@ -98,7 +94,7 @@ public class LoginController {
 	
 	@RequestMapping(value= {"/oauth"}, consumes="application/json", produces="application/json")
 	public ResponseEntity<Map> oauth(@RequestBody AuthDTO dto) {
-		log.info(dto+"");
+		
 		Map<String,Object> map = new HashMap<>();
 		MemberVO member = memberService.get(dto.getUser_id());
 		if(member == null || !member.getSns().equals(dto.getSns())) {
