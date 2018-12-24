@@ -22,8 +22,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
 	
 	@Override
-	public List<MemberVO> getList(Criteria cri) {
-		return mapper.getList(cri);
+	public List<MemberVO> getUserList(Map<String, Object> map) {
+		return mapper.getUserList(map);
 	}
 
 	@Override
@@ -79,6 +79,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getMyStoreCount(Map<String, Object> map) {
 		return mapper.getMyStoreCount(map);
+	}
+
+	@Override
+	public int getUserCount(Map<String, Object> map) {
+		return mapper.getUserCount(map);
 	}
 	
 

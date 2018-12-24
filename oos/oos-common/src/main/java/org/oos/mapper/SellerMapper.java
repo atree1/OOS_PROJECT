@@ -1,13 +1,16 @@
 package org.oos.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.oos.domain.Criteria;
 import org.oos.domain.SellerVO;
 
 public interface SellerMapper {
 
-	public List<SellerVO> getList(Criteria cri);
+	public List<SellerVO> getSellerList(Map<String, Object> map);
+	
+	public int getSellerCount(Map<String, Object> map);
 	
 	public SellerVO get(String sid);
 	
@@ -19,5 +22,4 @@ public interface SellerMapper {
 	
 	public int authorize(String sid);
 	
-	public int count(Criteria cri);
 }
