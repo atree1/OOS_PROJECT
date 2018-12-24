@@ -20,7 +20,12 @@ public class SellerController {
 
 	@Setter(onMethod_=@Autowired)
 	private SellerService sellerService;
+	
+	@GetMapping("/login")
+	public void login() {
 		
+	};
+	
 	@GetMapping("/signUp")
 	public void getRegister(Model model) {
 		
