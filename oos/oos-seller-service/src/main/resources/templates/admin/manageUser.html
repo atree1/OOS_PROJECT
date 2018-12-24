@@ -87,9 +87,13 @@
 
 					<tr class="replyData" role="row" th:each=arr:${member}>
 						<!-- <td class="rno"  th:text=${arr.rno}></td> -->
-						<td th:if="${arr.sns == 'null'}" class="mid" th:text=${arr.mid}></td>
-						<td th:if="${arr.sns != 'null'}" class="auth" th:text=${arr.authList[0].auth}></td>
-						<td class="auth" th:text=${arr.authList[0].auth}></td>
+						<td class="mid" th:text=${arr.mid}></td>
+						<td class="auth">
+							<select th:id="|auth_${arr.authList[0].ano}|">
+								<option value="user">USER</option>
+								<option value="ban">BAN</option>
+							</select>
+						</td>
 						<td class="email" th:text=${arr.email}></td>
 						<td class="ragdate"
 							th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}">
@@ -101,7 +105,7 @@
 	</div>
 
 	<div class="row">
-		
+		<button class="input-group" id="modifyBtn" style="float:right">수정하기</button>
        <div class="input-group custom-search-form" style="width:200px;">
            <input type="text" class="form-control" id="userSearchInput" placeholder="Search...">
            <span class="input-group-btn">
@@ -143,6 +147,15 @@
 $(document).ready(function(){
 	
 	var manageForm = $("#manageForm");
+	var member = [[${member}]];
+	
+	(function(){
+		$.each(member, function(index, item){
+			var auth = item.authList[0].auth;
+			$("#auth_"+auth.ano).val(auth.auth);
+		});
+	})();
+	
 	
 	$("#userSearch").click(function(){
 		var keyword = $("#userSearchInput").val();
@@ -150,11 +163,13 @@ $(document).ready(function(){
 			alert("내용을 입력해주세요.");
 			return;
 		}
-		
 		manageForm.append("<input type='hidden' name='keyword' value='"+keyword+"'>")
 		.submit();
-		
 	});
+	
+	$("#modifyBtn").click(function(){
+		
+	})
 });
 
 </script>
