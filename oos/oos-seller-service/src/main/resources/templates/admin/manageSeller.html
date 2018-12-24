@@ -212,8 +212,14 @@
 
 $(document).ready(function(){
 	
+<<<<<<< HEAD
 		var orderForm = $("#orderListForm");
 		var pageMaker = [[${pageMaker}]];
+=======
+	var manageForm = $("#manageForm");
+	var pageMaker = [[${pageMaker}]];
+	var product = [[${product}]];
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 	
 		$(".paginate_button").click(function(e) {
 	        $("#pageNum").val(String($(this).attr("id")).substring(5));
@@ -264,6 +270,26 @@ $(document).ready(function(){
 			}
 		});
 		
+<<<<<<< HEAD
+=======
+	});
+	
+	$(".paginate_button").click(function(e) {
+		
+		 $("#pageNum").val($(this).attr("id").substring(5));
+		 manageForm.submit();
+	});
+	
+	$(".paginate_button previous").click(function(){
+		$("#pageNum").val(Number(pageMaker.startPage) -1);
+		manageForm.submit();
+	});
+	
+	$(".paginate_button next").click(function(){
+		$("#pageNum").val(Number(pageMaker.endPage) + 1);
+		manageForm.submit();
+	});
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 });
 
 	

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.service.MemberService;
+import org.oos.service.ProductService;
 import org.oos.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,10 @@ public class SuperAdminController {
 	private MemberService memberService;
 	
 	@Setter(onMethod_=@Autowired)
-	private SellerService sellerService;
+	private SellerService sellerService;	
+	
+	@Setter(onMethod_=@Autowired)
+	private ProductService productService;
 	
 	
 	@GetMapping("/admin/manageUser")
@@ -67,5 +71,25 @@ public class SuperAdminController {
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("seller",sellerService.getSellerList(map));	}
+	
+	@GetMapping("/admin/manageProduct")
+	public void manageProduct(Model model, Criteria cri) {
+		Map<String, Object> map = new HashMap<>();
+		
+		PageDTO pageDTO = new PageDTO(cri,productService.getTotal(map)); 
+	
+		map.put("dto", pageDTO);
+		map.put("seller", "seller");
+		
+		List<Integer> pageList = new ArrayList<>();
+		
+        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
+            pageList.add(i);
+        }
+        
+	    model.addAttribute("pageList", pageList);
+        model.addAttribute("pageMaker", pageDTO);
+		model.addAttribute("product",productService.getList(map));
+	}
 	
 }

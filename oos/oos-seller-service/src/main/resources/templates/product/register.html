@@ -122,7 +122,8 @@
 </div>
     <!-- /#wrapper -->
 <script src="../js/jquery.min.js"></script>
-<script th:inline="javascript">
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
 $(document).ready(function(e){
 	
 	
@@ -278,3 +279,4 @@ $(document).ready(function(e){
 
 });
 </script>  
+</th:block>

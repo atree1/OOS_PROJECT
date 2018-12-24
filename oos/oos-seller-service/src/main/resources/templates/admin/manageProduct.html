@@ -49,7 +49,7 @@
   cursor: pointer;
 }
 </style>
-	<h1 align='center'>구매자관리</h1>
+	<h1 align='center'>상품관리</h1>
 	<br />
 	<div class="row">
 		<div class="col-sm-12" align="center">
@@ -60,44 +60,35 @@
 				<thead>
 					<tr role="row" style="text-align: center;">
 		
-					<!-- 	<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">멤버번호</th> -->
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">아이디</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Platform(s): activate to sort column ascending"
-							style="width: 150px;">권한</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Engine version: activate to sort column ascending"
-							style="width: 120px;">이메일</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="CSS grade: activate to sort column ascending"
-							style="width: 150px;">가입일</th>
-
+					 	<th class="sorting" style="width: 50px;">상품번호</th>
+						<th class="sorting" style="width: 90px;">이미지</th>
+						<th class="sorting" style="width: 250px;">상품이름</th>
+						<th class="sorting" style="width: 120px;">스토어</th>
+						<th class="sorting" style="width: 100px;">등록일</th>
+						<th class="sorting" style="width: 100px;">상태</th>
+						<th class="sorting" style="width: 100px;">관리</th>
 					</tr>
 				</thead>
 				<tbody>
 
-					<tr class="replyData" role="row" th:each=arr:${member}>
-						<!-- <td class="rno"  th:text=${arr.rno}></td> -->
-						<td class="mid" th:text=${arr.mid}></td>
-						<td class="auth">
-							<select th:id="|auth_${arr.authList[0].ano}|">
-								<option value="user">USER</option>
-								<option value="ban">BAN</option>
-							</select>
-						</td>
-						<td class="email" th:text=${arr.email}></td>
-						<td class="ragdate"
-							th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}">
-						</td>
+					<tr class="replyData" role="row" th:each=arr:${product}>
+						<td th:text=${arr.pno}>PNO</td>
+						<td><img th:id="|img_${arr.pno}|" src=""></td>
+						<td class="title" th:id="${arr.pno}">
+							<a th:text="${arr.pname}" style="cursor:pointer">PNAME</a></td>
+						<td th:text="${arr.store.sname}">sname</td>
+						<td th:text="${arr.regdate}"
+							>REGDATE</td>
+						<td th:if="${#strings.toString(arr.state)}=='O'"
+							style="color:blue">판매</td>
+						<td th:if="${#strings.toString(arr.state)}=='X'"
+							style="color:lightred">판매중지</td>
+						<td th:if="${#strings.toString(arr.state)}=='O'">
+							<button>판매중지</button>
+						</td>	
+						<td th:if="${#strings.toString(arr.state)}=='X'">
+							<button>판매허용</button>
+						</td>	
 					</tr>
 				</tbody>
 			</table>
@@ -105,7 +96,6 @@
 	</div>
 
 	<div class="row">
-		<button class="input-group" id="modifyBtn" style="float:right">수정하기</button>
        <div class="input-group custom-search-form" style="width:200px;">
            <input type="text" class="form-control" id="userSearchInput" placeholder="Search...">
            <span class="input-group-btn">
@@ -152,10 +142,7 @@ $(document).ready(function(){
 	var product = [[${product}]];
 	
 	(function(){
-		$.each(member, function(index, item){
-			var auth = item.authList[0].auth;
-			$("#auth_"+auth.ano).val(auth.auth);
-		});
+		
 	})();
 	
 	
@@ -187,6 +174,10 @@ $(document).ready(function(){
 	$(".paginate_button next").click(function(){
 		$("#pageNum").val(Number(pageMaker.endPage) + 1);
 		manageForm.submit();
+	});
+	
+	$(".title").click(function(){
+		window.location.href="http://localhost:8080/store/detail?pno="+$(this).attr("id");
 	});
 });
 

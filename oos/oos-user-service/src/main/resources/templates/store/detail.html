@@ -197,11 +197,14 @@
 							style="display:inline-block; margin-right:10px; margin-bottom:8px;"></div>
 							<button class="btn_order" style="display: inline-block;">장바구니에 담기</button>
 						</div>
-						<button class="btn_order_direct" style="display: inline-block;">
+						<button th:if="${#strings.toString(product.state)}=='O'" 
+							class="btn_order_direct" style="display: inline-block;">
 							<div class="symbolLogo"></div>
 							주문하기
 						</button>
-
+						<div th:if="${#strings.toString(product.state)}=='X'" >
+							<h1>판매가 중지된 상품입니다.</h1>
+						</div>
 					</div>
 
 				</div>
