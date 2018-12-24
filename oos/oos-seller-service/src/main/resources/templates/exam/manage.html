@@ -166,8 +166,6 @@
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}' /> 
 		<input type='hidden' name='sno' value='1' />
-			
-			
 	</form>
 </div>
 
@@ -250,11 +248,10 @@ $(document).ready(function(){
 						shipNum = -1;
 					}
 					
-					
 					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
 					orderForm.append("<input type='hidden' name='option' value='"+val+"' >");
 				});
-				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
+				orderForm.attr("method", "post").attr("action","/exam/modify").submit();
 			}else{ 
 			    return;
 			}

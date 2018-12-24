@@ -64,9 +64,8 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	}
 
 	@Override
-	public int modify(OrderDetailVO vo) {
-		log.info("service:"+vo);
-		return orderDetailMapper.modify(vo);
+	public int modify(Map<String, Object> map) {
+		return orderDetailMapper.modify2(map);
 	}
 
 	@Override

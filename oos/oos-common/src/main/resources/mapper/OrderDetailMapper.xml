@@ -136,13 +136,12 @@
 		#{addressDetail},#{sno})
 	</insert>
 
-	<!-- <update id="modify"> update tbl_order_detail set qty = #{qty}, opno 
-		= #{opno} where odno = #{odno} </update> -->
 
-	<update id="modify">
+	<update id="modify2" parameterType="map">
 		update tbl_order_detail
-		set dno = #{dno} and
-		detail_state = #{detail_state}
+		set detail_state = #{detail_state}
+		,  dno = #{dno}
+	
 		where odno = #{odno}
 	</update>
 
