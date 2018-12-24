@@ -22,6 +22,8 @@ public class StoreVO {
 	private String mid; // 찜목록 가져올때 쓰려고
 	private int odNum; //총 주문개수
 	
+	private int visitcnt;
+	
 	private List<StoreImgVO> imgList;
 	private List<StoreHashTagVO> hashList;
 

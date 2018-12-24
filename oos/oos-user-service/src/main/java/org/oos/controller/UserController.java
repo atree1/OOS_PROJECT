@@ -11,7 +11,6 @@ import org.oos.domain.OrderDetailVO;
 import org.oos.domain.OrderVO;
 import org.oos.domain.PageDTO;
 import org.oos.domain.StoreVO;
-import org.oos.mapper.ImgurMapper;
 import org.oos.persistence.MemberRepository;
 import org.oos.service.CartService;
 import org.oos.service.MemberService;
@@ -23,7 +22,6 @@ import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -58,9 +56,6 @@ public class UserController {
     
     @Setter(onMethod_= @Autowired)
     private ProductService productService;
-    
-    @Setter(onMethod_= @Autowired)
-    private	ImgurMapper imgurMapper;
     
 	@Setter(onMethod_= @Autowired)
 	private ReplyService replyService;
@@ -196,9 +191,6 @@ public class UserController {
     
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        model.addAttribute("info", auth);
     	
     	List<OrderDetailVO> list = orderDetailService.getList(ono);
         model.addAttribute("detail", list);
