@@ -89,7 +89,7 @@ public class LoginController {
 			}
 		});
 		
-		return "/logout";
+		return "redirect:/logout";
 	}
 	
 	@RequestMapping(value= {"/oauth"}, consumes="application/json", produces="application/json")

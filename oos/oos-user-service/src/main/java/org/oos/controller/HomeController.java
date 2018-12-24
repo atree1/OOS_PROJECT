@@ -4,14 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.oos.domain.Criteria;
+import org.oos.domain.MemberVO;
 import org.oos.domain.PageDTO;
-import org.oos.persistence.MemberRepository;
 import org.oos.service.HashTagService;
+import org.oos.service.MemberService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,9 @@ public class HomeController {
 	@Setter(onMethod_=@Autowired)
 	private HashTagService hashTagService;
 	
+	@Setter(onMethod_=@Autowired)
+	private MemberService memberService;
+
 	@PostMapping("/hashTag")
 	@ResponseBody
 	public List<String> autoComplete() {
@@ -55,6 +60,7 @@ public class HomeController {
 	public void aboutus(Model model) {
 		
 	}
+	
 	
 	@GetMapping("/pay")
 	public void pay(Model model){
