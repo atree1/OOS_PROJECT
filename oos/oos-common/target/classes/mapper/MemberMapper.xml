@@ -134,5 +134,13 @@
 		set del = 'Y'
 		where user_id = #{mid}
 	</update>
+	
+<!-- 	<select id="manageMember" parameterType="map" resultType="Member">
+		select m.mid, m.mname, m.updatedate, m.permit, m.del, a.auth  
+		from tbl_member m
+		left join tbl_member_auth a
+		on m.mid = a.mid
+		where m.del = 'N'
+	</select> -->
 
 </mapper>

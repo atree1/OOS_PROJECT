@@ -29,6 +29,7 @@ public class SuperAdminController {
 	@Setter(onMethod_=@Autowired)
 	private SellerService sellerService;
 	
+	
 	@GetMapping("/admin/manageUser")
 	public void manageUser(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
@@ -65,7 +66,6 @@ public class SuperAdminController {
         
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("seller",sellerService.getSellerList(map));
-	}
+		model.addAttribute("seller",sellerService.getSellerList(map));	}
 	
 }

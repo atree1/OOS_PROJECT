@@ -27,6 +27,7 @@ public class SellerVO {
 	private Date regdate;
 	private Date updatedate;
 	private  char del;
+	private char permit;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="sid")
