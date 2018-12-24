@@ -8,12 +8,13 @@ import org.oos.domain.ProductVO;
  
 public interface ProductMapper {
 	
-	/*public List<ProductVO> getList(Map<String, Object> map);*/
 	public List<ProductVO> getList2(Map<String, Object> map);
 	
 	public List<ProductVO> bestProductList();
 	
 	public int upVisitCnt(Long pno);
+	
+	public int permit(Map<String, Object> map);
 	
 	public ProductVO get(Long pno);
 	

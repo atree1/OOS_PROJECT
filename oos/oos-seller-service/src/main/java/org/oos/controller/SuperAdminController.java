@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.Setter;
@@ -33,8 +34,7 @@ public class SuperAdminController {
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
 	
-	
-	@GetMapping("/admin/manageUser")
+	@GetMapping("/manageUser")
 	public void manageUser(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		
@@ -54,7 +54,7 @@ public class SuperAdminController {
 		model.addAttribute("member",memberService.getUserList(map));
 	}
 	
-	@GetMapping("/admin/manageSeller")
+	@GetMapping("/manageSeller")
 	public void manageSeller(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		
@@ -72,7 +72,7 @@ public class SuperAdminController {
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("seller",sellerService.getSellerList(map));	}
 	
-	@GetMapping("/admin/manageProduct")
+	@GetMapping("/manageProduct")
 	public void manageProduct(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		
@@ -92,4 +92,19 @@ public class SuperAdminController {
 		model.addAttribute("product",productService.getList(map));
 	}
 	
+	@RequestMapping("/permitP/{state}/{pno}")
+	public String productBan(@PathVariable("pno") Long pno,
+					@PathVariable("state") String state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("pno", pno);
+		if(state.equals("o")){
+			map.put("permit", "O");
+		}else if(state.equals("x")) {
+			map.put("permit", "X");
+		}
+		
+		productService.permit(map);
+		
+		return "redirect:/admin/manageProduct";
+	}
 }
