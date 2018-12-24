@@ -27,7 +27,7 @@ public class MemberVO {
 	private String email;
 	private String address;
 	private String addressdetail;
-	private Date regdate;
+	private Date regdate = new Date();
 	
 	
 	private String sns = "null";
