@@ -11,7 +11,6 @@ import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductImgVO;
 import org.oos.domain.ProductVO;
-import org.oos.mapper.ImgurMapper;
 import org.oos.service.AutoMlService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
@@ -42,8 +41,6 @@ public class ProductController {
 	private StoreService storeService;
 	@Setter(onMethod_ = @Autowired)
 	private AutoMlService autoMIService;
-	@Setter(onMethod_=@Autowired)
-	private ImgurMapper imgurMapper;
 	
 	
 	@PostMapping("/remove")
@@ -85,7 +82,6 @@ public class ProductController {
 		
 				
 		ProductVO vo = productService.read(pno);
-		model.addAttribute("img", imgurMapper.getList());
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 		model.addAttribute("pageMaker", pageDTO);
@@ -109,7 +105,7 @@ public class ProductController {
             pageList.add(i);
         }
         
-        model.addAttribute("img", imgurMapper.getList());
+        
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
