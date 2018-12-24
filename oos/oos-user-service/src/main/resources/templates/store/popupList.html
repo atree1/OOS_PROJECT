@@ -115,8 +115,10 @@ $(document).ready(function(){
 			e.preventDefault();
 	        if (document.frm.pop.checked){
 	        	console.log('popclose')
-	        	$.cookie('popOpen', $.cookie(popupList[0].sno);
 	        	
+	        	
+	        	$.cookie('popupOpen', $.cookie(popupList[0].sno));
+	        	cookieList("popupOpen").add();
 	        /* 	if($.cookie("popOpen")!== null){
 	        	$.cookie('popOpen',popupList.sno);
 	        	}
