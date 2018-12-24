@@ -54,87 +54,72 @@
 		width: 600px;
 	}
 </style>
-<div>
-        <div id="page-wrapper" class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">상품등록</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                       
-                        <div class="panel-heading">
-                           
-                        </div>
-                        
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-								 <form role="form" action="/product/register" method="post">
-									<div class="form-group">
-										<label>상품명</label> <input id="pname" name="pname" type="text"
-											class="form-control" required>
-									</div>
-									<div class="form-group">
-										<label>가격</label> <input id="price" name="price" type="text"
-											class="form-control" required>
-									</div>
-									<div class="form-group">
-										<label>상품설명</label>
-										<textarea id="content" name="content" class="form-control" rows="3"></textarea>
-									</div> 
-										
-										<div >
+  	<div class="row">
+       <div class="col-lg-12">
+           <h1 class="page-header">상품등록</h1>
+       </div>
+       <!-- /.col-lg-12 -->
+   </div>
+   <!-- /.row -->
+   <div class="row">
+       <div class="col-lg-12">
+           <div class="panel panel-default">
+               <div class="panel-body">
+                   <div class="row">
+                       <div class="col-md-12 col-sm-12">
+							<form role="form" action="/product/register" method="post">
+								<div class="form-group">
+									<label>상품명</label> <input id="pname" name="pname" type="text"
+										class="form-control" required>
+								</div>
+								<div class="form-group">
+									<label>가격</label> <input id="price" name="price" type="text"
+										class="form-control" required>
+								</div>
+								<div class="form-group">
+									<label>상품설명</label>
+									<textarea id="content" name="content" class="form-control" rows="3"></textarea>
+								</div> 
+									
+									<div >
 										<button class="btn btn-success" id="optionAddBtn">+</button>
-										</div>
+									</div>
 								
-									<div class="optionDiv">
-									
-									
+								<div class="optionDiv">
+								
+								
+								</div>
+								<div class="form-group uploadDiv">
+									<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
+									 <input name="uploadFile" id="files" type="file" multiple>
+								</div>
+								<div class="uploadResult">
+									<ul>
+								
+									</ul>
+								</div>
+								<div class="form-group">
+									<div>
+										<button class="btn btn-success" type="submit">상품등록</button>
 									</div>
-									<div class="form-group uploadDiv">
-										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
-										 <input name="uploadFile" id="files" type="file" multiple>
-									</div>
-									<div class="uploadResult">
-										<ul>
-
-										</ul>
-									</div>
-									<div class="form-group">
-										<div>
-											<button class="btn btn-success" type="submit">상품등록</button>
-										</div>
-									</div>
-									
-									<div >									
+								</div>
+								
+								<div >									
 									<label>sno</label>
 									<input id="sno" name="sno" type="text" th:value="${store.sno}" readonly="readonly" class="form-control" required>
-									</div>
-									</form>
-								<!-- /.col-lg-6 (nested) -->
-                            </div>
-                          </div>
-                         </div>
-                        <!-- /.panel-body -->
-      		           
-                       
-                    </div>
-                    <!-- /.panel -->
+								</div>
+							</form>
+                   </div>
+                 </div>
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-        
-        
-
-    </div>
+               <!-- /.panel-body -->
+           </div>
+           <!-- /.panel -->
+       </div>
+       <!-- /.col-lg-12 -->
+   </div>
+       <!-- /.row -->
+</div>
     <!-- /#wrapper -->
 <script src="../js/jquery.min.js"></script>
 <script th:inline="javascript">

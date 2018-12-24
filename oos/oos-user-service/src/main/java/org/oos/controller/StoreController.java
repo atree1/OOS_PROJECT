@@ -54,8 +54,6 @@ public class StoreController {
 		map.put("cri", cri);
 		map.put("sid", sid);
 
-				
-		log.info(notifyService.popupList(map)+"");
 		PageDTO pageDTO = new PageDTO(cri,notifyService.popupCount(map)); 
 		
 		List<Integer> pageList = new ArrayList<>();
