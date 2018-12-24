@@ -132,4 +132,10 @@ public class ProductServiceImpl implements ProductService {
 		return pMapper.bestProductList();
 	}
 
+	@Override
+	public int upVisitCnt(Long pno) {
+		// TODO Auto-generated method stub
+		return pMapper.upVisitCnt(pno);
+	}
+
 }

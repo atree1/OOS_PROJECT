@@ -13,14 +13,25 @@ public interface ProductMapper {
 	
 	public List<ProductVO> bestProductList();
 	
+	public int upVisitCnt(Long pno);
+	
 	public ProductVO get(Long pno);
+	
 	public ProductVO getByPno(Long pno);
+	
 	public List<ProductVO> getListBySno(Map<String, Object> map);
+	
 	public int modify(ProductVO vo);
+	
 	public int delete(ProductVO vo);
+	
 	public int insert(ProductVO vo);
+	
 	public int count(Map<String, Object> map);
+	
 	public List<String> getName();
+	
 	public void updateQuestionReplyCnt(@Param("pno") Long pno,@Param("amount") int amount);
+	
 	public void updateReviewReplyCnt(@Param("pno") Long pno,@Param("amount") int amount);
 }

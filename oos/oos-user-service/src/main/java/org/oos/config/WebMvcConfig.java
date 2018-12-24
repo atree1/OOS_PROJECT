@@ -21,8 +21,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(productViewInterceptor)
 		.addPathPatterns("/store/detail");
+		
+		
 		registry.addInterceptor(storeViewInterceptor)
-				.addPathPatterns("/store/list").addPathPatterns("/store/detail");;
+				.addPathPatterns("/store/list").addPathPatterns("/store/detail");
 	
 		
 		

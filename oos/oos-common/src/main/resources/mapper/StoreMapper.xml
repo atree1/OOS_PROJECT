@@ -170,8 +170,7 @@
 	</insert>
 
 	<select id="getStoreLike" resultType="org.oos.domain.StoreVO">
-		select * from
-		tbl_store_like
+		select * from tbl_store_like
 		where sno > 0 and mid = #{mid} and sno = #{sno}
 	</select>
 </mapper>
