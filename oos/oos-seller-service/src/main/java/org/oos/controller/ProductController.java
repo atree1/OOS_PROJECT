@@ -96,7 +96,7 @@ public class ProductController {
 		
 		map.put("dto", dto);
 		map.put("sno", sno);
-		
+		map.put("seller", "seller");
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
         
         List<Integer> pageList = new ArrayList<>();
