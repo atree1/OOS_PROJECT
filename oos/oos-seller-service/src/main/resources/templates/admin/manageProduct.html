@@ -180,7 +180,11 @@ $(document).ready(function(){
 	});
 	
 	$(".permit").click(function(){
-		$(this).attr("id").substring(3);
+		manageForm.attr("action","/admin/permitP/"+
+				$(this).attr("id").substring(0,2)+"/"+$(this).attr("id").substring(3))
+						.attr("method","post")
+				.submit();
+		
 	});
 });
 

@@ -97,12 +97,13 @@ public class SuperAdminController {
 					@PathVariable("state") String state) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("pno", pno);
-		if(state.equals("o")){
+		if(state.equals("ye")){
 			map.put("permit", "O");
-		}else if(state.equals("x")) {
+		}else if(state.equals("no")) {
 			map.put("permit", "X");
 		}
 		
+		log.info(map+"");
 		productService.permit(map);
 		
 		return "redirect:/admin/manageProduct";
