@@ -15,6 +15,8 @@ public interface ProductService {
 	
 	public int update(ProductVO vo);
 	
+	public int upVisitCnt(Long pno);
+	
 	public int remove(ProductVO vo);
 	
 	public int register(ProductVO vo);

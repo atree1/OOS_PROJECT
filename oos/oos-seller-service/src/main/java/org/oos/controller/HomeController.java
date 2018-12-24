@@ -3,6 +3,7 @@ package org.oos.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.oos.domain.StoreVO;
 import org.oos.service.OrderDetailService;
 import org.oos.service.ReplyService;
 import org.oos.service.StoreService;
@@ -38,8 +39,10 @@ public class HomeController {
 		String[] state= {"ready","shipping","complete"};
 		String[] kind= {"q","r"};
 		String[] range= {"day","week","month"};
+		StoreVO vo=storeService.getBySid(sid);
 		
-		Long sno=storeService.getBySid(sid).getSno();
+		int visitcnt=vo.getVisitcnt();
+		Long sno=vo.getSno();
 		
 		Map<String, Object> map=new HashMap<>();
 		
@@ -63,6 +66,8 @@ public class HomeController {
 			map.put("range", str);		
 			model.addAttribute(str,detailService.getTotal(map));	
 		}
+		
+		model.addAttribute("visitcnt",visitcnt);
 	}
 	
 	

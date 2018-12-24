@@ -73,11 +73,7 @@ $(document).ready(function(){
 		notifyForm.submit();
 	});
 	
-	function setCookie(name, value, expiredays){
-	    var todayDate = new Date();
-	        todayDate.setDate (todayDate.getDate() + expiredays);
-	        document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
-	 }
+	
 	var cookieList = function(cookieName) {
 		
 		var cookie = $.cookie(cookieName);
@@ -115,14 +111,14 @@ $(document).ready(function(){
 			e.preventDefault();
 	        if (document.frm.pop.checked){
 	        	console.log('popclose')
-	        	$.cookie('popOpen', $.cookie(popupList[0].sno);
+
 	        	
-	        /* 	if($.cookie("popOpen")!== null){
+	        	if($.cookie("popOpen")!== null){
 	        	$.cookie('popOpen',popupList.sno);
 	        	}
 	        	else{
 	        		$.cookie('popOpen', $.cookie(popupList[0].sno);
-	        	}	 */
+	        	}	 
 	        }
 	   self.close();
 	});

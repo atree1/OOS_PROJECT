@@ -83,7 +83,7 @@ public class StoreController {
 		model.addAttribute("seller", sellerService.get(sid));
 		model.addAttribute("pageMaker", pageDTO);
 	}
-	private void checkVisit(String sViewCookie,Long sno) {
+	private void checkStoreVisit(String sViewCookie,Long sno) {
 		boolean check = false;
 		if (sViewCookie != null) {
 			String[] numbers = sViewCookie.split("_");
@@ -106,6 +106,31 @@ public class StoreController {
 			storeService.upVisitCnt(sno);
 		}
 	}
+	
+	private void checkProductVisit(String pViewCookie,Long pno) {
+		boolean check = false;
+		if (pViewCookie != null) {
+			String[] numbers = pViewCookie.split("_");
+
+			String bno = "" + pno;
+			log.info(bno);
+
+			for (String number : numbers) {
+				log.info(number);
+
+				if (number.equals(bno)) {
+					check = true;
+					log.info("" + check);
+					break;
+				}
+			}
+
+		}
+		if (!check) {
+			productService.upVisitCnt(pno);
+		}
+	}
+	
 	@GetMapping("/list")
 	public void storeList(@CookieValue(value = "sViewCookie", required = false) String sViewCookie, Criteria cri,
 			String sid, Long sbno, Long sno, Model model) {
@@ -118,7 +143,7 @@ public class StoreController {
 		map.put("sid", sid);
 		
 		log.info(sViewCookie);
-		checkVisit(sViewCookie, sno);
+		checkStoreVisit(sViewCookie, sno);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 
 
@@ -136,10 +161,15 @@ public class StoreController {
 	}
 
 	@GetMapping("/detail")
-	public void productRead(@CookieValue(value = "pViewCookie", required = false) String pViewCookie,Long pno, Long sno, Model model) {
+	public void productRead(@CookieValue(value = "sViewCookie", required = false) String sViewCookie,
+			@CookieValue(value = "pViewCookie", required = false) String pViewCookie,Long pno, Long sno, Model model) {
 
 		ProductVO vo = productService.read(pno);
-	
+		log.info(sViewCookie);
+		checkStoreVisit(sViewCookie, sno);
+		checkProductVisit(pViewCookie, pno);
+		
+		
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("product", vo);
 	}
