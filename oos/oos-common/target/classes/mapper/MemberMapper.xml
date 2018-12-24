@@ -56,12 +56,12 @@
 	</select>
 
 	<select id="getUserCount" resultType="int">
-		select *  from tbl_member m
+		select count(*)  from tbl_member m
 		left join tbl_member_auth a
 		on m.mid = a.mid
 		where m.mid != "" and del = 'N'
-		<if test="dto.cri.keyword != null">
-			and m.mid like concat("%", #{dto.cri.keyword} ,"%")
+		<if test="keyword != null">
+			and m.mid like concat("%", #{keyword} ,"%")
 		</if>
 	</select>
 

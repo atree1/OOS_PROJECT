@@ -10,7 +10,7 @@ public interface SellerMapper {
 
 	public List<SellerVO> getSellerList(Map<String, Object> map);
 	
-	public int getSellerCount(Map<String, Object> map);
+	public int getSellerCount(Criteria cri);
 	
 	public SellerVO get(String sid);
 	

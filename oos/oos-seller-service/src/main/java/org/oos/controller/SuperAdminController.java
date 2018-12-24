@@ -33,8 +33,9 @@ public class SuperAdminController {
 	public void manageUser(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		
-		PageDTO pageDTO = new PageDTO(cri,memberService.getUserCount(map)); 
-
+		PageDTO pageDTO = new PageDTO(cri,memberService.getUserCount(cri)); 
+		
+	
 		map.put("dto", pageDTO);
 		
 		List<Integer> pageList = new ArrayList<>();
@@ -50,9 +51,9 @@ public class SuperAdminController {
 	
 	@GetMapping("/admin/manageSeller")
 	public void manageSeller(Model model, Criteria cri) {
-Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		
-		PageDTO pageDTO = new PageDTO(cri,sellerService.getSellerCount(map)); 
+		PageDTO pageDTO = new PageDTO(cri,sellerService.getSellerCount(cri)); 
 
 		map.put("dto", pageDTO);
 		

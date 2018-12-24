@@ -82,8 +82,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int getUserCount(Map<String, Object> map) {
-		return mapper.getUserCount(map);
+	public int getUserCount(Criteria cri) {
+		return mapper.getUserCount(cri);
 	}
 	
 
