@@ -73,7 +73,7 @@
 
 					<tr class="replyData" role="row" th:each=arr:${product}>
 						<td th:text=${arr.pno}>PNO</td>
-						<td><img th:id="|img_${arr.pno}|" src=""></td>
+						<td><img th:class="|thumb_${arr.pno}|" style="; height:50px;" ></td>
 						<td class="title" th:id="${arr.pno}">
 							<a th:text="${arr.pname}" style="cursor:pointer">PNAME</a></td>
 						<td th:text="${arr.store.sname}">sname</td>
@@ -141,8 +141,18 @@ $(document).ready(function(){
 	var product = [[${product}]];
 	
 	(function(){
-		
+		$.each(product, function(index, item){
+			var img = item.imgList[0];
+						
+			var fileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
+			console.log(item.pno);
+		 	 $.each($('.thumb_'+ item.pno),function(){
+		 		 console.log("item");
+				$(this).attr("src","/display?fileName="+fileCallPath); 
+			});	
+		});
 	})();
+	
 	
 	
 	$("#userSearch").click(function(){

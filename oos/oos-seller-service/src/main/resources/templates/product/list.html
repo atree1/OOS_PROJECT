@@ -23,6 +23,7 @@
 								<th>상품번호</th>
 								<th>상품명</th>
 								<th>가격</th>
+								<th>상태</th>
 								<th>등록일</th>
 							</tr>
 						</thead>
@@ -38,6 +39,10 @@
 								<td><a class="move" th:href="${product.pno}"
 									th:text="${product.pname}"></a></td>
 								<td th:text="${product.price}"></td>
+								<td th:if="${#strings.toString(product.state)}=='O'"
+								style="color:blue">판매</td>
+								<td th:if="${#strings.toString(product.state)}=='X'"
+								style="color:lightred">판매중지</td>
 								<td th:text="${product.regdate}"></td>
 							</tr>
 						</tbody>
