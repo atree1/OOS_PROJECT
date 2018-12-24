@@ -51,9 +51,4 @@
 	<update id="authorize">	
 		update tbl_seller set permit='Y' where sid = #{sid}	
 	</update>
-	
-	<select id="count" resultType="int">
-		select count(*) from tbl_seller where sid !='' and del = 'N'
-	</select>
-	
 </mapper>
