@@ -175,15 +175,12 @@
 				var sid = [[${store.owner}]];
 				
 				window.open("/store/popupList?sid="+sid, "store", popOption);
-			
-					 cookieList("popOpen");
-					 if (parseInt(value)!==store.sno){
-						 
-					    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-							var sid = [[${store.owner}]];
-							
-							window.open("/store/popupList?sid="+sid, "store", popOption);
-					    } 
+				 cookieList("popOpen");
+				 if (parseInt(value)!==store.sno){
+				    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+						var sid = [[${store.owner}]];
+						window.open("/store/popupList?sid="+sid, "store", popOption);
+				    } 
 			
 				 
 				if(mid != undefined){

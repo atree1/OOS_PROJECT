@@ -3948,7 +3948,7 @@ input[type="radio"]:checked+label:before {
 	cursor: pointer;
 }
 
-#allSinsang .textImg.active {
+#allSinsang .textImg .active {
 	background: url('../img/btn_home_nv_menu_01_on.svg') no-repeat;
 }
 
@@ -3966,7 +3966,7 @@ input[type="radio"]:checked+label:before {
 	cursor: pointer;
 }
 
-#ShopSinsang .textImg.active {
+#ShopSinsang .textImg .active {
 	background: url('../img/btn_home_nv_menu_05_on.svg') no-repeat;
 }
 
