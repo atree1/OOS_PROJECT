@@ -36,6 +36,7 @@
 		<result column="regdate" property="regdate" />
 		<result column="updatedate" property="updatedate" />
 		<result column="del" property="del" />
+		<result column="state" property="state" />
 		<result column="questionreplycnt" property="questionReplyCnt" />
 		<result column="reviewreplycnt" property="reviewReplyCnt" />
 		<result column="content" property="content" />
@@ -48,7 +49,7 @@
 		update tbl_product set visitcnt=visitcnt+1 where pno = #{pno}
 	</update>
 	<select id="getByPno" resultMap="Product">
-		select p.pno, p.pname, p.price, s.sno, tel, p.questionreplycnt, p.reviewreplycnt,
+		select p.pno, p.pname, p.price, s.sno, p.state, tel, p.questionreplycnt, p.reviewreplycnt,
 		p.content, uuid, iname, ipath, o.opno, o.size, o.qty, sname from tbl_product p 
 		left join tbl_product_img i
 				on p.pno =i.pno 
@@ -61,12 +62,12 @@
 	</select>
 	
 	<select id="getList2" parameterType="map" resultMap="Product">
-		select product.pno,product.pname
+		select product.pno,product.pname, product.state
 		,product.price,product.sno,product.regdate,product.updatedate,product.del,product.uuid,product.iname,product.ipath
 		,s.sname from
 		(
 		select
-			 p.pno ,p.pname,p.price,p.sno,p.regdate,p.updatedate,del,uuid,iname,ipath 
+			 p.pno ,p.pname,p.price,p.sno,p.regdate,p.updatedate,p.state, del,uuid,iname,ipath 
 		from
 			tbl_product p left join tbl_product_img i
 			on p.pno =i.pno left join tbl_product_option o on p.pno=o.pno
@@ -77,6 +78,9 @@
 		 where s.sno > 0 and product.del='N'	
 		<if test="sno != null">
 			and s.sno=#{sno}
+		</if>
+		<if test="seller == null">
+			and product.state='O'
 		</if>
 		<if test="dto != null">
 			<if test="dto.cri.category != null">
@@ -119,41 +123,7 @@
 		order by cateno asc, cnt desc
 		limit 0, 6
 	</select>
-
 	
-	<!-- <select id="getList" parameterType="map" resultMap="Product">
-		select p.pno, p.pname, price, sname, p.del, s.sno ,p.regdate
-		from
-		tbl_product p join tbl_store s
-		on s.sno = p.sno left join
-		tbl_product_img i
-		on p.pno =i.pno left join tbl_product_option o on p.pno=o.pno
-		where
-		p.pno>0
-		<if test="sno != null">
-			and s.sno=#{sno}
-		</if>
-		<if test="dto.cri.category != null">
-			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
-		</if>
-		<choose>
-			<when test="dto.cri.orderby == '1'.toString()">
-				order by price desc
-			</when>
-			<when test="dto.cri.orderby == '2'.toString()">
-				order by price asc
-			</when>
-			<otherwise>
-				order by pno desc
-			</otherwise>
-		</choose>
-		limit #{dto.cri.skip} ,#{dto.cri.amount}
-	</select> -->
-
-<!-- 	<select id="get" resultType="org.oos.domain.ProductVO">
-		select * from tbl_product where pno=#{pno}
-	</select> -->
-
 	<insert id="insert">
 		insert into tbl_product(pname,price,sno,content)
 		values(#{pname},#{price},#{sno},#{content})
@@ -198,6 +168,17 @@
 
 	<update id="updateReviewReplyCnt">
 		update tbl_product set reviewreplycnt = reviewreplycnt + #{amount}
+		where pno = #{pno}
+	</update>
+	
+	<update id="permit" parameterType="map">
+		update tbl_product 
+		<if test="permit == 'O'">
+			set state = 'O'
+		</if>
+		<if test="permit == 'X'">
+			set state = 'X'
+		</if>
 		where pno = #{pno}
 	</update>
 </mapper>

@@ -15,7 +15,7 @@ public interface OrderDetailMapper {
 	
 	public OrderDetailVO get(Long odno);
 	
-	public int modify(OrderDetailVO vo);
+	public int modify2(Map<String, Object> map);
 	
 	public int delete(Long odno);
 	

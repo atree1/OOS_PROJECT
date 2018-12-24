@@ -17,6 +17,7 @@
 		<result column="pnum" property="pnum" />
 		<result column="tel" property="tel" />
 		<result column="regdate" property="regdate" />
+		<result column="updatedate" property="updatedate" />
 		<result column="del" property="del" />
 		<collection property="authList" resultMap="Auth" />
 	</resultMap>

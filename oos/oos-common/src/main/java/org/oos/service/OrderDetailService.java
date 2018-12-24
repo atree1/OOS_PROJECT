@@ -13,7 +13,7 @@ public interface OrderDetailService {
 	
 	public OrderDetailVO get(Long odno);
 	
-	public int modify(OrderDetailVO vo);
+	public int modify(Map<String, Object> map);
 	
 	public int delete(Long odno);
 	
