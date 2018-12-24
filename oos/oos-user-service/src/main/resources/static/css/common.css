@@ -3949,7 +3949,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #allSinsang .textImg.active {
-	background: url('../img/btn_home_nv_menu_01_on.png') no-repeat;
+	background: url('../img/btn_home_nv_menu_01_on.svg') no-repeat;
 }
 
 #ShopSinsang .textImg {
@@ -3967,7 +3967,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #ShopSinsang .textImg.active {
-	background: url('../img/btn_home_nv_menu_05_on.png') no-repeat;
+	background: url('../img/btn_home_nv_menu_05_on.svg') no-repeat;
 }
 
 #TopSinsang .textImg {
@@ -4003,7 +4003,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #BottomSinsang .textImg.active {
-	background: url('../img/btn_home_nv_menu_03_on.png') no-repeat;
+	background: url('../img/btn_home_nv_menu_03_on.svg') no-repeat;
 }
 
 #ShoesSinsang .textImg {
@@ -4021,7 +4021,7 @@ input[type="radio"]:checked+label:before {
 }
 
 #ShoesSinsang .textImg.active {
-	background: url('../img/btn_home_nv_menu_04_on.png') no-repeat;
+	background: url('../img/btn_home_nv_menu_04_on.svg') no-repeat;
 }
 
 #sinsangChoice .textImg {
@@ -4032,12 +4032,12 @@ input[type="radio"]:checked+label:before {
 }
 
 #sinsangChoice .textImg:hover {
-	background: url('../img/btn_home_nv_menu_04_over.png') no-repeat;
+	background: url('../img/btn_home_nv_menu_04_over.svg') no-repeat;
 	cursor: pointer;
 }
 
 #sinsangChoice .textImg.active {
-	background: url('../img/btn_home_nv_menu_04_on.png') no-repeat;
+	background: url('../img/btn_home_nv_menu_04_on.svg') no-repeat;
 }
 
 .topnineGname, .smallNinePrice, .bigGName, .bigNinePrice {
