@@ -93,8 +93,14 @@
 		where mid = #{mid} 
 	</update>
 
-	<update id="changeAutority">
+<!-- 	<update id="changePermit">
 		update tbl_member set permit = #{permit}
+		where mid =#{mid}
+	</update> -->
+	
+	<update id="changeAutority" parameterType="map">
+		update tbl_member_auth 
+		set auth = #{auth}
 		where mid =#{mid}
 	</update>
 	
