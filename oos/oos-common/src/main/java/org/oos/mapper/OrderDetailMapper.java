@@ -31,6 +31,8 @@ public interface OrderDetailMapper {
 
 	public int deleteAll(Long ono);
 	
+	public List<OrderDetailVO> joinList(Map<String, Object> map);
+	
 	
 	
 }

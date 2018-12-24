@@ -52,8 +52,8 @@ public class AdminController {
 		PageDTO pageDTO = new PageDTO(cri, orderDetailService.snoCount(sno));
 		map.put("dto", pageDTO);
 		
-		List<OrderDetailVO> order = orderDetailService.orderList(map);
-				
+		List<OrderDetailVO> order = orderDetailService.joinList(map);
+		/*log.info(""+order);
 		model.addAttribute("orderList", order);
 		
 		List<Integer> pageList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class AdminController {
 		}
 		
 		model.addAttribute("pageList", pageList);
-		model.addAttribute("pageMaker", pageDTO);
+		model.addAttribute("pageMaker", pageDTO);*/
 
 	}
 	
