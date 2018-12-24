@@ -16,7 +16,7 @@ import lombok.extern.java.Log;
 @Log
 @Controller
 @RequestMapping("/seller/*")
-public class LoginController {
+public class SellerController {
 
 	@Setter(onMethod_=@Autowired)
 	private SellerService sellerService;
