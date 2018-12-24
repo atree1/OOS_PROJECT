@@ -39,7 +39,7 @@
              xhr.setRequestHeader(header, token);
          },
          success:function(result, status, xhr){
-       	 
+       	 console.log(result)
         	if(JSON.stringify(result.state) == '"new"'){
         		var str = "<input type='hidden' name='access_token' value='"+result.info.access_token+"'>";
         		str += "<input type='hidden' name='sns' value='naver'>";
@@ -47,7 +47,10 @@
         		str += "<input type='hidden' name='user_id' value='"+result.info.user_id+"'>";
         		str += "<input type='hidden' name='_csrf' value='"+token+"'>";
         		$(opener.document).find("#loginSnsForm").append(str).submit();
-        	}else if(JSON.stringify(result.state) == '"old"'){
+        	}else if(JSON.stringify(result.state) == '"fail"'){
+         		alert("한번 회원탈퇴 시 같은 아이디로 로그인 할 수 없습니다.");
+         		self.close();
+         	 }else if(JSON.stringify(result.state) == '"old"'){
         		$(opener.document).find("#username").attr("name","");
         		$(opener.document).find("#password").attr("name","");
         		$(opener.document).find("#loginForm").append("<input type='hidden' name='username' value='"+result.info.user_id+"'>")

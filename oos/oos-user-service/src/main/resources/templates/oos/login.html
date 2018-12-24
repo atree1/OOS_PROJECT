@@ -192,7 +192,6 @@ Kakao.init('0b8ca018eae4b931cf6655a575ea3de6');
                      xhr.setRequestHeader(header, token);
                  },
                  success:function(result, status, xhr){
-                	 
                 	 if(JSON.stringify(result.state) == '"new"'){
                 		 var str = "<input type='hidden' name='access_token' value='"+result.info.access_token+"'>";
                  		str += "<input type='hidden' name='sns' value='kakao'>";
@@ -200,12 +199,16 @@ Kakao.init('0b8ca018eae4b931cf6655a575ea3de6');
                  		str += "<input type='hidden' name='user_id' value='"+result.info.user_id+"'>";
                  		str += "<input type='hidden' name='_csrf' value='"+token+"'>";
                  		$("#loginSnsForm").append(str).submit();
-                 	 }else{
+                 	 }else if(JSON.stringify(result.state) == '"fail"'){
+                 		
+                 		alert("한번 회원탈퇴 시 같은 아이디로 로그인 할 수 없습니다.");
+                 		return;
+                 	 }else if(JSON.stringify(result.state) == '"old"'){
                  		 $("#username").attr("name","");
-                 		$("#password").attr("name","");
-                		$("#loginForm").append("<input type='hidden' name='username' value='"+result.info.user_id+"'>")
-                					   .append("<input type='hidden' name='password' value='"+result.info.user_pw+"'>")
-                					   .submit();
+                  		$("#password").attr("name","");
+                 		$("#loginForm").append("<input type='hidden' name='username' value='"+result.info.user_id+"'>")
+                 					   .append("<input type='hidden' name='password' value='"+result.info.user_pw+"'>")
+                 					   .submit();
                  	 };
          		}
             });
