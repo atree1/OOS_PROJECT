@@ -50,8 +50,8 @@ public class SellerServiceImpl implements SellerService {
 
 
 	@Override
-	public int getSellerCount(Map<String, Object> map) {
-		return mapper.getSellerCount(map);
+	public int getSellerCount(Criteria cri) {
+		return mapper.getSellerCount(cri);
 	}
 
 }

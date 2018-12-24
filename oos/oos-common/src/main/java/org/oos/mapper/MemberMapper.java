@@ -11,7 +11,7 @@ import org.oos.domain.StoreVO;
 public interface MemberMapper {
 	public List<MemberVO> getUserList(Map<String, Object> map);
 	
-	public int getUserCount(Map<String, Object> map);
+	public int getUserCount(Criteria cri);
 	
 	public MemberVO get(String mid);
 	

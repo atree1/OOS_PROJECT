@@ -4,7 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.oos.mapper.SellerMapper">
-
+	<resultMap type="org.oos.domain.SellerAuthVO" id="Auth">
+		<result column="ano" property="ano" />
+		<result column="auth" property="auth" />
+	</resultMap>
+	
+	<resultMap type="org.oos.domain.SellerVO" id="Seller">
+		<result column="sid" property="sid" />
+		<result column="sname" property="sname" />
+		<result column="spw" property="spw" />
+		<result column="bnum" property="bnum" />
+		<result column="pnum" property="pnum" />
+		<result column="tel" property="tel" />
+		<result column="regdate" property="regdate" />
+		<result column="del" property="del" />
+		<collection property="authList" resultMap="Auth" />
+	</resultMap>
 		
 	<select id="getSellerList" resultMap="Seller">
 		select *  from tbl_seller s
@@ -25,8 +40,8 @@
 		left join tbl_seller_auth a
 		on s.sid = a.sid
 		where s.sid != ""
-		<if test="dto.cri.keyword != null">
-			and s.sid like concat("%", #{dto.cri.keyword} ,"%")
+		<if test="keyword != null">
+			and s.sid like concat("%", #{keyword} ,"%")
 		</if>
 	</select>
 	
