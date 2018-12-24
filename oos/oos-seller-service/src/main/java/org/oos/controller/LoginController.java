@@ -15,20 +15,20 @@ import lombok.extern.java.Log;
 
 @Log
 @Controller
-@RequestMapping("/signUp/*")
-public class signUpController {
+@RequestMapping("/seller/*")
+public class LoginController {
 
 	@Setter(onMethod_=@Autowired)
 	private SellerService sellerService;
 		
-	@GetMapping("/seller")
+	@GetMapping("/signUp")
 	public void getRegister(Model model) {
 		
 		
 		
 	}
 	
-	@PostMapping("/seller")
+	@PostMapping("/signUp")
 	public String postRegister(RedirectAttributes rttr, SellerVO vo) {
 		
 		int result = sellerService.register(vo);
