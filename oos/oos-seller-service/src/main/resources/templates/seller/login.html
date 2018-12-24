@@ -1,6 +1,8 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
 
 <head>
 
@@ -43,13 +45,15 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="post" action="/exam/home">
+                        <form role="form" method="post" id="loginForm" action="/login" >
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="ID" name="sid" type="text" autofocus>
+                                 
+                                
+                                    <input class="form-control" id="username" name="username" type="text" placeholder="id" autofocus >
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="spw" type="password" >
+                                    <input class="form-control" placeholder="Password" id="password" name="password" type="password" >
                                 </div>
                                 <div class="checkbox">
                                     <label>

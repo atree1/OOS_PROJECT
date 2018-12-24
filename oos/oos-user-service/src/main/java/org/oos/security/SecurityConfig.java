@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// access denied 걸리면  로그인페이지 갈거라고 선언
 		
 		http.rememberMe().key("oos")
+		
 			.userDetailsService(userDetailsService())
 			.tokenRepository(getJDBCReopsitory())
 			.tokenValiditySeconds(60*60*24*15);

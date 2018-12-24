@@ -24,9 +24,9 @@ public class SellerVO {
 	private String bnum;
 	private String pnum;
 	private String tel;
-	private Date regdate;
-	private Date updatedate;
-	private  char del;
+	private Date regdate= new Date();
+	private Date updatedate= new Date();
+	private  char del= 'N';
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="sid")
