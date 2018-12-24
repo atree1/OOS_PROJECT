@@ -164,9 +164,10 @@
 
 	<form id="orderListForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
-		<input type='hidden' id='pageNum' name='pageNum'
-			th:value='${pageMaker.cri.pageNum}' /> <input type='hidden'
-			name='sno' th:value='${orderList[0].sno}' />
+		<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}' /> 
+		<input type='hidden' name='sno' value='1' />
+			
+			
 	</form>
 </div>
 
