@@ -160,6 +160,17 @@
 		limit #{dto.cri.skip},
 		#{dto.cri.amount}
 	</select>
+	
+	<select id="joinList" resultType="OrderDetail">
+		select od.odno, od.regdate, p.pname, op.size, od.qty, od.detail_state,od.name, p.price 
+		from tbl_order_detail od
+		left join tbl_product p
+		on p.pno = od.pno
+        left join tbl_product_option op
+        on op.opno = od.opno
+		where od.del = 'N' and od.odno > 0
+		and od.sno = #{sno};
+	</select>
 
 	<update id="deleteAll">
 		update tbl_order_detail set del = "Y"

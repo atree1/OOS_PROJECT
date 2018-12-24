@@ -114,6 +114,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		// TODO Auto-generated method stub
 		return orderDetailMapper.stateCount(map);
 	}
+
+	@Override
+	public List<OrderDetailVO> joinList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return orderDetailMapper.joinList(map);
+	}
 	
 	
 }

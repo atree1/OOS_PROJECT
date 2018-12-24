@@ -91,7 +91,7 @@
 								th:value="${arr.odno}"></td>
 							<td class="odno" th:text=${arr.odno}></td>
 							<td class="ragdate"
-								th:text="${#dates.format(arr.order.regdate,'yyyy-MM-dd')}"></td>
+								th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 							<td class="state">
 							<select th:id="|state_${arr.odno}|" th:value="${arr.detail_state}">
 									<option value="ready">준비중</option>
@@ -106,13 +106,12 @@
 								th:value="${arr.option.qty}"
 								style="width: 90px; text-align: center;" readonly></td>
 							<td class="price" th:text=${arr.product.price}></td>
-							<td class="mname" th:text=${arr.order.mid}></td>
+							<td class="mname" th:text=${arr.name}></td>
 							<td class="shipnumber"><input type="number" th:id="|ship_${arr.odno}|" th:value="${arr.dno}" /></td>
 
-
-							<!-- <td class=""><button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
- 						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button>
-					</tr> -->
+				<!-- 	 <td class=""><button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
+ 						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button> -->
+					</tr>
 					</tbody>
 				</table>
 			</div>
