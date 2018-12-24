@@ -24,17 +24,12 @@ public class SellerVO {
 	private String bnum;
 	private String pnum;
 	private String tel;
-<<<<<<< HEAD
+
 	private Date regdate= new Date();
 	private Date updatedate= new Date();
 	private  char del= 'N';
-=======
-	private Date regdate;
-	private Date updatedate;
-	private  char del;
-	private char permit;
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-	
+	private char permit = 'Y';
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="sid")
 	private List<SellerAuthVO> authList;
