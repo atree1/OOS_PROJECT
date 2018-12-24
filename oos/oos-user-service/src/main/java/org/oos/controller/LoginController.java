@@ -89,7 +89,7 @@ public class LoginController {
 			}
 		});
 		
-		return "redirect:/oos/logout";
+		return "/logout";
 	}
 	
 	@RequestMapping(value= {"/oauth"}, consumes="application/json", produces="application/json")
@@ -100,6 +100,8 @@ public class LoginController {
 		if(member == null || !member.getSns().equals(dto.getSns())) {
 			map.put("state", "new");
 			map.put("info", dto);
+		}else if(member != null && memberService.getSnsAuth(dto.getUser_id()) == null){
+			map.put("state", "fail");
 		}else {
 			map.put("state", "old");
 			map.put("info", memberService.getSnsAuth(dto.getUser_id()));

@@ -291,7 +291,7 @@
 		}
 		
 		$("#withdrawal").click(function(){
-			if(confirm("한번 회원탈퇴 하면 복구할 수 없슴니다. 정말 탈퇴하시겠습니까?") == true){
+			if(confirm("회원탈퇴를 할 시에 같은 아이디로 로그인할 수 없습니다. 정말 탈퇴하시겠습니까?") == true){
 				$("#withForm").append("<input type='hidden' name='"+csrfName+"' value='"+token+"'>").submit();
 			}else{  
 			    return;
