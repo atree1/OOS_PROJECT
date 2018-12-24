@@ -119,7 +119,7 @@
 			
 	 		(function(){
 
-				 $.each(goodsImg, function(index, item){
+				$.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
 					
 					var fileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
@@ -129,7 +129,7 @@
 				}); 
 				 
 				var fileCallPath =  encodeURIComponent(store.imgList[0].ipath+ "/"+
-							store.imgList[0].uuid +"_"+store.imgList[0].iname);
+							store.imgList[0].uuid +"_"+store.imgList[0].iname); 
 				 
 				$('#storeImg').attr("src","/display?fileName="+fileCallPath); 
 				 
@@ -170,23 +170,45 @@
 					  }
 					}  
 				 
+			
+				
+				 var cookieValue=cookieList("popupOpen").items();
+				 console.dir(cookieValue);
+<<<<<<< HEAD
+				 cookieList("popupOpen").add(store.sno);
+=======
+=======
 				 
 				var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 				var sid = [[${store.owner}]];
 				
 				window.open("/store/popupList?sid="+sid, "store", popOption);
+				 cookieList("popOpen");
+				 if (parseInt(value)!==store.sno){
+				    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+						var sid = [[${store.owner}]];
+						window.open("/store/popupList?sid="+sid, "store", popOption);
+				    } 
 			
-					 cookieList("popOpen");
-					 if (parseInt(value)!==store.sno){
-						 
-					    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-							var sid = [[${store.owner}]];
-							
-							window.open("/store/popupList?sid="+sid, "store", popOption);
-					    } 
-			
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 				 
-				if(mid != undefined){
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+				 
+			$(cookieValue).each(function(i,value){
+			});	
+			
+				if (parseInt(cookieValue)!==store.sno){
+					
+			    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+					var sid = [[${store.owner}]];
+					
+					window.open("/store/popupList?sid="+sid, "store", popOption);
+			    } 
+				
+				
+			
+				 	
+			if(mid != undefined){
 						$.ajax({
 							type:"post",
 							url:"/store/checkzzim/"+store.sno,
