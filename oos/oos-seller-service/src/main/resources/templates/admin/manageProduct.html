@@ -84,10 +84,10 @@
 						<td th:if="${#strings.toString(arr.state)}=='X'"
 							style="color:lightred">판매중지</td>
 						<td th:if="${#strings.toString(arr.state)}=='O'">
-							<button>판매중지</button>
+							<button class="permit" th:id="|no_${arr.pno}|">판매중지</button>
 						</td>	
 						<td th:if="${#strings.toString(arr.state)}=='X'">
-							<button>판매허용</button>
+							<button class="permit" th:id="|ye_${arr.pno}|">판매허용</button>
 						</td>	
 					</tr>
 				</tbody>
@@ -116,7 +116,6 @@
 						th:text="${page}">1</button>
 				</li>
 				<li class="paginate_button" th:if="${pageMaker.next} == true"></li>
-
 			</ul>
 		</div>
 
@@ -178,6 +177,10 @@ $(document).ready(function(){
 	
 	$(".title").click(function(){
 		window.location.href="http://localhost:8080/store/detail?pno="+$(this).attr("id");
+	});
+	
+	$(".permit").click(function(){
+		$(this).attr("id").substring(3);
 	});
 });
 

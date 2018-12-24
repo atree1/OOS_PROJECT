@@ -38,7 +38,6 @@ public class UploadController {
 			contentType = Files.probeContentType(file.toPath());
 			return contentType.startsWith("image");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -50,121 +49,13 @@ public class UploadController {
 		String str = sdf.format(date);
 		return str.replace("-", File.separator);
 	}
-	
-	/*@GetMapping(value="/download",produces= {MediaType.APPLICATION_OCTET_STREAM_VALUE})
-	@ResponseBody
-	public ResponseEntity<byte[]> download(@RequestHeader("User-Agent")String userAgent,String fileName){
-		
-		ResponseEntity<byte[]> result=null;
-		log.info(fileName);
-		String fName=fileName.substring(0,fileName.lastIndexOf("_"));
-		log.info("Fname: "+fName);
-		String ext=fileName.substring(fileName.lastIndexOf("_")+1);
-		String total=fName+"."+ext;
-	
-		
-		int under=total.indexOf("_");
-		String totalOrigin=total.substring(under+1);
-		try {
-			File target=new File("\\\\HB03-26\\upload\\"+total);
-			
-			HttpHeaders header=new HttpHeaders();
-			String downloadName=null;
-			if(userAgent.contains("Trident")) {
-				log.info("IE browser");
-			downloadName=URLEncoder.encode(totalOrigin,"UTF-8").replaceAll("\\+"," ");
-			}else if(userAgent.contains("Edge")) {
-				log.info("edge browser");
-				downloadName=URLEncoder.encode(totalOrigin,"UTF-8");
-			}else {
-				log.info("edge browser");
-				downloadName=new String(totalOrigin.getBytes("UTF-8"),"ISO-8859-1");
-			}
-			log.info("downloadName:"+downloadName);
-			
-			
-			header.add("Content-Disposition","attachment; filename="+downloadName);
-			
-			byte[] arr= FileCopyUtils.copyToByteArray(target);
-			result=new ResponseEntity<>(arr,header,HttpStatus.OK);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
-		return result;
-	}*/
 
-	/*@PostMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<List<ProductImgVO>> upload(MultipartFile[] uploadFile) {
-		
-		List<ProductImgVO> list = new ArrayList<>();
-		String uploadFolder = "\\\\HB03-26\\upload\\";
-
-		String uploadFolderPath = getFolder();
-		// make folder --------
-		File uploadPath = new File(uploadFolder, uploadFolderPath);
-
-		if (uploadPath.exists() == false) {
-			uploadPath.mkdirs();
-		}
-		// make yyyy/MM/dd folder
-
-		for (MultipartFile multipartFile : uploadFile) {
-			
-
-			ProductImgVO productImgVO = new ProductImgVO();
-						
-			String uploadFileName = multipartFile.getOriginalFilename();
-
-			// IE has file path
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			log.info("only file name: " + uploadFileName);
-			productImgVO.setIname(uploadFileName);
-
-			UUID uuid = UUID.randomUUID();
-
-			uploadFileName = uuid.toString() + "_" + uploadFileName;
-
-			try {
-				File saveFile = new File(uploadPath, uploadFileName);
-				multipartFile.transferTo(saveFile);
-
-
-				productImgVO.setUuid(uuid.toString());
-				productImgVO.setIpath(uploadFolderPath);
-
-				// check image type file
-								
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s_" + uploadFileName));
-
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
-
-					thumbnail.close();
-				
-
-				// add to List
-				list.add(productImgVO);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} // end for
-		return new ResponseEntity<>(list, HttpStatus.OK);
-		
-	}*/
-	
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
 
-		//log.info("fileName: " + fileName);
-
 		File file = new File("\\\\HB03-26\\upload\\"+ fileName);
 
-		//log.info("file: " + file);
 
 		ResponseEntity<byte[]> result = null;
 
