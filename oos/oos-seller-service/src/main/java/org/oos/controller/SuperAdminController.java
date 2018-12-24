@@ -76,9 +76,10 @@ public class SuperAdminController {
 	public void manageProduct(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		
-		PageDTO pageDTO = new PageDTO(cri,memberService.getUserCount(cri)); 
+		PageDTO pageDTO = new PageDTO(cri,productService.getTotal(map)); 
 	
 		map.put("dto", pageDTO);
+		map.put("seller", "seller");
 		
 		List<Integer> pageList = new ArrayList<>();
 		

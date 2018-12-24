@@ -148,6 +148,8 @@ $(document).ready(function(){
 	
 	var manageForm = $("#manageForm");
 	var member = [[${member}]];
+	var pageMaker = [[${pageMaker}]];
+	var product = [[${product}]];
 	
 	(function(){
 		$.each(member, function(index, item){
@@ -169,7 +171,23 @@ $(document).ready(function(){
 	
 	$("#modifyBtn").click(function(){
 		
-	})
+	});
+	
+	$(".paginate_button").click(function(e) {
+		
+		 $("#pageNum").val($(this).attr("id").substring(5));
+		 manageForm.submit();
+	});
+	
+	$(".paginate_button previous").click(function(){
+		$("#pageNum").val(Number(pageMaker.startPage) -1);
+		manageForm.submit();
+	});
+	
+	$(".paginate_button next").click(function(){
+		$("#pageNum").val(Number(pageMaker.endPage) + 1);
+		manageForm.submit();
+	});
 });
 
 </script>

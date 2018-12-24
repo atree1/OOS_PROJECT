@@ -138,6 +138,8 @@
 $(document).ready(function(){
 	
 	var manageForm = $("#manageForm");
+	var pageMaker = [[${pageMaker}]];
+	var product = [[${product}]];
 	
 	$("#userSearch").click(function(){
 		var keyword = $("#userSearchInput").val();
@@ -149,6 +151,22 @@ $(document).ready(function(){
 		manageForm.append("<input type='hidden' name='keyword' value='"+keyword+"'>")
 		.submit();
 		
+	});
+	
+	$(".paginate_button").click(function(e) {
+		
+		 $("#pageNum").val($(this).attr("id").substring(5));
+		 manageForm.submit();
+	});
+	
+	$(".paginate_button previous").click(function(){
+		$("#pageNum").val(Number(pageMaker.startPage) -1);
+		manageForm.submit();
+	});
+	
+	$(".paginate_button next").click(function(){
+		$("#pageNum").val(Number(pageMaker.endPage) + 1);
+		manageForm.submit();
 	});
 });
 

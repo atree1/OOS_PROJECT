@@ -26,7 +26,8 @@ public class ProductVO {
 	private List<ProductImgVO> imgList;
 	private List<ProductOptionVO> optList;
 	private List<CategoryVO> cateList;
-	private  char del;	
+	private char del;	
+	private  char state;	
 	private int QuestionReplyCnt;
 	private int ReviewReplyCnt;
 	private String content;

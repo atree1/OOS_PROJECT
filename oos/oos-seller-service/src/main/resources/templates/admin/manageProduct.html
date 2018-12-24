@@ -49,7 +49,7 @@
   cursor: pointer;
 }
 </style>
-	<h1 align='center'>구매자관리</h1>
+	<h1 align='center'>상품관리</h1>
 	<br />
 	<div class="row">
 		<div class="col-sm-12" align="center">
@@ -60,18 +60,13 @@
 				<thead>
 					<tr role="row" style="text-align: center;">
 		
-					 	<th class="sorting" tabindex="0" rowspan="1" colspan="1"
-							style="width: 90px;">상품번호</th>
-						<th class="sorting" tabindex="0" ㅜrowspan="1" colspan="1"
-							style="width: 90px;">이미지</th>
-						<th class="sorting" tabindex="0" rowspan="1" colspan="1"
-							style="width: 150px;">상품이름</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							style="width: 120px;">스토어</th>
-						<th class="sorting" tabindex="0" rowspan="1" colspan="1"
-							style="width: 150px;">등록일</th>
-
+					 	<th class="sorting" style="width: 50px;">상품번호</th>
+						<th class="sorting" style="width: 90px;">이미지</th>
+						<th class="sorting" style="width: 250px;">상품이름</th>
+						<th class="sorting" style="width: 120px;">스토어</th>
+						<th class="sorting" style="width: 100px;">등록일</th>
+						<th class="sorting" style="width: 100px;">상태</th>
+						<th class="sorting" style="width: 100px;">관리</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,10 +74,21 @@
 					<tr class="replyData" role="row" th:each=arr:${product}>
 						<td th:text=${arr.pno}>PNO</td>
 						<td><img th:id="|img_${arr.pno}|" src=""></td>
-						<td th:text=${arr.pname}>PNAME</td>
-						<td th:text=${arr.store.sname}>sname</td>
-						<td th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"
+						<td class="title" th:id="${arr.pno}">
+							<a th:text="${arr.pname}" style="cursor:pointer">PNAME</a></td>
+						<td th:text="${arr.store.sname}">sname</td>
+						<td th:text="${arr.regdate}"
 							>REGDATE</td>
+						<td th:if="${#strings.toString(arr.state)}=='O'"
+							style="color:blue">판매</td>
+						<td th:if="${#strings.toString(arr.state)}=='X'"
+							style="color:lightred">판매중지</td>
+						<td th:if="${#strings.toString(arr.state)}=='O'">
+							<button>판매중지</button>
+						</td>	
+						<td th:if="${#strings.toString(arr.state)}=='X'">
+							<button>판매허용</button>
+						</td>	
 					</tr>
 				</tbody>
 			</table>
@@ -132,6 +138,8 @@ $(document).ready(function(){
 	
 	var manageForm = $("#manageForm");
 	var member = [[${member}]];
+	var pageMaker = [[${pageMaker}]];
+	var product = [[${product}]];
 	
 	(function(){
 		
@@ -150,7 +158,27 @@ $(document).ready(function(){
 	
 	$("#modifyBtn").click(function(){
 		
-	})
+	});
+	
+	$(".paginate_button").click(function(e) {
+		
+		 $("#pageNum").val($(this).attr("id").substring(5));
+		 manageForm.submit();
+	});
+	
+	$(".paginate_button previous").click(function(){
+		$("#pageNum").val(Number(pageMaker.startPage) -1);
+		manageForm.submit();
+	});
+	
+	$(".paginate_button next").click(function(){
+		$("#pageNum").val(Number(pageMaker.endPage) + 1);
+		manageForm.submit();
+	});
+	
+	$(".title").click(function(){
+		window.location.href="http://localhost:8080/store/detail?pno="+$(this).attr("id");
+	});
 });
 
 </script>
