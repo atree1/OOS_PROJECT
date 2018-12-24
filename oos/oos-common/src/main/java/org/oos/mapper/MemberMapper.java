@@ -37,4 +37,6 @@ public interface MemberMapper {
 	
 	public int deleteSns(String mid);
 	
+	public List<MemberVO> manageMember(Map<String, Object> map);
+	
 }

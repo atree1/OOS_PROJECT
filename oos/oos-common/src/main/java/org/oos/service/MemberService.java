@@ -36,4 +36,6 @@ public interface MemberService {
 	
 	public int getMyStoreCount(Map<String, Object> map);
 	
+	public List<MemberVO> manageMember(Map<String, Object> map);
+	
 }

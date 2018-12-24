@@ -70,8 +70,7 @@ public class SuperAdminController {
         
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("seller",sellerService.getSellerList(map));
-	}
+		model.addAttribute("seller",sellerService.getSellerList(map));	}
 	
 	@GetMapping("/manageProduct")
 	public void manageProduct(Model model, Criteria cri) {

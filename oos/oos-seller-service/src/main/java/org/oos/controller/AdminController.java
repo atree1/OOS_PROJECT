@@ -53,7 +53,6 @@ public class AdminController {
 		map.put("dto", pageDTO);
 		
 		List<OrderDetailVO> order = orderDetailService.joinList(map);
-		log.info(""+order);
 		model.addAttribute("orderList", order);
 		
 		List<Integer> pageList = new ArrayList<>();
