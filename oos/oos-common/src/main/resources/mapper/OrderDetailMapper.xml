@@ -41,6 +41,7 @@
 		<result column="pnum" property="pnum" />
 		<result column="name" property="name" />
 		<result column="address" property="address" />
+		<result column="regdate" property="regdate" />
 		<result column="addressDetail" property="addressDetail" />
 		<result column="dno" property="dno" />
 		<result column="del" property="del" />
@@ -161,7 +162,7 @@
 		#{dto.cri.amount}
 	</select>
 	
-	<select id="joinList" resultType="OrderDetail">
+	<select id="joinList" parameterType="map" resultMap="OrderDetail">
 		select od.odno, od.regdate, p.pname, op.size, od.qty, od.detail_state,od.name, p.price 
 		from tbl_order_detail od
 		left join tbl_product p

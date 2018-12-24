@@ -1,5 +1,7 @@
 package org.oos.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -19,6 +21,7 @@ public class OrderDetailVO {
 	private String detail_state;
 	private Long sno;
 	private Long dno;
+	private Date regdate;
 	
 	private ProductVO product;
 	private ProductOptionVO option;
