@@ -38,18 +38,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 웹과 관련된 보안 설정
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/**").permitAll()
-			.and().csrf().disable();
-
+		 .antMatchers("/**").access("ROLE_ADMIN")
+		;
+		
 		http.formLogin().loginPage("/seller/login");
+		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
+		http.rememberMe().key("oos")
+		.userDetailsService(userDetailsService())
+		.tokenRepository(getJDBCReopsitory())
+		.tokenValiditySeconds(60*60*24*15);
 
-		http.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/main");
+
+		http.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/seller/login");
 
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/**");
+		
 	}
 
 	private PersistentTokenRepository getJDBCReopsitory() {

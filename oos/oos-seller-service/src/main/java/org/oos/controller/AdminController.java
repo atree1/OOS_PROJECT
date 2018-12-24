@@ -81,8 +81,10 @@ public class AdminController {
     @PostMapping("/modify")
     public String modify(String[] option, RedirectAttributes rttr) {
         
-        
-    	for(String num : option) {    		
+    	for(String num : option) {    	
+    		log.info(num);
+    		Map<String, Object> map = new HashMap<String, Object>();
+    		
     		String[] list= num.split("_");
     		Long odno = Long.parseLong(list[0]);
     		Long dno = Long.parseLong(list[1]);
@@ -96,13 +98,13 @@ public class AdminController {
     			state = "배송완료";
     		}
     		
-    		
-    		OrderDetailVO vo = new OrderDetailVO();
-    		vo.setOdno(odno);
-    		vo.setDetail_state(state);
-    		vo.setDno(dno);
-    		log.info(vo+"");
-    		orderDetailService.modify(vo);
+    		map.put("odno", odno);
+    		if(dno != -1) {
+        		map.put("dno", dno);
+    		}
+    		map.put("detail_state", state);
+    		log.info(map+"");
+    		int count = orderDetailService.modify(map);
     		
     	}
     	
