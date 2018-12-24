@@ -9,7 +9,6 @@ import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductVO;
 import org.oos.domain.StoreVO;
-import org.oos.mapper.ImgurMapper;
 import org.oos.service.NotifyService;
 import org.oos.service.ProductService;
 import org.oos.service.SellerService;
@@ -40,10 +39,7 @@ public class StoreController {
 
 	@Setter(onMethod_ = @Autowired)
 	private StoreService storeService;
-
-	@Setter(onMethod_ = @Autowired)
-	private ImgurMapper imgurMapper;
-
+	
 	@Setter(onMethod_ = @Autowired)
 	private NotifyService notifyService;
 
