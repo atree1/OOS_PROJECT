@@ -129,15 +129,9 @@
 				}); 
 				 
 				var fileCallPath =  encodeURIComponent(store.imgList[0].ipath+ "/"+
-<<<<<<< HEAD
 							store.imgList[0].uuid +"_"+store.imgList[0].iname); 
 				 
-				$('#storeImg').attr("src","/display?fileName="+fileCallPath);
-=======
-							store.imgList[0].uuid +"_"+store.imgList[0].iname);
-				 
 				$('#storeImg').attr("src","/display?fileName="+fileCallPath); 
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 				 
 				$("#storeTel").html(store.tel.substring(0,3) + "-" + 
 							store.tel.substring(3,7) + "-" + store.tel.substring(7));
@@ -176,40 +170,25 @@
 					  }
 					}  
 				 
-<<<<<<< HEAD
 			
 				
 				 var cookieValue=cookieList("popupOpen").items();
 				 console.dir(cookieValue);
-=======
+
+				 cookieList("popupOpen").add(store.sno);
+
 				 
 				var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 				var sid = [[${store.owner}]];
 				
 				window.open("/store/popupList?sid="+sid, "store", popOption);
 				 cookieList("popOpen");
-				 if (parseInt(value)!==store.sno){
+				 
+				 if (parseInt(cookieValue)!==store.sno){
 				    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 						var sid = [[${store.owner}]];
 						window.open("/store/popupList?sid="+sid, "store", popOption);
 				    } 
-			
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
-				 
-				 
-			$(cookieValue).each(function(i,value){
-			});	
-			
-				if (parseInt(cookieValue)!==store.sno){
-					
-			    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-					var sid = [[${store.owner}]];
-					
-					window.open("/store/popupList?sid="+sid, "store", popOption);
-			    } 
-				
-				
-			
 				 	
 			if(mid != undefined){
 						$.ajax({
