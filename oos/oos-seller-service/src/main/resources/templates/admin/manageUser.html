@@ -60,38 +60,25 @@
 				<thead>
 					<tr role="row" style="text-align: center;">
 		
-					<!-- 	<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">멤버번호</th> -->
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">아이디</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Platform(s): activate to sort column ascending"
-							style="width: 150px;">권한</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Engine version: activate to sort column ascending"
-							style="width: 120px;">이메일</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="CSS grade: activate to sort column ascending"
-							style="width: 150px;">가입일</th>
+						<th class="sorting" style="width: 10px;">-</th>
+						<th class="sorting" style="width: 90px;">아이디</th>
+						<th class="sorting" style="width: 150px;">권한</th>
+						<th class="sorting" style="width: 120px;">이메일</th>
+						<th class="sorting" style="width: 150px;">가입일</th>
 
 					</tr>
 				</thead>
 				<tbody>
-
 					<tr class="replyData" role="row" th:each=arr:${member}>
-						<!-- <td class="rno"  th:text=${arr.rno}></td> -->
-						<td class="mid" th:text=${arr.mid}></td>
+						<td class="rno">
+							<input type='checkbox' class="chk"  th:id="|chk_${arr.mid}|">
+						</td>
+						<td class="mid" th:text="${arr.mid}"></td>
 						<td class="auth">
-							<select th:id="|auth_${arr.authList[0].ano}|">
-								<option value="user">USER</option>
-								<option value="ban">BAN</option>
+							<select th:class="|select auth_${arr.authList[0].ano}|" 
+							th:id="|select_${arr.mid}|">
+								<option value="USER">USER</option>
+								<option value="BAN">BAN</option>
 							</select>
 						</td>
 						<td class="email" th:text=${arr.email}></td>
@@ -105,8 +92,8 @@
 	</div>
 
 	<div class="row">
-		<button class="input-group" id="modifyBtn" style="float:right">수정하기</button>
-       <div class="input-group custom-search-form" style="width:200px;">
+		<button class="input-group" id="modifyBtn" style="float:left">수정하기</button>
+       <div class="input-group custom-search-form" style="width:200px;float:right">
            <input type="text" class="form-control" id="userSearchInput" placeholder="Search...">
            <span class="input-group-btn">
 	           <button class="btn btn-default" type="button" id="userSearch" >
@@ -115,7 +102,7 @@
       		</span>
        </div>
            
-		<div class="pull-right">
+		<div style="margin:0 auto; display:table">
 
 			<ul class="pagination">
 				<li class="paginate_button previous"
@@ -153,8 +140,9 @@ $(document).ready(function(){
 	
 	(function(){
 		$.each(member, function(index, item){
-			var auth = item.authList[0].auth;
-			$("#auth_"+auth.ano).val(auth.auth);
+			var auth = item.authList[0];
+			$(".auth_"+auth.ano).val(auth.auth);
+			
 		});
 	})();
 	
@@ -170,7 +158,13 @@ $(document).ready(function(){
 	});
 	
 	$("#modifyBtn").click(function(){
-		
+		$("input[class=chk]:checked").each(function(){
+			var mid = $(this).attr("id").substring(4);
+			var auth = $("#select_"+mid).val();
+			manageForm.attr("method","post")
+						.append("<input type='hidden' name='infos' value='"+mid+"_"+auth+"'>")
+		});
+		manageForm.submit();
 	});
 	
 	$(".paginate_button").click(function(e) {
@@ -188,6 +182,12 @@ $(document).ready(function(){
 		$("#pageNum").val(Number(pageMaker.endPage) + 1);
 		manageForm.submit();
 	});
+	
+	$(".select").change(function(){
+		$("#chk_"+$(this).attr("id").substring(7)).attr("checked",true);
+	});
+	
+	
 });
 
 </script>

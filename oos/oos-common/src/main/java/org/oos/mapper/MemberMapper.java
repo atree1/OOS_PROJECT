@@ -23,8 +23,10 @@ public interface MemberMapper {
 	
 	public int delete(String mid);
 	
-	public int changeAutority(MemberVO vo);
+/*	public int changePermit(MemberVO vo);*/
 		
+	public int changeAutority(Map<String, Object> map);
+	
 	public int count(Criteria cri);
 
 	public List<StoreVO> getMyStoreList(Map<String, Object> map);

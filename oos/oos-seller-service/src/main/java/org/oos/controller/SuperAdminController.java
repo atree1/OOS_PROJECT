@@ -56,7 +56,7 @@ public class SuperAdminController {
 	}
 	
 	@PostMapping("/manageUser")
-	public void manageUserPost(String[] infos) {
+	public String manageUserPost(String[] infos) {
 		
 		for(String info : infos) { 
     		Map<String, Object> map = new HashMap<String, Object>();
@@ -70,6 +70,7 @@ public class SuperAdminController {
     		memberService.changeAutority(map);
     	}
 		
+		return "redirect:/admin/manageUser";
 	}
 	
 	
@@ -122,7 +123,6 @@ public class SuperAdminController {
 			map.put("permit", "X");
 		}
 		
-		log.info(map+"");
 		productService.permit(map);
 		
 		return "redirect:/admin/manageProduct";
