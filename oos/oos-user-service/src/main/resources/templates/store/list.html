@@ -170,25 +170,39 @@
 					  }
 					}  
 				 
+								
 			
+				//cookieList("popupOpen");
 				
-				 var cookieValue=cookieList("popupOpen").items();
-				 console.dir(cookieValue);
-
-				 cookieList("popupOpen").add(store.sno);
-
+				var cookieValue=cookieList("popupOpen").items();
+		 	
+				cookieValue.filter((value, idx, arr) => arr.indexOf(value) === idx);
+				 console.log(cookieValue);
+			
+			
+				 var result=true;
+				 $.each(cookieValue,function(i,item){
+				 	
+			
+				 console.log(item);
 				 
-				var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
-				var sid = [[${store.owner}]];
+				if(store.sno == item){
+					
+					result=false;
+					
+						return false;
+				}
 				
-				window.open("/store/popupList?sid="+sid, "store", popOption);
-				 cookieList("popOpen");
+				});
 				 
-				 if (parseInt(cookieValue)!==store.sno){
-				    	var popOption = "width=800, height=700, resizable=no,location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+				 if(result==true){	
+				    	var popOption = "width=800, height=700, resizable=no, location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 						var sid = [[${store.owner}]];
 						window.open("/store/popupList?sid="+sid, "store", popOption);
-				    } 
+				 }
+				 				 
+				 
+				 
 				 	
 			if(mid != undefined){
 						$.ajax({
