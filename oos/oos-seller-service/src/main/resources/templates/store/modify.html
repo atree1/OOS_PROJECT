@@ -89,10 +89,7 @@
                                             <input id="owner" name="owner" type="text" class="form-control" th:value="${store.owner}" readonly="readonly" >
                                         </div>
                                         
-                                        <div class="form-group">
-                                            <label>스토어 주소</label>
-                                            <input id="price" name="saddress" type="text" class="form-control" th:value="${store.saddress}" >
-                                        </div>
+                                   
                                         <div class="form-group">
                                             <label>전화 번호</label>
                                             <input id="price" name="tel" type="text" class="form-control" th:value="${store.tel}" >
@@ -104,6 +101,20 @@
                                             <label>스토어 정보</label>
                                             <textarea class="form-control" rows="3" name='sinfo' th:text="${store.sinfo}" ></textarea>
                                         </div>
+                                        
+                     	<div class="form-group">
+							<input style="width: 80px;" class="orderInfo addressInfo" 
+								id="roadAddr1" type="text" readonly="readonly"> 
+							 <button class="adressSearch" 
+							 style="background: #ff7f7a; color:#fff;">주소검색</button>
+							 <br>
+							 <input class="orderInfo addressInfo" type="text" name="saddress" 
+							 	th:value="${store.saddress}" id="roadAddr2"><span id="failADDRESS"></span>				 
+							 <br>
+							 <input type="text" class="orderInfo addressInfo" maxlength="15" name="saddressdetail"
+							placeholder="상세 주소를 입력해주세요" th:value="${store.saddressdetail}" id="roadAddr3">
+							<span id="failDETAIL"></span>
+							</div>
                                  	<div class="form-group uploadDiv">
 										<label>사진첨부(처음올리는 사진이 대표사진입니다.) </label>
 										 <input name="uploadFile" id="files" type="file" multiple>
@@ -152,6 +163,7 @@
 </div>
 <script src="../js/jquery.min.js"></script>
 <th:block layout:fragment="script">
+<script th:inline="javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 	<script th:inline="javascript">
 $(document).ready(function(e){
 	
@@ -175,6 +187,24 @@ $(document).ready(function(e){
 			
 		})
 	})();
+	
+    $(".adressSearch").click(function(e){
+		e.preventDefault();
+		daum.postcode.load(function(){
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	            	address(data);
+	            }
+	        }).open();
+	    });
+	});
+	     
+	     
+	   function address(data){
+		$("#roadAddr1").val(data.postcode);
+		$("#roadAddr2").val(data.roadAddress);
+		$("#roadAddr3").val("");
+	}
 	(function() {
 	
 		var arr=[[${store.imgList}]]
