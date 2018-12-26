@@ -25,6 +25,7 @@ public class SellerVO {
 	private String pnum;
 	private String tel;
 
+	private Long sno;
 	private Date regdate= new Date();
 	private Date updatedate= new Date();
 	private  char del= 'N';

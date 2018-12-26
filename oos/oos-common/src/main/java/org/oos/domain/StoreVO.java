@@ -12,6 +12,7 @@ public class StoreVO {
 	private String owner;
 	private String sinfo;
 	private String saddress;
+	private String saddressdetail;
 	private String tel;
 	private Date regdate;
 	private Date updatedate;

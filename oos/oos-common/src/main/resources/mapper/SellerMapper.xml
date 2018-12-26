@@ -70,7 +70,9 @@
 	<update id="delete">	
 		update tbl_seller set del='Y' where sid = #{sid}	
 	</update>
-	
+		<update id="addSno">	
+		update tbl_seller set sno=#{sno} where sid = #{owner}	
+	</update>
 	<update id="authorize">	
 		update tbl_seller set permit='Y' where sid = #{sid}	
 	</update>

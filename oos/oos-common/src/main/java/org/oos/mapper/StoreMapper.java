@@ -19,7 +19,7 @@ public interface StoreMapper {
 	
 	public List<StoreVO> getBestStore();
 	
-/*	public StoreVO get(Long sno);*/
+	public Long getSnoBySid(String sid);
 	
 	public StoreVO getBySno(Long sno);
 	

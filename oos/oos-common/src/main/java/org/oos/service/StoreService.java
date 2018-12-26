@@ -15,6 +15,7 @@ public interface StoreService {
 	
 	public List<StoreVO> getBestStore();
 	
+	public Long getSnoBySid(String sid);
 	public List<String> getName();
 	
 	public List<ProductImgVO> getImg(Long sno);

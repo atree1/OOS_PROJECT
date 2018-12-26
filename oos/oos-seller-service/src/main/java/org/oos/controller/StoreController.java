@@ -41,11 +41,11 @@ public class StoreController {
 	}
 	
 	@PostMapping("/register")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("principal.username==#vo.owner")
 	public String storeRegisterPost(StoreVO vo) {
 		log.info(""+vo);
 		storeService.register(vo);
-		return "redirect:/exam/home";
+		return "redirect:/main";
 	}
 	@GetMapping("/read")
 	@PreAuthorize("isAuthenticated()")
@@ -68,7 +68,7 @@ public class StoreController {
 	public String storeModifyPost(StoreVO vo) {
 		log.info(""+vo);
 		storeService.modify(vo);
-		return "redirect:/exam/home";
+		return "redirect:/main";
 	}
 	
 	
