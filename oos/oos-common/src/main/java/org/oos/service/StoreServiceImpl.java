@@ -148,5 +148,11 @@ public class StoreServiceImpl implements StoreService {
 		return mapper.getBestStore();
 	}
 
+	@Override
+	public Long getSnoBySid(String sid) {
+		// TODO Auto-generated method stub
+		return mapper.getSnoBySid(sid);
+	}
+
 	
 }
