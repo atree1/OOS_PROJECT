@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 // 시큐리티에 대한 설정을 담당한다
@@ -25,14 +26,21 @@ import lombok.extern.java.Log;
 @EnableWebSecurity // SecurityConfig를 인식되게 한다
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 설정 담당 클래스
-	@Autowired
+	@Setter(onMethod_=@Autowired)
 	DataSource dataSource;
 
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	// 설정 담당 클래스
+
+	@Bean
+	public UserDetailsService userDetailsService() {
+		// Oosserservice를 빈으로 설정
+		return new OosUserService();
+	}
 
 	
 	@Override
@@ -44,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login");
 		
-		http.csrf().disable();
 		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
 		http.rememberMe().key("seller")
@@ -54,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		http.logout().logoutUrl("/logout")
-		.invalidateHttpSession(true).logoutSuccessUrl("/seller/login");
+		.invalidateHttpSession(true)
+		.deleteCookies("remember-me","JSESSION_ID").logoutSuccessUrl("/seller/login");
 
 	}
 
@@ -64,12 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(dataSource);
 		return repo;
-	}
-
-	@Bean
-	public UserDetailsService userDetailsService() {
-		// Oosserservice를 빈으로 설정
-		return new OosUserService();
 	}
 
 }
