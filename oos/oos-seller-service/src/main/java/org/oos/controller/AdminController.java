@@ -52,7 +52,7 @@ public class AdminController {
 		PageDTO pageDTO = new PageDTO(cri, orderDetailService.snoCount(sno));
 		map.put("dto", pageDTO);
 		
-		List<OrderDetailVO> order = orderDetailService.joinList(map);
+		List<OrderDetailVO> order = orderDetailService.getListBySno(map);
 		model.addAttribute("orderList", order);
 		
 		List<Integer> pageList = new ArrayList<>();

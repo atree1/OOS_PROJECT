@@ -40,47 +40,16 @@
 					aria-describedby="dataTables-example_info" style="width: 100%";>
 					<thead>
 						<tr role="row" style="text-align: center;">
-							<th class="sorting_asc" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-sort="ascending"
-								aria-label="Rendering engine: activate to sort column descending"
-								style="width: 50px;"></th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="Browser: activate to sort column ascending"
-								style="width: 120px;">상품주문번호</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="Platform(s): activate to sort column ascending"
-								style="width: 170px;">주문일시</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="Engine version: activate to sort column ascending"
-								style="width: 120px;">주문상태</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 150px;">상품명</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 80px;">옵션정보</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 80px;">수량</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 80px;">가격</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 90px;">구매자명</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 120px;">운송장번호</th>
+							<th class="sorting_asc" style="width: 50px;"></th>
+							<th class="sorting"style="width: 120px;">상품주문번호</th>
+							<th class="sorting" style="width: 170px;">주문일시</th>
+							<th class="sorting" style="width: 120px;">주문상태</th>
+							<th class="sorting" style="width: 150px;">상품명</th>
+							<th class="sorting" style="width: 80px;">옵션정보</th>
+							<th class="sorting" style="width: 80px;">수량</th>
+							<th class="sorting" style="width: 80px;">가격</th>
+							<th class="sorting" style="width: 90px;">구매자명</th>
+							<th class="sorting" style="width: 120px;">운송장번호</th>
 
 						</tr>
 					</thead>
@@ -108,7 +77,9 @@
 								style="width: 90px; text-align: center;" readonly></td>
 							<td class="price" th:text=${arr.product.price}></td>
 							<td class="mname" th:text=${arr.name}></td>
-							<td class="shipnumber"><input type="text" numberOnly th:id="|ship_${arr.odno}|" th:value="${arr.dno}"/></td>
+							<td class="shipnumber">
+								<input type="text" numberOnly th:id="|ship_${arr.odno}|" th:value="${arr.dno}"/>
+							</td>
 
 				<!-- 	 <td class=""><button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
  						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button> -->
@@ -240,7 +211,10 @@ $(document).ready(function(){
 					alert("삭제하고자 하는 주문건에 체크하십시요.");
 					return;
 				}
-				orderForm.attr("method", "post").attr("action","/exam/manage").submit(); 
+				orderForm.attr("method", "post")
+						.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+						.attr("action","/exam/manage").submit(); 
+				
 			}else{ 
 			    return;
 			}
@@ -265,7 +239,9 @@ $(document).ready(function(){
 					alert("수정하고자 하는 주문건에 체크하십시요.");
 					return;
 				} 
-				orderForm.attr("method", "post").attr("action","/exam/modify").submit();
+				orderForm.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+						.attr("method", "post").attr("action","/exam/modify")
+						.submit();
 			}else{ 
 				return;
 			}

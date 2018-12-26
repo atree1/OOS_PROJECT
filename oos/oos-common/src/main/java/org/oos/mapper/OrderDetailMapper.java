@@ -7,7 +7,7 @@ import org.oos.domain.OrderDetailVO;
 
 public interface OrderDetailMapper {
 
-	public List<OrderDetailVO> getList(Long ono);
+/*	public List<OrderDetailVO> getList(Long ono);*/
 	
 	public OrderDetailVO getByOdno(Long odno);
 	
@@ -15,7 +15,7 @@ public interface OrderDetailMapper {
 	
 	public OrderDetailVO get(Long odno);
 	
-	public int modify2(Map<String, Object> map);
+	public int modify(Map<String, Object> map);
 	
 	public int delete(Long odno);
 	
@@ -27,11 +27,11 @@ public interface OrderDetailMapper {
 	
 	public int insert(OrderDetailVO vo);
 
-	public List<OrderDetailVO> orderList(Map<String, Object> map);
-
+	/*public List<OrderDetailVO> orderList(Map<String, Object> map);
+*/
 	public int deleteAll(Long ono);
 	
-	public List<OrderDetailVO> joinList(Map<String, Object> map);
+	public List<OrderDetailVO> getListBySno(Map<String, Object> map);
 	
 	
 	
