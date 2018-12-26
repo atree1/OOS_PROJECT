@@ -44,7 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login");
 		
-		http.csrf().disable();
 		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
 		http.rememberMe().key("seller")
