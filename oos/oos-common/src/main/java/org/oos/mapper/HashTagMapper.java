@@ -13,5 +13,8 @@ public interface HashTagMapper {
 	public int get(Long hno);
 	
 	public List<HashTagVO> getList();
-
+	
+	public int insert(String tag);
+	
+	public int delete(int hno);
 }

@@ -7,7 +7,16 @@
 	layout:fragment="container">
 <style>
 .btn{
-	margin-bottom:5px;
+	margin:0 5px 5px 0;
+}
+
+.on{
+	background:#ccc
+}
+
+.panel-bocy{
+	max-height:400px;
+	overflow:scroll;
 }
 </style>
 	<h1 align='center'>상품관리</h1>
@@ -20,18 +29,18 @@
                  </div>
                  <!-- /.panel-heading -->
                  <div class="panel-body">
-                     <p>
-                     	<span  th:each="arr:${tagList}">
-                      		<button type="button" th:text="${arr.tag}"
-                      		class="btn btn-default">TAG</button>
-                     	</span>
+                     <p id="tagBox">
+                   		<button th:each="arr:${tagList}" type="button" 
+                   				th:data-hno="${arr.hno}" th:text="${arr.tag}"
+                   		class="btn btn-default">TAG</button>
                      </p>
+                    	 <button type="button" style="float:right"
+                    	 class="btn disabled btn-sm btn-warning">태그 삭제</button>
                  </div>
-                 <!-- /.panel-body -->
              </div>
              <div class="form-group has-success" style="margin: 0 auto;width:500px;">
 	            <label class="control-label" for="inputTag">태그입력</label>
-	            <input type="text" class="form-control" id="inputTag" onkeyup="javascript:test(this);">
+	            <input type="text" class="form-control" id="inputTag">
 	            <p class="help-block">쉼표(,)로 여러개의 태그를 입력할 수 있습니다.<br>
 	            		띄어쓰기 없이 입력해주세요.</p>
 	        </div>
@@ -49,16 +58,74 @@
 
 $(document).ready(function(){
 	
-	$("#tagBtn").click(function(){
+	var tagList = new Array();
+	
+	$(document).on('click', "#tagBtn" , function(){
 		$.ajax({
-			data: $("#inputTag").val(),
-			
+			type:"post",
+			url:"/admin/addTag/"+encodeURI($("#inputTag").val()),
+			beforeSend: function(xhr) {
+	            xhr.setRequestHeader(header, token);
+	        },
+            success:function(result, status, xhr){
+            	tagReload();
+			}
 		});
 	});
 	
-	function test(obj){
-       var a = $('#inputTag').val().replace(/ /gi, '');
+	$(document).on('click', ".btn-default" , function(e){
+		console.log("hello");
+		if($(e.target).hasClass("on")){
+			$(e.target).removeClass("on")
+		}else{
+			$(e.target).addClass("on")
+		}
+		
+		$.each($(".btn-default"),function(index, item){
+			
+			if($(this).hasClass("on")){
+				$(".btn-warning").removeClass("disabled");
+				return false;
+			}
+			
+			$(".btn-warning").addClass("disabled");
+		});
+	});
+	
+	
+	$(document).on('click', ".btn-warning" , function(){
+		$.each($(".btn-default"),function(index, item){
+			if($(this).hasClass("on")){
+				tagList.push($(this).data("hno"));
+			}
+		});
+		
+		$.ajax({
+			data:{'tagArray' : tagList},
+			type:"post",
+			traditional : true,	//배열 ajax로 넘길때
+			url:"/admin/deleteTag",
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
+            success:function(result, status, xhr){
+            	tagReload();
+			}
+		});
+	});
+	
+	$("#inputTag").keydown(function(e){
+		if (e.keyCode == 32) { 
+	       $(this).val($(this).val() + ""); 
+	       return false;
+		}
+	});
+	
+	function tagReload(){
+		$("#inputTag").val("");
+    	$(".panel-body").load(location.href + " .panel-body>*","");
 	}
+	
 });
 
 </script>

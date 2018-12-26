@@ -6,17 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.Criteria;
+import org.oos.domain.HashTagVO;
 import org.oos.domain.PageDTO;
 import org.oos.service.HashTagService;
 import org.oos.service.MemberService;
 import org.oos.service.ProductService;
 import org.oos.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -141,6 +145,31 @@ public class SuperAdminController {
 	public void manageTag(Model model) {
 		
 		model.addAttribute("tagList",tagService.getList());
+	}
+	
+	@PostMapping("/addTag/{tags}")
+	public ResponseEntity<String> addTag(@PathVariable("tags") String tags) {
+		int result = -1;
+		
+		String tagList[] = tags.split(",");
+		for(String tag: tagList) {
+			result = tagService.insert("#"+tag);
+		}
+		
+		return result == 1? new ResponseEntity<>("success", HttpStatus.OK) 
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@PostMapping("/deleteTag")
+	public ResponseEntity<String> deleteTag(Model model, int[] tagArray) {
+		int result = -1;
+		
+		for(int tagNum : tagArray) {
+			result = tagService.delete(tagNum);
+		}
+		
+		return result == 1? new ResponseEntity<>("success", HttpStatus.OK) 
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 }
