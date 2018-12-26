@@ -153,7 +153,7 @@ public class SuperAdminController {
 		
 		String tagList[] = tags.split(",");
 		for(String tag: tagList) {
-			result = tagService.insert("#"+tag);
+			result = tagService.insert(tag);
 		}
 		
 		return result == 1? new ResponseEntity<>("success", HttpStatus.OK) 
