@@ -54,7 +54,13 @@ public class AdminNotifyController {
 	public void getList(Model model, Criteria cri) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
+		if(cri.getCategory() != null) {
+			if(cri.getCategory().equals("t")) {cri.setCategory("title"); }
+			else if(cri.getCategory().equals("c")) { cri.setCategory("content"); }
+			else if(cri.getCategory().equals("tc")) { cri.setCategory("tc");}
+		}
+		
 		map.put("cri", cri);
 		PageDTO pageDTO = new PageDTO(cri, service.count(cri));
 		map.put("dto", pageDTO);
@@ -74,15 +80,13 @@ public class AdminNotifyController {
 	
     @PostMapping("/remove")
     public String remove(Long[] bno, RedirectAttributes rttr) {
-        log.info(bno+"");
+    	int result = -1;
         for(Long num : bno) {
-    		if(service.delete(num) == 1) {
-                rttr.addFlashAttribute("result", "success");
-            }
+    		result = service.delete(num);
     	}
         
+		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
         return "redirect:/adminNotify/notify";
-        
     }
     
     

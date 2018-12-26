@@ -15,6 +15,4 @@
          where hno>0 and del = 'N'
      </select>
      
-      
-  
 </mapper>
