@@ -7,7 +7,7 @@
   
   <select id="getList" parameterType="map" resultType="org.oos.domain.AdminNotifyVO">
   select * from tbl_admin_notify
-  where bno > 0 and sid = #{sid} and del = 'n'
+  where bno > 0 and del = 'n'
   order by bno desc
   limit #{dto.cri.skip}, #{dto.cri.amount}
   </select>
@@ -20,28 +20,23 @@
   
   <update id="modify">
   update tbl_admin_notify
-  set content = #{content}, title = #{title}, regdate=now(), updatedate = now() 
+  set content = #{content}, title = #{title}, updatedate=now()
   where bno = #{bno}	
   </update>
   
   <insert id="insert">
-  insert into tbl_admin_notify(title, content, sid)
-		values(#{title},#{content},#{sid})
+  insert into tbl_admin_notify(title, content)
+		values(#{title},#{content})
   </insert>
   
   <select id="get" resultType="org.oos.domain.AdminNotifyVO">
   		select * from tbl_admin_notify
 		where bno = #{bno}
   </select>
-  
-  <select id="sidCount" resultType="int">
-  		select count(*) from tbl_admin_notify
-		where bno > 0 and sid = #{sid} and del = 'N'
-  </select>
-  
+
   <select id="count" resultType="int">
 		select count(*) from tbl_admin_notify
-		where sno > 0 and sno = #{sno} and del='N'
-</select>	
+		where bno > 0 and del='N'
+	</select>	
   
   </mapper>

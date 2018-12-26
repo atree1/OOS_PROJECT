@@ -15,7 +15,6 @@
 		
 			<br/>
 			<form role="role" action="/adminNotify/register">
-				<input type='hidden' name='sid' th:value='${seller.sid}'/>
 				<button data-oper='remove' id="remove-btn"
 					class="form-control input-sm" placeholder=""
 					aria-controls="dataTables-example">삭제하기</button>				
@@ -35,28 +34,12 @@
 				aria-describedby="dataTables-example_info" style="width: 100%";>
 				<thead>
 					<tr role="row" style="text-align: center;">
-						<th class="sorting_asc" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-sort="ascending"
-							aria-label="Rendering engine: activate to sort column descending"
-							style="width: 50px;"></th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 70px;">번호</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Platform(s): activate to sort column ascending"
-							style="width: 110px;">제목</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="CSS grade: activate to sort column ascending"
-							style="width: 150px;">등록일</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="CSS grade: activate to sort column ascending"
-							style="width: 150px;">업데이트일</th>
-
+						<th class="sorting_asc" style="width: 30px;"></th>
+						<th class="sorting" style="width: 30px;">번호</th>
+						<th class="sorting" style="width: 150px;">제목</th>
+						<th class="sorting" style="width: 40px;">작성자</th>
+						<th class="sorting" style="width: 50px;">수정일</th>	
+						<th class="sorting" style="width: 50px;">등록일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -66,15 +49,11 @@
 							th:value="${arr.bno}"></td>
 						<td class="bno" th:text=${arr.bno}></td>
 						<td><a class="move" th:href="${arr.bno}" th:text=${arr.title}></a></td>
-						<td class="ragdate"
-							th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
+						<td>관리자</td>
 						<td class="updatedate"
 							th:text="${#dates.format(arr.updatedate,'yyyy-MM-dd')}"></td>
-
-
-						<!-- <td class=""><button type="submit" data-oper='remove' class="btn-remove basketSwapBtn" 
- 						style="width:80px; color:#fff; background: black;" th:data-ono="${arr.ono}">주문취소</button>
-					</tr> -->
+						<td class="ragdate"
+						th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 				</tbody>
 			</table>
 		</div>
@@ -110,7 +89,6 @@
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' />
-		<input type='hidden' name='sid' th:value='${seller.sid}'/>
 	</form>
 </div>
 

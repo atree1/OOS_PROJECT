@@ -1,7 +1,9 @@
 $(function() {
     $('#side-menu').metisMenu();
 });
-
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+var csrfName = $("meta[name='_csrf_name']").attr("content");
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size

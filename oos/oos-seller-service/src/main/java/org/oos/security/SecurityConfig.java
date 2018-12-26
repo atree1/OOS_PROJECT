@@ -52,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login");
 		
-	
 		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
 		http.rememberMe().key("seller")
@@ -61,7 +60,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.tokenValiditySeconds(60*60*24*15);
 		
 		
+<<<<<<< HEAD
 		http.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("remember-me","JSESSION_ID").logoutSuccessUrl("/seller/login");
+=======
+		http.logout().logoutUrl("/logout")
+		.invalidateHttpSession(true).logoutSuccessUrl("/seller/login");
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 
 	}
 
