@@ -155,5 +155,13 @@
 	<select id="newCustomer" resultType="int">
 		select count(*) from tbl_member where date(regdate)=curdate() and del='N'
 	</select>
+	
+	<select id="totalCustomer" resultType="int">
+		select count(*) from tbl_member_auth where ano >0
+	</select>
+	
+	<select id="banCustomer" resultType="int">
+		select count(*) from tbl_member_auth where auth='ban' and ano >0
+	</select>
 
 </mapper>

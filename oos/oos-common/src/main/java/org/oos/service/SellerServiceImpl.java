@@ -68,4 +68,18 @@ public class SellerServiceImpl implements SellerService {
 		return mapper.unapprovedCount(map);
 	}
 
+
+	@Override
+	public int banCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.banCount(map);
+	}
+
+
+	@Override
+	public int currentSeller(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.currentSeller(map);
+	}
+
 }

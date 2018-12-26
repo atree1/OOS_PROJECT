@@ -92,4 +92,6 @@
 		select sum(total) from tbl_order
 		 where date(regdate)=curdate() and del='N'
 	</select>
+	
+	
 </mapper>

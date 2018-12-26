@@ -61,6 +61,11 @@ public class HomeController {
 		model.addAttribute("newCustomer", memberService.newCustomer(map));
 		model.addAttribute("unapprovedSeller", sellerService.unapprovedCount(map));
 		model.addAttribute("todayRevenue", orderService.todayRevenue(map));
+		model.addAttribute("banCount", sellerService.banCount(map));
+		model.addAttribute("currentSeller", sellerService.currentSeller(map));
+		model.addAttribute("totalCustomer", memberService.totalCustomer(map));
+		model.addAttribute("banCustomer", memberService.banCustomer(map));
+		
 	}
 	
 

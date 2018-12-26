@@ -24,4 +24,6 @@ public interface OrderMapper {
 	public int orderCount(Map<String, Object> map);
 	
 	public int todayRevenue(Map<String, Object> map);
+	
+	public int monthlyRevenue(Map<String, Object> map);
 }

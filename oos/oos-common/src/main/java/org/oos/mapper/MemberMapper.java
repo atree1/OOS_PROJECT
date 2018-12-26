@@ -43,4 +43,8 @@ public interface MemberMapper {
 	
 	public int newCustomer(Map<String, Object> map);
 	
+	public int totalCustomer(Map<String, Object> map);
+	
+	public int banCustomer(Map<String, Object> map);
+	
 }
