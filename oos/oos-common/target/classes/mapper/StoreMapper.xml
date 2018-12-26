@@ -93,7 +93,7 @@
 		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
 		where s.sno=#{sno}
 	</select>
-	
+
 <!-- 	<select id="get" resultType="org.oos.domain.StoreVO">
 		select * from tbl_store where sno = #{sno}
 	</select> -->
@@ -110,9 +110,11 @@
 		limit 0, 6
 	</select>
 	
-	<select id="getBySid" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store where
-		owner = #{owner}
+	<select id="getBySid" resultMap="Store">
+			select * from tbl_store s left join tbl_store_img i
+		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
+		where 
+			s.owner = #{owner}
 	</select>
 
 	<insert id="insert">

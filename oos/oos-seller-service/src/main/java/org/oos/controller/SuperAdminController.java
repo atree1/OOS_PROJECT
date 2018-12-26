@@ -99,6 +99,7 @@ public class SuperAdminController {
 		model.addAttribute("seller",sellerService.getSellerList(map));	
 	}
 	
+	
 	@GetMapping("/manageProduct")
 	public void manageProduct(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();

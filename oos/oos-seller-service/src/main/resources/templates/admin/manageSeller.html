@@ -34,6 +34,24 @@
        
 		<div class="row">
 			<div class="col-sm-12" align="center">
+			
+						<table class="table table-striped table-bordered"
+				style="width: 20%; max-width:1100px; float:left";>
+				<tbody>
+					<tr>
+						<td><input type='checkbox' class="sortChk" id="chk"></td>
+						<td>ALL</td>
+						<td><input type='checkbox' class="sortChk" id="approvedChk"></td>
+						<td>APPROVED</td>
+						<td><input type='checkbox' class="sortChk" id="unapprovedChk"></td>
+						<td>UNAPPROVED</td>
+						<td><input type='checkbox' class="sortChk" id="banChk"></td>
+						<td>BAN</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			
 				<table width="100%"
 					class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
 					id="dataTables-example" role="grid"
@@ -52,23 +70,19 @@
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="Platform(s): activate to sort column ascending"
-								style="width: 170px;">판매자이름</th>
+								style="width: 150px;">판매자이름</th>
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 80px;">포인트</th>
+								style="width: 80px;">판매자 사업자번호</th>
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 150px;">최종접속</th>
+								style="width: 100px;">최종접속</th>
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 50px;">권한</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 50px;">인증현황</th>
+								style="width: 80px;">권한</th>
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
@@ -76,29 +90,26 @@
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 70px;">버튼</th>
+								style="width: 100px;">인증 및 수정</th>
 
 						</tr>
 					</thead>
 					<tbody>
 
 						<tr class="gradeA odd" role="row" th:each=arr:${seller}>
-							<td class="sorting"><input type="checkbox" name="checkbox"
-								th:value="${arr.sid}"></td>
+							<td class="sorting">
+							<input type="checkbox" class="chk" name="checkbox" th:id="|chk_${arr.sid}|"></td>
 							<td class="sid" th:text=${arr.sid}></td>
 							<td class="sname" th:text=${arr.sname}></td>
-							<td class="point">0</td>
+							<td class="bnum" th:text=${arr.bnum}></td>
 							<td class="updatedate" th:text="${#dates.format(arr.updatedate,'yyyy-MM-dd')}"></td>
-							<td class="permit">
-							<select th:id="|permit_${arr.sid}|" th:value="${arr.permit}">
-									<option value="seller">판매회원</option>
-									<option value="forbidseller">판매중지회원</option>
+							<td class="auth">
+							<select th:id="|select_${arr.sid}|" th:class="|select auth_${arr.authList[0].ano}|">
+									<option value="approved">승인 판매자</option>
+									<option value="unapproved">미승인 판매자</option>
+									<option value="ban">판매금지 판매자</option>
 							</select></td>
-							
-							<td class="permit">
-							<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-lock"></i></button>
-							<button type="button" class="btn btn-warning btn-circle"><i class="fa fa-unlock"></i></button>
-							</td>	
+	
 							
 							<td class="del"><input type="button" id="del"
 								th:value="${arr.del}" style="width: 90px; text-align: center;" readonly></td>
@@ -166,11 +177,9 @@
 
 	</div>
 
-	<form id="orderListForm">
+	<form id="manageForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}' /> 
-		<input type='hidden' name='sno' value='1' />
-			
 			
 	</form>
 </div>
@@ -212,15 +221,51 @@
 
 $(document).ready(function(){
 	
-<<<<<<< HEAD
-		var orderForm = $("#orderListForm");
-		var pageMaker = [[${pageMaker}]];
-=======
+	var orderForm = $("#orderListForm");
+	var pageMaker = [[${pageMaker}]];
 	var manageForm = $("#manageForm");
 	var pageMaker = [[${pageMaker}]];
 	var product = [[${product}]];
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+	var seller = [[${seller}]];
 	
+	
+		(function(){
+				
+				var cat = pageMaker.cri.category;
+				if(cat == "approved"){
+					$("input[id=approvedChk]").attr("checked",true);
+				}else if(cat == "unapproved"){
+					$("input[id=unapprovedChk]").attr("checked",true);			
+				}else if(!cat){
+					$("input[id=chk]").attr("checked",true);
+				}
+				
+				$.each(seller, function(index, item){
+					var auth = item.authList[0];
+					$(".auth_"+auth.ano).val(auth.auth);
+					
+				});
+			})();
+	
+	
+		//자동체크박스체크
+		$(".sortChk").change(function(){
+			if($(this).attr("id") == "approvedChk"){
+				manageForm.append("<input type='hidden' name='category' value='approved'>");
+			}else if($(this).attr("id") == "unapprovedChk"){
+				manageForm.append("<input type='hidden' name='category' value='unapproved'>");
+			}else if($(this).attr("id") == "banChk"){
+				manageForm.append("<input type='hidden' name='category' value='ban'>");
+			}
+			manageForm.submit();
+		});
+		
+		$(".select").change(function(){
+			$("#chk_"+$(this).attr("id").substring(7)).attr("checked",true);
+		});
+	
+		
+		//페이지
 		$(".paginate_button").click(function(e) {
 	        $("#pageNum").val(String($(this).attr("id")).substring(5));
 	        orderForm.submit();
@@ -236,6 +281,8 @@ $(document).ready(function(){
 	        orderForm.submit();
 	    });
 	    
+	    
+	    //삭제
 		$('#remove-btn').click(function() {
 		
 			if (confirm("해당 주문건을 취소하시겠습니까?") == true){ 
@@ -250,6 +297,7 @@ $(document).ready(function(){
 			}
 		});
 	   
+		//수정
 		$("#modify-btn").click(function(){
 			if (confirm("해당 주문건을 수정하시겠습니까?") == true){ 
 				orderForm.html("");
@@ -270,10 +318,10 @@ $(document).ready(function(){
 			}
 		});
 		
-<<<<<<< HEAD
-=======
 	});
 	
+	
+	//페이지
 	$(".paginate_button").click(function(e) {
 		
 		 $("#pageNum").val($(this).attr("id").substring(5));
@@ -289,7 +337,6 @@ $(document).ready(function(){
 		$("#pageNum").val(Number(pageMaker.endPage) + 1);
 		manageForm.submit();
 	});
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 });
 
 	
