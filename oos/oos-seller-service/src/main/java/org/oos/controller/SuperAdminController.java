@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
+import org.oos.service.HashTagService;
 import org.oos.service.MemberService;
 import org.oos.service.ProductService;
 import org.oos.service.SellerService;
@@ -35,6 +36,9 @@ public class SuperAdminController {
 	
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
+	
+	@Setter(onMethod_=@Autowired)
+	private HashTagService tagService;
 	
 	@GetMapping("/manageUser")
 	public void manageUser(Model model, Criteria cri) {
@@ -92,7 +96,8 @@ public class SuperAdminController {
         
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("seller",sellerService.getSellerList(map));	}
+		model.addAttribute("seller",sellerService.getSellerList(map));	
+	}
 	
 	@GetMapping("/manageProduct")
 	public void manageProduct(Model model, Criteria cri) {
@@ -130,4 +135,11 @@ public class SuperAdminController {
 		
 		return "redirect:/admin/manageProduct";
 	}
+	
+	@GetMapping("/manageTag")
+	public void manageTag(Model model) {
+		
+		model.addAttribute("tagList",tagService.getList());
+	}
+	
 }
