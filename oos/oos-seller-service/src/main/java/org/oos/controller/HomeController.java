@@ -39,6 +39,11 @@ public class HomeController {
 
 	}
 
+	@GetMapping("/mypage")
+	public void mypage() {
+
+	}
+
 	@GetMapping("/main")
 	@PreAuthorize("isAuthenticated()")
 	public String storeMain(Principal principal, Model model) {
