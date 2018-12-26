@@ -41,7 +41,7 @@ public class StoreController {
 	}
 	
 	@PostMapping("/register")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("principal.username==#vo.owner")
 	public String storeRegisterPost(StoreVO vo) {
 		log.info(""+vo);
 		storeService.register(vo);
