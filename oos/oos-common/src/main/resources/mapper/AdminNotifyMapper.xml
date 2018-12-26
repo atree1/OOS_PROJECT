@@ -4,10 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="org.oos.mapper.AdminNotifyMapper">
-  
+
   <select id="getList" parameterType="map" resultType="org.oos.domain.AdminNotifyVO">
   select * from tbl_admin_notify
   where bno > 0 and del = 'n'
+ 	<if test="dto.cri.category != null">
+ 		<if test="dto.cri.category == 'tc'.toString()">
+		and (title like concat("%", #{dto.cri.keyword} ,"%")
+		or content like concat("%", #{dto.cri.keyword} ,"%"))
+		</if>
+		<if test="dto.cri.category != 'tc'.toString()">
+			and ${dto.cri.category} like concat("%", #{dto.cri.keyword} ,"%")
+		</if>
+	</if>
   order by bno desc
   limit #{dto.cri.skip}, #{dto.cri.amount}
   </select>
@@ -35,8 +44,17 @@
   </select>
 
   <select id="count" resultType="int">
-		select count(*) from tbl_admin_notify
-		where bno > 0 and del='N'
+	 select count(*) from tbl_admin_notify
+	 where bno > 0 and del = 'n'
+  	<if test="category != null">
+ 		<if test="category == 'tc'.toString()">
+		and (title like concat("%", #{keyword} ,"%")
+		or content like concat("%", #{keyword} ,"%"))
+		</if>
+		<if test="category != 'tc'.toString()">
+			and ${category} like concat("%", #{keyword} ,"%")
+		</if>
+	</if>
 	</select>	
   
   </mapper>

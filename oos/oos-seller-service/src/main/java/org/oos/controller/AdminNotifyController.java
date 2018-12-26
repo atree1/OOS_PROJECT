@@ -54,7 +54,13 @@ public class AdminNotifyController {
 	public void getList(Model model, Criteria cri) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
+		if(cri.getCategory() != null) {
+			if(cri.getCategory().equals("t")) {cri.setCategory("title"); }
+			else if(cri.getCategory().equals("c")) { cri.setCategory("content"); }
+			else if(cri.getCategory().equals("tc")) { cri.setCategory("tc");}
+		}
+		
 		map.put("cri", cri);
 		PageDTO pageDTO = new PageDTO(cri, service.count(cri));
 		map.put("dto", pageDTO);
