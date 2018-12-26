@@ -33,40 +33,13 @@ public class CartController {
 	
 	@PostMapping(value = "/new", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> create(@RequestBody List<CartVO> vo) {
-		
-		log.info("Cart vo :" + vo);
 
 		int result = service.register(vo);
 				
 		return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-/*	@GetMapping(value="/pages/{mid}/{page}",produces={MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<CartVO>> getList(@PathVariable("page")int pageNum,@PathVariable("mid") String mid,Model model){
-		
-		Criteria cri=new Criteria();
-		cri.setPageNum(pageNum);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("criteria", cri);
-		map.put("mid",mid);
-		return new ResponseEntity<>(service.getList(map),HttpStatus.OK);
-	}
-	
-	@GetMapping(value="/{cno}",produces={MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<CartVO> get(@PathVariable("cno")Long cno){
-		
-		return new ResponseEntity<CartVO>(service.get(cno),HttpStatus.OK);
-	}
-	
-	@RequestMapping(method= {RequestMethod.PUT,RequestMethod.PATCH},value="/{cno}",consumes="application/json",
-			produces= {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> modify(@RequestBody CartVO vo,@PathVariable("cno") Long cno){
 
-		vo.setCno(cno);
-		int result=service.modify(vo);
-		return result==1?new ResponseEntity<String>("success",HttpStatus.OK):new ResponseEntity<String> (HttpStatus.INTERNAL_SERVER_ERROR);
-	}*/
 	
 	@RequestMapping(value="/delete/{str}")
 	public ResponseEntity<String> delete(@PathVariable("str") String str, Model model){
