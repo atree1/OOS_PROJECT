@@ -181,4 +181,11 @@
 		</if>
 		where pno = #{pno}
 	</update>
+	
+	<select id="totalProduct" resultType="int">
+		select count(*)
+		from tbl_product
+		where pno > 0 and del='N'
+
+	</select>
 </mapper>

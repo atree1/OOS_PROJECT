@@ -101,13 +101,7 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mapper.newCustomer(map);
 	}
-
-	@Override
-	public int totalCustomer(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return mapper.totalCustomer(map);
-	}
-
+	
 	@Override
 	public int banCustomer(Map<String, Object> map) {
 		// TODO Auto-generated method stub

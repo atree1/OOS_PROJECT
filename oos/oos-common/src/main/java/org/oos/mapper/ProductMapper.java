@@ -35,4 +35,6 @@ public interface ProductMapper {
 	public void updateQuestionReplyCnt(@Param("pno") Long pno,@Param("amount") int amount);
 	
 	public void updateReviewReplyCnt(@Param("pno") Long pno,@Param("amount") int amount);
+	
+	public int  totalProduct(Map<String, Object> map);
 }

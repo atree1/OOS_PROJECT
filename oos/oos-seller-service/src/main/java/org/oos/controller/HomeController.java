@@ -4,11 +4,13 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.oos.domain.Criteria;
 import org.oos.domain.SellerVO;
 import org.oos.domain.StoreVO;
 import org.oos.service.MemberService;
 import org.oos.service.OrderDetailService;
 import org.oos.service.OrderService;
+import org.oos.service.ProductService;
 import org.oos.service.ReplyService;
 import org.oos.service.SellerService;
 import org.oos.service.StoreService;
@@ -42,6 +44,9 @@ public class HomeController {
 	@Setter(onMethod_=@Autowired)
 	private OrderService orderService;
 	
+	@Setter(onMethod_=@Autowired)
+	private ProductService productService;
+	
 	@GetMapping("/test")
 	public void test() {
 
@@ -55,7 +60,9 @@ public class HomeController {
 		SellerVO vo = sellerService.get(sid);
 			
 		Map<String,Object> map = new HashMap<>();
+		Criteria cri = new Criteria();
 		map.put("sid", vo.getSid());
+		map.put("cri",cri);
 					
 		model.addAttribute("totalVisit", storeService.totalVisit(map));
 		model.addAttribute("newCustomer", memberService.newCustomer(map));
@@ -63,9 +70,9 @@ public class HomeController {
 		model.addAttribute("todayRevenue", orderService.todayRevenue(map));
 		model.addAttribute("banCount", sellerService.banCount(map));
 		model.addAttribute("currentSeller", sellerService.currentSeller(map));
-		model.addAttribute("totalCustomer", memberService.totalCustomer(map));
+		model.addAttribute("totalCustomer", memberService.getUserCount(cri));
 		model.addAttribute("banCustomer", memberService.banCustomer(map));
-		
+		model.addAttribute("totalProduct", productService.totalProduct(map));
 	}
 	
 

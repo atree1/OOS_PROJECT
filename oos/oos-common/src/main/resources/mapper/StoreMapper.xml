@@ -186,6 +186,6 @@
 	</select>
 	
 	<select id="totalVisit" resultType="int">
-		select sum(visitcnt) from tbl_store
+		select sum(visitcnt) from tbl_store where sno >0
 	</select>
 </mapper>
