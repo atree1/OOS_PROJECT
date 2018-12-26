@@ -27,13 +27,17 @@
 		left join tbl_seller_auth a
 		on s.sid = a.sid
 		where s.sid != ""
-				<if test="dto != null">
+		and auth is not null
+		<if test="dto != null">
+		
 			<if test="dto.cri.keyword != null">
-				and s.sid like concat("%", #{dto.cri.keyword} ,"%")
+				and s.sname like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
+			
 			<if test="dto.cri.category != null">
 				and auth = #{dto.cri.category}
 			</if>
+			
 			order by regdate desc
 			limit #{dto.cri.skip}, #{dto.cri.amount}
 		</if>
@@ -69,5 +73,12 @@
 	
 	<update id="authorize">	
 		update tbl_seller set permit='Y' where sid = #{sid}	
+	</update>
+	
+	
+	<update id="changeAutority" parameterType="map">
+		update tbl_seller_auth 
+		set auth = #{auth}
+		where sid =#{sid}
 	</update>
 </mapper>

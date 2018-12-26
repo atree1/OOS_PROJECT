@@ -22,4 +22,6 @@ public interface SellerMapper {
 	
 	public int authorize(String sid);
 	
+	public int changeAutority(Map<String, Object> map);
+	
 }

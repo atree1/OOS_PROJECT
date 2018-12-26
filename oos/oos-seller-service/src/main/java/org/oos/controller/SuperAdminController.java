@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -90,6 +91,37 @@ public class SuperAdminController {
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("seller",sellerService.getSellerList(map));	}
+	
+	
+	@PostMapping("/manageSeller")
+	public String sellerDelete(String sid, RedirectAttributes rttr) {
+		
+			if(sellerService.remove(sid) == 1) {
+				rttr.addAttribute("result", "success");
+				
+			}
+		return "redirect:/admin/manageSeller";
+	}
+	
+	@PostMapping("/sellerModfiy")
+	public String sellerModify(String[] options) {
+		
+		for(String option : options) { 
+    		Map<String, Object> map = new HashMap<String, Object>();
+    		
+    		String[] list= option.split("_");
+    		String sid = list[0];
+    		String sellerAuth = list[1];
+    		
+    		map.put("sid", sid);
+    		map.put("auth", sellerAuth);
+    		sellerService.changeAutority(map);
+    		
+    	}
+	
+		return "redirect:/admin/manageSeller";
+	}
+	
 	
 	
 	@GetMapping("/manageProduct")

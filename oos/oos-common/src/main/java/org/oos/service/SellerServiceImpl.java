@@ -54,4 +54,11 @@ public class SellerServiceImpl implements SellerService {
 		return mapper.getSellerCount(cri);
 	}
 
+
+	@Override
+	public int changeAutority(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.changeAutority(map);
+	}
+
 }
