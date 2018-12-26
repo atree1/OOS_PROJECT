@@ -20,7 +20,7 @@
   
   <update id="modify">
   update tbl_admin_notify
-  set content = #{content}, title = #{title}, regdate=now(), updatedate = now() 
+  set content = #{content}, title = #{title}, regdate=now()
   where bno = #{bno}	
   </update>
   
@@ -37,6 +37,6 @@
   <select id="count" resultType="int">
 		select count(*) from tbl_admin_notify
 		where bno > 0 and del='N'
-</select>	
+	</select>	
   
   </mapper>

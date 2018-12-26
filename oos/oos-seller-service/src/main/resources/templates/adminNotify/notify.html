@@ -15,7 +15,6 @@
 		
 			<br/>
 			<form role="role" action="/adminNotify/register">
-				<input type='hidden' name='sid' th:value='${seller.sid}'/>
 				<button data-oper='remove' id="remove-btn"
 					class="form-control input-sm" placeholder=""
 					aria-controls="dataTables-example">삭제하기</button>				
@@ -110,7 +109,6 @@
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' />
-		<input type='hidden' name='sid' th:value='${seller.sid}'/>
 	</form>
 </div>
 

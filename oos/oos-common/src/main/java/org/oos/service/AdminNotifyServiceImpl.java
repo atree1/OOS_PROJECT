@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.AdminNotifyVO;
+import org.oos.domain.Criteria;
 import org.oos.mapper.AdminNotifyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,8 @@ public class AdminNotifyServiceImpl implements AdminNotifyService {
 	}
 
 	@Override
-	public int sidCount(Map<String, Object> map) {
-		return mapper.sidCount(map);
+	public int count(Criteria cri) {
+		return mapper.count(cri);
 	}
 
 }

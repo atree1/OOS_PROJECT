@@ -35,10 +35,6 @@
 										<label>제목</label> <input id="title" name="title" type="text" th:value="${notify.title}"
 											class="form-control" readonly="readonly">
 									</div>
-									<div class="form-group">
-										<label>작성자</label> <input id="sid" name="sid" type="text" th:value="${notify.sid}"
-											class="form-control" readonly="readonly">
-									</div>
 									
 									<div class="form-group">
 										<label>내용</label>
@@ -50,7 +46,7 @@
 											<input type='hidden' name='bno' th:value='${notify.bno}'/>
 											<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 											<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}' />
-											<input type='hidden' name='sid' th:value='${seller.sid}' />
+											
 										<div>
 											<button class="btn btn-success" type="submit">공지사항 수정</button>
 										</div>
@@ -80,7 +76,6 @@
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' />
-		<input type='hidden' name='sid' th:value='${seller.sid}'/>
 	</form>        
         
 

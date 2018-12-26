@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.AdminNotifyVO;
+import org.oos.domain.Criteria;
 
 public interface AdminNotifyMapper {
 
-public List<AdminNotifyVO> getList(Map<String, Object> map);
+	public List<AdminNotifyVO> getList(Map<String, Object> map);
 	
 	public AdminNotifyVO get(Long bno);
 	
@@ -17,5 +18,5 @@ public List<AdminNotifyVO> getList(Map<String, Object> map);
 	
 	public int insert(AdminNotifyVO vo);
 	
-	public int sidCount(Map<String, Object> map);
+	public int count(Criteria cri);
 }

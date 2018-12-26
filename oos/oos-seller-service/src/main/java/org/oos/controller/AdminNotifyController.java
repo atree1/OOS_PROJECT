@@ -37,20 +37,17 @@ public class AdminNotifyController {
 		
 		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		
-		return "redirect:/adminNotify/get?sid="+vo.getSid()+"&bno="+vo.getBno()+"&amount="+cri.getAmount()+"&pageNum="+cri.getPageNum();
+		return "redirect:/adminNotify/get?bno="+vo.getBno();
 	}
 	
 	@GetMapping({"/get","/modify"})
-	public void get(Long bno,String sid,Criteria cri,Model model) {
+	public void get(Long bno, Criteria cri,Model model) {
 		
 		Map<String, Object> map = new HashMap<>();
-		PageDTO pageDTO = new PageDTO(cri, service.sidCount(map));
 		map.put("bno", bno);
-		map.put("sid", sid);
-		map.put("dto", pageDTO);
 		
 		model.addAttribute("notify", service.get(bno));
-		model.addAttribute("pageMaker", pageDTO);
+		model.addAttribute("page", cri);
 	}
 	
 	@GetMapping("/notify")
@@ -59,12 +56,10 @@ public class AdminNotifyController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("cri", cri);
-		PageDTO pageDTO = new PageDTO(cri, service.sidCount(map));
+		PageDTO pageDTO = new PageDTO(cri, service.count(cri));
 		map.put("dto", pageDTO);
-		
-		List<AdminNotifyVO> notify = service.getList(map);
 				
-		model.addAttribute("notify", notify);
+		model.addAttribute("notify", service.getList(map));
 		
 		List<Integer> pageList = new ArrayList<>();
 
@@ -78,22 +73,21 @@ public class AdminNotifyController {
 	}
 	
     @PostMapping("/remove")
-    public String remove(Long[] bno,String sid, RedirectAttributes rttr) {
+    public String remove(Long[] bno, RedirectAttributes rttr) {
         log.info(bno+"");
-        log.info("sid:"+sid);
         for(Long num : bno) {
     		if(service.delete(num) == 1) {
                 rttr.addFlashAttribute("result", "success");
             }
     	}
         
-        return "redirect:/adminNotify/notify?sid="+sid;
+        return "redirect:/adminNotify/notify";
         
     }
     
     
 	@GetMapping("/register")
-	public void insert(String sid,Model model) {
+	public void insert(Model model) {
 		
 	}
 	
@@ -104,7 +98,7 @@ public class AdminNotifyController {
 		
 		rttr.addFlashAttribute("result", result == 1? "SUCCESS":"FAIL");
 		
-		return "redirect:/adminNotify/notify?sid="+vo.getSid();
+		return "redirect:/adminNotify/notify";
 		
 	} 
 	
