@@ -28,9 +28,7 @@ public class AdminNotifyController {
 
 	@Setter(onMethod_= @Autowired)
 	private AdminNotifyService service;
-	
-	@Setter(onMethod_=@Autowired)
-	private SellerService sellerService;
+
 	
 	@PostMapping("/modify")
 	public String sellerModifyPost(AdminNotifyVO vo,Criteria cri, RedirectAttributes rttr){
@@ -51,17 +49,15 @@ public class AdminNotifyController {
 		map.put("sid", sid);
 		map.put("dto", pageDTO);
 		
-		model.addAttribute("seller", sellerService.get(sid));
 		model.addAttribute("notify", service.get(bno));
 		model.addAttribute("pageMaker", pageDTO);
 	}
 	
 	@GetMapping("/notify")
-	public void getList(Model model, String sid, Criteria cri) {
+	public void getList(Model model, Criteria cri) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		map.put("sid", sid);
 		map.put("cri", cri);
 		PageDTO pageDTO = new PageDTO(cri, service.sidCount(map));
 		map.put("dto", pageDTO);
@@ -78,7 +74,6 @@ public class AdminNotifyController {
 		
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("seller", sellerService.get(sid));
 
 	}
 	
@@ -100,8 +95,6 @@ public class AdminNotifyController {
 	@GetMapping("/register")
 	public void insert(String sid,Model model) {
 		
-		model.addAttribute("seller", sellerService.get(sid));
-    
 	}
 	
 	@PostMapping("/register")

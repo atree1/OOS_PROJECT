@@ -20,37 +20,31 @@ public class AdminNotifyServiceImpl implements AdminNotifyService {
 	
 	@Override
 	public List<AdminNotifyVO> getList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return mapper.getList(map);
 	}
 
 	@Override
 	public AdminNotifyVO get(Long bno) {
-		// TODO Auto-generated method stub
 		return mapper.get(bno);
 	}
 
 	@Override
 	public int delete(Long bno) {
-		// TODO Auto-generated method stub
 		return mapper.delete(bno);
 	}
 
 	@Override
 	public int modify(AdminNotifyVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.modify(vo);
 	}
 
 	@Override
 	public int insert(AdminNotifyVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.insert(vo);
 	}
 
 	@Override
 	public int sidCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return mapper.sidCount(map);
 	}
 

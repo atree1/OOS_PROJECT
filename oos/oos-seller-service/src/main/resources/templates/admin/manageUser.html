@@ -49,7 +49,7 @@
   cursor: pointer;
 }
 </style>
-	<h1 align='center'>구매자관리</h1>
+	<h1 align='center'><a href="/admin/manageUser">구매자관리</a></h1>
 	<br />
 	<div class="row">
 	
@@ -58,6 +58,8 @@
 				style="width: 20%; max-width:1100px; float:left";>
 				<tbody>
 					<tr>
+						<td><input type='checkbox' class="sortChk" id="chk"></td>
+						<td>ALL</td>
 						<td><input type='checkbox' class="sortChk" id="userChk"></td>
 						<td>USER</td>
 						<td><input type='checkbox' class="sortChk" id="banChk"></td>
@@ -151,6 +153,16 @@ $(document).ready(function(){
 	var product = [[${product}]];
 	
 	(function(){
+		
+		var cat = pageMaker.cri.category;
+		if(cat == "user"){
+			$("input[id=userChk]").attr("checked",true);
+		}else if(cat == "ban"){
+			$("input[id=banChk]").attr("checked",true);			
+		}else if(!cat){
+			$("input[id=chk]").attr("checked",true);
+		}
+		
 		$.each(member, function(index, item){
 			var auth = item.authList[0];
 			$(".auth_"+auth.ano).val(auth.auth);
@@ -190,6 +202,8 @@ $(document).ready(function(){
 			manageForm.append("<input type='hidden' name='category' value='user'>");
 		}else if($(this).attr("id") == "banChk"){
 			manageForm.append("<input type='hidden' name='category' value='ban'>");
+		}else if($(this).attr("id") == "chk"){
+			location.reload();
 		}
 		manageForm.submit();
 	});
