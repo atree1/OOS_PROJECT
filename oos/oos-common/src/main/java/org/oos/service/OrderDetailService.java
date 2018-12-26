@@ -7,7 +7,7 @@ import org.oos.domain.OrderDetailVO;
 
 public interface OrderDetailService {
 	
-	public List<OrderDetailVO> getList(Long ono);
+/*	public List<OrderDetailVO> getList(Long ono);*/
 	
 	/*public int count(Map<String, Object> map);*/
 	
@@ -25,9 +25,9 @@ public interface OrderDetailService {
 	
 	public int insert(OrderDetailVO vo);
 	
-	public List<OrderDetailVO> orderList(Map<String, Object> map);
+/*	public List<OrderDetailVO> orderList(Map<String, Object> map);*/
 	
 	public List<OrderDetailVO> getListByOno(Long ono);
 	
-	public List<OrderDetailVO> joinList(Map<String, Object> map);
+	public List<OrderDetailVO> getListBySno(Map<String, Object> map);
 }

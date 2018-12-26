@@ -192,7 +192,7 @@ public class UserController {
     @GetMapping("/mypage/orderDetail")
     public void orderDetail(long ono, Model model) {
     	
-    	List<OrderDetailVO> list = orderDetailService.getList(ono);
+    	List<OrderDetailVO> list = orderDetailService.getListByOno(ono);
         model.addAttribute("detail", list);
     }
     

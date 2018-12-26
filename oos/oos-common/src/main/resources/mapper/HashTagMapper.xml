@@ -15,4 +15,14 @@
          where hno>0 and del = 'N'
      </select>
      
+     <insert id="insert">
+         insert into tbl_hashtag(tag)
+         value(#{tag})
+     </insert>
+     
+     <delete id="delete">
+         delete from tbl_hashtag
+         where hno = #{hno}
+     </delete>
+     
 </mapper>

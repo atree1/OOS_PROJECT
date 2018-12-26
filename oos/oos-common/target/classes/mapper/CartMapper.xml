@@ -54,12 +54,12 @@
 		select i.pno, a.cno, a.sno, a.mid, a.qty,a.price, a.opno, 
 		a.pname, a.size, i.uuid,i.ipath, i.iname from tbl_product_img i
 		join(select cno, mid, p.pno, c.qty, c.opno, p.price, p.pname, p.sno, o.size
-		from tbl_cart c left join tbl_product_option o on c.pno=o.pno
+		from tbl_cart c left join tbl_product_option o on c.opno=o.opno
 		 				left join tbl_product p on c.pno=p.pno
 				where  c.cno > 0 and c.mid = #{mid}) a
 		on(a.pno = i.pno)
 		where uuid != ''
-		group by i.pno
+		group by a.opno
 		<if test="dto != null ">
 			limit #{dto.cri.skip}, #{dto.cri.amount}
 		</if>
@@ -71,9 +71,10 @@
  		left join tbl_product p on c.pno=p.pno
  	where cno = #{cno}
  </select>
-	<select id="get" resultType="org.oos.domain.CartVO">
+ 
+	<select id="getByOpno" resultType="org.oos.domain.CartVO">
 		select * from tbl_cart
-		where cno = #{cno}
+		where opno = #{opno}
 	</select>
 
 	<insert id="insert">
@@ -81,9 +82,9 @@
 		values(#{mid}, #{pno}, #{qty}, #{opno}, #{sno})
 	</insert>
 
-	<update id="modify">
+	<update id="update">
 		update tbl_cart
-		set qty = #{qty}, opno =#{opno}
+		set qty = #{qty}
 		where cno = #{cno}
 	</update>
 
@@ -91,7 +92,6 @@
 		delete from tbl_cart
 		where cno = #{cno}
 	</delete>
-
 
 	<select id="count" resultType="int">
 		select count(*) from tbl_cart
