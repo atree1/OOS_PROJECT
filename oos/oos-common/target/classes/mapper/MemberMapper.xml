@@ -50,8 +50,9 @@
 			<if test="dto.cri.keyword != null">
 				and m.mid like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
-		order by regdate desc
-		limit #{dto.cri.skip}, #{dto.cri.amount}
+			and auth = "user"
+			order by regdate desc
+			limit #{dto.cri.skip}, #{dto.cri.amount}
 		</if>
 	</select>
 

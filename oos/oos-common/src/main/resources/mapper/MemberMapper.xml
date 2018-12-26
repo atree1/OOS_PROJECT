@@ -50,8 +50,9 @@
 			<if test="dto.cri.keyword != null">
 				and m.mid like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
-		order by regdate desc
-		limit #{dto.cri.skip}, #{dto.cri.amount}
+			and auth = "user"
+			order by regdate desc
+			limit #{dto.cri.skip}, #{dto.cri.amount}
 		</if>
 	</select>
 
@@ -93,8 +94,14 @@
 		where mid = #{mid} 
 	</update>
 
-	<update id="changeAutority">
+<!-- 	<update id="changePermit">
 		update tbl_member set permit = #{permit}
+		where mid =#{mid}
+	</update> -->
+	
+	<update id="changeAutority" parameterType="map">
+		update tbl_member_auth 
+		set auth = #{auth}
 		where mid =#{mid}
 	</update>
 	
