@@ -1,5 +1,6 @@
 package org.oos.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.oos.domain.PageDTO;
 import org.oos.service.OrderDetailService;
 import org.oos.service.OrderService;
 import org.oos.service.ProductService;
+import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,15 +38,18 @@ public class AdminController {
 
 	@Setter(onMethod_ = @Autowired)
 	private ProductService productService;
-
+	
+	@Setter(onMethod_=@Autowired)
+	private StoreService storeService;
+	
 	@GetMapping({ "comment", "edit", "home", "paysettle", "products", "seller" })
 	public void admin() {
 
 	}
 
 	@GetMapping("/manage")
-	public void orderList(Model model, long sno, Criteria cri) {
-
+	public void orderList(Model model, Principal principal, Criteria cri) {
+		Long sno = storeService.getBySid(principal.getName()).getSno();
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("sno", sno);
