@@ -21,5 +21,7 @@ public interface SellerService {
 	public int remove(String sid);
 	
 	public int changeAutority(Map<String, Object> map);
+	
+	public int unapprovedCount(Map<String, Object> map);
 
 }

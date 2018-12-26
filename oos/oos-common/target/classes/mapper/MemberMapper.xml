@@ -151,5 +151,9 @@
 		on m.mid = a.mid
 		where m.del = 'N'
 	</select> -->
+	
+	<select id="newCustomer" resultType="int">
+		select count(*) from tbl_member where date(regdate)=curdate() and del='N'
+	</select>
 
 </mapper>

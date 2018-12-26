@@ -87,5 +87,9 @@
 		order by ono desc, regdate desc
 		limit #{dto.cri.skip}, #{dto.cri.amount}
 	</select> -->
-
+	
+	<select id="todayRevenue" resultType="int">		
+		select sum(total) from tbl_order
+		 where date(regdate)=curdate() and del='N'
+	</select>
 </mapper>

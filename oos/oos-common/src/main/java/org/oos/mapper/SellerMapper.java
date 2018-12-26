@@ -25,4 +25,6 @@ public interface SellerMapper {
 	
 	public int changeAutority(Map<String, Object> map);
 	
+	public int unapprovedCount(Map<String, Object> map);
+	
 }

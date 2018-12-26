@@ -184,4 +184,8 @@
 		tbl_store_like
 		where sno > 0 and mid = #{mid} and sno = #{sno}
 	</select>
+	
+	<select id="totalVisit" resultType="int">
+		select sum(visitcnt) from tbl_store
+	</select>
 </mapper>

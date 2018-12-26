@@ -95,6 +95,12 @@ public class MemberServiceImpl implements MemberService {
 	public int changeAutority(Map<String, Object> map) {
 		return mapper.changeAutority(map);
 	}
+
+	@Override
+	public int newCustomer(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.newCustomer(map);
+	}
 	
 
 }

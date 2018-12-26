@@ -84,4 +84,8 @@
 		set auth = #{auth}
 		where sid =#{sid}
 	</update>
+	
+	<select id="unapprovedCount" resultType="int">
+		select count(*) from tbl_seller where permit='N'
+	</select>
 </mapper>

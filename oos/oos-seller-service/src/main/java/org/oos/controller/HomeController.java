@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.oos.domain.SellerVO;
 import org.oos.domain.StoreVO;
+import org.oos.service.MemberService;
 import org.oos.service.OrderDetailService;
+import org.oos.service.OrderService;
 import org.oos.service.ReplyService;
 import org.oos.service.SellerService;
 import org.oos.service.StoreService;
@@ -33,12 +35,33 @@ public class HomeController {
 
 	@Setter(onMethod_ = @Autowired)
 	private OrderDetailService detailService;
-
+	
+	@Setter(onMethod_=@Autowired)
+	private MemberService memberService;
+	
+	@Setter(onMethod_=@Autowired)
+	private OrderService orderService;
+	
 	@GetMapping("/test")
 	public void test() {
 
 	}
 
+	//최고관리자 메인
+	@GetMapping("/adminMain")
+	public void adminMain(String sid, Model model) {
+			
+		SellerVO vo = sellerService.get(sid);
+			
+		Map<String,Object> map = new HashMap<>();
+		map.put("sid", vo.getSid());
+					
+		model.addAttribute("totalVisit", storeService.totalVisit(map));
+		model.addAttribute("newCustomer", memberService.newCustomer(map));
+		model.addAttribute("unapprovedSeller", sellerService.unapprovedCount(map));
+		model.addAttribute("todayRevenue", orderService.todayRevenue(map));
+	}
+	
 	@GetMapping("/main")
 	@PreAuthorize("isAuthenticated()")
 	public String storeMain(Principal principal, Model model) {

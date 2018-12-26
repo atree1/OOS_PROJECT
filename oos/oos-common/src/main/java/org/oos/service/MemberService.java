@@ -40,4 +40,5 @@ public interface MemberService {
 	
 	public List<MemberVO> manageMember(Map<String, Object> map);
 	
+	public int newCustomer(Map<String, Object> map);
 }
