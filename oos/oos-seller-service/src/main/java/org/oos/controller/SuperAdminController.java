@@ -122,8 +122,8 @@ public class SuperAdminController {
     		
     		map.put("sid", sid);
     		map.put("auth", sellerAuth);
+    		log.info(map+"");
     		sellerService.changeAutority(map);
-    		
     	}
 	
 		return "redirect:/admin/manageSeller";

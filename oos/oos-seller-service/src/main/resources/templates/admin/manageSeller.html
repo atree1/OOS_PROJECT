@@ -79,10 +79,6 @@
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 40px;">회원삭제</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
 								style="width: 100px;">인증 및 수정</th>
 
 						</tr>
@@ -97,15 +93,12 @@
 							<td class="bnum" th:text=${arr.bnum}></td>
 							<td class="updatedate" th:text="${#dates.format(arr.updatedate,'yyyy-MM-dd')}"></td>
 							<td class="auth">
-							<select th:class="|select auth_${arr.authList}|" th:id="|select_${arr.sid}|">
-									<option value="seller">승인 판매자</option>
-									<option value="none">미승인 판매자</option>
-									<option value="ban">판매금지 판매자</option>
+							<select th:class="|select auth_${arr.authList[0].ano}|" th:id="|select_${arr.sid}|">
+									<option value="SELLER">승인 판매자</option>
+									<option value="NONE">미승인 판매자</option>
+									<option value="BAN">판매금지 판매자</option>
 							</select></td>
 	
-							
-							<td class="del"><input type="button" id="del"
-								th:value="${arr.del}" style="width: 90px; text-align: center;" readonly></td>
 								
 							<td class="button">
 							<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-pencil"></i></button>
@@ -237,18 +230,18 @@ $(document).ready(function(){
 				$.each(seller, function(index, item){
 					var auth = item.authList[0];
 					console.log(auth);
-					/* $(".auth_"+auth.ano).val(auth.auth); */
+					$(".auth_"+auth.ano).val(auth.auth);
 				});
 			})();
 	
 		//상단검색필터
 		$(".sortChk").change(function(){
 			if($(this).attr("id") == "approvedChk"){
-				manageForm.append("<input type='hidden' name='category' value='approved'>");
+				manageForm.append("<input type='hidden' name='category' value='SELLER'>");
 			}else if($(this).attr("id") == "unapprovedChk"){
-				manageForm.append("<input type='hidden' name='category' value='unapproved'>");
+				manageForm.append("<input type='hidden' name='category' value='NONE'>");
 			}else if($(this).attr("id") == "banChk"){
-				manageForm.append("<input type='hidden' name='category' value='ban'>");
+				manageForm.append("<input type='hidden' name='category' value='BAN'>");
 			}
 			manageForm.submit();
 		});
@@ -340,6 +333,8 @@ $(document).ready(function(){
 				var auth = $("#select_"+sid).val();
 				console.log(auth);
 				manageForm.attr("method","post")
+							.attr("action","/admin/sellerModfiy")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
 							.append("<input type='hidden' name='options' value='"+sid+"_"+auth+"'>")
 			});
 			manageForm.submit();

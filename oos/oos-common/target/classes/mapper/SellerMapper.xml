@@ -27,6 +27,7 @@
 		left join tbl_seller_auth a
 		on s.sid = a.sid
 		where s.sid != ""
+		and s.sid !="admin"
 		and auth is not null
 		<if test="dto != null">
 		
