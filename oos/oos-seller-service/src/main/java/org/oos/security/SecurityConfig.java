@@ -49,8 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/seller/*").permitAll()
-		.antMatchers("/main", "/store", "/qna","/adminNotify","/product","/exam")
+
+		.antMatchers("/main", "/store", "/qna","/notify/*","/adminNotify","/product","/exam")
 		.hasRole("SELLER")
+
 		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
