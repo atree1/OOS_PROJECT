@@ -211,10 +211,16 @@ $(document).ready(function(){
 					alert("삭제하고자 하는 주문건에 체크하십시요.");
 					return;
 				}
+<<<<<<< HEAD
+				orderForm.attr("method", "post").attr("action","/exam/manage")
+				.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+				.submit(); 
+=======
 				orderForm.attr("method", "post")
 						.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
 						.attr("action","/exam/manage").submit(); 
 				
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 			}else{ 
 			    return;
 			}
@@ -239,9 +245,15 @@ $(document).ready(function(){
 					alert("수정하고자 하는 주문건에 체크하십시요.");
 					return;
 				} 
+<<<<<<< HEAD
+				orderForm.attr("method", "post").attr("action","/exam/modify")
+				.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+				.submit();
+=======
 				orderForm.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
 						.attr("method", "post").attr("action","/exam/modify")
 						.submit();
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 			}else{ 
 				return;
 			}
@@ -253,7 +265,15 @@ $(document).ready(function(){
 		});
 		
 		
-
+		//Select option 권한값 유지
+		$.each(orderList, function(index, item){
+			var dno = item.dno[0];
+			console.log(dno);
+			$(".ship_"+orderList.odno).val(orderList.dno);
+		});
+	})();
+		
+	
 });
 
 	
