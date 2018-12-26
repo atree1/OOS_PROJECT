@@ -60,12 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.tokenValiditySeconds(60*60*24*15);
 		
 		
-<<<<<<< HEAD
-		http.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("remember-me","JSESSION_ID").logoutSuccessUrl("/seller/login");
-=======
 		http.logout().logoutUrl("/logout")
-		.invalidateHttpSession(true).logoutSuccessUrl("/seller/login");
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+		.invalidateHttpSession(true)
+		.deleteCookies("remember-me","JSESSION_ID").logoutSuccessUrl("/seller/login");
 
 	}
 
