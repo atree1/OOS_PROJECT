@@ -84,12 +84,31 @@
 
 			</ul>
 	</div>
-
 	<form id="notifyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' />
 	</form>
+	
+	<!-- 모달시작  -->
+	<form id="modal-form" class="modal">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">알림창</h4>
+                </div>
+                <div class="modal-body">
+                	글 삭제가 완료되었습니다
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-primary ">확인</button>
+                </div>
+            </div>
+        </div>
+	</form>
+	<!-- 모달끝  -->
+	
 </div>
 
 
@@ -99,60 +118,71 @@
 
 $(document).ready(function(){
 	
-		var notifyForm = $("#notifyForm");
-		var pageMaker = [[${pageMaker}]];
-		
-		$(".move").on("click",function(e){
-			e.preventDefault();
-			
-			notifyForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>")
-						.attr("action","/adminNotify/get")
-						.submit();
-		});
+	var notifyForm = $("#notifyForm");
+	var pageMaker = [[${pageMaker}]];
 	
-		$(".paginate_button").click(function(e) {
-	        $("#pageNum").val(String($(this).attr("id")).substring(5));
-	        notifyForm.submit();
-	    });
-	    
-	    $(".paginate_button previous").click(function(){
-	        $("#pageNum").val(Number(pageMaker.startPage) -1);
-	        notifyForm.submit();
-	    });
-	    
-	    $(".paginate_button next").click(function(){
-	        $("#pageNum").val(Number(pageMaker.endPage) + 1);
-	        notifyForm.submit();
-	    });
-		$('#remove-btn').click(function(e) {
-			e.preventDefault();
-			if (confirm("해당 공지를 삭제하시겠습니까?") == true){ 
-				$("input[name='checkbox']:checked").each(function(index, item){
-					notifyForm.append("<input type='hidden' name='bno' value='"+item.value+"' >")
-							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
-				});
-				notifyForm.attr("method", "post").attr("action","/adminNotify/remove").submit(); 
-			}else{ 
-			    return;
-			}
-		});
+	(function(){
+		var result = [[${result}]];
+		checkModal(result);
+	})();
+	
+	
+	$(".move").on("click",function(e){
+		e.preventDefault();
 		
-		$("#userSearch").click(function(){
-			var keyword = $("#userSearchInput").val();
-			var category = $("#selectS").val();
-			if(!keyword){
-				alert("내용을 입력해주세요.");
-				return;
-			}
-			
-			notifyForm.append("<input type='hidden' name='keyword' value='"+keyword+"'>")
-					.append("<input type='hidden' name='category' value='"+category+"'>")
+		notifyForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>")
+					.attr("action","/adminNotify/get")
 					.submit();
-		});
+	});
+	
+	$(".paginate_button").click(function(e) {
+	       $("#pageNum").val(String($(this).attr("id")).substring(5));
+	       notifyForm.submit();
+	   });
+	   
+	   $(".paginate_button previous").click(function(){
+	       $("#pageNum").val(Number(pageMaker.startPage) -1);
+	       notifyForm.submit();
+	   });
+	   
+	   $(".paginate_button next").click(function(){
+	       $("#pageNum").val(Number(pageMaker.endPage) + 1);
+	       notifyForm.submit();
+	   });
+	$('#remove-btn').click(function(e) {
+		e.preventDefault();
+		if (confirm("해당 공지를 삭제하시겠습니까?") == true){ 
+			$("input[name='checkbox']:checked").each(function(index, item){
+				notifyForm.append("<input type='hidden' name='bno' value='"+item.value+"' >")
+						.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
+			});
+			notifyForm.attr("method", "post").attr("action","/adminNotify/remove").submit(); 
+		}else{ 
+		    return;
+		}
+	});
+	
+	$("#userSearch").click(function(){
+		var keyword = $("#userSearchInput").val();
+		var category = $("#selectS").val();
+		if(!keyword){
+			alert("내용을 입력해주세요.");
+			return;
+		}
+		
+		notifyForm.append("<input type='hidden' name='keyword' value='"+keyword+"'>")
+				.append("<input type='hidden' name='category' value='"+category+"'>")
+				.submit();
+	});
+	
+	function checkModal(result){
+		if(result === '' || history.state){return;}
+		if(result === 'SUCCESS'){
+			$('#modal-form').modal();
+		}
+	}	
 
 });
-
-	
 
 	</script>
 </th:block>

@@ -80,15 +80,13 @@ public class AdminNotifyController {
 	
     @PostMapping("/remove")
     public String remove(Long[] bno, RedirectAttributes rttr) {
-        log.info(bno+"");
+    	int result = -1;
         for(Long num : bno) {
-    		if(service.delete(num) == 1) {
-                rttr.addFlashAttribute("result", "success");
-            }
+    		result = service.delete(num);
     	}
         
+		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
         return "redirect:/adminNotify/notify";
-        
     }
     
     

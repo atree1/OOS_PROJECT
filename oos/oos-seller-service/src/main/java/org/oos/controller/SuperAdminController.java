@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -55,8 +56,9 @@ public class SuperAdminController {
 	}
 	
 	@PostMapping("/manageUser")
-	public String manageUserPost(String[] infos) {
-
+	public String manageUserPost(String[] infos, RedirectAttributes rttr) {
+		int result = -1;
+		
 		for(String info : infos) { 
     		Map<String, Object> map = new HashMap<String, Object>();
     		
@@ -66,9 +68,10 @@ public class SuperAdminController {
     		
     		map.put("mid", mid);
     		map.put("auth", state);
-    		memberService.changeAutority(map);
+    		result = memberService.changeAutority(map);
     	}
-	
+		
+		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		return "redirect:/admin/manageUser";
 	}
 	
@@ -113,7 +116,7 @@ public class SuperAdminController {
 	
 	@RequestMapping("/permitP/{state}/{pno}")
 	public String productBan(@PathVariable("pno") Long pno,
-					@PathVariable("state") String state) {
+					@PathVariable("state") String state, RedirectAttributes rttr) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("pno", pno);
 		if(state.equals("ye")){
@@ -122,7 +125,8 @@ public class SuperAdminController {
 			map.put("permit", "X");
 		}
 		
-		productService.permit(map);
+		int result = productService.permit(map);
+		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		
 		return "redirect:/admin/manageProduct";
 	}
