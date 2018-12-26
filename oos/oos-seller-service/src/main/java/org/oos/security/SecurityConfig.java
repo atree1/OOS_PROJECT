@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -50,8 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/seller/*").permitAll()
 		.antMatchers("/main").hasRole("SELLER")
 		.antMatchers("/admin/*").hasRole("ADMIN");
-		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main"
-				+ "");
+		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
 		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.tokenValiditySeconds(60*60*24*15);
 		
 		
-		http.logout().logoutUrl("/logout")
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.invalidateHttpSession(true)
 		.deleteCookies("remember-me","JSESSION_ID").logoutSuccessUrl("/seller/login");
 
