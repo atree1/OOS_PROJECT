@@ -19,5 +19,7 @@ public interface SellerService {
 	public int modify(SellerVO vo);
 	
 	public int remove(String sid);
+	
+	public int changeAutority(Map<String, Object> map);
 
 }
