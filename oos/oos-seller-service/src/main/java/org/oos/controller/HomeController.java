@@ -47,6 +47,7 @@ public class HomeController {
 
 	}
 
+
 	//최고관리자 메인
 	@GetMapping("/adminMain")
 	public void adminMain(String sid, Model model) {
@@ -62,6 +63,12 @@ public class HomeController {
 		model.addAttribute("todayRevenue", orderService.todayRevenue(map));
 	}
 	
+
+	@GetMapping("/mypage")
+	public void mypage() {
+
+	}
+
 	@GetMapping("/main")
 	@PreAuthorize("isAuthenticated()")
 	public String storeMain(Principal principal, Model model) {
