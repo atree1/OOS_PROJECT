@@ -38,9 +38,8 @@ public class SuperAdminController {
 	@GetMapping("/manageUser")
 	public void manageUser(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
-		
+	
 		PageDTO pageDTO = new PageDTO(cri,memberService.getUserCount(cri)); 
-		
 	
 		map.put("dto", pageDTO);
 		
@@ -57,7 +56,7 @@ public class SuperAdminController {
 	
 	@PostMapping("/manageUser")
 	public String manageUserPost(String[] infos) {
-		
+
 		for(String info : infos) { 
     		Map<String, Object> map = new HashMap<String, Object>();
     		
@@ -69,7 +68,7 @@ public class SuperAdminController {
     		map.put("auth", state);
     		memberService.changeAutority(map);
     	}
-		
+	
 		return "redirect:/admin/manageUser";
 	}
 	
