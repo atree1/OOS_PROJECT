@@ -40,10 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/seller/*").permitAll()
-		.antMatchers("/main").hasRole("SELLER");
+		.antMatchers("/main").hasRole("SELLER")
+		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login");
 		
-		http.csrf().disable();
+	
 		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
 		http.rememberMe().key("seller")
