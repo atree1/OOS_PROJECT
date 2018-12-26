@@ -41,7 +41,7 @@ public class AdminNotifyController {
 	}
 	
 	@GetMapping({"/get","/modify"})
-	public void get(Long bno, Criteria cri,Model model) {
+	public void get(Long bno, Criteria cri, Model model) {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("bno", bno);
