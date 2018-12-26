@@ -32,7 +32,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	@Setter(onMethod_=@Autowired)
 	private ProductOptionMapper productOptionMapper;
 	
-	@Override
+/*	@Override
 	public List<OrderDetailVO> getList(Long ono) {
 		
 		List<OrderDetailVO> list = orderDetailMapper.getList(ono);
@@ -44,7 +44,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		});
 		
 		return list;
-	}
+	}*/
 	
 	@Override
 	public List<OrderDetailVO> getListByOno(Long ono) {
@@ -65,7 +65,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 
 	@Override
 	public int modify(Map<String, Object> map) {
-		return orderDetailMapper.modify2(map);
+		return orderDetailMapper.modify(map);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	}
 
 
-	@Override
+/*	@Override
 	public List<OrderDetailVO> orderList(Map<String, Object> map) {
 
 		List<OrderDetailVO> list = orderDetailMapper.orderList(map);
@@ -95,7 +95,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		});
 		
 		return list;
-	}
+	}*/
 
 	@Override
 	public int snoCount(Long sno) {
@@ -104,20 +104,17 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 
 	@Override
 	public int getTotal(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return orderDetailMapper.total(map);
 	}
 
 	@Override
 	public int getStateCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return orderDetailMapper.stateCount(map);
 	}
 
 	@Override
-	public List<OrderDetailVO> joinList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return orderDetailMapper.joinList(map);
+	public List<OrderDetailVO> getListBySno(Map<String, Object> map) {
+		return orderDetailMapper.getListBySno(map);
 	}
 	
 	

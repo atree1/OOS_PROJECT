@@ -34,10 +34,10 @@
 					<tr>
 						<td><input type='checkbox' class="sortChk" id="chk"></td>
 						<td>ALL</td>
-						<td><input type='checkbox' class="sortChk" id="approvedChk"></td>
-						<td>APPROVED</td>
-						<td><input type='checkbox' class="sortChk" id="unapprovedChk"></td>
-						<td>UNAPPROVED</td>
+						<td><input type='checkbox' class="sortChk" id="sellerChk"></td>
+						<td>SELLER</td>
+						<td><input type='checkbox' class="sortChk" id="noneChk"></td>
+						<td>UNAPPROVED SELLER</td>
 						<td><input type='checkbox' class="sortChk" id="banChk"></td>
 						<td>BAN</td>
 					</tr>
@@ -63,11 +63,15 @@
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="Platform(s): activate to sort column ascending"
-								style="width: 150px;">판매자이름</th>
+								style="width: 100px;">판매자이름</th>
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 80px;">판매자 사업자번호</th>
+								style="width: 110px;">판매자 사업자번호</th>
+							<th class="sorting" tabindex="0"
+								aria-controls="dataTables-example" rowspan="1" colspan="1"
+								aria-label="Platform(s): activate to sort column ascending"
+								style="width: 110px;">판매자연락처</th>	
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
@@ -91,6 +95,7 @@
 							<td class="sid" th:text=${arr.sid}></td>
 							<td class="sname" th:text=${arr.sname}></td>
 							<td class="bnum" th:text=${arr.bnum}></td>
+							<td class="email" th:text=${arr.tel}></td>
 							<td class="updatedate" th:text="${#dates.format(arr.updatedate,'yyyy-MM-dd')}"></td>
 							<td class="auth">
 							<select th:class="|select auth_${arr.authList[0].ano}|" th:id="|select_${arr.sid}|">
@@ -124,9 +129,6 @@
 					<div align="left" id="dataTables-example_filter"
 						class="dataTables_filter">
 
-						<button type="submit" data-oper='remove' id="remove-btn"
-							class="form-control input-sm" placeholder=""
-							aria-controls="dataTables-example">삭제하기</button>
 						<button type="submit" data-oper='modify' value="수정하기"
 							class="form-control input-sm" id="modify-btn"
 							aria-controls="dataTables-example">수정하기</button>
@@ -218,37 +220,45 @@ $(document).ready(function(){
 		//자동체크박스체크
 		(function(){
 				
+			
+			//상단검색필터
 				var cat = pageMaker.cri.category;
-				if(cat == "approved"){
-					$("input[id=approvedChk]").attr("checked",true);
-				}else if(cat == "unapproved"){
-					$("input[id=unapprovedChk]").attr("checked",true);			
+				if(cat == "SELLER"){
+					$("input[id=sellerChk]").attr("checked",true);
+				}else if(cat == "NONE"){
+					$("input[id=noneChk]").attr("checked",true);			
 				}else if(!cat){
 					$("input[id=chk]").attr("checked",true);
 				}
 				
+				
+				//상단검색필터를 위한 값변화
+				$(".sortChk").change(function(){
+					if($(this).attr("id") == "sellerChk"){
+						manageForm.append("<input type='hidden' name='category' value='SELLER'>");
+					}else if($(this).attr("id") == "noneChk"){
+						manageForm.append("<input type='hidden' name='category' value='NONE'>");
+					}else if($(this).attr("id") == "banChk"){
+						manageForm.append("<input type='hidden' name='category' value='BAN'>");
+					}
+					manageForm.submit();
+				});
+				
+				
+			//Select option 권한값 유지
 				$.each(seller, function(index, item){
 					var auth = item.authList[0];
 					console.log(auth);
 					$(".auth_"+auth.ano).val(auth.auth);
 				});
 			})();
-	
-		//상단검색필터
-		$(".sortChk").change(function(){
-			if($(this).attr("id") == "approvedChk"){
-				manageForm.append("<input type='hidden' name='category' value='SELLER'>");
-			}else if($(this).attr("id") == "unapprovedChk"){
-				manageForm.append("<input type='hidden' name='category' value='NONE'>");
-			}else if($(this).attr("id") == "banChk"){
-				manageForm.append("<input type='hidden' name='category' value='BAN'>");
-			}
-			manageForm.submit();
-		});
+		
+		
 		
 		$(".select").change(function(){
 			$("#chk_"+$(this).attr("id").substring(7)).attr("checked",true);
 		});
+		
 		
 		//검색
 		$("#sellerSearch").click(function(){
@@ -305,28 +315,7 @@ $(document).ready(function(){
 		});
 	   
 	    
-/* 		//수정
-		$("#modify-btn").click(function(){
-			if (confirm("해당 주문건을 수정하시겠습니까?") == true){ 
-				orderForm.html("");
-				$("input[name='checkbox']:checked").each(function(index, item){
-					
-					var shipNum = $("#ship_"+item.value).val();
-					if(String(shipNum) == ""){
-						shipNum = -1;
-					}
-					
-					
-					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
-					orderForm.append("<input type='hidden' name='option' value='"+val+"' >");
-				});
-				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
-			}else{ 
-			    return;
-			}
-		}); */
-		
-		
+		//수정버튼
 		$("#modify-btn").click(function(){
 			$("input[class=chk]:checked").each(function(){
 				var sid = $(this).attr("id").substring(4);

@@ -17,14 +17,22 @@ public class HashTagServiceImpl implements HashTagService {
 	
 	@Override
 	public List<String> getName() {
-		// TODO Auto-generated method stub
 		return mapper.getName();
 	}
 
 	@Override
 	public List<HashTagVO> getList() {
-		// TODO Auto-generated method stub
 		return mapper.getList();
+	}
+
+	@Override
+	public int insert(String tag) {
+		return mapper.insert(tag);
+	}
+
+	@Override
+	public int delete(int hno) {
+		return mapper.delete(hno);
 	}
 
 }
