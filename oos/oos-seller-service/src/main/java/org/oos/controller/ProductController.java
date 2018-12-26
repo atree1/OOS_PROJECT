@@ -10,15 +10,12 @@ import java.util.Map;
 import org.oos.domain.CategoryVO;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
-import org.oos.domain.ProductImgVO;
 import org.oos.domain.ProductVO;
 import org.oos.service.AutoMlService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
