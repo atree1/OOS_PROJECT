@@ -9,6 +9,7 @@ import org.oos.domain.PageDTO;
 import org.oos.domain.ProductImgVO;
 import org.oos.domain.StoreVO;
 import org.oos.mapper.ProductImgMapper;
+import org.oos.mapper.SellerMapper;
 import org.oos.mapper.StoreHashTagMapper;
 import org.oos.mapper.StoreImgMapper;
 import org.oos.mapper.StoreMapper;
@@ -24,6 +25,10 @@ public class StoreServiceImpl implements StoreService {
 
 	@Setter(onMethod_=@Autowired)
 	private StoreMapper mapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private SellerMapper sellerMapper;
+	
 	
 	@Setter(onMethod_=@Autowired)
 	private StoreHashTagMapper hashMapper;
@@ -58,6 +63,8 @@ public class StoreServiceImpl implements StoreService {
 			hash.setSno(vo.getSno());
 			hashMapper.insert(hash);
 		});
+		
+		sellerMapper.addSno(vo);
 		return 1;
 	}
 
