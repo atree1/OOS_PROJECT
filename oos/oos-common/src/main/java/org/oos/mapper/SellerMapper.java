@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.oos.domain.Criteria;
 import org.oos.domain.SellerVO;
+import org.oos.domain.StoreVO;
 
 public interface SellerMapper {
 
@@ -17,9 +18,11 @@ public interface SellerMapper {
 	public int insert(SellerVO vo);
 	
 	public int modify(SellerVO vo);
-	
+	public int addSno(StoreVO vo);
 	public int delete(String sid);
 	
 	public int authorize(String sid);
+	
+	public int changeAutority(Map<String, Object> map);
 	
 }

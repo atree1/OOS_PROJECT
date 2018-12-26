@@ -104,6 +104,37 @@ public class SuperAdminController {
 	}
 	
 	
+	@PostMapping("/manageSeller")
+	public String sellerDelete(String sid, RedirectAttributes rttr) {
+		
+			if(sellerService.remove(sid) == 1) {
+				rttr.addAttribute("result", "success");
+				
+			}
+		return "redirect:/admin/manageSeller";
+	}
+	
+	@PostMapping("/sellerModfiy")
+	public String sellerModify(String[] options) {
+		
+		for(String option : options) { 
+    		Map<String, Object> map = new HashMap<String, Object>();
+    		
+    		String[] list= option.split("_");
+    		String sid = list[0];
+    		String sellerAuth = list[1];
+    		
+    		map.put("sid", sid);
+    		map.put("auth", sellerAuth);
+    		log.info(map+"");
+    		sellerService.changeAutority(map);
+    	}
+	
+		return "redirect:/admin/manageSeller";
+	}
+	
+	
+	
 	@GetMapping("/manageProduct")
 	public void manageProduct(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();

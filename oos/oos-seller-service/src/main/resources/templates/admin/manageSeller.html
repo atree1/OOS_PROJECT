@@ -12,22 +12,15 @@
 	<div class="row">
        <div class="input-group custom-search-form" style="width:200px; float: right;">
        
-       <select name="sfl" class="form-control" id="userSearchInput" >
-            <option value="mb_id">회원아이디</option>
-            <option value="mb_name">이름</option>
-            <option value="mb_nick">별명</option>
-            <option value="mb_level">권한</option>
-            <option value="mb_email">E-MAIL</option>
-            <option value="mb_tel">전화번호</option>
-            <option value="mb_hp">핸드폰번호</option>
-            <option value="mb_point">포인트</option>
-            <option value="mb_datetime">가입일시</option>
-            <option value="mb_ip">IP</option>
-            <option value="mb_recommend">추천인</option>
+       <select name="sfl" class="form-control" id="sellerSearchType">
+            <option value="id"}>이름</option>
+            <option value="sname">아이디</option>
+            <option value="bnum">사업자번호</option>
+            <option value="auth">권한</option>
         </select>
-           <input type="text" class="form-control" id="userSearchInput" placeholder="Search...">
+           <input type="text" class="form-control" id="sellerSearchInput" placeholder="Search...">
            <span class="input-group-btn">
-	           <button class="btn btn-default" type="button" id="userSearch" style="height: 68px">
+	           <button class="btn btn-default" type="button" id="sellerSearch" style="height: 68px">
 	               <i class="fa fa-search"></i>
       		</span>
        </div>
@@ -86,10 +79,6 @@
 							<th class="sorting" tabindex="0"
 								aria-controls="dataTables-example" rowspan="1" colspan="1"
 								aria-label="CSS grade: activate to sort column ascending"
-								style="width: 40px;">회원삭제</th>
-							<th class="sorting" tabindex="0"
-								aria-controls="dataTables-example" rowspan="1" colspan="1"
-								aria-label="CSS grade: activate to sort column ascending"
 								style="width: 100px;">인증 및 수정</th>
 
 						</tr>
@@ -104,20 +93,17 @@
 							<td class="bnum" th:text=${arr.bnum}></td>
 							<td class="updatedate" th:text="${#dates.format(arr.updatedate,'yyyy-MM-dd')}"></td>
 							<td class="auth">
-							<select th:id="|select_${arr.sid}|" th:class="|select auth_${arr.authList[0].ano}|">
-									<option value="approved">승인 판매자</option>
-									<option value="unapproved">미승인 판매자</option>
-									<option value="ban">판매금지 판매자</option>
+							<select th:class="|select auth_${arr.authList[0].ano}|" th:id="|select_${arr.sid}|">
+									<option value="SELLER">승인 판매자</option>
+									<option value="NONE">미승인 판매자</option>
+									<option value="BAN">판매금지 판매자</option>
 							</select></td>
 	
-							
-							<td class="del"><input type="button" id="del"
-								th:value="${arr.del}" style="width: 90px; text-align: center;" readonly></td>
 								
 							<td class="button">
 							<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-pencil"></i></button>
 							<button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i></button>
-							<button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i></button>
+							<button type="button" class="btn btn-warning btn-circle" id="remove-btn1"><i class="fa fa-times"></i></button>
 							</td>
 							
 <!-- 							<td class="price" th:text=${arr.product.price}></td>
@@ -229,6 +215,7 @@ $(document).ready(function(){
 	var seller = [[${seller}]];
 	
 	
+		//자동체크박스체크
 		(function(){
 				
 				var cat = pageMaker.cri.category;
@@ -242,26 +229,44 @@ $(document).ready(function(){
 				
 				$.each(seller, function(index, item){
 					var auth = item.authList[0];
+					console.log(auth);
 					$(".auth_"+auth.ano).val(auth.auth);
-					
 				});
 			})();
 	
-	
-		//자동체크박스체크
+		//상단검색필터
 		$(".sortChk").change(function(){
 			if($(this).attr("id") == "approvedChk"){
-				manageForm.append("<input type='hidden' name='category' value='approved'>");
+				manageForm.append("<input type='hidden' name='category' value='SELLER'>");
 			}else if($(this).attr("id") == "unapprovedChk"){
-				manageForm.append("<input type='hidden' name='category' value='unapproved'>");
+				manageForm.append("<input type='hidden' name='category' value='NONE'>");
 			}else if($(this).attr("id") == "banChk"){
-				manageForm.append("<input type='hidden' name='category' value='ban'>");
+				manageForm.append("<input type='hidden' name='category' value='BAN'>");
 			}
 			manageForm.submit();
 		});
 		
 		$(".select").change(function(){
 			$("#chk_"+$(this).attr("id").substring(7)).attr("checked",true);
+		});
+		
+		//검색
+		$("#sellerSearch").click(function(){
+			var searchType = $("#sellerSearchType").attr("value");
+			var keyword = $("#sellerSearchInput").val();
+			
+	/* 		if(!sellerSearchType.find("optio:selected").val()){
+				alert("검색종류를 선택하세요.");
+				return false
+			} */
+			
+			if(!keyword){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+			/* manageForm.append("<input type='hidden' name='searchType' value='"+searchType+"'>") */
+			manageForm.append("<input type='hidden' name='keyword' value='"+keyword+"'>")
+			.submit();
 		});
 	
 		
@@ -285,19 +290,22 @@ $(document).ready(function(){
 	    //삭제
 		$('#remove-btn').click(function() {
 		
-			if (confirm("해당 주문건을 취소하시겠습니까?") == true){ 
-				orderForm.html("");
+			if (confirm("해당 판매자 정보를 삭제하시겠습니까?") == true){ 
+				manageForm.html("");
 				$("input[name='checkbox']:checked").each(function(index, item){
+					manageForm.append("<input type='hidden' name='sid' value='"+item.value+"' >")
 					
-					orderForm.append("<input type='hidden' name='odno' value='"+item.value+"' >");
 				});
-				orderForm.attr("method", "post").attr("action","/exam/manage").submit(); 
+				
+				manageForm.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+							.attr("method", "post").attr("action","/admin/manageSeller").submit(); 
 			}else{ 
 			    return;
 			}
 		});
 	   
-		//수정
+	    
+/* 		//수정
 		$("#modify-btn").click(function(){
 			if (confirm("해당 주문건을 수정하시겠습니까?") == true){ 
 				orderForm.html("");
@@ -316,11 +324,23 @@ $(document).ready(function(){
 			}else{ 
 			    return;
 			}
+		}); */
+		
+		
+		$("#modify-btn").click(function(){
+			$("input[class=chk]:checked").each(function(){
+				var sid = $(this).attr("id").substring(4);
+				var auth = $("#select_"+sid).val();
+				console.log(auth);
+				manageForm.attr("method","post")
+							.attr("action","/admin/sellerModfiy")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+							.append("<input type='hidden' name='options' value='"+sid+"_"+auth+"'>")
+			});
+			manageForm.submit();
+			alert("권한이 변경되었습니다.");
 		});
 		
-	});
-	
-	
 	//페이지
 	$(".paginate_button").click(function(e) {
 		

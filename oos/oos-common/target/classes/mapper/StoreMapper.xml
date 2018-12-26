@@ -10,13 +10,13 @@
 		<result column="tag" property="tag" />
 		<result column="del" property="del" />
 	</resultMap>
-	
+
 	<resultMap type="org.oos.domain.StoreImgVO" id="Image">
 		<result column="uuid" property="uuid" />
 		<result column="iname" property="iname" />
 		<result column="ipath" property="ipath" />
 	</resultMap>
-	
+
 	<resultMap type="org.oos.domain.StoreVO" id="Store">
 		<result column="sno" property="sno" />
 		<result column="sname" property="sname" />
@@ -26,6 +26,7 @@
 		<result column="updatedate" property="updatedate" />
 		<result column="del" property="del" />
 		<result column="saddress" property="saddress" />
+		<result column="saddressdetail" property="saddressdetail" />
 		<result column="tel" property="tel" />
 		<result column="likeNum" property="likeNum" />
 		<result column="pdNum" property="pdNum" />
@@ -33,11 +34,11 @@
 		<collection property="imgList" resultMap="Image" />
 		<collection property="hashList" resultMap="HashTag" />
 	</resultMap>
-	
+
 	<select id="getList2" resultMap="Store">
-		select * from 
-		 	tbl_store s left join tbl_store_img i on s.sno =i.sno
-		 	 left join tbl_store_hashtag h on s.sno=h.sno
+		select * from
+		tbl_store s left join tbl_store_img i on s.sno =i.sno
+		left join tbl_store_hashtag h on s.sno=h.sno
 		where s.sno> 0 and s.del='N'
 		<if test="cri.category != null">
 			and s.sname like concat("%", #{cri.keyword} ,"%")
@@ -46,28 +47,25 @@
 		limit #{cri.skip}, #{cri.amount}
 	</select>
 
-<!-- <select id="getList" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store
-		where sno > 0 and del='N'
-		<if test="cri.category != null">
-			and sname like concat("%", #{cri.keyword} ,"%")
-		</if>
-		order by sno desc
-		limit #{cri.skip}, #{cri.amount}
+	<!-- <select id="getList" resultType="org.oos.domain.StoreVO"> select * 
+		from tbl_store where sno > 0 and del='N' <if test="cri.category != null"> 
+		and sname like concat("%", #{cri.keyword} ,"%") </if> order by sno desc limit 
+		#{cri.skip}, #{cri.amount} </select> -->
 
-	</select> -->
-	
 	<select id="getStoreList" resultMap="Store">
-		select a.sno, a.sname, a.saddress, a.tel, pdNum, likeNum, d.uuid, d.ipath, d.iname
+		select a.sno, a.sname, a.saddress, a.tel, pdNum, likeNum, d.uuid,
+		d.ipath, d.iname
 		from tbl_store a
-		left join (select sno, count(*) pdNum from tbl_product
-				where pno > 0 and del = 'N'
-				group by sno) b
+		left join (select sno, count(*) pdNum
+		from tbl_product
+		where pno > 0 and del = 'N'
+		group by sno) b
 		on a.sno = b.sno
-		left join (select sno, count(*) likeNum from tbl_store_like
+		left join (select sno, count(*) likeNum from
+		tbl_store_like
 		where lno > 0
 		group by sno) c
-		on c.sno = a.sno 
+		on c.sno = a.sno
 		left join (select * from tbl_store_img) d
 		on d.sno = a.sno
 		where a.sno > 0
@@ -89,39 +87,47 @@
 	</select>
 
 	<select id="getBySno" resultMap="Store">
-		select * from tbl_store s left join tbl_store_img i
-		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
+		select * from tbl_store s left
+		join tbl_store_img i
+		on s.sno =i.sno left join tbl_store_hashtag h on
+		s.sno=h.sno
 		where s.sno=#{sno}
 	</select>
 
-<!-- 	<select id="get" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store where sno = #{sno}
-	</select> -->
-	
+	<!-- <select id="get" resultType="org.oos.domain.StoreVO"> select * from 
+		tbl_store where sno = #{sno} </select> -->
+
 	<select id="getBestStore" resultMap="Store">
-		select s.sno, s.tel, s.sname, uuid, iname, ipath, odNum from tbl_store s
-		left join tbl_store_img i
+		select s.sno, s.tel,
+		s.sname, uuid, iname, ipath, odNum from tbl_store s
+		left join
+		tbl_store_img i
 		on i.sno = s.sno
-		left join (select sno, count(*) odNum from tbl_order_detail
-					where odno > 0 and del = 'N' group by sno) d
+		left join (select sno, count(*) odNum
+		from tbl_order_detail
+		where odno > 0 and del = 'N' group by sno) d
 		on s.sno = d.sno
-		where s.sno > 0 and s.del = 'N' and uuid !=""
+		where s.sno > 0
+		and s.del = 'N' and uuid !=""
 		order by odNum desc
 		limit 0, 6
 	</select>
-	
-	<select id="getBySid" resultMap="Store">
-			select * from tbl_store s left join tbl_store_img i
-		on s.sno =i.sno left join tbl_store_hashtag h on s.sno=h.sno
-		where 
-			s.owner = #{owner}
-	</select>
 
+	<select id="getBySid" resultMap="Store">
+		select * from tbl_store s left join tbl_store_img i
+		on s.sno =i.sno
+		left join tbl_store_hashtag h on s.sno=h.sno
+		where
+		s.owner = #{owner}
+	</select>
+	
+	
 	<insert id="insert">
-		insert into tbl_store(sname,owner,sinfo,saddress,tel)
-		values(#{sname},#{owner},#{sinfo},#{saddress},#{tel})
+		insert into tbl_store(sname,owner,sinfo,saddress,saddressdetail,tel)
+		values(#{sname},#{owner},#{sinfo},#{saddress},#{saddressdetatil},#{tel})
 		<selectKey resultType="Long" keyProperty="sno" order="AFTER">
-			select max(sno) from tbl_store
+			select
+			max(sno) from tbl_store
 		</selectKey>
 	</insert>
 
@@ -129,7 +135,7 @@
 
 		update tbl_store set sname = #{sname}, owner =
 		#{owner}, sinfo = #{sinfo},
-		saddress = #{saddress}, tel = #{tel},
+		saddress = #{saddress}, tel = #{tel},saddressdetail = #{saddressdetail},
 		updatedate = now()
 		where sno = #{sno}
 	</update>
@@ -138,7 +144,8 @@
 		update tbl_store set del='Y' where sno = #{sno}
 	</update>
 	<update id="upVisitCnt">
-		update tbl_store set visitcnt=visitcnt+1 where sno = #{sno}
+		update tbl_store set visitcnt=visitcnt+1 where sno =
+		#{sno}
 	</update>
 	<select id="count" resultType="int">
 		select count(*) from tbl_store
@@ -147,11 +154,12 @@
 			and sname like concat("%", #{keyword} ,"%")
 		</if>
 	</select>
-	
+
 	<select id="getName" resultType="string">
 		select sname
 		from tbl_store
-		where sno>0
+		where
+		sno>0
 	</select>
 
 	<select id="pNumCount" resultType="int">
@@ -172,7 +180,8 @@
 	</insert>
 
 	<select id="getStoreLike" resultType="org.oos.domain.StoreVO">
-		select * from tbl_store_like
+		select * from
+		tbl_store_like
 		where sno > 0 and mid = #{mid} and sno = #{sno}
 	</select>
 </mapper>
