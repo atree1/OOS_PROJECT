@@ -1,5 +1,6 @@
 package org.oos.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +9,9 @@ import java.util.Map;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ReplyVO;
-import org.oos.domain.StoreVO;
 import org.oos.service.ReplyService;
+import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,21 +29,24 @@ public class ReviewController {
 	
 	@Setter(onMethod_=@Autowired)
 	private ReplyService replyService;
-
+	
+	@Setter(onMethod_=@Autowired)
+	private StoreService storeService;
+		
 	//화면리스트
 	@GetMapping("/list")
-	public void getList(Model model,String kind, Criteria cri, int sno) {
+	public void getList(Model model,Criteria cri, Principal principal) {
 
 		Map<String,Object> map  = new HashMap<String, Object>();
-		map.put("kind", kind);
-		map.put("sno", sno);
+		map.put("kind", "r");
+		map.put("sno", storeService.getBySid(principal.getName()).getSno());
 		PageDTO pageDTO = new PageDTO(cri, replyService.count(map));
 		map.put("dto", pageDTO);
 		
 		List<ReplyVO> reply = replyService.getStoreReply(map);
 		
 		model.addAttribute("replyList", reply);
-		log.info(reply+"");
+		
 		List<Integer> pageList = new ArrayList<>();
 
 		for (int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++) {
