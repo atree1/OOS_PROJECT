@@ -1,16 +1,13 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+<meta charset="utf-8">
+<!-- <meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+ -->
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,22 +40,25 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="post" action="/exam/home">
-                            <fieldset>
+                        <form role="form" method="POST" id="loginForm" action="/seller/login" >
+                      
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="ID" name="sid" type="text" autofocus>
+                                 <!-- 
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">  -->
+                                    <input class="form-control" id="username" name="username" type="text" placeholder="id" autofocus >
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="spw" type="password" >
+                                    <input class="form-control" placeholder="Password" id="password" name="password" type="password" >
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input type="checkbox" name="remember-me" >Remember Me
                                     </label>
                                 </div>
+                                	<input type='hidden' th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button class="btn btn-lg btn-success btn-block">Login</button>
-                            </fieldset>
+                      
                         </form>
                     </div>
                 </div>

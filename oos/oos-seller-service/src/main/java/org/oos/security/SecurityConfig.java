@@ -34,23 +34,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	// 설정 담당 클래스
 
+	
 	@Override
 	// 웹과 관련된 보안 설정
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").permitAll()
-			.and().csrf().disable();
-
+		http.authorizeRequests()
+		.antMatchers("/seller/*").permitAll()
+		.antMatchers("/main").hasRole("SELLER");
 		http.formLogin().loginPage("/seller/login");
+		
+		http.csrf().disable();
+		
 		// access denied 걸리면 로그인페이지 갈거라고 선언
-
-		http.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/main");
+		http.rememberMe().key("seller")
+		.userDetailsService(userDetailsService())
+		.tokenRepository(getJDBCReopsitory())
+		.tokenValiditySeconds(60*60*24*15);
+		
+		
+		http.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/seller/login");
 
 	}
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/**");
-	}
+
 
 	private PersistentTokenRepository getJDBCReopsitory() {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();

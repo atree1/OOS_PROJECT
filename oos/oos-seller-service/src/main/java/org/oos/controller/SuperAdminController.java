@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.Setter;
@@ -37,9 +38,8 @@ public class SuperAdminController {
 	@GetMapping("/manageUser")
 	public void manageUser(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
-		
+	
 		PageDTO pageDTO = new PageDTO(cri,memberService.getUserCount(cri)); 
-		
 	
 		map.put("dto", pageDTO);
 		
@@ -53,6 +53,25 @@ public class SuperAdminController {
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("member",memberService.getUserList(map));
 	}
+	
+	@PostMapping("/manageUser")
+	public String manageUserPost(String[] infos) {
+
+		for(String info : infos) { 
+    		Map<String, Object> map = new HashMap<String, Object>();
+    		
+    		String[] list= info.split("_");
+    		String mid = list[0];
+    		String state = list[1];
+    		
+    		map.put("mid", mid);
+    		map.put("auth", state);
+    		memberService.changeAutority(map);
+    	}
+	
+		return "redirect:/admin/manageUser";
+	}
+	
 	
 	@GetMapping("/manageSeller")
 	public void manageSeller(Model model, Criteria cri) {
@@ -97,9 +116,9 @@ public class SuperAdminController {
 					@PathVariable("state") String state) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("pno", pno);
-		if(state.equals("o")){
+		if(state.equals("ye")){
 			map.put("permit", "O");
-		}else if(state.equals("x")) {
+		}else if(state.equals("no")) {
 			map.put("permit", "X");
 		}
 		

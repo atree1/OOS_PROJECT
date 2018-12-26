@@ -12,9 +12,6 @@ import lombok.Data;
 public class SecurityUser extends User{
 
 	private MemberVO member;
-	
-
-	
 	public SecurityUser(MemberVO member) {
 		
 		super(member.getMid(), member.getMpw(),

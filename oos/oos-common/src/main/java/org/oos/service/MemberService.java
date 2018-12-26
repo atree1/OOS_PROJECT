@@ -25,6 +25,8 @@ public interface MemberService {
 	public int remove(String mid);
 		
 	public int count(Criteria cri);
+	
+	public int changeAutority(Map<String, Object> map);
 
 	public List<StoreVO> getMyStoreList(Map<String, Object> map);
 	

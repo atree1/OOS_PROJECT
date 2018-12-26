@@ -18,8 +18,9 @@ public class OosUserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return repo.findById(username)
-				.filter(vo -> vo != null)
+				.filter(vo -> vo != null && vo.getDel() == 'N')
 				.map(vo -> new SecurityUser(vo)).get();
+		
 	}
 
 }

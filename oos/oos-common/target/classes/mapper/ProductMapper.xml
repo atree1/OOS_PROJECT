@@ -173,10 +173,10 @@
 	
 	<update id="permit" parameterType="map">
 		update tbl_product 
-		<if test="permit == 'O'">
+		<if test='permit == "O"'>
 			set state = 'O'
 		</if>
-		<if test="permit == 'X'">
+		<if test='permit == "X"'>
 			set state = 'X'
 		</if>
 		where pno = #{pno}

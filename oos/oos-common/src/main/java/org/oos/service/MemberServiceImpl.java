@@ -84,14 +84,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getUserCount(Criteria cri) {
 		return mapper.getUserCount(cri);
-		
-		
 	}
 
 	@Override
 	public List<MemberVO> manageMember(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return mapper.manageMember(map);
+	}
+
+	@Override
+	public int changeAutority(Map<String, Object> map) {
+		return mapper.changeAutority(map);
 	}
 	
 

@@ -24,11 +24,12 @@ public class SellerVO {
 	private String bnum;
 	private String pnum;
 	private String tel;
-	private Date regdate;
-	private Date updatedate;
-	private  char del;
-	private char permit;
-	
+
+	private Date regdate= new Date();
+	private Date updatedate= new Date();
+	private  char del= 'N';
+	private char permit = 'Y';
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="sid")
 	private List<SellerAuthVO> authList;
