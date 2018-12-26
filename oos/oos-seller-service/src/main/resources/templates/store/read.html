@@ -94,24 +94,31 @@ form {
 										readonly="readonly">
 								</div>
 
-								<div class="form-group">
-									<label>스토어 주소</label> <input id="price" name="saddress"
-										type="text" class="form-control" th:value="${store.saddress}"
-										readonly="readonly">
-								</div>
+							
 								<div class="form-group">
 									<label>전화 번호</label> <input id="price" name="tel" type="text"
 										class="form-control" th:value="${store.tel}"
 										readonly="readonly">
 								</div>
 
-
+								
 
 								<div class="form-group">
 									<label>스토어 정보</label>
 									<textarea class="form-control" rows="3" name='sinfo'
 										th:text="${store.sinfo}" readonly="readonly"></textarea>
 								</div>
+								
+									<div class="form-group">
+									<label>스토어 정보</label>
+									<textarea class="form-control" rows="3" name='sinfo'></textarea>
+								</div>
+								<div class="form-group">
+							 <input class="orderInfo addressInfo" type="text" name="saddress" 
+							 	th:value="${store.saddress}" readonly="readonly">							 <br>
+							 <input type="text" class="orderInfo addressInfo" maxlength="15" name="saddressdetail" th:value="${store.saddressdetail}" readonly="readonly">
+
+							</div>
 								<div class="form-group">
 									<label>스토어 이미지</label>
 									<div id='storeImage'></div>
@@ -135,7 +142,7 @@ form {
 
 								</div>
 								<form role="form" action="/store/modify">
-									<input type="hidden" name="sno" th:value="${store.sno}">
+									
 									<button class="btn btn-success" type="submit">modify</button>
 
 								</form>

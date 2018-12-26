@@ -26,6 +26,7 @@
 		<result column="updatedate" property="updatedate" />
 		<result column="del" property="del" />
 		<result column="saddress" property="saddress" />
+		<result column="saddressdetail" property="saddressdetail" />
 		<result column="tel" property="tel" />
 		<result column="likeNum" property="likeNum" />
 		<result column="pdNum" property="pdNum" />
@@ -121,13 +122,9 @@
 	</select>
 	
 	
-	<select id="getSnoBySid" resultType="Long">
-		select ifnull(sno,0) from tbl_store
-		where owner = #{owner}
-	</select>
 	<insert id="insert">
-		insert into tbl_store(sname,owner,sinfo,saddress,tel)
-		values(#{sname},#{owner},#{sinfo},#{saddress},#{tel})
+		insert into tbl_store(sname,owner,sinfo,saddress,saddressdetail,tel)
+		values(#{sname},#{owner},#{sinfo},#{saddress},#{saddressdetatil},#{tel})
 		<selectKey resultType="Long" keyProperty="sno" order="AFTER">
 			select
 			max(sno) from tbl_store
@@ -138,7 +135,7 @@
 
 		update tbl_store set sname = #{sname}, owner =
 		#{owner}, sinfo = #{sinfo},
-		saddress = #{saddress}, tel = #{tel},
+		saddress = #{saddress}, tel = #{tel},saddressdetail = #{saddressdetail},
 		updatedate = now()
 		where sno = #{sno}
 	</update>
