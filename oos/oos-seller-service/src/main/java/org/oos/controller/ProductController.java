@@ -1,6 +1,7 @@
 package org.oos.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,30 +45,29 @@ public class ProductController {
 	
 	
 	@PostMapping("/remove")
-	public String remove(ProductVO vo, RedirectAttributes rttr, Long sno,Criteria cri) {
+	public String remove(ProductVO vo, RedirectAttributes rttr, Criteria cri) {
 		
 		int result = productService.remove(vo);
 		
 		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		
-		return "redirect:/product/list?sno="+storeService.get(sno).getSno();
+		return "redirect:/product/list";
 	}
 	
 	@PostMapping("/modify")
-	public String modifyPost(Criteria cri,ProductVO vo, RedirectAttributes rttr, Long sno) {
+	public String modifyPost(Criteria cri,ProductVO vo, RedirectAttributes rttr) {
 		
 		int result = productService.update(vo);
-		
 		
 		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:/product/list?sno="+storeService.get(sno).getSno();
+		return "redirect:/product/list";
 	}
 	
 	@GetMapping({"/read","/modify"})
-	public void productGet(Criteria cri,Long pno, Long sno,Long opno, Model model) {
+	public void productGet(Criteria cri,Long pno, Principal principal, Long opno, Model model) {
 
 		
 		Map<String, Object> map = new HashMap<>();
@@ -75,27 +75,27 @@ public class ProductController {
 		
 		map.put("dto", dto);
 		map.put("pno", pno);
-		map.put("sno", sno);
+		map.put("sno", storeService.getBySid(principal.getName()).getSno());
 		map.put("opno", opno);
 		
 		PageDTO pageDTO = new PageDTO(cri,productService.getTotal(map));
 		
 				
 		ProductVO vo = productService.read(pno);
-		model.addAttribute("store", storeService.get(sno));
+		model.addAttribute("store", storeService.getBySid(principal.getName()));
 		model.addAttribute("product", vo);
 		model.addAttribute("pageMaker", pageDTO);
 
 	}
 	
 	@GetMapping("/list")
-	public void productList(Criteria cri,Long sno, Model model) {
+	public void productList(Criteria cri,Long sno, Model model, Principal principal) {
 		
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
 		
 		map.put("dto", dto);
-		map.put("sno", sno);
+		map.put("sno", storeService.getBySid(principal.getName()).getSno());
 		map.put("seller", "seller");
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
         
@@ -108,7 +108,7 @@ public class ProductController {
         
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
-		model.addAttribute("store", storeService.get(sno));
+		model.addAttribute("store", storeService.getBySid(principal.getName()));
 		model.addAttribute("product", productService.getList(map));
 	}
 
@@ -118,24 +118,21 @@ public class ProductController {
 	}
 
 	@PostMapping("/register")
-	public String productRegisterPost(ProductVO vo, RedirectAttributes rttr, Long sno) {
+	public String productRegisterPost(ProductVO vo, RedirectAttributes rttr) {
 		List<CategoryVO> cateList = new ArrayList<>();
-		log.info(""+vo);
-		String firstPath = "\\\\HB03-14\\upload\\" + vo.getImgList().get(0).getIpath() + "\\" + vo.getImgList().get(0).getUuid() + "_" + vo.getImgList().get(0).getIname();
+		String firstPath = "\\\\HB03-14\\upload\\" + vo.getImgList().get(0).getIpath() 
+					+ "\\" + vo.getImgList().get(0).getUuid() + "_" 
+					+ vo.getImgList().get(0).getIname();
 		try {
 			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN8521692284338889379",
 					firstPath, "0.7");
 
 			list.forEach(name -> {
 				CategoryVO catevo = new CategoryVO();
-				log.info("category:" + name);
 				catevo.setCatename(name);
-				log.info("catevo" + catevo);
-				log.info(""+cateList.add(catevo));
 			});
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -145,7 +142,7 @@ public class ProductController {
 
 		rttr.addFlashAttribute("result", result == 1 ? "SUCCESS" : "FAIL");
 
-		return "redirect:/product/list?sno="+storeService.get(sno).getSno();
+		return "redirect:/product/list";
 	}
 	
 	@PostMapping("/autocomplete")
