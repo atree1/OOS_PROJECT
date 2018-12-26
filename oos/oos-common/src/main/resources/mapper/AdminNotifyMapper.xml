@@ -20,7 +20,7 @@
   
   <update id="modify">
   update tbl_admin_notify
-  set content = #{content}, title = #{title}, regdate=now()
+  set content = #{content}, title = #{title}, updatedate=now()
   where bno = #{bno}	
   </update>
   
