@@ -12,18 +12,6 @@
 	<div id="dataTables-example_wrapper"
 		class="dataTables_wrapper form-inline dt-bootstrap no-footer"
 		style="align-item: left;float:right">
-		
-			<br/>
-			<form role="role" action="/adminNotify/register">
-				<button data-oper='remove' id="remove-btn"
-					class="form-control input-sm" placeholder=""
-					aria-controls="dataTables-example">삭제하기</button>				
-				<button type="submit" data-oper='register' id="registerBtn"
-					class="form-control input-sm" placeholder=""
-					aria-controls="dataTables-example">등록하기</button></a>
-			</form>
-				
-
 	</div>
 
 	<div class="row">
@@ -61,15 +49,16 @@
 
 
 	</div>
-
+	<div class="dataTables_wrapper form-inline dt-bootstrap no-footer"
+		style="align-item: left;float:left">
+		<button id="remove-btn"
+			class="form-control input-sm">삭제하기</button>				
+		<button type="submit" id="registerBtn"
+			class="form-control input-sm">등록하기</button>
+	</div>
+	
 	<div class="row">
-		<div class="col-sm-6">
-			<div class="dataTables_info" id="dataTables-example_info"
-				role="status" aria-live="polite">Showing 1 to 10</div>
-		</div>
-
 		<div class="pull-right">
-
 			<ul class="pagination">
 				<li class="paginate_button previous"
 					th:if="${pageMaker.prev} == true"></li>
