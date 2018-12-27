@@ -21,7 +21,6 @@
 		<result column="sno" property="sno" />
 		<result column="sname" property="sname" />
 		<result column="owner" property="owner" />
-		<result column="sinfo" property="sinfo" />
 		<result column="regdate" property="regdate" />
 		<result column="updatedate" property="updatedate" />
 		<result column="del" property="del" />
@@ -123,8 +122,8 @@
 	
 	
 	<insert id="insert">
-		insert into tbl_store(sname,owner,sinfo,saddress,saddressdetail,tel)
-		values(#{sname},#{owner},#{sinfo},#{saddress},#{saddressdetail},#{tel})
+		insert into tbl_store(sname,owner,saddress,saddressdetail,tel)
+		values(#{sname},#{owner},#{saddress},#{saddressdetail},#{tel})
 		<selectKey resultType="Long" keyProperty="sno" order="AFTER">
 			select
 			max(sno) from tbl_store
@@ -134,7 +133,7 @@
 	<update id="modify">
 
 		update tbl_store set sname = #{sname}, owner =
-		#{owner}, sinfo = #{sinfo},
+		#{owner},
 		saddress = #{saddress}, tel = #{tel},saddressdetail = #{saddressdetail},
 		updatedate = now()
 		where sno = #{sno}
