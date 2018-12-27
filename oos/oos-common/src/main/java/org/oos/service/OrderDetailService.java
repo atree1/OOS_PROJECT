@@ -15,7 +15,7 @@ public interface OrderDetailService {
 	
 	public int modify(Map<String, Object> map);
 	
-	public int delete(Long odno);
+	public int delete(Long odno, Long ono);
 	
 	public int snoCount(Long sno);
 	

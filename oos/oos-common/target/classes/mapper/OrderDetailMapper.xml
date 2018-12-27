@@ -57,8 +57,7 @@
 		select * from tbl_order_detail
 		od left join tbl_product p
 		on od.pno =p.pno left join tbl_product_option o on od.pno=o.pno
-		where
-		od.odno=#{odno}
+		where od.odno=#{odno}
 	</select>
 	
 	<select id="stateCount" resultType="Integer">
@@ -113,11 +112,10 @@
 
 	<select id="getListByOno"
  		resultMap="OrderDetail">
-		select odno, od.ono, p.pno, p.price, o.size, od.qty, od.opno, name, pnum, address, pname, addressDetail,
-			uuid, ipath, iname from tbl_order_detail od left join tbl_product p 
+		select * from tbl_order_detail od left join tbl_product p 
 		on od.pno =p.pno left join tbl_product_option o on od.pno=o.pno left join tbl_product_img i
 	    on od.pno = i.pno
-		where od.ono=#{ono}
+		where od.ono=#{ono} and od.del = 'N'
 	</select>
 
 	<select id="count" resultType="int">
