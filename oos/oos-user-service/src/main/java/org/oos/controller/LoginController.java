@@ -114,6 +114,8 @@ public class LoginController {
 	@PostMapping(value= {"/signup"})
 	public String signUpPost(@ModelAttribute("member") MemberVO vo, AuthDTO dto) {
 		
+		log.info(vo+"");
+		
 		if(dto.getSns() != null) {
 			dto.setUser_id(vo.getMid());
 			dto.setUser_pw(vo.getMpw());
