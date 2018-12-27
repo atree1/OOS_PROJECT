@@ -47,10 +47,11 @@
 		<result column="del" property="del" />
 		<result column="sno" property="sno" />
 		<result column="detail_state" property="detail_state" />
-		<association property="option" resultMap="Option" />
-		<association property="product" resultMap="Product" />
-		<association property="img" resultMap="Img" />
+		<collection property="option" resultMap="Option" />
+		<collection property="product" resultMap="Product" />
+		<collection property="img" resultMap="Img" />
 	</resultMap>
+
 
 	<select id="getByOdno" resultMap="OrderDetail">
 		select * from tbl_order_detail

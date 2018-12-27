@@ -85,7 +85,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int todayRevenue(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return orderMapper.todayRevenue(map);
 	}
 	
