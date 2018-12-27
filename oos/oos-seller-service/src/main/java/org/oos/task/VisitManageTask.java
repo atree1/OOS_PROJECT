@@ -35,13 +35,13 @@ public class VisitManageTask  {
 	@Transactional
 	public void resetVisit() throws Exception{
 		log.info("visit reset");
-<<<<<<< HEAD
-		Map<String, Object> map = new HashMap<>();
-		  
-		map.put("range", "day");
-		int dayIncome = detailService.getTotal(map);
-=======
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+//<<<<<<< HEAD
+//		Map<String, Object> map = new HashMap<>();
+//		  
+//		map.put("range", "day");
+//		int dayIncome = detailService.getTotal(map);
+//=======
+//>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 		
 		storeService.resetVisitCnt();
 		productService.resetVisitCnt();
