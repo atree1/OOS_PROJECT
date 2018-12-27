@@ -60,7 +60,6 @@ public class OrderController {
 		list.forEach(vo -> {
 			
 		cartList.forEach(cart -> {
-			log.info(cart.getOpno() + " : " + vo.getOpno());
 				if(cart.getOpno().equals(vo.getOpno())) {
 					cartService.remove(cart.getCno());
 				}

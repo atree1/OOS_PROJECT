@@ -262,9 +262,6 @@
 			$.ajax({
 				type:"post",
 				url:"/user/modPw/"+pw,
-				beforeSend: function(xhr) {
-		            xhr.setRequestHeader(header, token);
-		        },
 				success: function(result, status, xhr){
 					if(result == "success"){
 						alert("변경되었습니다.");

@@ -169,10 +169,10 @@ $(document).ready(function(e){
 	
 	  var token = $("meta[name='_csrf']").attr("content");
    	  var header = $("meta[name='_csrf_header']").attr("content");
-      
-	     $(document).ajaxSend(function(e,xhr,options){
-	         xhr.setRequestHeader(header, token);
-	      });
+     
+     $(document).ajaxSend(function(e,xhr,options){
+         xhr.setRequestHeader(header, token);
+      });
 	
 	
 	var formObj = $("form[role='form']");
@@ -309,8 +309,6 @@ $("button[type='submit']").on("click",function(e){
 		var uploadUL=$(".uploadResult ul");
 		var str="";
 		$(uploadResultArr).each(function(i,obj){
-			
-			
 				var fileCallPath =  encodeURIComponent( obj.ipath+ "/s_"+obj.uuid +"_"+obj.iname);
 				str += "<li data-path='"+obj.ipath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.iname+"'><div>";
 				str += "<span> "+ obj.iname+"</span>";
@@ -335,10 +333,10 @@ $("button[type='submit']").on("click",function(e){
 			data:{fileName:targetFile},
 			dataType:'text',
 			type:'POST',
-				success:function(result){
-					alert(result);
-				targetLi.remove();	
-				}
+			success:function(result){
+				alert(result);
+			targetLi.remove();	
+			}
 		});
 	});//end
 

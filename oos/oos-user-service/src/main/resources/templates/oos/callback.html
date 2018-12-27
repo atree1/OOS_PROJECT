@@ -16,7 +16,11 @@
   var header = $("meta[name='_csrf_header']").attr("content");
   
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
-	
+
+  $(document).ajaxSend(function(e,xhr,options){
+      xhr.setRequestHeader(header, token);
+   });
+  
   function naverSignInCallback() {
     var naverProfile = {
     	sns : "naver",
@@ -35,9 +39,6 @@
     	data : JSON.stringify(naverProfile),
     	url: "/oos/oauth",
     	contentType : "application/json; charset=UTF-8",
-    	 beforeSend: function(xhr) {
-             xhr.setRequestHeader(header, token);
-         },
          success:function(result, status, xhr){
        	 console.log(result)
         	if(JSON.stringify(result.state) == '"new"'){

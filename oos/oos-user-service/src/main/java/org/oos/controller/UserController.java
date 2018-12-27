@@ -193,6 +193,7 @@ public class UserController {
     public void orderDetail(long ono, Model model) {
     	
     	List<OrderDetailVO> list = orderDetailService.getListByOno(ono);
+    	
         model.addAttribute("detail", list);
     }
     
