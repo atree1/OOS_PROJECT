@@ -115,7 +115,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/register")
-	public String productRegisterPost(ProductVO vo, RedirectAttributes rttr) {
+	public String productRegisterPost(ProductVO vo) {
 		List<CategoryVO> cateList = new ArrayList<>();
 		String firstPath = "\\\\HB03-26\\upload\\" + vo.getImgList().get(0).getIpath() 
 					+ "\\" + vo.getImgList().get(0).getUuid() + "_" 
@@ -134,10 +134,9 @@ public class ProductController {
 		}
 		
 		vo.setCateList(cateList);
+		log.info(""+vo);
 
-		int result = productService.register(vo);
-
-		rttr.addFlashAttribute("result", result == 1 ? "SUCCESS" : "FAIL");
+		productService.register(vo);
 
 		return "redirect:/product/list";
 	}
