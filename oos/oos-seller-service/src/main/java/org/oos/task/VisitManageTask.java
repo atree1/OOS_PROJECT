@@ -1,7 +1,11 @@
 package org.oos.task;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
+import org.oos.service.OrderDetailService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,8 @@ public class VisitManageTask  {
 	@Setter(onMethod_=@Autowired)
 	private StoreService storeService;
 	
+	@Setter(onMethod_ = @Autowired)
+	private OrderDetailService detailService;
 
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
@@ -29,6 +35,7 @@ public class VisitManageTask  {
 	@Transactional
 	public void resetVisit() throws Exception{
 		log.info("visit reset");
+
 		storeService.resetVisitCnt();
 		productService.resetVisitCnt();
 	}

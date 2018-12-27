@@ -110,11 +110,15 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 
 	@Override
 	public int getTotal(Map<String, Object> map) {
+		
+		
 		return orderDetailMapper.total(map);
 	}
 
 	@Override
 	public int getStateCount(Map<String, Object> map) {
+		
+		
 		return orderDetailMapper.stateCount(map);
 	}
 

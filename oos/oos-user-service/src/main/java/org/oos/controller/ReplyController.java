@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.Setter;
 import lombok.extern.java.Log;
 
-@RequestMapping("/replies")
+@RequestMapping(value= {"/replies"})
 @RestController
 @Log
 public class ReplyController {

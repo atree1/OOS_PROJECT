@@ -37,7 +37,7 @@ import lombok.extern.java.Log;
 
 @Controller
 @Log
-@RequestMapping("/user/*")
+@RequestMapping(value= {"/user/*","/m/user/*"})
 public class UserController {
     @Setter(onMethod_=@Autowired)
     private CartService cartService;

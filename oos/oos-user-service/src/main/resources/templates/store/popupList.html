@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -102,7 +104,7 @@ $(document).ready(function(){
 		  }
 		}  
 			
-	console.log(popupList[0].sno);
+	//console.log(popupList[0].sno);
 	 
 		$("#closeBtn").click(function (e){
 			e.preventDefault();
@@ -113,17 +115,20 @@ $(document).ready(function(){
 	        	cookieList('popupOpen').add(popupList[0].sno);
 	        	
 	
-	         /* 	if($.cookie("popOpen")!== null){
-	        	$.cookie('popOpen',popupList.sno);
-	        	}
-	        	else{
-	        		$.cookie('popOpen', $.cookie(popupList[0].sno);
-	        	}	  */
+
 	        }
 	       
 	   self.close();
 	});
+	        		
+	     console.log(popupList);   		
 
+	     //공지사항없으면 자동닫기
+		if(popupList.length == 0){
+			
+			self.close();
+			
+		}        		
 		
 });
 	

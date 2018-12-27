@@ -111,7 +111,7 @@ public class HomeController {
 		String[] range = { "day", "week", "month" };
 		String sid=principal.getName();
 	
-		if (sellerService.get(sid).getSno() == 0) {
+		if (sellerService.get(sid).getSno() == null) {
 			return "redirect:/store/register";
 		}
 		StoreVO vo = storeService.getBySid(sid);

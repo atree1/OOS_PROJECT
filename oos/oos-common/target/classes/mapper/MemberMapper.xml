@@ -74,8 +74,8 @@
 	</select>
 	
 	<insert id="insert">
-		insert into tbl_member(mid,mpw,mname,pnum,birth,email,address,addressdetail) 
-		values(#{mid},#{mpw},#{mname},#{pnum},#{birth},#{email},#{address},#{addressdetail})
+		insert into tbl_member(mid,mpw,mname,pnum,birth,email,address,addressdetail,mno) 
+		values(#{mid},#{mpw},#{mname},#{pnum},#{birth},#{email},#{address},#{addressdetail},get_seq('member_seq'))
 	</insert>
 
 	<update id="modify">
