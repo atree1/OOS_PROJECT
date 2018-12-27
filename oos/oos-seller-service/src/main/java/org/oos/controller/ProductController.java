@@ -110,14 +110,14 @@ public class ProductController {
 	}
 
 	@GetMapping("/register")
-	public void productRegister(Long sno, Model model) {
-		model.addAttribute("store", storeService.get(sno));
+	public void productRegister(Principal principal, Model model) {
+		model.addAttribute("store", storeService.getBySid(principal.getName()));
 	}
 
 	@PostMapping("/register")
-	public String productRegisterPost(ProductVO vo, RedirectAttributes rttr) {
+	public String productRegisterPost(ProductVO vo) {
 		List<CategoryVO> cateList = new ArrayList<>();
-		String firstPath = "\\\\HB03-14\\upload\\" + vo.getImgList().get(0).getIpath() 
+		String firstPath = "\\\\HB03-26\\upload\\" + vo.getImgList().get(0).getIpath() 
 					+ "\\" + vo.getImgList().get(0).getUuid() + "_" 
 					+ vo.getImgList().get(0).getIname();
 		try {
@@ -134,10 +134,9 @@ public class ProductController {
 		}
 		
 		vo.setCateList(cateList);
+		log.info(""+vo);
 
-		int result = productService.register(vo);
-
-		rttr.addFlashAttribute("result", result == 1 ? "SUCCESS" : "FAIL");
+		productService.register(vo);
 
 		return "redirect:/product/list";
 	}
