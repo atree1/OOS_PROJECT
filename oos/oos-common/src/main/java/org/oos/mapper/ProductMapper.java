@@ -13,7 +13,7 @@ public interface ProductMapper {
 	public List<ProductVO> bestProductList();
 	
 	public int upVisitCnt(Long pno);
-	
+	public int resetVisitCnt();
 	public int permit(Map<String, Object> map);
 	
 	public ProductVO get(Long pno);

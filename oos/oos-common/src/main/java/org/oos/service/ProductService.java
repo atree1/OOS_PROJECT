@@ -28,4 +28,6 @@ public interface ProductService {
 	public List<String> getName();
 	
 	public int  totalProduct(Map<String, Object> map);
+	
+	public int resetVisitCnt();
 }

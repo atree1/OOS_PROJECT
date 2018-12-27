@@ -147,6 +147,11 @@
 		update tbl_store set visitcnt=visitcnt+1 where sno =
 		#{sno}
 	</update>
+	
+	
+	<update id="resetVisitCnt">
+		update tbl_store set visitcnt=0 where sno >0
+	</update>
 	<select id="count" resultType="int">
 		select count(*) from tbl_store
 		where sno > 0 and del = 'N'

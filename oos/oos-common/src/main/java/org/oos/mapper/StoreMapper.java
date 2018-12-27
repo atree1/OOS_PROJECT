@@ -31,6 +31,8 @@ public interface StoreMapper {
 	
 	public int upVisitCnt(Long sno);
 	
+	public int resetVisitCnt();
+	
 	public int delete(Long sno);
 	
 	public int count(Criteria cri);
