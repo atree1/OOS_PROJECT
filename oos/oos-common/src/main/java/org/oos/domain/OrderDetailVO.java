@@ -20,7 +20,7 @@ public class OrderDetailVO {
 	private String mid;
 	private String detail_state;
 	private Long sno;
-	private Long dno;
+	private String dno;
 	private Date regdate;
 	
 	private ProductVO product;
