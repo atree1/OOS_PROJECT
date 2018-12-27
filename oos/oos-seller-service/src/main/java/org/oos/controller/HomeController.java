@@ -1,6 +1,7 @@
 package org.oos.controller;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.oos.service.SellerService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,13 +85,17 @@ public class HomeController {
 
 	@GetMapping("/main")
 	@PreAuthorize("isAuthenticated()")
-	public String storeMain(Principal principal, Model model) {
+	public String storeMain(Authentication authentication,Principal principal, Model model) {
 		log.info("register get~");
+		
+//		log.info(authentication.getAuthorities().=="ROLE_SELLER");
+				 
+		//Collections.authentication.getAuthorities()
 		String[] state = { "ready", "shipping", "complete" };
 		String[] kind = { "q", "r" };
 		String[] range = { "day", "week", "month" };
 		String sid=principal.getName();
-		
+	
 		if (sellerService.get(sid).getSno() == 0) {
 			return "redirect:/store/register";
 		}

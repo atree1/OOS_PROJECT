@@ -80,7 +80,7 @@
 	
 	<select id="total" parameterType="map" resultType="Integer">
 		select
-		ifnull((sum(od.qty*p.price)),0)
+		ifnull((sum(od.qty*p.price)),1)
 		
 		from
 		tbl_order_detail od join tbl_product p on
