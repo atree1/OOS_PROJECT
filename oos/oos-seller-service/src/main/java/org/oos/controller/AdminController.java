@@ -91,9 +91,9 @@ public class AdminController {
     		
     		String[] list= num.split("_");
     		Long odno = Long.parseLong(list[0]);
-    		Long dno = Long.parseLong(list[1]);
+    		String dno = list[1];
     		String state = list[2];
-    		        
+    		log.info(dno+"");
     		if(state.equals("ready")) {
     			state = "준비중";
     		}else if(state.equals("shipping")){
@@ -103,11 +103,11 @@ public class AdminController {
     		}
     		
     		map.put("odno", odno);
-    		if(dno != -1) {
+    		if(dno != "-1") {
         		map.put("dno", dno);
     		}
     		map.put("detail_state", state);
-    		log.info(map+"");
+    		
     		int count = orderDetailService.modify(map);
     		
     	}
