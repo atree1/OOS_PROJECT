@@ -177,7 +177,7 @@
 				var cookieValue=cookieList("popupOpen").items();
 		 	
 				cookieValue.filter((value, idx, arr) => arr.indexOf(value) === idx);
-				 console.log(cookieValue);
+				console.log(cookieValue);
 			
 			
 				 var result=true;
@@ -198,10 +198,13 @@
 				 if(result==true){	
 				    	var popOption = "width=800, height=700, resizable=no, location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 						var sid = [[${store.owner}]];
-						window.open("/store/popupList?sid="+sid, "store", popOption);
+						window.open("/store/popupList?sid="+sid, "store", popOption);   
+											
+
 				 }
 				 				 
-				 
+				
+					
 				 
 				 	
 			if(mid != undefined){
