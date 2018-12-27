@@ -100,7 +100,8 @@ input {
 						<td class="">
 							<div class="td_info">
 								<input type="hidden" class="hiddenImg" th:data-odno="${arr.odno}"
-									th:data-ipath="${arr.product.imgList[0].ipath}" >
+									th:data-ipath="${arr.img.ipath}" th:data-uuid="${arr.img.uuid}" 
+									th:data-iname="${arr.img.iname}">
 								<ul>
 									<li class="tit_info">
 										<a th:href="|javascript:window.open('/store/detail?pno=${arr.pno}&sno=${arr.product.sno}')|"> 
