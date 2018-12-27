@@ -15,7 +15,6 @@
 		<result column="spw" property="spw" />
 		<result column="bnum" property="bnum" />
 		<result column="pnum" property="pnum" />
-		<result column="tel" property="tel" />
 		<result column="regdate" property="regdate" />
 		<result column="updatedate" property="updatedate" />
 		<result column="del" property="del" />
@@ -60,11 +59,11 @@
 	</select>
 	
 	<insert id="insert">
-		insert into tbl_seller(sid,spw,sname,bnum,pnum,tel) values(#{sid},#{spw},#{sname},#{bnum},#{pnum},#{tel})
+		insert into tbl_seller(sid,spw,sname,bnum,pnum) values(#{sid},#{spw},#{sname},#{bnum},#{pnum})
 	</insert>
 	
 	<update id="modify">	
-		update tbl_seller set spw = #{spw}, sname = #{sname}, bnum = #{bnum}, pnum = #{pnum}, tel = #{tel}, updatedate = now()
+		update tbl_seller set spw = #{spw}, sname = #{sname}, bnum = #{bnum}, pnum = #{pnum}, updatedate = now()
 		 where sid = #{sid}		
 	</update>
 	

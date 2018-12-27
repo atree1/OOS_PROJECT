@@ -10,7 +10,6 @@ public class StoreVO {
 	private Long sno;
 	private String sname;
 	private String owner;
-	private String sinfo;
 	private String saddress;
 	private String saddressdetail;
 	private String tel;
