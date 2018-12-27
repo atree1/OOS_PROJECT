@@ -101,6 +101,10 @@
 					qnaForm.attr("method", "post")
 					.attr("action","/qna/qnaDetail").submit(); 
 					
+					//리스트창 새로고침
+					opener.parent.location="/qna/list";
+					opener.parent.location.reload();
+					
 				}else{   //취소
 				    return;
 				}
