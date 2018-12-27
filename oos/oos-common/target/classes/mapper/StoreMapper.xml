@@ -88,11 +88,23 @@
 	</select>
 
 	<select id="getBySno" resultMap="Store">
-		select * from tbl_store s left
-		join tbl_store_img i
-		on s.sno =i.sno left join tbl_store_hashtag h on
-		s.sno=h.sno
-		where s.sno=#{sno}
+		select * from tbl_store s 
+	left join tbl_store_img i
+	on s.sno =i.sno 
+    left join tbl_store_hashtag h 
+    on s.sno=h.sno
+    left join (select sno, count(*) pdNum
+		from tbl_product
+		where pno > 0 and del = 'N'
+		group by sno) b
+		on s.sno = b.sno
+        left join (select sno, count(*) likeNum from
+		tbl_store_like
+        where lno > 0
+		group by sno) c
+		on c.sno = s.sno
+		where s.sno= #{sno} and h.hno > 0 and uuid != "" and s.sno > 0
+        group by s.sno
 	</select>
 
 	<!-- <select id="get" resultType="org.oos.domain.StoreVO"> select * from 

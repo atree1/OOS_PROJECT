@@ -144,12 +144,12 @@
 		</div>
 		<div style="width: 1100px; margin: 0 auto; position: relative;">
 				<ul id="goodsList"
-					style="list-style: outside none none; padding: 0px; position: relative; overflow: hidden;">
-					<ul class="goods_ul" th:each="arr :${product}">
+					style="list-style: outside none none; padding: 0px; position: relative;">
+					<ul class="goods_ul" th:each="arr :${product}" >
 						<li th:class="|goodsContainer store_${arr.sno}|"
 							style="margin-right: 5px;" th:id="|link_${arr.pno}|">
 							<div class="goodsImg"
-								style="position: relative; width: 270px; height: 353px;">
+								style="position: relative; overflow:hidden; width: 270px; height: 353px;">
 								<img th:id="|img_${arr.pno}|" class="productImg"
 									style="width: 100%;position:absolute;
 									overflow:hidden;
