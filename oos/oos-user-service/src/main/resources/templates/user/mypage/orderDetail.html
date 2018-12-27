@@ -69,7 +69,6 @@ input {
 ::-webkit-scrollbar-thumb {  background:#ff7f7a;  }
 </style>
 <div class="myPageContentArea" style="position: relative;">
-	
 		<div class="orderlistArea"
 			style="left: 225px; width: 600px;">
 
@@ -94,8 +93,9 @@ input {
 						<th>주문취소</th>
 					</tr>
 				</thead>
-				<tbody id="orderList_tbody" th:each="arr: ${detail}">
+				<tbody id="orderList_tbody" th:if="${detail != 'null'}" th:each="arr: ${detail}">
 					<tr class="height100">
+					<input type="hidden" id="ono" th:value="${detail[0].ono}">
 						<td class="" th:text="${arr.odno}"></td>
 						<td class="">
 							<div class="td_info">
@@ -118,7 +118,8 @@ input {
 						<td>
 							<div th:if="${arr.detail_state == '배송중'}" 
 							th:text="|송장번호 : [${arr.dno}]|">운송장 번호</div>
-							배송조회
+							<div th:if="${arr.detail_state == '배송중'}" >배송조회</div>
+							<div th:if="${arr.detail_state == '준비중'}" > - </div>
 						</td>
 						<td>
 							<button type="submit"
@@ -129,7 +130,7 @@ input {
 				</tbody>
 			</table>
 			
-			<table style=" border-top:1px solid #d7d7d7; 
+			<table th:if="${detail != 'null'}" style=" border-top:1px solid #d7d7d7; 
 				border-left:1px solid #d7d7d7; margin:50px auto">
                     <tr>
                     	<td class="personalTd headTitle" style="">수령인명</td>
@@ -167,7 +168,6 @@ input {
 $(document).ready(function(){
 	var token = $("meta[name='_csrf']").attr("content");
 	var csrfName = $("meta[name='_csrf_name']").attr("content");
-	var ono = String([[${detail[0].ono}]]);
 	var tel = $("#hiddenPnum").val();
 	
 	(function(){
@@ -189,10 +189,10 @@ $(document).ready(function(){
 	
 	$(".orderRemove").click(function(){
 		$("#orderDetailForm").append("<input type='hidden' name='odno' value='"+$(this).attr("id")+"'>")
-							.append("<input type='hidden' name='ono' value='"+ono+"'>")
+							.append("<input type='hidden' name='ono' value='"+$("#ono").val()+"'>")
 							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"'>")
 							.submit();
-	});
+	}); 
 	
 });
 </script>

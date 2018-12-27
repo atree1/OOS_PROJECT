@@ -73,9 +73,8 @@ public class AdminController {
 	
     @PostMapping("/manage")
     public String remove(Long[] odno, RedirectAttributes rttr) {
-        log.info(odno+"");
     	for(Long num : odno) {
-    		if(orderDetailService.delete(num) == 1) {
+    		if(orderDetailService.delete(num,1L) == 1) {
                 rttr.addFlashAttribute("result", "success");
             }
     	}

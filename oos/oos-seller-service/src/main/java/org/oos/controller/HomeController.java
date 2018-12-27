@@ -1,7 +1,11 @@
 package org.oos.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.Criteria;
@@ -16,6 +20,7 @@ import org.oos.service.SellerService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,13 +89,28 @@ public class HomeController {
 
 	@GetMapping("/main")
 	@PreAuthorize("isAuthenticated()")
-	public String storeMain(Principal principal, Model model) {
+	public String storeMain(Authentication authentication,Principal principal, Model model) {
 		log.info("register get~");
+		
+
+		Collection<? extends Object> collection=authentication.getAuthorities();
+		List list=new ArrayList(collection);
+		
+		String auth=""+list.get(0);
+		log.info(auth);
+			if(auth.equals("ROLE_NONE")) {
+				return "redirect:/store/register";
+				
+			}
+			else if(auth.equals("ROLE_ADMIN")) {
+				return "redirect:/admin/manageTag";
+			}
+	
 		String[] state = { "ready", "shipping", "complete" };
 		String[] kind = { "q", "r" };
 		String[] range = { "day", "week", "month" };
 		String sid=principal.getName();
-		
+	
 		if (sellerService.get(sid).getSno() == 0) {
 			return "redirect:/store/register";
 		}
