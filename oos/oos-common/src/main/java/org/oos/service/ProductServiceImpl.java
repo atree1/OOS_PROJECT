@@ -134,4 +134,10 @@ public class ProductServiceImpl implements ProductService {
 		return pMapper.totalProduct(map);
 	}
 
+	@Override
+	public int resetVisitCnt() {
+		// TODO Auto-generated method stub
+		return pMapper.resetVisitCnt();
+	}
+
 }

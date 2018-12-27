@@ -143,7 +143,11 @@
 		set del='Y'
 		where pno=${pno}
 	</update>
-
+	
+		<update id="resetVisitCnt">
+		update tbl_product set visitcnt=0 where pno >0
+	</update>
+	
 	<select id="count" parameterType="map" resultType="int">
 		select count(*)
 		from tbl_product

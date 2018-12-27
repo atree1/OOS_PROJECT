@@ -37,7 +37,7 @@ import lombok.extern.java.Log;
 
 @Controller
 @Log
-@RequestMapping("/user/*")
+@RequestMapping(value= {"/user/*","/m/user/*"})
 public class UserController {
     @Setter(onMethod_=@Autowired)
     private CartService cartService;
@@ -193,12 +193,16 @@ public class UserController {
     public void orderDetail(long ono, Model model) {
     	
     	List<OrderDetailVO> list = orderDetailService.getListByOno(ono);
-        model.addAttribute("detail", list);
+    	if(list.size() > 0) {
+            model.addAttribute("detail", list);
+    	}else {
+    		model.addAttribute("detail", "null");
+    	}
     }
     
     @PostMapping("/mypage/orderDetail")
     public String orderDetailRemove(long odno, long ono) {
-    	orderDetailService.delete(odno);
+    	orderDetailService.delete(odno, ono);
     	
     	return "redirect:/user/mypage/orderDetail?ono="+ono;
     }

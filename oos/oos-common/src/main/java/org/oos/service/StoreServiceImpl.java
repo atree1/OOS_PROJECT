@@ -168,5 +168,11 @@ public class StoreServiceImpl implements StoreService {
 		return mapper.totalVisit(map);
 	}
 
+	@Override
+	public int resetVisitCnt() {
+		// TODO Auto-generated method stub
+		return mapper.resetVisitCnt();
+	}
+
 	
 }

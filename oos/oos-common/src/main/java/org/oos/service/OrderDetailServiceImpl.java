@@ -1,5 +1,6 @@
 package org.oos.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,9 +70,14 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	}
 
 	@Override
-	public int delete(Long odno) {
+	public int delete(Long odno, Long ono) {
+		log.info(odno+"");
+		int result  = orderDetailMapper.delete(odno);
 		
-		return orderDetailMapper.delete(odno);
+		if(orderDetailMapper.getListByOno(ono).size() == 0) {
+			orderMapper.delete(ono);
+		};
+		return result;
 	}
 
 	@Override

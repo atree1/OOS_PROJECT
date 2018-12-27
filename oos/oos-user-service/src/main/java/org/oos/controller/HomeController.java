@@ -68,7 +68,7 @@ public class HomeController {
 		log.info("payPage....");
 	}
 	
-	@GetMapping("/main")
+	@GetMapping(value= {"/main","/m/main","/m/shopLayout"})
 	public void submain(Model model) {
 		Map<String, Object> map = new HashMap<>();
 		

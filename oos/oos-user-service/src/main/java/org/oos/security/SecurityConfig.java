@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	//웹과 관련된 보안 설정
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/css/**", "/js/**","/img/**", "/font/**", "**/favicon.ico", "/index").permitAll()
+				.antMatchers("/m/**","/css/**", "/js/**","/img/**", "/font/**", "**/favicon.ico", "/index").permitAll()
 				.antMatchers("/user/list").permitAll()
 				.antMatchers("/order/**", "/user/**","/user/mypage/**").hasRole("USER");
 		

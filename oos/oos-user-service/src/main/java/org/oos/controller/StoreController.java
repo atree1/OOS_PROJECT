@@ -31,7 +31,7 @@ import lombok.extern.java.Log;
 
 @Controller
 @Log
-@RequestMapping("/store/*")
+@RequestMapping(value= {"/store/*","/m/store/*"})
 public class StoreController {
 
 	@Setter(onMethod_ = @Autowired)

@@ -45,5 +45,5 @@ public interface StoreService {
 	
 	public int totalVisit(Map<String,Object> map);
 	
-	
+	public int resetVisitCnt();
 }
