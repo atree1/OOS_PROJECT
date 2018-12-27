@@ -121,7 +121,7 @@ public class HomeController {
 		
 		Long sno=vo.getSno();
 		int visitcnt = vo.getVisitcnt();
-		
+		log.info("visit"+visitcnt);
 
 		Map<String, Object> map = new HashMap<>();
 

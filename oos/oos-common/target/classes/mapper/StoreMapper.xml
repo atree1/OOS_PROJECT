@@ -30,6 +30,8 @@
 		<result column="likeNum" property="likeNum" />
 		<result column="pdNum" property="pdNum" />
 		<result column="odNum" property="odNum" />
+		<result column="visitcnt" property="visitcnt" />
+		
 		<collection property="imgList" resultMap="Image" />
 		<collection property="hashList" resultMap="HashTag" />
 	</resultMap>
