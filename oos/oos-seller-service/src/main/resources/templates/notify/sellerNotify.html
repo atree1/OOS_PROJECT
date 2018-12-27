@@ -218,7 +218,9 @@ $(document).ready(function(){
 					
 					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");
 				});
-				notifyForm.attr("method", "post").attr("action","/notify/remove").submit(); 
+				notifyForm.attr("method", "post").attr("action","/notify/remove")
+				.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
+				.submit(); 
 			}else{ 
 			    return;
 			}

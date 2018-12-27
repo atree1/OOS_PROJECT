@@ -33,11 +33,15 @@ public class StoreController {
 	
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
-	public void storeRegister(Principal principal, Model model) {
+	public String storeRegister(Principal principal, Model model) {
 		
 		String sid=principal.getName();
+		if (sellerService.get(sid).getSno() != null) {
+			return "redirect:/store/read";
+		}
 		model.addAttribute("owner",sid );
 		model.addAttribute("hashTagList",hashTagService.getList());
+		return "/store/register";
 	}
 	
 	@PostMapping("/register")
