@@ -88,12 +88,23 @@
 		limit #{dto.cri.skip}, #{dto.cri.amount}
 	</select> -->
 	
-	<select id="todayRevenue" resultType="int">		
+	<select id="todayRevenue" resultType="int" parameterType="map">		
+		select ifnull(sum(total),0) from tbl_order
+		
+		where del='N' and ono>0
+	       
+        and date(regdate) = date(now())
+       
+	</select>
+	
+	<select id="monthlyRevenue" resultType="int">		
 		select sum(total) from tbl_order
 		 where del='N' and ono>0
-		 <if test="cri.dayStart != null and cri.dayEnd != null ">
-			and date(regdate) BETWEEN #{cri.dayStart} AND #{cri.dayEnd}
-		</if>
+		 
+		 <![CDATA[ 
+			and ( date(regdate) > LAST_DAY(NOW() - interval 1 month) AND date(regdate) <= LAST_DAY(NOW())); 
+			]]>
+		
 	</select>
 	
 	
