@@ -105,6 +105,9 @@
 		and od.odno>0 and od.del='N' and od.sno=#{sno};
 	</select>
 	
+	
+	
+	
 <!-- 	<select id="getList" resultType="org.oos.domain.OrderDetailVO">
 		select * from tbl_order_detail
 		where odno > 0 and ono = #{ono} and del='N'
