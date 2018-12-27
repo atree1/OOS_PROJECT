@@ -29,6 +29,7 @@ public class VisitManageTask  {
 	@Transactional
 	public void resetVisit() throws Exception{
 		log.info("visit reset");
+		
 		storeService.resetVisitCnt();
 		productService.resetVisitCnt();
 	}
