@@ -100,8 +100,7 @@ input {
 						<td class="">
 							<div class="td_info">
 								<input type="hidden" class="hiddenImg" th:data-odno="${arr.odno}"
-									th:data-ipath="${arr.product.imgList[0].ipath}" 
-									th:data-uuid="${arr.product.imgList[0].uuid}" th:data-iname="${arr.product.imgList[0].iname}">
+									th:data-ipath="${arr.product.imgList[0].ipath}" >
 								<ul>
 									<li class="tit_info">
 										<a th:href="|javascript:window.open('/store/detail?pno=${arr.pno}&sno=${arr.product.sno}')|"> 
@@ -180,8 +179,8 @@ $(document).ready(function(){
 			imgDiv.attr("src","/display?fileName="+fileCallPath);
 		}); 
 		
-	 	$("#pnum").val(tel.substring(0,3) +" - "+ 
-				String(tel.substring(3,7)) +" - "+ String(tel.substring(7))); 
+	 	$("#pnum").val(String(tel).substring(0,3) +" - "+ 
+				String(String(tel).substring(3,7)) +" - "+ String(String(tel).substring(7))); 
 	 	$("#address").val($("#hiddenAddress").val()+" "+$("#hiddenDetail").val())
 	})();
 	
