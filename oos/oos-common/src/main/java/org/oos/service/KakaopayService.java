@@ -38,7 +38,7 @@ public class KakaopayService {
 	public String kakaoPayReady(Long totalPrice, List<OrderDetailVO> orderList) {
 		
 		finalOrderList = orderList;
-		
+		log.info(finalOrderList+"");
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "KakaoAK f3071c0fe499cf06231fd365c1cc4d30");
@@ -60,9 +60,10 @@ public class KakaopayService {
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
 		try {
+			
 			kakaoPayReadyDTO = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/payment/ready"), body,
 					KakaoPayReadyDTO.class);
-			
+	
 			return kakaoPayReadyDTO.getNext_redirect_pc_url();
 		} catch (RestClientException e) {
 			e.printStackTrace();
