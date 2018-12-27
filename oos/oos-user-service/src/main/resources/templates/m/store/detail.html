@@ -96,71 +96,65 @@ ul {
 						<h3 class="card-title">My Profile</h3>
 					</div>
 					<div class="card-body">
-						
-							<div class="row">
-
-								<div class="col">
-									<div class="form-group">
-										
-
-											<h4 class="card-title">
-												<a href="javascript:void(0)">GoPro HERO6 Black</a>
-											</h4>
-											<div class="card-subtitle">GoPro</div>
-											<div class="mt-5 d-flex align-items-center">
-												<div class="product-price">
-													<strong>$599</strong>
-												</div>
-
-											</div>
-										
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<h4 class="card-title">
+										<a href="javascript:void(0)">GoPro HERO6 Black</a>
+									</h4>
+									<div class="card-subtitle">GoPro</div>
+									<div class="mt-5 d-flex align-items-center">
+										<div class="product-price">
+											<strong>$599</strong>
+										</div>
 									</div>
 								</div>
 							</div>
-							<input type="hidden" name="pno" th:value="${product.pno}">
+						</div>
+						<input type="hidden" name="pno" th:value="${product.pno}">
 
-							<div class="option_area" th:each="arr:${product.optList}">
-								<ul class="goods_option_ul" style="width: 100%;">
-									<li class="min-height42 optionLi">
-										<div class="option">
-											<div th:name="${arr.opno}" th:data-size="${arr.size}"
-												th:text="|SIZE / ${arr.size}|"
-												style="color: #333; font-weight: 500; font-size: 14px;">SIZE</div>
-											<div style="margin-top: 6px; font-size: 12px;"
-												th:text="|재고수량 / ${arr.qty}|">재고수량</div>
-										</div>
-										<div class="count">
-											<div class="option_count_control" style="">
-												<div class="detailUpDownDiv">
-													<div class="detailDownArea"></div>
-													<input name="option" th:id="${arr.opno}"
-														class="detailUpDownNumArea" type="text" value="0">
-													<div class="detailUpArea"></div>
-												</div>
+						<div class="option_area" th:each="arr:${product.optList}">
+							<ul class="goods_option_ul" style="width: 100%;">
+								<li class="min-height42 optionLi">
+									<div class="option">
+										<div th:name="${arr.opno}" th:data-size="${arr.size}"
+											th:text="|SIZE / ${arr.size}|"
+											style="color: #333; font-weight: 500; font-size: 14px;">SIZE</div>
+										<div style="margin-top: 6px; font-size: 12px;"
+											th:text="|재고수량 / ${arr.qty}|">재고수량</div>
+									</div>
+									<div class="count">
+										<div class="option_count_control" style="">
+											<div class="detailUpDownDiv">
+												<div class="detailDownArea"></div>
+												<input name="option" th:id="${arr.opno}"
+													class="detailUpDownNumArea" type="text" value="0">
+												<div class="detailUpArea"></div>
 											</div>
 										</div>
-									</li>
-								</ul>
-								<div class="div_line_1px"
-									style="width: 100%; margin-top: 20px; margin-bottom: 15px;"></div>
-							</div>
+									</div>
+								</li>
+							</ul>
+							<div class="div_line_1px"
+								style="width: 100%; margin-top: 20px; margin-bottom: 15px;"></div>
+						</div>
 
 
-							<div class="form-group">
-								<label class="form-label">결제방법</label> <input
-									class="form-control" value="카카오페이">
-							</div>
-							<div class="form-group">
-								<label class="form-label">총 결제금액</label> <input
-									class="form-control" id="totalSum">
-							</div>
-							<div class="form-footer">
-								<button class="btn btn-primary btn-block">Save</button>
-							</div>
-						
+						<div class="form-group">
+							<label class="form-label">결제방법</label> <input
+								class="form-control" value="카카오페이">
+						</div>
+						<div class="form-group">
+							<label class="form-label">총 결제금액</label> <input
+								class="form-control" id="totalSum">
+						</div>
+						<div class="form-footer">
+							<button class="btn btn-primary btn-block">Save</button>
+						</div>
+
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="col-lg-8">
 				<div class="card">
@@ -172,21 +166,47 @@ ul {
 				</div>
 			</div>
 			<div class="col-lg-8 order-lg-2">
-                <div class="form-group mb-0">
-                        <label class="form-label">About Me</label>
-                        <textarea rows="5" class="form-control" placeholder="Here can be your description" value="Mike">Oh so, your weak rhyme
-You doubt I'll bother, reading into it
-I'll probably won't, left to my own devices
-But that's the difference in our opinions.</textarea>
-                      </div>
-                  <ul class="list-group card-list-group">
-                    
-                    
-                    
-                  </ul>
-                </div>
-              </div>
-			
+			<button class="btn btn-square btn-primary" data-kind='R'
+				style="border-bottom:0">리뷰<span class="count" 
+				th:text="${product.ReviewReplyCnt}">COUNT</span>
+			</button>
+			<button class="btn btn-square btn-secondary" data-kind='Q'
+				style="border-bottom:0">문의<span class="count" 
+				th:text="${product.QuestionReplyCnt}">COUNT</span>
+			</button>
+				<div class="card">
+				
+					<div class="card-header"  style="padding:10px 5px">
+						<div class="col-md-12">
+							<input type="text" name="title" placeholder="제목을 입력해주세요." 
+								class="form-control replytitlearea">
+							<div class="form-group mb-0" style="margin-top: 10px;">
+								<input name="content" class="form-control replyTextarea" 
+							 	placeholder="덧글을 입력해주세요." style="width: 100%; height: 80px;">
+							</div>
+							<div class="card-footer text-right" style="padding:10px 0 0 0;">
+			                  <div class="d-flex">
+			                   <select class="score" id="score"
+									style="border: 0px; height: 28px;">
+									<option th:value="5" selected>★★★★★</option>
+									<option th:value="4">★★★★</option>
+									<option th:value="3">★★★</option>
+									<option th:value="2">★★</option>
+									<option th:value="1">★</option>
+								</select>
+			                    <button type="submit" id="repleRegiBtn"
+			                    	class="btn btn-primary ml-auto ">댓글 등록</button>
+			                  </div>
+			                </div>
+						</div>
+					</div>
+					<ul class="list-group card-list-group">
+
+					</ul>
+					<div class="replyPageFooter" style="text-align: center;"></div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -207,10 +227,11 @@ But that's the difference in our opinions.</textarea>
 		var kindValue = "R"; 
 		var parent = 0;
 		
-		var replyAdd = $("#replyAdd");
+		var replyAdd = $(".col-md-12");
 		var InputTitle = replyAdd.find("input[name='title']");
 		var InputContent=replyAdd.find("input[name='content']");
 		var InputMid=replyAdd.find("input[name='mid']");
+		var replyPageFooter = $(".replyPageFooter");
 		
 		var replyContainer =$(".replyContainer").clone(true);
 		var modifyTitle ;
@@ -304,17 +325,63 @@ But that's the difference in our opinions.</textarea>
 			$("#totalSum").val(totalSum);
 		}
 		
-
+		function showReplyPage(replyCnt){
+			
+			var endNum = Math.ceil(pageNum/10.0)*10;
+			var startNum = endNum - 9;
+			
+			var prev = startNum != 1;
+			var next = false;
+			
+			if(endNum*10>=replyCnt){
+				endNum=Math.ceil(replyCnt/10.0);
+			}
+						
+			if(endNum*10 <replyCnt){
+				next=true;				
+			}
+			
+			var str="<div style='text-align:center;''>";
+			
+			if(prev){
+				str+="<div class='pageControlLeft'><button href='"+(startNum-1)+"'></button></div>";
+			}
+			
+			for(var i=startNum; i<=endNum; i++){
+				var active= pageNum ==i?"active":"";
+				
+				str+="<div class='showPage'style='display:inline-block; vertical-align:top;'>";
+				str+="<button class='pageNum pageNumber "+active+"' href='"+i+"'>"+i+"</button>";
+				
+			}
+			
+			if(next){
+				str+="<div class='pageControlRight'><a href='"+(endNum-1)+"'></a></div>";
+			}
+			str+="</div>";
+			replyPageFooter.html(str);
+		}
+		
+		replyPageFooter.on("click","button",function(e){
+			
+			e.preventDefault();
+			var targetPageNum = $(this).attr("href");
+			
+			pageNum=targetPageNum;
+			
+			showList(pageNum);
+		});
+		
 		//Question 별점숨김.
-		$(".goods_comments_area").on("click","div [data-kind]",function(e){
+		$(".btn-square").on("click",function(e){
 			
 			var kind=$(this).data("kind");
 			
 			if(kind =='Q'){
-				$(".star").hide();
+				$(".score").hide();
 			}
 			else{
-				$(".star").show();	
+				$(".score").show();	
 			}
 			
 			$(".item").find("a").attr("class","link");
@@ -389,12 +456,12 @@ But that's the difference in our opinions.</textarea>
 		});
 		
 		//댓글등록
-		$(".repleRegiBtn").on("click",function(e){
+		$("#repleRegiBtn").on("click",function(e){
 			
-			if(mid == null){
+			/* if(mid == null){
 				alert("회원만 댓글 작성이 가능합니다.");	
 				return;
-			}
+			} */
 			
 			if(kindValue == "Q"){
 				scoreValue = 0;
@@ -417,8 +484,8 @@ But that's the difference in our opinions.</textarea>
 					parent: ++parent,
 					depth:0				
 					};
-			
-			replyService.add(reply, function(result){
+			console.log(reply);
+			/* replyService.add(reply, function(result){
 				alert(result);
 				replyAdd.find("input").val("");
 				
@@ -426,7 +493,7 @@ But that's the difference in our opinions.</textarea>
 				showList(1);
 				cnt.text(parseInt(cnt.text())+1);
 								
-			}); 
+			});  */
 		});
 
 		
