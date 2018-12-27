@@ -91,11 +91,12 @@ public class HomeController {
 	public String storeMain(Authentication authentication,Principal principal, Model model) {
 		log.info("register get~");
 		
-//		log.info(authentication.getAuthorities().=="ROLE_SELLER");
+
 		Collection<? extends Object> collection=authentication.getAuthorities();
 		List list=new ArrayList(collection);
 		
 		String auth=""+list.get(0);
+		log.info(auth);
 			if(auth.equals("ROLE_NONE")) {
 				return "redirect:/store/register";
 				
