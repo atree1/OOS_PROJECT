@@ -26,4 +26,6 @@ public interface ProductService {
 	public int permit(Map<String, Object> map);
 	
 	public List<String> getName();
+	
+	public int  totalProduct(Map<String, Object> map);
 }

@@ -81,38 +81,14 @@
 				<thead>
 					<tr role="row" style="text-align: center;">
 		
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">문의번호</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">문의 유형</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Browser: activate to sort column ascending"
-							style="width: 90px;">상품번호</th>	
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Platform(s): activate to sort column ascending"
-							style="width: 150px;">제목</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Engine version: activate to sort column ascending"
-							style="width: 120px;">작성자</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="Engine version: activate to sort column ascending"
-							style="width: 120px;">답변상태</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="CSS grade: activate to sort column ascending"
-							style="width: 150px;">등록일</th>
-						<th class="sorting" tabindex="0"
-							aria-controls="dataTables-example" rowspan="1" colspan="1"
-							aria-label="CSS grade: activate to sort column ascending"
-							style="width: 150px;">삭제</th>	
+						<th class="sorting" style="width: 90px;">문의번호</th>
+						<th class="sorting" style="width: 90px;">문의 유형</th>
+						<th class="sorting" style="width: 90px;">상품번호</th>	
+						<th class="sorting" style="width: 150px;">제목</th>
+						<th class="sorting" style="width: 120px;">작성자</th>
+						<th class="sorting" style="width: 120px;">답변상태</th>
+						<th class="sorting" style="width: 150px;">등록일</th>
+						<th class="sorting" style="width: 150px;">삭제</th>	
 
 					</tr>
 				</thead>
@@ -194,8 +170,6 @@
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' /> 
-	 	<input type='hidden' name='kind' th:value='${replyList[0].kind}' />
-		<input type='hidden' name='sno' th:value='${replyList[0].store.sno}' />
 	</form>
 </div>
 
@@ -282,7 +256,7 @@ $(document).ready(function(){
 				replyForm.html("");
 				replyForm.attr("method", "post")
 				.append("<input type='hidden' name='rno' value='"+$(this).attr("data-rno")+"' >")
-				.attr("action","/qna/list?kind=q&sno=1").submit(); 
+				.attr("action","/qna/list").submit(); 
 			}else{ 
 			    return;
 			}
@@ -302,7 +276,7 @@ $(document).ready(function(){
 					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
 					notifyForm.append("<input type='hidden' name='option' value='"+val+"' >");
 				});
-				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
+				orderForm.attr("method", "post").attr("action","/exam/manage").submit();
 			}else{ 
 			    return;
 			}

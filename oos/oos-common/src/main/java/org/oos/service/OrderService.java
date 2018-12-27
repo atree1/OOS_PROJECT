@@ -24,4 +24,5 @@ public interface OrderService {
 	
 	public int orderCount(Map<String, Object> map);
 	
+	public int todayRevenue(Map<String, Object> map);
 }

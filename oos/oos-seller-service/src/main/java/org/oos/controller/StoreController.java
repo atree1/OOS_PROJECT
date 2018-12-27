@@ -34,7 +34,7 @@ public class StoreController {
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
 	public void storeRegister(Principal principal, Model model) {
-		log.info("register get~");
+		
 		String sid=principal.getName();
 		model.addAttribute("owner",sid );
 		model.addAttribute("hashTagList",hashTagService.getList());
@@ -43,30 +43,31 @@ public class StoreController {
 	@PostMapping("/register")
 	@PreAuthorize("principal.username==#vo.owner")
 	public String storeRegisterPost(StoreVO vo) {
-		log.info(""+vo);
+		
 		storeService.register(vo);
 		return "redirect:/main";
 	}
+	
 	@GetMapping("/read")
 	@PreAuthorize("isAuthenticated()")
 	public void storeRead(Principal principal, Model model) {
-		log.info("register get~");
+		
 		StoreVO vo=storeService.getBySid(principal.getName());
 		model.addAttribute("store",vo);
 	}
+	
 	@GetMapping("/modify")
 	@PreAuthorize("isAuthenticated()")
 	public void storeModify(Principal principal, Model model) {
-		log.info("modify get~");
 
 		StoreVO vo=storeService.getBySid(principal.getName());
 		model.addAttribute("store",vo);
 		model.addAttribute("hashTagList",hashTagService.getList());
 	}
+	
 	@PostMapping("/modify")
 	@PreAuthorize("principal.username==#vo.owner")
 	public String storeModifyPost(StoreVO vo) {
-		log.info(""+vo);
 		storeService.modify(vo);
 		return "redirect:/main";
 	}

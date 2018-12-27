@@ -1,6 +1,7 @@
 package org.oos.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
@@ -41,6 +42,8 @@ public interface StoreService {
 	public int inStoreLike(StoreVO vo);
 	
 	public List<StoreVO> getStoreLike(StoreVO vo);
+	
+	public int totalVisit(Map<String,Object> map);
 	
 	
 }

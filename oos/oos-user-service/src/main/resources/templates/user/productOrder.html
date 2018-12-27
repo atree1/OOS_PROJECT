@@ -329,17 +329,14 @@
 		
 		(function(){
 			
-			getTotalSum();
-			
-		})();
-		
-		function getTotalSum(){
 			$.makeArray($(".optionPrice").map(function(){
 				sum += $(this).data("price");
 			}));
 			$(".d_goodsSumPrice").html(sum);
 			$(".d_totalPrice").html(sum + 3000);
-		}
+			
+		})();
+		
 		
 		$(".downArea").click(function(e) {
 			var count = $(this).next("input").val();

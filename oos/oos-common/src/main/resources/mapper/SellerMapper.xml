@@ -84,4 +84,16 @@
 		set auth = #{auth}
 		where sid =#{sid}
 	</update>
+	
+	<select id="unapprovedCount" resultType="int">
+		select count(*) from tbl_seller_auth where auth = 'none' and ano >0;
+	</select>
+	
+	<select id="banCount" resultType="int">
+		select count(*) from tbl_seller_auth where auth = 'ban' and ano >0;
+	</select>
+	
+	<select id="currentSeller" resultType="int">
+		select count(*) from tbl_seller_auth where auth = 'seller' and ano >0;
+	</select>
 </mapper>

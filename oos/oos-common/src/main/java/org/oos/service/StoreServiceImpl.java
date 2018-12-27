@@ -1,6 +1,7 @@
 package org.oos.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -159,6 +160,12 @@ public class StoreServiceImpl implements StoreService {
 	public Long getSnoBySid(String sid) {
 		// TODO Auto-generated method stub
 		return mapper.getSnoBySid(sid);
+	}
+
+	@Override
+	public int totalVisit(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.totalVisit(map);
 	}
 
 	

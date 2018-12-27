@@ -128,4 +128,10 @@ public class ProductServiceImpl implements ProductService {
 		return pMapper.permit(map);
 	}
 
+	@Override
+	public int totalProduct(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return pMapper.totalProduct(map);
+	}
+
 }

@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -48,7 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/seller/*").permitAll()
-		.antMatchers("/main").hasRole("SELLER")
+
+		.antMatchers("/store/*", "/qna/*","/notify/*","/adminNotify/*","/product/*","/exam")
+		.hasRole("SELLER")
+
 		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
@@ -60,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.tokenValiditySeconds(60*60*24*15);
 		
 		
-		http.logout().logoutUrl("/logout")
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.invalidateHttpSession(true)
 		.deleteCookies("remember-me","JSESSION_ID").logoutSuccessUrl("/seller/login");
 

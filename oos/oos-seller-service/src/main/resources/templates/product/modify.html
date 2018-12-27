@@ -107,13 +107,12 @@
 						
 									<div>									
 									<label>sno</label>
-									<input id="sno" name="sno" type="text" th:value="${store.sno}" readonly="readonly" class="form-control" required>
 									</div>
 									
 										<input type='hidden' name='pno' th:value="${product.pno}"/>
 										<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}'/>
 										<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}'/>
-										<input type='hidden' name='sno' th:value='${store.sno}'/>
+										
 									<button class="btn btn-success" type="submit">상품수정</button>
 									<button class="btn btn-success" id="#removeBtn" data-oper="remove">삭
 									제</button>

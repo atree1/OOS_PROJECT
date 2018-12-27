@@ -171,7 +171,7 @@
 	var cartList = [[${cartList}]];
 	var chkList = new Array();
 	var pageMaker = [[${pageMaker}]];
-	
+
 	(function(){
 
 		var totalSum = 0;
@@ -234,9 +234,6 @@
 		$.ajax({
             type:"post",
             url: "/cart/delete/"+cno,
-            beforeSend: function(xhr) {
-	            xhr.setRequestHeader(header, token);
-	        },
             success:function(result, status, xhr){
 
             	alert("삭제되었습니다");
@@ -259,9 +256,6 @@
 		 $.ajax({
             type:"post",
             url: "/cart/delete/"+str,
-            beforeSend: function(xhr) {
-	            xhr.setRequestHeader(header, token);
-	        },
             success:function(result, status, xhr){
 
             	alert("삭제되었습니다");

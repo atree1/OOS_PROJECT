@@ -1,5 +1,6 @@
 package org.oos.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,9 +106,9 @@ public class SuperAdminController {
 	
 	
 	@PostMapping("/manageSeller")
-	public String sellerDelete(String sid, RedirectAttributes rttr) {
+	public String sellerDelete(RedirectAttributes rttr, Principal principal) {
 		
-			if(sellerService.remove(sid) == 1) {
+			if(sellerService.remove(principal.getName()) == 1) {
 				rttr.addAttribute("result", "success");
 				
 			}

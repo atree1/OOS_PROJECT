@@ -118,7 +118,7 @@
 		on s.sno =i.sno
 		left join tbl_store_hashtag h on s.sno=h.sno
 		where
-		s.owner = #{owner}
+		s.owner = #{owner} and s.sno>0
 	</select>
 	
 	
@@ -183,5 +183,9 @@
 		select * from
 		tbl_store_like
 		where sno > 0 and mid = #{mid} and sno = #{sno}
+	</select>
+	
+	<select id="totalVisit" resultType="int">
+		select sum(visitcnt) from tbl_store where sno >0
 	</select>
 </mapper>

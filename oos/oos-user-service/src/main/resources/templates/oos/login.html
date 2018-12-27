@@ -166,6 +166,9 @@ input[type="checkbox"], input[type="radio"] {
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
+$(document).ajaxSend(function(e,xhr,options){
+    xhr.setRequestHeader(header, token);
+ });
 
 $("#kakaologin").click(function(){
 Kakao.init('0b8ca018eae4b931cf6655a575ea3de6');
@@ -189,9 +192,6 @@ Kakao.init('0b8ca018eae4b931cf6655a575ea3de6');
             	data : JSON.stringify(kakaoProfile),
             	url: "/oos/oauth",
             	contentType : "application/json; charset=UTF-8",
-            	 beforeSend: function(xhr) {
-                     xhr.setRequestHeader(header, token);
-                 },
                  success:function(result, status, xhr){
                 	 if(JSON.stringify(result.state) == '"new"'){
                 		 var str = "<input type='hidden' name='access_token' value='"+result.info.access_token+"'>";

@@ -42,5 +42,7 @@ public interface StoreMapper {
 	public int inStoreLike(StoreVO vo);
 	
 	public List<StoreVO> getStoreLike(StoreVO vo);
+	
+	public int totalVisit(Map<String,Object> map);
 
 }

@@ -8,9 +8,6 @@ var replyService = (function(){
 			url:'/replies/new',
 			data:JSON.stringify(reply),
 			contentType:"application/json; charset=utf-8",
-			beforeSend: function(xhr) {
-	            xhr.setRequestHeader(header, token);
-	        },
 			success: function(result, status, xhr){
 				if(callback){
 					callback(result);
@@ -52,9 +49,6 @@ var replyService = (function(){
 		$.ajax({
 			type: 'put',
 			url: '/replies/delete/' + rno,
-			beforeSend: function(xhr) {
-	            xhr.setRequestHeader(header, token);
-	        },
 			success: function(deleteResult, staus, xhr){
 				if(callback){
 					callback(deleteResult);
@@ -77,9 +71,6 @@ var replyService = (function(){
 			url:'/replies/' + reply.rno,
 			data: JSON.stringify(reply),
 			contentType: "application/json; charset=utf-8",
-			beforeSend: function(xhr) {
-	            xhr.setRequestHeader(header, token);
-	        },
 			success: function(result, status, xhr){
 				if(callback){
 					callback(result);

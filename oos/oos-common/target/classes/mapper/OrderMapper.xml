@@ -87,5 +87,14 @@
 		order by ono desc, regdate desc
 		limit #{dto.cri.skip}, #{dto.cri.amount}
 	</select> -->
-
+	
+	<select id="todayRevenue" resultType="int">		
+		select sum(total) from tbl_order
+		 where del='N' and ono>0
+		 <if test="cri.dayStart != null and cri.dayEnd != null ">
+			and date(regdate) BETWEEN #{cri.dayStart} AND #{cri.dayEnd}
+		</if>
+	</select>
+	
+	
 </mapper>

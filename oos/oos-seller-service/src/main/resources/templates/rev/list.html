@@ -194,8 +194,6 @@
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
 			th:value='${pageMaker.cri.pageNum}' /> 
-	 	<input type='hidden' name='kind' th:value='${replyList[0].kind}' />
-		<input type='hidden' name='sno' th:value='${replyList[0].store.sno}' />
 	</form>
 </div>
 
@@ -282,7 +280,7 @@ $(document).ready(function(){
 				replyForm.html("");
 				replyForm.attr("method", "post")
 				.append("<input type='hidden' name='rno' value='"+$(this).attr("data-rno")+"' >")
-				.attr("action","/rev/list?kind=r&sno=1").submit(); 
+				.attr("action","/rev/list").submit(); 
 			}else{ 
 			    return;
 			}
@@ -302,7 +300,7 @@ $(document).ready(function(){
 					var val = item.value+"_"+shipNum+"_"+$("#state_"+item.value).val();
 					notifyForm.append("<input type='hidden' name='option' value='"+val+"' >");
 				});
-				orderForm.attr("method", "post").attr("action","/exam/manage?sno=1").submit();
+				orderForm.attr("method", "post").attr("action","/exam/manage").submit();
 			}else{ 
 			    return;
 			}

@@ -41,4 +41,8 @@ public interface MemberMapper {
 	
 	public List<MemberVO> manageMember(Map<String, Object> map);
 	
+	public int newCustomer(Map<String, Object> map);
+		
+	public int banCustomer(Map<String, Object> map);
+	
 }
