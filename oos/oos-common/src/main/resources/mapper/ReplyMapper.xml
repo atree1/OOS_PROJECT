@@ -59,7 +59,7 @@
 		where del = 'N' and pno > 0) p
 		on p.pno = r.pno
 		where rno > 0 and del = 'N'
-		and sno =#{sno} and kind=#{kind}
+		and sno =#{sno} and kind=#{kind} and  depth=0 and state='N';
 	</select>
 
 	<select id="getStoreReply" parameterType="map"
