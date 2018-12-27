@@ -87,7 +87,8 @@
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 	
-
+	//리스트창 새로고침
+	opener.parent.location="/rev/list";
 	
 		$(document).ready(function(){
 			var rep = [[${replyList[0]}]];
@@ -102,8 +103,7 @@
 					reviewForm.attr("method", "post")
 					.attr("action","/rev/reviewDetail").submit(); 
 					
-					//리스트창 새로고침
-					opener.parent.location="/rev/list";
+					
 					opener.parent.location.reload();
 					
 					
