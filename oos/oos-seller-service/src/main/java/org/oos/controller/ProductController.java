@@ -127,6 +127,7 @@ public class ProductController {
 			list.forEach(name -> {
 				CategoryVO catevo = new CategoryVO();
 				catevo.setCatename(name);
+				cateList.add(catevo);
 			});
 
 		} catch (IOException e) {

@@ -23,7 +23,6 @@ public class SellerVO {
 	private String sname;
 	private String bnum;
 	private String pnum;
-	private String tel;
 
 	private Long sno;
 	private Date regdate= new Date();
