@@ -1,8 +1,11 @@
 package org.oos.controller;
 
 import java.security.Principal;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.Criteria;
@@ -89,8 +92,18 @@ public class HomeController {
 		log.info("register get~");
 		
 //		log.info(authentication.getAuthorities().=="ROLE_SELLER");
-				 
-		//Collections.authentication.getAuthorities()
+		Collection<? extends Object> collection=authentication.getAuthorities();
+		List list=new ArrayList(collection);
+		
+		String auth=""+list.get(0);
+			if(auth.equals("ROLE_NONE")) {
+				return "redirect:/store/register";
+				
+			}
+			else if(auth.equals("ROLE_ADMIN")) {
+				return "redirect:/admin/manageTag";
+			}
+	
 		String[] state = { "ready", "shipping", "complete" };
 		String[] kind = { "q", "r" };
 		String[] range = { "day", "week", "month" };
