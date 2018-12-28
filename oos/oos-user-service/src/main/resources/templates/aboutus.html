@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 <script type="text/javascript" language="JavaScript">
 
            var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'Windows CE;', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson', 'Mobile', 'Symbian', 'Opera Mobi', 'Opera Mini', 'IEmobile');
@@ -19,6 +20,9 @@
 
 </script>
 <meta charset="utf-8">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<meta name="_csrf_name" th:content="${_csrf.parameterName}"/>
 <title>jquery tagcloud</title>
 <script src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/tagcloud.jquery.js"></script>
@@ -164,7 +168,15 @@ a {
     <!-- Custom scripts for this template -->
     <script src="js/coming-soon.min.js"></script>
 <script type="text/javascript">
-    
+
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+var csrfName = $("meta[name='_csrf_name']").attr("content");
+
+$(document).ajaxSend(function(e,xhr,options){
+    xhr.setRequestHeader(header, token);
+ });
+ 
 $(document).ready(function(){
     $(function() {
         $.ajax({
