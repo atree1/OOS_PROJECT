@@ -65,7 +65,6 @@ public class HomeController {
 	@GetMapping("/pay")
 	public void pay(Model model){
 		
-		log.info("payPage....");
 	}
 	
 	@GetMapping(value= {"/main","/m/main","/m/shopLayout"})
@@ -73,7 +72,6 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<>();
 		
 		Criteria cri = new Criteria();
-		map.put("cri", cri);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		
