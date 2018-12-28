@@ -3,6 +3,8 @@
 	layout:decorate="~{/layout/shopLayout}">
 
 <div layout:fragment="container">
+
+<link href="/css/tag.css" type="text/css" rel="stylesheet" />
 	<div class="container" style="margin-top: 20px;">
 		<div class="menuRoot">
 			<div class="table-cell" style="">
@@ -34,7 +36,10 @@
 							<span class="tradeStatusBtn">+ 찜리스트 추가</span>
 						</button>
 					</div>
-					
+					<div style="padding:15px;">
+						<span class="tag tag-pink" style="margin-right:5px;"
+						th:each="arr : ${storeTag}" th:text="|#${arr.tag}|">Pink tag</span>
+					</div>
 					<div style="line-height: 1.0 position:relative;">
 						<span style="color: #9b9b9b; font-size: 14px; margin-right: 5px;">찜목록 추가수</span><span
 							class="store_info_text" style="margin-right: 15px;" th:text="${store.likeNum}"></span><span
@@ -55,9 +60,6 @@
 				<div id="sortMethod_1" class="sortMethodClass">높은가격순</div>
 				<div class="breakPoint">∙</div>
 				<div id="sortMethod_2" class="sortMethodClass">낮은가격순</div>
-				<div class="sortingText"
-					style="color: #9b9b9b; margin-left: 5px; display: inline-block; visibility: hidden;">
-					※ 매장에서 중복으로 업로드한 상품이 연달아서 나올 수 있습니다.</div>
 			</div>
 		</div>
 		<div class="div_line_grey_2px"

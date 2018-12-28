@@ -9,9 +9,9 @@ import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductImgVO;
 import org.oos.domain.StoreVO;
+import org.oos.mapper.HashTagMapper;
 import org.oos.mapper.ProductImgMapper;
 import org.oos.mapper.SellerMapper;
-import org.oos.mapper.StoreHashTagMapper;
 import org.oos.mapper.StoreImgMapper;
 import org.oos.mapper.StoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,10 @@ public class StoreServiceImpl implements StoreService {
 	
 	
 	@Setter(onMethod_=@Autowired)
-	private StoreHashTagMapper hashMapper;
+	private HashTagMapper hashMapper;
 	
 	@Setter(onMethod_=@Autowired)
+	
 	private StoreImgMapper sImgMapper;
 	private ProductImgMapper pImgMapper;
 	
@@ -62,7 +63,7 @@ public class StoreServiceImpl implements StoreService {
 		});
 		vo.getHashList().forEach(hash->{
 			hash.setSno(vo.getSno());
-			hashMapper.insert(hash);
+			hashMapper.insertStore(hash);
 		});
 		
 		sellerMapper.addSno(vo);
@@ -92,7 +93,7 @@ public class StoreServiceImpl implements StoreService {
 		}
 		vo.getHashList().forEach(hash->{
 			hash.setSno(vo.getSno());
-			hashMapper.insert(hash);
+			hashMapper.insertStore(hash);
 		});
 		return mapper.modify(vo);
 	}
@@ -117,7 +118,7 @@ public class StoreServiceImpl implements StoreService {
 	public StoreVO getBySid(String sid) {
 		StoreVO vo=mapper.getBySid(sid);
 		vo.setImgList(sImgMapper.get(vo.getSno()));
-		vo.setHashList(hashMapper.getList(vo.getSno()));
+		vo.setHashList(hashMapper.getStoreTagList(vo.getSno()));
 		return vo;
 	}
 

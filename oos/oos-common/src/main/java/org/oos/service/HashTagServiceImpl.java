@@ -3,6 +3,7 @@ package org.oos.service;
 import java.util.List;
 
 import org.oos.domain.HashTagVO;
+import org.oos.domain.StoreHashTagVO;
 import org.oos.mapper.HashTagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,21 @@ public class HashTagServiceImpl implements HashTagService {
 	@Override
 	public int delete(int hno) {
 		return mapper.delete(hno);
+	}
+
+	@Override
+	public List<StoreHashTagVO> getStoreTagList(Long sno) {
+		return mapper.getStoreTagList(sno);
+	}
+
+	@Override
+	public int insertStore(StoreHashTagVO vo) {
+		return mapper.insertStore(vo);
+	}
+
+	@Override
+	public int deleteAll(Long sno) {
+		return mapper.deleteAll(sno);
 	}
 
 }
