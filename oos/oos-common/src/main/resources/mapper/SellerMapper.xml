@@ -95,4 +95,14 @@
 	<select id="currentSeller" resultType="int">
 		select count(*) from tbl_seller_auth where auth = 'seller' and ano >0;
 	</select>
+	
+	
+	<select id="getBySid" resultMap="Seller">
+	select * from tbl_seller s left join tbl_seller_auth a
+		on s.sid =a.sid
+		where
+		s.sid = #{sid}
+	</select>
+	
+	
 </mapper>

@@ -30,4 +30,6 @@ public interface SellerMapper {
 	public int banCount(Map<String, Object> map);
 	
 	public int currentSeller(Map<String, Object> map);
+	
+	public SellerVO getBySid(String sid);
 }
