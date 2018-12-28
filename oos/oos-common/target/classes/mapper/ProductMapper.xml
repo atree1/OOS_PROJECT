@@ -26,6 +26,12 @@
 		<result column="tel" property="tel" />
 		<collection property="imgList" resultMap="Image" />
 	</resultMap>
+		<resultMap type="org.oos.domain.HashTagVO" id="Tag">
+		<result column="hno" property="hno" />
+		<result column="tag" property="tag"/>
+		<result column="tagcnt" property="tagcnt" />
+		<result column="del" property="del" />
+	</resultMap>
 	
 	<resultMap type="org.oos.domain.ProductVO" id="Product">
 		<result column="pno" property="pno" />
@@ -43,11 +49,14 @@
 		<collection property="imgList" resultMap="Image" />
 		<collection property="store" resultMap="Store" />
 		<collection property="optList" resultMap="Option" />
+		<collection property="tagList" resultMap="Tag" />
 		<collection property="cateList" resultMap="Category" />
 	</resultMap>
+	
 	<update id="upVisitCnt">
 		update tbl_product set visitcnt=visitcnt+1 where pno = #{pno}
 	</update>
+	
 	<select id="getByPno" resultMap="Product">
 		select p.pno, p.pname, p.price, s.sno, p.state, tel, p.questionreplycnt, p.reviewreplycnt,
 		p.content, uuid, iname, ipath, o.opno, o.size, o.qty, sname from tbl_product p 
@@ -61,7 +70,7 @@
 		and uuid != "" and p.pno=#{pno}
 	</select>
 	
-	<select id="getList2" parameterType="map" resultMap="Product">
+	<!-- <select id="getList2" parameterType="map" resultMap="Product">
 		select product.pno,product.pname, product.state
 		,product.price,product.sno,product.regdate,product.updatedate,product.del,product.uuid,product.iname,product.ipath
 		,s.sname from
@@ -95,6 +104,40 @@
 				</when>
 				<otherwise>
 					order by product.pno desc
+				</otherwise>
+			</choose>
+			limit #{dto.cri.skip} ,#{dto.cri.amount}
+		</if>
+	</select> -->
+	
+	<select id="getList2" parameterType="map" resultMap="Product">
+		select * from tbl_product p
+			left join tbl_product_img i
+			on p.pno = i.pno
+			left join tbl_store s
+			on p.sno = s.sno
+			right join tbl_category c
+			on c.pno = p.pno
+		 where s.sno > 0 and p.del='N' and p.pno > 0 and c.cateno > 0 and uuid != ""
+		<if test="sno != null">
+			and s.sno=#{sno}
+		</if>
+		<if test="seller == null">
+			and p.state='O'
+		</if>
+		<if test="dto != null">
+			<if test="dto.cri.filter != null">
+			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
+			</if>
+			<choose>
+				<when test="dto.cri.orderby == '1'.toString()">
+					order by p.price desc
+				</when>
+				<when test="dto.cri.orderby == '2'.toString()">
+					order by p.price asc
+				</when>
+				<otherwise>
+					order by p.pno desc
 				</otherwise>
 			</choose>
 			limit #{dto.cri.skip} ,#{dto.cri.amount}
