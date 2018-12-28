@@ -52,9 +52,9 @@ public class HomeController {
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
 	
-	@GetMapping("/test")
-	public void test() {
-
+	@GetMapping("/")
+	public String main() {
+		return "redirect:/main";
 	}
 
 
