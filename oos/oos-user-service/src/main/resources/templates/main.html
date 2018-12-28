@@ -142,17 +142,16 @@
 			<div class="div_line_grey_2px"
 				style="margin-top: -8px; margin-bottom: 16px;"></div>
 		</div>
-		<div style="width: 1100px; margin: 0 auto; position: relative;">
-				<ul id="goodsList"
-					style="list-style: outside none none; padding: 0px; position: relative;">
+		<div class="item_list_wrap"style="width: 1100px; margin: 0 auto;">
+				<ul id="goodsList" style="padding: 0px;">
 					<ul class="goods_ul" th:each="arr :${product}" >
 						<li th:class="|goodsContainer store_${arr.sno}|"
 							style="margin-right: 5px;" th:id="|link_${arr.pno}|">
 							<div class="goodsImg"
-								style="position: relative; overflow:hidden; width: 270px; height: 353px;">
+								style=" position: relative; overflow:hidden; width: 270px; height: 353px;">
 								<img th:id="|img_${arr.pno}|" class="productImg"
-									style="width: 100%;position:absolute;
-									overflow:hidden;
+									style="width: 98%;position:absolute;
+									overflow:hidden; right:2px;
 									top:0;bottom:50px;margin:auto;">
 							</div>
 							<div class="goodsInfo" style="position: relative;">

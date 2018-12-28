@@ -52,17 +52,17 @@ public class HomeController {
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
 	
-	@GetMapping("/test")
-	public void test() {
-
+	@GetMapping("/")
+	public String main() {
+		return "redirect:/main";
 	}
 
 
 	//최고관리자 메인
 	@GetMapping("/adminMain")
-	public void adminMain(String sid, Model model) {
+	public void adminMain(Principal principal, Model model) {
 			
-		SellerVO vo = sellerService.get(sid);
+		SellerVO vo = sellerService.get(principal.getName());
 			
 		Map<String,Object> map = new HashMap<>();
 		Criteria cri = new Criteria();
@@ -98,13 +98,13 @@ public class HomeController {
 		
 		String auth=""+list.get(0);
 		log.info(auth);
-			if(auth.equals("ROLE_NONE")) {
-				return "redirect:/store/register";
-				
-			}
-			else if(auth.equals("ROLE_ADMIN")) {
-				return "redirect:/admin/manageTag";
-			}
+		if(auth.equals("ROLE_NONE")) {
+			return "redirect:/store/register";
+			
+		}
+		else if(auth.equals("ROLE_ADMIN")) {
+			return "redirect:/adminMain";
+		}
 	
 		String[] state = { "ready", "shipping", "complete" };
 		String[] kind = { "q", "r" };

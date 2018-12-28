@@ -14,6 +14,7 @@ public class Criteria {
 	private String dayStart;
 	private String dayEnd;
 	private String category;
+	private String filter;
 	private String keyword;
 	private String orderby;
 

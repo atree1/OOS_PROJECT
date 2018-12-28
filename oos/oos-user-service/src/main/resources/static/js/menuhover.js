@@ -12,7 +12,7 @@ $("#searchOptionSelect").click(function(){
 $(".bigCategory, .TopLi").click(function(){
 	actionForm.html("");
 	actionForm.attr("action","/user/list")
-			.append("<input type='hidden' name='cate' value='"+$(this).data("cat")+"'>")
+			.append("<input type='hidden' name='category' value='"+$(this).data("cat")+"'>")
 			.submit();
 });
 
@@ -20,7 +20,7 @@ $(".AllCategory").click(function(){
 	actionForm.html("");
 	actionForm.attr("action","/user/list")
 			.append("<input type='hidden' name='keyword'>")
-			.append("<input type='hidden' name='category' value='select2'>")
+			.append("<input type='hidden' name='filter' value='select2'>")
 			.submit();
 });
 

@@ -67,6 +67,7 @@
 		 where sid = #{sid}		
 	</update>
 	
+	
 	<update id="delete">	
 		update tbl_seller set del='Y' where sid = #{sid}	
 	</update>

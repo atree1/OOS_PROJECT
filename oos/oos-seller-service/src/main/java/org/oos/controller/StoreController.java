@@ -73,7 +73,7 @@ public class StoreController {
 	@PreAuthorize("principal.username==#vo.owner")
 	public String storeModifyPost(StoreVO vo) {
 		storeService.modify(vo);
-		return "redirect:/main";
+		return "redirect:/store/read";
 	}
 	
 	

@@ -32,7 +32,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+<<<<<<< HEAD
                 <a href="http://localhost:8081/main" class="navbar-brand">Out Of Stock</a>
+=======
+                <a class="navbar-brand" href="/main">Out Of Stock</a>
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
             </div>
             <!-- /.navbar-header -->
 
@@ -306,20 +310,28 @@
                                     <a href="/adminNotify/notify">관리자 공지</a>
                                 </li>
                                 <li>
-                                    <a href="/notify/sellerNotify?sid=seller1">스토어 공지</a>
+                                    <a href="/notify/sellerNotify">스토어 공지</a>
                                 </li>
                             </ul>
                         </li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>(임시) 최고관리자 메뉴
-                            <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="/admin/manageUser">구매자 관리</a></li>
-                                <li><a href="/admin/manageSeller">판매자 관리</a></li>
-                                <li><a href="/admin/manageProduct">상품 관리</a></li>
-                                <li><a href="/admin/manageTag">해시태그 관리</a></li>
-                                <li><a href="/adminNotify/notify">전체공지 관리</a></li>
-                            </ul>
+                            <a href="/admin/manageUser"><i class="fa fa-bar-chart-o fa-fw"></i>구매자 관리</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a href="/admin/manageSeller"><i class="fa fa-bar-chart-o fa-fw"></i>판매자 관리</a>
+                           
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a href="/admin/manageProduct"><i class="fa fa-bar-chart-o fa-fw"></i>상품 관리</a>
+                           
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a href="/admin/manageTag"><i class="fa fa-bar-chart-o fa-fw"></i>해시태그 관리</a>
+                           
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a href="/adminNotify/notify"><i class="fa fa-bar-chart-o fa-fw"></i>전체공지 관리</a>
+                            
                         </li>
                     </ul>
              	</div>
