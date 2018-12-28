@@ -320,7 +320,11 @@
 				}
 				
 				list.push(json);
-			});			
+				
+			});		
+			
+
+			console.log(list);
 			 $.ajax({
                 type:"post",
                 data : JSON.stringify(list),
@@ -330,7 +334,7 @@
                 	popupOpen(result);
     			}
             }); 
-			
+			 
 		});
 		
 	function popupOpen(popUrl){

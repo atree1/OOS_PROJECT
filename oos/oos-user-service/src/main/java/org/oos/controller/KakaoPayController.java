@@ -44,6 +44,7 @@ public class KakaoPayController {
 			totalPrice += (vo.getQty() * vo.getProduct().getPrice());
 		};
 		totalPrice += 3000;
+		
 		return new ResponseEntity<>(service.kakaoPayReady(totalPrice, orderList), HttpStatus.OK);
 	}
 	
