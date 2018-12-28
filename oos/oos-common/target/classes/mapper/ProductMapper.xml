@@ -208,7 +208,7 @@
 		<if test="seller == null">
 			and p.state='O'
 		</if>
-		<if test="cri.category != null ">
+		<if test="cri != null and cri.category != null ">
 			and c.catename=#{cri.category}
 		</if>
 		<if test="cri != null and cri.filter != null">

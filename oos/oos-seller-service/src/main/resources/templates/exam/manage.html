@@ -200,10 +200,11 @@ $(document).ready(function(){
 	    
 		$.each(orderList, function(index, item){
 			var state = item.detail_state;
-			if(state == "배송중"){
-				
-			}else if()
-			$("#state_"+item.odno).val(item.detail_state);
+			console.log(state == "배송중");
+			if(state == "배송중"){state = "shipping";}
+			else if(state =="준비중"){state = "ready";}
+			else if(state =="배송완료"){state = "complete";}
+			$("#state_"+item.odno).val(state);
 			
 		});
 	
