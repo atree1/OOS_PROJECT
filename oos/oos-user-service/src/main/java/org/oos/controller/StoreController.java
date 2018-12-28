@@ -9,6 +9,7 @@ import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
 import org.oos.domain.ProductVO;
 import org.oos.domain.StoreVO;
+import org.oos.service.HashTagService;
 import org.oos.service.NotifyService;
 import org.oos.service.ProductService;
 import org.oos.service.SellerService;
@@ -45,6 +46,9 @@ public class StoreController {
 
 	@Setter(onMethod_ = @Autowired)
 	private SellerService sellerService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HashTagService hashService;
 
 	@GetMapping("/popupList")
 	public void popupList(Criteria cri, String sid, Model model) {
@@ -122,15 +126,15 @@ public class StoreController {
 	
 	@GetMapping("/list")
 	public void storeList(@CookieValue(value = "sViewCookie", required = false) String sViewCookie, Criteria cri,
-		Long sbno, Long sno, Model model) {
-		
-		Map<String, Object> map = new HashMap<>();
-		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
+			Long sno, Model model) {
 
 		String sid = storeService.get(sno).getOwner();
+		Map<String, Object> map = new HashMap<>();
+		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
+		map.put("sid", sid);
 		map.put("dto", dto);
 		map.put("sno", sno);
-		map.put("sid", sid);
+
 		checkStoreVisit(sViewCookie, sno);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 
@@ -140,11 +144,12 @@ public class StoreController {
 		for (int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++) {
 			pageList.add(i);
 		}
-
+		
 		model.addAttribute("popupList", notifyService.popupList(map));
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
+		model.addAttribute("storeTag", hashService.getStoreTagList(sno));
 		model.addAttribute("product", productService.getList(map));
 
 	}
@@ -154,7 +159,6 @@ public class StoreController {
 			@CookieValue(value = "pViewCookie", required = false) String pViewCookie,Long pno, Long sno, Model model) {
 
 		ProductVO vo = productService.read(pno);
-		log.info(sViewCookie);
 		checkStoreVisit(sViewCookie, sno);
 		checkProductVisit(pViewCookie, pno);
 		
