@@ -83,7 +83,7 @@
 			and product.state='O'
 		</if>
 		<if test="dto != null">
-			<if test="dto.cri.category != null">
+			<if test="dto.cri.filter != null">
 			and product.pname like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
 			<choose>
@@ -155,7 +155,7 @@
 		<if test="sno != null">
 			and sno=#{sno}
 		</if>
-		<if test="cri != null and cri.category != null">
+		<if test="cri != null and cri.filter != null">
 			and pname like concat("%", #{cri.keyword} ,"%")
 		</if>
 	</select>

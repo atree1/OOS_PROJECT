@@ -209,13 +209,13 @@ public class UserController {
     
     @GetMapping("/list")
     public void List(Criteria cri, Model model) {
-
+    	log.info(cri.getFilter());
 	    
     	Map<String, Object> map = new HashMap<>();
     	map.put("cri", cri);
     	PageDTO pageDTO;
     	
-    	if(cri.getCategory() != null && cri.getCategory().equals("select2")) {
+    	if(cri.getFilter() != null && cri.getFilter().equals("select2")) {
     		pageDTO = new PageDTO(cri, storeService.count(cri));
     	}else {
     		pageDTO = new PageDTO(cri, productService.getTotal(map));
@@ -223,7 +223,7 @@ public class UserController {
     	
     	map.put("dto", pageDTO);
 		
-		if(cri.getCategory() != null && cri.getCategory().equals("select2")) {	
+		if(cri.getFilter() != null && cri.getFilter().equals("select2")) {	
         	model.addAttribute("store", storeService.getStoreList(pageDTO));
         }else{
         	model.addAttribute("product", productService.getList(map));
