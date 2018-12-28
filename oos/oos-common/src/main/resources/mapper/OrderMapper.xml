@@ -103,7 +103,7 @@
 	</select>
 	
 	<select id="monthlyRevenue" resultType="int">		
-		select sum(total) from tbl_order
+		select  ifnull(sum(total),0) from tbl_order
 		 where del='N' and ono>0
 		 
 		 <![CDATA[ 
