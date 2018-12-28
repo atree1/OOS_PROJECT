@@ -123,7 +123,7 @@ public class ProductController {
 					+ vo.getImgList().get(0).getIname();
 		try {
 			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN3296882034050407743",
-					firstPath, "0.7");
+					firstPath, "0.6");
 
 			list.forEach(name -> {
 				CategoryVO catevo = new CategoryVO();
