@@ -49,8 +49,7 @@
 	
 <form id="notifyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
-		<input type='hidden' id='pageNum' name='pageNum'
-			th:value='${pageMaker.cri.pageNum}' />
+		<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}' />
 		<input type='hidden' name='sid' th:value='${seller.sid}'/>
 </form>
 
@@ -111,25 +110,17 @@ $(document).ready(function(){
 	        if (document.frm.pop.checked){
 	        	console.log(popupList[0].sno)
 	        	
-	        	
+	        			        	
 	        	cookieList('popupOpen').add(popupList[0].sno);
 	        	
-	
-
+				
 	        }
 	       
 	   self.close();
 	});
 	        		
 	     console.log(popupList);   		
-
-	     //공지사항없으면 자동닫기
-		if(popupList.length == 0){
-			
-			self.close();
-			
-		}        		
-		
+	
 });
 	
 		
