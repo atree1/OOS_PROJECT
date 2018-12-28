@@ -216,13 +216,19 @@ $(document).ready(function(){
 				
 				$("input[name='checkbox']:checked").each(function(index, item){
 					
-					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");
+					notifyForm.append("<input type='hidden' id='sbno' name='sbno' value='"+item.value+"' >");
 				});
+				if($("#sbno").val()==null){
+					alert("삭제할 공지에 체크하십시요.");
+					return;
+				} 
+				
 				notifyForm.attr("method", "post").attr("action","/notify/remove")
 				.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
 				.submit(); 
 			}else{ 
-			    return;
+				
+				return ;
 			}
 		});
 		
@@ -235,13 +241,18 @@ $(document).ready(function(){
 			if(confirm("해당 공지를 팝업 "+swi+" 하시겠습니까?") == true){
 				$("input[name='checkbox']:checked").each(function(index,item){
 					
-					notifyForm.append("<input type='hidden' name='sbno' value='"+item.value+"' >");	
+					notifyForm.append("<input type='hidden' id='pop' name='sbno' value='"+item.value+"' >");	
 					
 				});
+				if($("#pop").val()==null){
+					alert("해당 공지에 체크하십시요.");
+					return;
+				} 				
 				notifyForm.append("<input type='hidden' name='swi' value='"+swi+"'>");
 				notifyForm.attr("method","post").attr("action","/notify/popup").submit();
 			}else{
-				return;
+				
+				return false;
 			}; 	
 			
 		});
