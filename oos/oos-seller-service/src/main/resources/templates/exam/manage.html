@@ -56,7 +56,7 @@
 					<tbody>
 
 						<tr class="gradeA odd" role="row" th:each=arr:${orderList}>
-							<td class="sorting"><input type="checkbox" id="checkbox"
+							<td class="sorting"><input name="checkbox" type="checkbox" id="checkbox"
 								th:value="${arr.odno}"></td>
 							<td class="odno" th:text=${arr.odno}></td>
 							<td class="ragdate"
@@ -180,6 +180,7 @@ $(document).ready(function(){
 	
 		var orderForm = $("#orderListForm");
 		var pageMaker = [[${pageMaker}]];
+		var orderList = [[${orderList}]];
 		
 		//페이지 스크립트
 		$(".paginate_button").click(function(e) {
@@ -194,18 +195,21 @@ $(document).ready(function(){
 	    
 	    $(".paginate_button next").click(function(){
 	        $("#pageNum").val(Number(pageMaker.endPage) + 1);
-	        orderForm.submit();
+	       
 	    });
 	    
 		$.each(orderList, function(index, item){
-			var order = item.orderList[0];
-		
-			$(".state_"+state.odno).val(order.state);
+			var state = item.detail_state;
+			if(state == "배송중"){
+				
+			}else if()
+			$("#state_"+item.odno).val(item.detail_state);
+			
 		});
-	})();
+	
 	    
 	    $(".state").change(function(){
-			$(".checkbox"+$(this).attr("value").attr("checked",true);
+			$(".checkbox"+$(this).attr("value")).attr("checked",true);
 		});
 	    
 	    //삭제스크립트
