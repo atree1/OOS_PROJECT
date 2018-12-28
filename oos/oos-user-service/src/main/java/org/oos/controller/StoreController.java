@@ -131,14 +131,16 @@ public class StoreController {
 	
 	@GetMapping("/list")
 	public void storeList(@CookieValue(value = "sViewCookie", required = false) String sViewCookie, Criteria cri,
-			String sid, Long sbno, Long sno, Model model) {
-
+		Long sbno, Long sno, Model model) {
+		
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
 
+		String sid = storeService.get(sno).getOwner();
 		map.put("dto", dto);
 		map.put("sno", sno);
 		map.put("sid", sid);
+		log.info("sid:"+sid);
 		
 		log.info(sViewCookie);
 		checkStoreVisit(sViewCookie, sno);
@@ -151,6 +153,7 @@ public class StoreController {
 			pageList.add(i);
 		}
 
+		model.addAttribute("popupList", notifyService.popupList(map));
 		model.addAttribute("pageList", pageList);
 		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));

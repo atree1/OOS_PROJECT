@@ -89,6 +89,9 @@
 					</li>
 			</ul>
 		</ul>
+		
+		
+
 		<div class="notListMsg"></div>
 		<form id="storeForm">
 			<input type='hidden' name='amount' value='12'/>
@@ -103,6 +106,8 @@
 			<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
 		<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
 	</div>
+			
+
 
 </div>
 
@@ -193,17 +198,25 @@
 				
 				});
 				 
-				 if(result==true){	
+				 console.log(store.owner);
+				 console.log("popupList: "+popupList.length);
+				 
+				 if(result==true){
+					 
+					 if(popupList.length == 0){
+						 return;
+						 
+					 }else{
+						 
 				    	var popOption = "width=800, height=700, resizable=no, location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 						var sid = [[${store.owner}]];
 						window.open("/store/popupList?sid="+sid, "store", popOption);   
-											
-
+					 }		
+					 	
 				 }
-				 				 
+				 				 				
 				
-					
-				 
+				
 				 	
 			if(mid != undefined){
 						$.ajax({
