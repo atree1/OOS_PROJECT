@@ -40,8 +40,9 @@ public class NotifyController {
 	private StoreService storeService;
 	
 	@PostMapping("/popup")
-    public String popupState(Long[] sbno,String swi,String sid) {
+    public String popupState(Long[] sbno,String swi,Principal principal) {
         log.info(sbno+"");
+        String sid = principal.getName();
         log.info("sid:"+sid);
         Map<String, Object> map =new HashMap<>();
         map.put("switch", swi);
@@ -62,7 +63,7 @@ public class NotifyController {
 		
 		rttr.addFlashAttribute("result", result ==1? "SUCCESS":"FAIL");
 		
-		return "redirect:/notify/sellerGet"+"&sbno="+vo.getSbno()+"&amount="+cri.getAmount()+"&pageNum="+cri.getPageNum();
+		return "redirect:/notify/sellerGet?&sbno="+vo.getSbno()+"&amount="+cri.getAmount()+"&pageNum="+cri.getPageNum();
 	}
 	
 	@GetMapping({"/sellerGet","/sellerModify"})
@@ -123,7 +124,7 @@ public class NotifyController {
             }
     	}
         
-        return "redirect:/notify/sellerNotify";
+        return "redirect:/notify/sellerNotify?";
         
     }
 
