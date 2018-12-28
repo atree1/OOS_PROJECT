@@ -92,10 +92,10 @@ public class ProductController {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("sno", storeService.getBySid(principal.getName()).getSno());
-		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
+		PageDTO pageDTO = new PageDTO(cri, productService.totalProduct(map));
 		map.put("dto", pageDTO);
 		map.put("seller", "seller");
-        log.info(pageDTO.getCri().getAmount()+"");
+        log.info(storeService.getBySid(principal.getName())+"");
         List<Integer> pageList = new ArrayList<>();
         
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
@@ -106,7 +106,7 @@ public class ProductController {
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.getBySid(principal.getName()));
-		model.addAttribute("product", productService.getList(map));
+		model.addAttribute("product", productService.getListBySno(map));
 	}
 
 	@GetMapping("/register")

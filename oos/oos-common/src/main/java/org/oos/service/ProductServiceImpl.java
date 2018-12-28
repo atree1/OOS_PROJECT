@@ -130,14 +130,17 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int totalProduct(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return pMapper.totalProduct(map);
 	}
 
 	@Override
 	public int resetVisitCnt() {
-		// TODO Auto-generated method stub
 		return pMapper.resetVisitCnt();
+	}
+
+	@Override
+	public List<ProductVO> getListBySno(Map<String, Object> map) {
+		return pMapper.getListBySno(map);
 	}
 
 }

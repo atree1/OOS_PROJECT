@@ -7,8 +7,6 @@
 	<resultMap type="org.oos.domain.CategoryVO" id="Category">
 		<result column="cateno" property="cateno" />
 		<result column="catename" property="catename" />
-		<result column="delete" property="delete" />
-		<result column="pno" property="pno" />
 	</resultMap>
 	<resultMap type="org.oos.domain.ProductOptionVO" id="Option">
 		<result column="opno" property="opno" />
@@ -112,11 +110,19 @@
 		</if>
 	</select> -->
 	
+	<select id="getListBySno" parameterType="map" resultMap="Product">
+		select * from tbl_product p
+			left join tbl_product_img i
+			on p.pno = i.pno
+		 where p.del='N' and p.pno > 0 and uuid != "" and p.sno=#{sno}
+		 group by i.pno
+		 order by p.pno desc
+		limit #{dto.cri.skip} ,#{dto.cri.amount}
+	</select>
+	
 	<select id="getList2" parameterType="map" resultMap="Product">
 		select * from tbl_product p
-			left join (select * from tbl_product_img
-            where uuid !=""
-            group by pno) i
+			left join tbl_product_img i
 			on p.pno = i.pno
 			left join tbl_store s
 			on p.sno = s.sno
@@ -199,17 +205,15 @@
 	</update>
 	
 	<select id="count" parameterType="map" resultType="int">
-		select count(*) from tbl_product p
-		<if test="cri != null and cri.category != null ">
-			right join tbl_category c
+		select count(*)
+		from tbl_product p
+		left join tbl_store s
+			on p.sno = s.sno
+		right join tbl_category c
 			on c.pno = p.pno
-		</if>
-		 where p.del='N' and p.pno > 0 
-		 <if test="cri != null and cri.category != null ">
-			and c.cateno > 0 
-		</if>
-		 <if test="sno != null">
-			and p.sno=#{sno}
+		where p.pno > 0
+		<if test="sno != null">
+			and s.sno=#{sno}
 		</if>
 		<if test="seller == null">
 			and p.state='O'
@@ -252,6 +256,8 @@
 		select count(*)
 		from tbl_product
 		where pno > 0 and del='N'
-
+		<if test="sno != null">
+			and sno=#{sno}
+		</if>
 	</select>
 </mapper>

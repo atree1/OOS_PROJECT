@@ -9,6 +9,8 @@ public interface ProductService {
 	
 	public List<ProductVO> getList(Map<String, Object> map);
 	
+	public List<ProductVO> getListBySno(Map<String, Object> map);
+	
 	public List<ProductVO> bestProductList();
 
 	public ProductVO read(Long pno);
