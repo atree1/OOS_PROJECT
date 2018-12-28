@@ -228,14 +228,10 @@
 						.substring(5);
 				var sno = $(this).attr("class")
 						.substring(21);
-				mainForm
-						.append("<input type='hidden' name='pno' value='"+pno+"'>");
-				mainForm
-						.append("<input type='hidden' name='sno' value='"+sno+"'>");
+				mainForm.append("<input type='hidden' name='pno' value='"+pno+"'>");
+				mainForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
 
-				mainForm.attr("action",
-						"/store/detail")
-						.submit();
+				mainForm.attr("action","/store/detail").submit();
 			});
 		});
 	</script>

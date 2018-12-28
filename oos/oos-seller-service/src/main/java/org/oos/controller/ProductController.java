@@ -86,9 +86,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public void productList(Criteria cri,Long sno, Model model, Principal principal) {
+	public void productList(Criteria cri,Model model, Principal principal) {
 		
 		Map<String, Object> map = new HashMap<>();
+		map.put("cri", cri);
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
 		
 		map.put("dto", dto);

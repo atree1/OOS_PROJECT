@@ -209,7 +209,9 @@ public class UserController {
     
     @GetMapping("/list")
     public void List(Criteria cri, Model model) {
-	    
+    	if(cri.getCategory() == "") {
+    		cri.setCategory(null);
+    	};
     	Map<String, Object> map = new HashMap<>();
     	map.put("cri", cri);
     	PageDTO pageDTO;
@@ -233,7 +235,6 @@ public class UserController {
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
             pageList.add(i);
         }
-        
         model.addAttribute("cri", cri);   
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);

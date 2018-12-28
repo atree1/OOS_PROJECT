@@ -30,8 +30,10 @@ function categoryMenuShow(num){
     if(num == 1){
         $(".Top_Menu").show();
     }else if(num == 2){
-        $(".Bottom_Menu").show();
+        $(".Outer_Menu").show();
     }else if(num == 3){
+        $(".Bottom_Menu").show();
+    }else if(num == 4){
         $(".Etc_Menu").show();
     }
 
