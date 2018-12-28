@@ -38,4 +38,6 @@ public interface ProductMapper {
 	
 	public int  totalProduct(Map<String, Object> map);
 	
+	public int minus(Map<String, Object> map);
+	
 }

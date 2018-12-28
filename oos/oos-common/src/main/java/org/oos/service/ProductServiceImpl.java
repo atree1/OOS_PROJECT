@@ -143,4 +143,14 @@ public class ProductServiceImpl implements ProductService {
 		return pMapper.getListBySno(map);
 	}
 
+	@Override
+	public int minus(Map<String, Object> map) {
+		return pMapper.minus(map);
+	}
+
+	@Override
+	public ProductOptionVO getOption(Long opno) {
+		return optMapper.get(opno);
+	}
+
 }

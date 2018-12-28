@@ -3,6 +3,7 @@ package org.oos.service;
 import java.util.List;
 import java.util.Map;
 
+import org.oos.domain.ProductOptionVO;
 import org.oos.domain.ProductVO;
 
 public interface ProductService {
@@ -32,4 +33,8 @@ public interface ProductService {
 	public int  totalProduct(Map<String, Object> map);
 	
 	public int resetVisitCnt();
+	
+	public int minus(Map<String, Object> map);
+	
+	public ProductOptionVO getOption(Long opno);
 }

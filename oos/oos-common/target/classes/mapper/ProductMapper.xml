@@ -200,6 +200,12 @@
 		where pno=${pno}
 	</update>
 	
+	<update id="minus">
+		update tbl_product_option
+		set qty = ${qty}
+		where opno=${opno}
+	</update>
+	
 		<update id="resetVisitCnt">
 		update tbl_product set visitcnt=0 where pno >0
 	</update>
