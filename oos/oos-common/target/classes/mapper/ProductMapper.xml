@@ -199,16 +199,15 @@
 	</update>
 	
 	<select id="count" parameterType="map" resultType="int">
-		 select count(*)
-		from tbl_product p
-		left join tbl_store s
+		select count(*) from tbl_product p
+			left join tbl_store s
 			on p.sno = s.sno
-		right join (select * from tbl_category 
-        where cateno > 0
-        group by pno) c
+			right join tbl_category c
 			on c.pno = p.pno
-		where p.pno > 0
-			and s.sno=1
+		 where s.sno > 0 and p.del='N' and p.pno > 0 and c.cateno > 0 
+		 <if test="sno != null">
+			and s.sno=#{sno}
+		</if>
 		<if test="seller == null">
 			and p.state='O'
 		</if>
