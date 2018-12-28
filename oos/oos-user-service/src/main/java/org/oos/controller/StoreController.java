@@ -128,6 +128,7 @@ public class StoreController {
 			Long sno, Model model) {
 
 		Map<String, Object> map = new HashMap<>();
+		map.put("cri", cri);
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
 
 		map.put("dto", dto);
