@@ -82,4 +82,10 @@ public class SellerServiceImpl implements SellerService {
 		return mapper.currentSeller(map);
 	}
 
+
+	@Override
+	public SellerVO getBySid(String sid) {
+		return mapper.getBySid(sid);
+	}
+
 }

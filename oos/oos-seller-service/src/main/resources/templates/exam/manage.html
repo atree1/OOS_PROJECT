@@ -56,13 +56,13 @@
 					<tbody>
 
 						<tr class="gradeA odd" role="row" th:each=arr:${orderList}>
-							<td class="sorting"><input type="checkbox" name="checkbox"
+							<td class="sorting"><input type="checkbox" id="checkbox"
 								th:value="${arr.odno}"></td>
 							<td class="odno" th:text=${arr.odno}></td>
 							<td class="ragdate"
 								th:text="${#dates.format(arr.regdate,'yyyy-MM-dd')}"></td>
 							<td class="state">
-							<select name="state" th:id="|state_${arr.odno}|" th:value="${arr.detail_state}">
+							<select class="state" th:id="|state_${arr.odno}|" th:value="${arr.detail_state}">
 									<option id="ready" value="ready"}>준비중</option>
 									<option id="shipping" value="shipping">배송중</option>
 									<option id="complete" value="complete">배송완료</option>
@@ -197,6 +197,16 @@ $(document).ready(function(){
 	        orderForm.submit();
 	    });
 	    
+		$.each(orderList, function(index, item){
+			var order = item.orderList[0];
+		
+			$(".state_"+state.odno).val(order.state);
+		});
+	})();
+	    
+	    $(".state").change(function(){
+			$(".checkbox"+$(this).attr("value").attr("checked",true);
+		});
 	    
 	    //삭제스크립트
 		$('#remove-btn').click(function() {

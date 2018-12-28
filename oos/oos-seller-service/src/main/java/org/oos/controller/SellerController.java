@@ -55,4 +55,5 @@ public class SellerController {
 		repo.save(vo);
 		return "redirect:/seller/login";
 	}
+	
 }
