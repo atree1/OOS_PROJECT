@@ -202,8 +202,6 @@ $(document).ready(function(e){
 		signupCheck("tel", "전화번호","failTel");
 		signupCheck("roadAddr2", "주소", "failADDRESS");
 		signupCheck("roadAddr3", "상세주소", "failDETAIL");
-
-		
 		
 		 $('input:checkbox[type=checkbox]:checked').each(function (i,e) {
 			
@@ -228,10 +226,15 @@ $(document).ready(function(e){
 		});
 		
 		 
-		 if($('input:checkbox[type=checkbox]:checked') == null){
-			 alert("해시태그를 선택해 주세요");
-			 return;
-		 }
+		if($(".uploadResult ul").html() == ""){
+			alert("상점 이미지는 반드시 등록해야합니다.");
+			return;
+		};
+		
+		if($('input:checkbox[type=checkbox]:checked').length == 0){
+			alert("해시태그는 반드시 한 개 이상 등록해야합니다.");
+			return;
+		};
 		 
 		formObj.append(str).submit();
 	
@@ -320,7 +323,6 @@ $(document).ready(function(e){
 			$("#"+fail).html(string+"를(을) 입력해주세요");
 			throw "stop";
 		}
-		
 	}
 
 });
