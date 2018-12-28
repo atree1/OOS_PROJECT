@@ -124,22 +124,26 @@
 					<tbody>
 						<tr>
 					<td id="allSinsang" style="padding-right:20px;" onclick="javascript:location.href='/user/list'">
-						<div class="textImg active" style="margin-top:3px;"></div>
+						<div class="textImg active" style="margin-top:3px;">전체신상</div>
 					</td>
 					<td id="ShopSinsang" class="AllCategory" style="width:166px; padding:0px;" data-cat="shop">
-                    	<div class="textImg" style="margin-top:3px;"></div>
+                    	<div class="textImg" style="margin-top:3px;color:#43a047">전체상점</div>
                     </td>
                     <td id="TopSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="top"
                     	onmouseover="javascript:categoryMenuShow(1)" onmouseout="javascript:$('.Top_Menu').hide()">
-                    	<div class="textImg" style="margin-top:3px;"></div>
+                    	<div class="textImg" style="margin-top:3px;">상의</div>
                     </td>
-					<td id="BottomSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="bottom"
-						onmouseover="categoryMenuShow(2)" onmouseout="javascript:$('.Bottom_Menu').hide()">
-						<div class="textImg" style="margin-top:3px;"></div>
+					<td id="OuterSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="outer"
+						onmouseover="categoryMenuShow(2)" onmouseout="javascript:$('.Outer_Menu').hide()">
+						<div class="textImg" style="margin-top:3px;">아우터</div>
 					</td>
-                    <td id="EtcSinsang"  style="width:166px; padding:0px;" data-cat="etc"
-						onmouseover="categoryMenuShow(3)" onmouseout="javascript:$('.Etc_Menu').hide()">
-						<div class="textImg" style="margin-top:3px;"></div>
+                    <td id="BottomSinsang" class="bigCategory" style="width:166px; padding:0px;" data-cat="bottom"
+						onmouseover="categoryMenuShow(3)" onmouseout="javascript:$('.Bottom_Menu').hide()">
+						<div class="textImg" style="margin-top:3px;">바지</div>
+					</td>
+					<td id="EtcSinsang"  style="width:166px; padding:0px;" data-cat="etc"
+						onmouseover="categoryMenuShow(4)" onmouseout="javascript:$('.Etc_Menu').hide()">
+						<div class="textImg">악세사리</div>
 					</td>
                      <td style="width:400px; padding:0px;" onmouseover="javascript:$('.textImg').removeClass('hover')"></td>
 							<td style="width: 400px; padding: 0px; cursor:unset;"></td>
@@ -196,20 +200,27 @@
 				<div class="Top_Menu" onmouseover="javascript:$('.Top_Menu').show()" 
 					onmouseout="javascript:$('.Top_Menu').hide()">
 	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
-	                    <li class="TopLi" data-cat="">패딩</li>
-	                    <li class="TopLi" data-cat="knit">니트</li>
-	                    <li class="TopLi" data-cat="jacket">재킷</li>
-	                    <li class="TopLi" data-cat="outer">아우터</li>
+	      				<li class="TopLi" data-cat="knit">니트</li>
+	      				 <li class="TopLi" data-cat="tshirt">반팔티</li>
 	                    <li class="TopLi" data-cat="shirt">셔츠</li>
-	                    <li class="TopLi" data-cat="">원피스</li>
+	                    <li class="TopLi" data-cat="onepiece">원피스</li>
+	                </ul>
+	            </div>
+	            <div class="Outer_Menu" onmouseover="javascript:$('.Outer_Menu').show()" 
+					onmouseout="javascript:$('.Outer_Menu').hide()" >
+	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
+	                    <li class="TopLi" data-cat="padding">패딩</li>
+	                    <li class="TopLi" data-cat="coat">코트</li>
+	                    <li class="TopLi" data-cat="jacket">재킷</li>
 	                </ul>
 	            </div>
 	            <div class="Bottom_Menu" onmouseover="javascript:$('.Bottom_Menu').show()" 
 					onmouseout="javascript:$('.Bottom_Menu').hide()">
 	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
-	                    <li class="TopLi" data-cat="">청바지</li>
-	                    <li class="TopLi" data-cat="">바지</li>
-	                    <li class="TopLi" data-cat="">치마</li>
+	                    <li class="TopLi" data-cat="jeans">청바지</li>
+	                    <li class="TopLi" data-cat="cotton">면바지</li>
+	                    <li class="TopLi" data-cat="half">반바지</li>
+	                    <li class="TopLi" data-cat="skirt">치마</li>
 	                </ul>
 	            </div>
 	            <div class="Etc_Menu" onmouseover="javascript:$('.Etc_Menu').show()" 
@@ -217,10 +228,10 @@
 	                <ul style="list-style:none; padding:0px; font-size:13px; line-height:2.0; color:#9b9b9b; padding:0px 25px;">
 	                    <li class="TopLi" data-cat="shoes">신발</li>
 	                    <li class="TopLi" data-cat="hat">모자</li>
-	                    <li class="TopLi" data-cat="clock">손목시계</li>
+	                    <li class="TopLi" data-cat="watch">손목시계</li>
 	                    <li class="TopLi" data-cat="wallet">지갑</li>
 	                    <li class="TopLi" data-cat="belt">벨트</li>
-	                    <li class="TopLi" data-cat="glass">안경</li>
+	                    <li class="TopLi" data-cat="glasses">안경</li>
 	                    <li class="TopLi" data-cat="bag">가방</li>
 	                </ul>
 	            </div>
