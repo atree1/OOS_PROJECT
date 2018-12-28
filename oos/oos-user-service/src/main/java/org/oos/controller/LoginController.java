@@ -47,9 +47,13 @@ public class LoginController {
 		
 	}
 	
+	@GetMapping(value="/snsSignup")
+	public String getSns() {
+		return "redirect:/oos/login";
+	}
 	
 	@PostMapping(value="/snsSignup")
-	public void getSns(AuthDTO dto, Model model) {
+	public void PostSns(AuthDTO dto, Model model) {
 		dto.setAccess_token(dto.getAccess_token().replaceAll("\\p{Z}", "+"));
 		model.addAttribute("info", dto);
 	}
