@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.oos.domain.CategoryVO;
 import org.oos.domain.Criteria;
 import org.oos.domain.PageDTO;
@@ -116,6 +118,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/register")
+	@Transactional
 	public String productRegisterPost(ProductVO vo) {
 		List<CategoryVO> cateList = new ArrayList<>();
 		String firstPath = "\\\\HB03-26\\upload\\" + vo.getImgList().get(0).getIpath() 
