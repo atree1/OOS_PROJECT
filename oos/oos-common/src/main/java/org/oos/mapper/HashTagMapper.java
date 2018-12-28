@@ -21,7 +21,7 @@ public interface HashTagMapper {
 	
 	public List<StoreHashTagVO> getStoreTagList(Long sno);
 	
-	public void insertStore(StoreHashTagVO vo);
+	public int insertStore(StoreHashTagVO vo);
 	
 	public int deleteAll(Long sno);
 }

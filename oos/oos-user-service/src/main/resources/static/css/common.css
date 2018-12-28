@@ -3259,8 +3259,8 @@ input[type="radio"]:checked+label:before {
 
 .tradeBtnWrapClass {
 	position: relative;
-	height: 80px;
-	padding: 0px 100px 30px 200px;
+	height: 60px;
+	padding: 0px 100px 0px 200px;
 }
 
 .main_img .img_edge {
