@@ -126,7 +126,7 @@
 			and p.state='O'
 		</if>
 		<if test="dto != null">
-			<if test="dto.cri.category != null">
+			<if test="dto.cri.category != null ">
 				and c.catename=#{dto.cri.category}
 			</if>
 			<if test="dto.cri.filter != null">
@@ -196,10 +196,18 @@
 	
 	<select id="count" parameterType="map" resultType="int">
 		select count(*)
-		from tbl_product
-		where pno > 0
+		from tbl_product p
+		right join tbl_category c
+			on c.pno = p.pno
+		where p.pno > 0
 		<if test="sno != null">
-			and sno=#{sno}
+			and s.sno=#{sno}
+		</if>
+		<if test="seller == null">
+			and p.state='O'
+		</if>
+		<if test="cri.category != null ">
+			and c.catename=#{cri.category}
 		</if>
 		<if test="cri != null and cri.filter != null">
 			and pname like concat("%", #{cri.keyword} ,"%")
