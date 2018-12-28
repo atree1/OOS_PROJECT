@@ -71,6 +71,7 @@
 	<!-- /#page-wrapper -->
 	<form id="actionForm" action="/product/list">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
+		<input type='hidden' id="pageNum" name='pageNum' th:value='${pageMaker.cri.pageNum}' />
 	</form>
 </div>
 
@@ -110,7 +111,7 @@ $(document).ready(function(){
 	
 	$(".paginate_button").click(function(e) {
 		
-		 $("#pageNum").val($(this).attr("id").substring(0));
+		 $("#pageNum").val($(this).attr("id"));
 		actionForm.submit();
 	});
 	
