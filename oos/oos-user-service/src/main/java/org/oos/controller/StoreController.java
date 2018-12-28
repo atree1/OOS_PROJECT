@@ -87,14 +87,10 @@ public class StoreController {
 			String[] numbers = sViewCookie.split("_");
 
 			String bno = "" + sno;
-			log.info(bno);
-
 			for (String number : numbers) {
-				log.info(number);
 
 				if (number.equals(bno)) {
 					check = true;
-					log.info("" + check);
 					break;
 				}
 			}
@@ -111,14 +107,9 @@ public class StoreController {
 			String[] numbers = pViewCookie.split("_");
 
 			String bno = "" + pno;
-			log.info(bno);
-
 			for (String number : numbers) {
-				log.info(number);
-
 				if (number.equals(bno)) {
 					check = true;
-					log.info("" + check);
 					break;
 				}
 			}
@@ -134,16 +125,12 @@ public class StoreController {
 		Long sbno, Long sno, Model model) {
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("cri", cri);
 		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
 
 		String sid = storeService.get(sno).getOwner();
 		map.put("dto", dto);
 		map.put("sno", sno);
 		map.put("sid", sid);
-		log.info("sid:"+sid);
-		
-		log.info(sViewCookie);
 		checkStoreVisit(sViewCookie, sno);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 
