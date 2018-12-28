@@ -26,7 +26,7 @@ $(".goSearch").click(function(){
 	var keyword = $("#searchText").val();
 	
 	if(keyword.length != 0){
-		actionForm.append("<input type='hidden' id='category' name='category' value='"+$("#category_").val()+"'>");
+		actionForm.append("<input type='hidden' id='filter' name='filter' value='"+$("#category_").val()+"'>");
 		actionForm.append("<input type='hidden' id='keyword' name='keyword' value='"+keyword+"'>");
 		actionForm.attr("action","/user/list").submit();
 	}else{

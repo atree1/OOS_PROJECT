@@ -32,7 +32,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+<<<<<<< HEAD
+                <a href="http://localhost:8081/main" class="navbar-brand">Out Of Stock</a>
+=======
                 <a class="navbar-brand" href="/main">Out Of Stock</a>
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
             </div>
             <!-- /.navbar-header -->
 
@@ -255,7 +259,7 @@
                             </div>
                         </li>
                         <li sec:authorize="hasRole('ROLE_SELLER')">
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> 
+                            <a href="#"><i class="fa fa-cubes fa-fw"></i> 
                             		상품관리<span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level">
                                 <li><a href="/product/register">상품등록(1번)</a></li>
@@ -271,7 +275,7 @@
                             </ul>
                         </li>
                        <li sec:authorize="hasRole('ROLE_SELLER')">
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 문의/리뷰 <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> 문의/리뷰 <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li><a href="/qna/list">Q&A 관리</a></li>
                                 <li><a href="/rev/list">리뷰관리</a></li>
@@ -279,8 +283,8 @@
                         </li>
                         <li sec:authorize="hasRole('ROLE_SELLER')">
                             <a href="#">
-                            	<i class="fa fa-edit fa-fw"></i> 
-                           		 판매자정보 <span class="fa arrow">
+                            	<i class="fa fa-apple fa-fw"></i> 
+                           		 스토어 정보 <span class="fa arrow">
                            	</a>
                               <ul class="nav nav-second-level">
                                 <li><a href="/store/register">스토어 등록</a></li>
@@ -289,7 +293,18 @@
                         </li>
                         
                         <li sec:authorize="hasRole('ROLE_SELLER')">
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 공지사항 <span class="fa arrow"></span></a>
+                            <a href="#">
+                            	<i class="fa fa-desktop fa-fw"></i> 
+                           		 판매자 정보 <span class="fa arrow">
+                           	</a>
+                              <ul class="nav nav-second-level">
+                                <li><a href="/sellerInfo/read">판매자 정보 조회</a></li>
+                                <li><a href="/sellerInfo/modify">판매자 정보 수정</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li sec:authorize="hasRole('ROLE_SELLER')">
+                            <a href="#"><i class="fa fa-envelope-o fa-fw"></i> 공지사항 <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/adminNotify/notify">관리자 공지</a>

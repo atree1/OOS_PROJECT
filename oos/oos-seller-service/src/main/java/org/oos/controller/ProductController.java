@@ -121,7 +121,7 @@ public class ProductController {
 					+ "\\" + vo.getImgList().get(0).getUuid() + "_" 
 					+ vo.getImgList().get(0).getIname();
 		try {
-			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN8521692284338889379",
+			List<String> list = autoMIService.predict("oos-atree-224402", "us-central1", "ICN3296882034050407743",
 					firstPath, "0.7");
 
 			list.forEach(name -> {
