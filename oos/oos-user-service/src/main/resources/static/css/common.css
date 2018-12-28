@@ -106,7 +106,7 @@ button, input, table, div, textarea, a, span {
 	margin: 0 auto;
 }
 
-.Top_Menu, .Bottom_Menu, .Shoes_Menu {	
+.Top_Menu, .Bottom_Menu, .Etc_Menu {	
 	position: absolute;
 	width: 100%;
 	top: 52px;
@@ -4006,7 +4006,7 @@ input[type="radio"]:checked+label:before {
 	background: url('../img/btn_home_nv_menu_03_on.svg') no-repeat;
 }
 
-#ShoesSinsang .textImg {
+#EtcSinsang .textImg {
 	width: 45px;
 	height: 22px;
 	background: url('../img/btn_home_nv_menu_04_off.png') no-repeat;
@@ -4014,13 +4014,13 @@ input[type="radio"]:checked+label:before {
 	margin: 0 auto;
 }
 
-#ShoesSinsang .textImg:hover {
+#EtcSinsang .textImg:hover {
 	background: url('../img/btn_home_nv_menu_04_over.png') no-repeat;
 	background-size: 43px;
 	cursor: pointer;
 }
 
-#ShoesSinsang .textImg.active {
+#EtcSinsang .textImg.active {
 	background: url('../img/btn_home_nv_menu_04_on.svg') no-repeat;
 }
 

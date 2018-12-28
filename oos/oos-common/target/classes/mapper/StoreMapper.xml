@@ -41,7 +41,7 @@
 		tbl_store s left join tbl_store_img i on s.sno =i.sno
 		left join tbl_store_hashtag h on s.sno=h.sno
 		where s.sno> 0 and s.del='N'
-		<if test="cri.category != null">
+		<if test="cri.filter != null">
 			and s.sname like concat("%", #{cri.keyword} ,"%")
 		</if>
 		group by s.sno desc
@@ -70,7 +70,7 @@
 		left join (select * from tbl_store_img) d
 		on d.sno = a.sno
 		where a.sno > 0
-		<if test="cri.category != null">
+		<if test="cri.filter != null">
 			and a.sname like concat("%", #{cri.keyword} ,"%")
 		</if>
 		<choose>
@@ -168,7 +168,7 @@
 	<select id="count" resultType="int">
 		select count(*) from tbl_store
 		where sno > 0 and del = 'N'
-		<if test="category != null">
+		<if test="filter != null">
 			and sname like concat("%", #{keyword} ,"%")
 		</if>
 	</select>

@@ -23,6 +23,7 @@ public class ProductVO {
 	private List<ProductImgVO> imgList;
 	private List<ProductOptionVO> optList;
 	private List<CategoryVO> cateList;
+	private List<HashTagVO> tagList;
 	private char del;	
 	private  char state;	
 	private int QuestionReplyCnt;
