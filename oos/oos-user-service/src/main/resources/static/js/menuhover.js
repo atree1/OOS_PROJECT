@@ -32,7 +32,7 @@ function categoryMenuShow(num){
     }else if(num == 2){
         $(".Bottom_Menu").show();
     }else if(num == 3){
-        $(".Shoes_Menu").show();
+        $(".Etc_Menu").show();
     }
 
 }

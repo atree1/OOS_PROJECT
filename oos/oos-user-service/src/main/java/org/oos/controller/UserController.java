@@ -209,7 +209,6 @@ public class UserController {
     
     @GetMapping("/list")
     public void List(Criteria cri, Model model) {
-    	log.info(cri.getFilter());
 	    
     	Map<String, Object> map = new HashMap<>();
     	map.put("cri", cri);

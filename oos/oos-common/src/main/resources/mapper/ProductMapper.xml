@@ -126,6 +126,9 @@
 			and p.state='O'
 		</if>
 		<if test="dto != null">
+			<if test="dto.cri.category != null">
+				and c.catename=#{dto.cri.category}
+			</if>
 			<if test="dto.cri.filter != null">
 			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
