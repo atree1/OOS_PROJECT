@@ -16,16 +16,6 @@
 </style>
 <div class="container" style="margin-top: 20px;"
 	layout:fragment="container">
-	<div class="menuRoot">
-		<!-- <div class="table-cell" style="">
-			<span class="bigCategoryName"
-				style="color: #9b9b9b; margin-right: 10px;">여성의류</span> <span
-				class="detailCategoryName"
-				style="color: #9b9b9b; margin-right: 10px;">> 티 & 탑</span> <span
-				class="selectedMypageMenu selectedGoodsNameInner"> > 양면기모
-				레터링맨투맨(주문폭주, 리오더폭발)</span>
-		</div> -->
-	</div>
 
 	<div class="innerDetail_goods_info" style="padding-bottom: 50px;">
 		<div class="img_area"
@@ -112,23 +102,7 @@
 					</div>
 					<div class="goods_price" th:text="${product.price}">PRICE</div>
 					<div class="div_line_1px" style="width: 100%; margin-bottom: 30px;"></div>
-					<table class="goods_option_table" style="margin-bottom: 30px;">
-						<tbody>
-							<tr>
-								<td class="title">색상</td>
-								<td class="color">오트밀 차콜그레이</td>
-							</tr>
-							<tr>
-								<td class="title">혼용률</td>
-								<td class="content">면</td>
-							</tr>
-							<tr>
-								<td class="title">제조국</td>
-								<td class="content">대한민국</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="div_line_1px" style="width: 100%; margin-bottom: 21px;"></div>
+					
 					<table class="goods_option_table" style="margin-bottom: 30px;">
 						<tbody>
 							<tr>
@@ -641,22 +615,32 @@
 				}
 				
 				for(var i=0, len = list.length ||0; i<len; i++){
-					str +="<div data-rno='"+list[i].rno+"' class='item_review'>";
+					if(list[i].mid == null){
+						str +="<div data-rno='"+list[i].rno+"' style='padding-left:40px; background:#fafafa' class='item_review'>";
+					}else{
+						str +="<div data-rno='"+list[i].rno+"' class='item_review'>";
+					}
 					str +="<div class='review_profile'><img src='/img/profile.jpg'></div><div><div>";
-					str +="<span class='title' style='margin-top: 17px; padding: 15px;'><strong>"+list[i].title+"</strong></span>";
-					if(list[i].kind =="Q"){
+					str +="<span class='title' style='margin-top: 17px; padding: 15px;'>";
+					if(list[i].title !== "null"){
+						str += "<strong>"+list[i].title+"</strong></span>";
+					}else{
+						str += "<strong>판매자</strong></span>";
+					}
+					
+					if(list[i].kind =="Q" || list[i].title == "null"){
 						str+="</div><div>";
 					}else{
 						str +="<span class='score'><img src ='/img/"+list[i].score+"star.png' width='80px'/></span></div><div>";
 					}
 					
 					if(list[i].depth==1){
-						str+="<div class='area_status_user' style='margin-left:30px'><span class='text_info'>"+list[i].mid;
+						str+="<div class='area_status_user'>";
 					}else{
-						str+="<div class='area_status_user'><span class='text_info'>"+list[i].mid;
+						str+="<div class='area_status_user'><span class='text_info'>"+list[i].mid + " /</span>";
 					}					
-					str +=" /</span><span class='text_info'>"+formatDate(list[i].regdate)+"</span>";
-					if(mid == list[i].mid){
+					str +=" <span class='text_info'>"+formatDate(list[i].regdate)+"</span>";
+					if(list[i].mid != null && mid == list[i].mid){
 						str +="/<span class='text_info infoBtn modifyBtn' data-rno='"+list[i].rno+"'>수정</span>";
 						str +="<span class='text_info infoBtn deleteBtn' data-rno='"+list[i].rno+"'>삭제</span>";
 					}
