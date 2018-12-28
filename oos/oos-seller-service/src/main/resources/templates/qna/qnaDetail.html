@@ -87,6 +87,8 @@
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 	
+	//리스트창 새로고침
+	opener.parent.location="/qna/list";
 	
 		$(document).ready(function(){
 			var rep = [[${replyList[0]}]];
@@ -101,8 +103,7 @@
 					qnaForm.attr("method", "post")
 					.attr("action","/qna/qnaDetail").submit(); 
 					
-					//리스트창 새로고침
-					opener.parent.location="/qna/list";
+
 					opener.parent.location.reload();
 					
 				}else{   //취소

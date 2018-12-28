@@ -256,6 +256,7 @@ $(document).ready(function(){
 				replyForm.html("");
 				replyForm.attr("method", "post")
 				.append("<input type='hidden' name='rno' value='"+$(this).attr("data-rno")+"' >")
+				.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >")
 				.attr("action","/qna/list").submit(); 
 			}else{ 
 			    return;
