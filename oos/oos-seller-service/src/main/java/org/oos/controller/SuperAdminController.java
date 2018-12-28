@@ -139,7 +139,7 @@ public class SuperAdminController {
 	@GetMapping("/manageProduct")
 	public void manageProduct(Model model, Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
-		
+		map.put("cri", cri);
 		PageDTO pageDTO = new PageDTO(cri,productService.getTotal(map)); 
 	
 		map.put("dto", pageDTO);
