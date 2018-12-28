@@ -89,20 +89,17 @@ public class ProductController {
 	public void productList(Criteria cri,Model model, Principal principal) {
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("cri", cri);
-		PageDTO dto = new PageDTO(cri, productService.getTotal(map));
-		
-		map.put("dto", dto);
 		map.put("sno", storeService.getBySid(principal.getName()).getSno());
-		map.put("seller", "seller");
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
-        
+		map.put("dto", pageDTO);
+		map.put("seller", "seller");
+        log.info(pageDTO.getCri().getAmount()+"");
         List<Integer> pageList = new ArrayList<>();
         
         for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
             pageList.add(i);
+           
         }
-        
         
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
