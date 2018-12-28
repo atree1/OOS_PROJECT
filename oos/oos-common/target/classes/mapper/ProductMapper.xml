@@ -200,13 +200,16 @@
 	
 	<select id="count" parameterType="map" resultType="int">
 		select count(*) from tbl_product p
-			left join tbl_store s
-			on p.sno = s.sno
+		<if test="cri != null and cri.category != null ">
 			right join tbl_category c
 			on c.pno = p.pno
-		 where s.sno > 0 and p.del='N' and p.pno > 0 and c.cateno > 0 
+		</if>
+		 where p.del='N' and p.pno > 0 
+		 <if test="cri != null and cri.category != null ">
+			and c.cateno > 0 
+		</if>
 		 <if test="sno != null">
-			and s.sno=#{sno}
+			and p.sno=#{sno}
 		</if>
 		<if test="seller == null">
 			and p.state='O'
