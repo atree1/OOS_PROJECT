@@ -151,7 +151,7 @@
 					return {
 					    "add": function(val) {
 					        items.push(val);
-					        $.cookie(cookieName, items.join(','));
+					        $.cookie(cookieName, items.join(','),{ expires: 1});
 					    },
 					    "remove": function (val) { 
 					        
@@ -169,9 +169,7 @@
 					    }
 					  }
 					}  
-				 
-								
-			
+				 											
 				//cookieList("popupOpen");
 				
 				var cookieValue=cookieList("popupOpen").items();
@@ -182,9 +180,10 @@
 			
 				 var result=true;
 				 $.each(cookieValue,function(i,item){
-				 	
-			
+				 				
 				 console.log(item);
+				 
+				
 				 
 				if(store.sno == item){
 					
@@ -212,6 +211,8 @@
 					 }		
 					 	
 				 }
+				 
+				 
 			 	
 			if(mid != undefined){
 						$.ajax({

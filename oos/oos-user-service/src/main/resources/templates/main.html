@@ -196,8 +196,7 @@
 		$(".showcase_con").click(function(){
 			mainForm.append("<input type='hidden' name='pno' value='"+
 							$(this).find("img").attr("id").substring(6)+"'>")
-					.append("<input type='hidden' name='sno' value='"+
-							$(this).data("sno")+"'>")		
+							
 					.attr("action","/store/detail").submit();
 		});
 		
@@ -212,7 +211,6 @@
 				var sno = $(this).attr("class")
 						.substring(21);
 				mainForm.append("<input type='hidden' name='pno' value='"+pno+"'>");
-				mainForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
 
 				mainForm.attr("action","/store/detail").submit();
 			});
