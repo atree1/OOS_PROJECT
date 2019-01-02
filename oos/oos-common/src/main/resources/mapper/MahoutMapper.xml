@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.oos.mapper.MahoutMapper">
+
+	<resultMap type="org.oos.domain.CartVO" id="Cart">
+		<result column="c_mid" property="mid" />
+		<result column="c_pno" property="pno"/>
+	</resultMap>
+	<resultMap type="org.oos.domain.OrderDetailVO" id="Order">
+		<result column="d_mid" property="mid" />
+		<result column="d_pno" property="pno"/>
+	</resultMap>
+	<resultMap type="org.oos.domain.Mahout_MemberVO" id="User">
+		<result column="mid" property="mid" />
+		<result column="ano" property="mno" />
+		<collection property="cartList" resultMap="Cart" />
+		<collection property="orderList" resultMap="Order" />
+	</resultMap>
+	
+	<select id="getOrderList" resultMap="User">
+		select a.mid, a.ano, c.pno c_pno,c.mid c_mid, dt.pno d_pno, dt.mid d_mid from tbl_member_auth a
+        left join (select mid, pno from tbl_order_detail d 
+        left join tbl_order o
+        on d.ono = o.ono
+        where d.odno > 0 and o.ono > 0) dt
+        on a.mid = dt.mid
+        left join tbl_cart c
+        on a.mid = c.mid
+		where a.ano > 0 and cno > 0
+		order by ano, c.pno
+	</select>
+	
+  <insert id="insert">
+  	insert into recommend(user_id, item_id, value)
+  	values(#{user_id}, #{item_id}, #{value})
+  </insert>
+  
+  <insert id="insert_user_order">
+  	insert into tbl_user_order(mid, pno)
+  	values(#{mid}, #{pno})
+  </insert>
+  
+  <delete id="delete">
+  	delete from recommend
+  </delete>
+  
+</mapper>

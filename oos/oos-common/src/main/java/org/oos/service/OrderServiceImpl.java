@@ -90,7 +90,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int monthlyRevenue(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return orderMapper.monthlyRevenue(map);
 	}
 	

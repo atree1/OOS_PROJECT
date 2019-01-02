@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.oos.service.MahoutService;
 import org.oos.service.OrderDetailService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
@@ -31,6 +32,9 @@ public class VisitManageTask  {
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
 	
+	@Setter(onMethod_ = @Autowired)
+	private MahoutService mahoutService;
+	
 	@Scheduled(cron="0 0 0 * * *")
 	@Transactional
 	public void resetVisit() throws Exception{
@@ -39,5 +43,12 @@ public class VisitManageTask  {
 		storeService.resetVisitCnt();
 		productService.resetVisitCnt();
 	}
+	
+	@Scheduled(cron="0 0 0 * * *")
+	@Transactional
+	public void Mahout() throws Exception{
+		mahoutService.setTable();
+	}
+	
 	
 }
