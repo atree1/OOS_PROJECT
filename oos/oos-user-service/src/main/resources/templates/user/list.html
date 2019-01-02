@@ -130,6 +130,8 @@
 
 
 		<form id="listForm">
+			<input type='hidden' name='pageNum' id='pageNum'
+				th:value="${cri.pageNum}" /> 
 			<input type='hidden' name='category' id='category'
 				th:value="${cri.category}" /> 
 			<input type='hidden' name='keyword'
