@@ -50,9 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/seller/*").permitAll()
 
-		.antMatchers("/store/*", "/qna/*","/notify/*","/adminNotify/*","/product/*","/exam")
+		.antMatchers("/store/*", "/qna/*","/notify/*","/adminNotify/notify","/product/*","/exam")
 		.hasRole("SELLER")
-		.antMatchers("/admin/*").hasRole("ADMIN");
+		.antMatchers("/admin/*","/adminNotify/notify","/adminNotify/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
 		
