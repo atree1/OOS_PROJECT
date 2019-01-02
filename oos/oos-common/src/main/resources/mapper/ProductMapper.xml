@@ -142,6 +142,7 @@
 			<if test="dto.cri.filter != null">
 			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
+			group by p.pno
 			<choose>
 				<when test="dto.cri.orderby == '1'.toString()">
 					order by p.price desc

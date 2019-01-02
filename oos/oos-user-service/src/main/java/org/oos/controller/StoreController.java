@@ -136,7 +136,7 @@ public class StoreController {
 		map.put("sno", sno);
 
 		checkStoreVisit(sViewCookie, sno);
-		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
+		PageDTO pageDTO = new PageDTO(cri, productService.totalProduct(map));
 
 
 		List<Integer> pageList = new ArrayList<>();
@@ -150,7 +150,7 @@ public class StoreController {
 		model.addAttribute("pageMaker", pageDTO);
 		model.addAttribute("store", storeService.get(sno));
 		model.addAttribute("storeTag", hashService.getStoreTagList(sno));
-		model.addAttribute("product", productService.getList(map));
+		model.addAttribute("product", productService.getListBySno(map));
 
 	}
 
