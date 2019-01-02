@@ -59,8 +59,7 @@ public class OrderController {
 		List<OrderDetailVO> list = orderDetailService.getListByOno(ono);
 		list.forEach(vo -> {
 			map.put("opno", vo.getOpno());
-			map.put("qty", 
-			productService.getOption(vo.getOpno()).getQty() - vo.getQty());
+			map.put("qty", productService.getOption(vo.getOpno()).getQty() - vo.getQty());
 		cartList.forEach(cart -> {
 				if(cart.getOpno().equals(vo.getOpno())) {
 					cartService.remove(cart.getCno());
@@ -68,7 +67,7 @@ public class OrderController {
 			});
 			
 		});
-		
+		productService.minus(map);
 		model.addAttribute("order", list);
 	}
 	
