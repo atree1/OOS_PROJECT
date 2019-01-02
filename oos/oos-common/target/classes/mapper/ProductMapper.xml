@@ -142,6 +142,9 @@
 			<if test="dto.cri.filter != null">
 			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
+			<if test="dto.cri.category == null ">
+				 group by p.pno
+			</if>
 			<choose>
 				<when test="dto.cri.orderby == '1'.toString()">
 					order by p.price desc
@@ -153,6 +156,7 @@
 					order by p.pno desc
 				</otherwise>
 			</choose>
+			
 			limit #{dto.cri.skip} ,#{dto.cri.amount}
 		</if>
 	</select>
