@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.antMatchers("/store/*", "/qna/*","/notify/*","/adminNotify/*","/product/*","/exam")
 		.hasRole("SELLER")
-		.antMatchers("/admin/*","/adminNotify/*").hasRole("ADMIN");
+		.antMatchers("/admin/*").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
 		
