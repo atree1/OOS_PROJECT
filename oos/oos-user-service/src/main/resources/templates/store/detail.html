@@ -20,7 +20,7 @@
 	<div class="innerDetail_goods_info" style="padding-bottom: 50px;">
 		<div class="img_area"
 			style="border-right: 1px solid rgb(221, 221, 221);">
-			<div class="gthumbs" style=" height:720px;overflow-y: auto;">
+			<div id="gthumbs" class="gthumbs" style=" height:720px;overflow-y: auto;">
 
 			</div>
 			<div style="position: relative; width: 540px; height:720px;line-height:200px;">
@@ -256,15 +256,15 @@
 			 $(".inner_main_img").attr("src","/display?fileName="+fileCallPath); 
 			
 		
-			/*  $.each(img, function(index, item){
+			 $.each(imgList, function(index, item){
 				if(item.pno == product.pno){
 					$(".inner_main_img").attr("src",item.img);
 				} 
-			});  */
+			});  
 			
-			/* for(img of imgList){
+			 for(img of imgList){
 				
-				var thumbFileCallPath =  encodeURIComponent(img.ipath+ "/s_"+ img.uuid +"_"+img.iname);
+				var thumbFileCallPath =  encodeURIComponent(img.ipath+ "/"+ img.uuid +"_"+img.iname);
 
 				str += "<div class='gthumb'>"
 				str += "<img width='60' src='/display?fileName="+
@@ -273,7 +273,7 @@
 		
 			}
 			
-			$(".gthumbs").html(str); */
+			$(".gthumbs").html(str); 
 		}
 		
 		//장바구니
