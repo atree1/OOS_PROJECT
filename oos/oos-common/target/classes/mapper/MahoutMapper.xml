@@ -36,16 +36,22 @@
 		where a.ano > 0
 		order by ano
 	</select>
+
+	
+	<select id="getScoreList" resultType="org.oos.domain.ReplyVO">
+		select * from tbl_reply
+		where rno > 0 and kind = "R" and mid is not null and del = 'N'
+	</select>
 	
   <insert id="insert">
   	insert into recommend(user_id, item_id, value)
   	values(#{user_id}, #{item_id}, #{value})
   </insert>
-<!--   
+
   <insert id="insert_user_order">
   	insert into tbl_user_order(mid, pno)
   	values(#{mid}, #{pno})
-  </insert> -->
+  </insert> 
   
   <delete id="delete">
   	delete from recommend

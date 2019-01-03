@@ -5,12 +5,11 @@ import java.util.List;
 
 import org.oos.domain.MahoutVO;
 import org.oos.domain.Mahout_MemberVO;
+import org.oos.domain.ReplyVO;
 import org.oos.mapper.MahoutMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import groovy.util.logging.Log;
-import groovy.util.logging.Log4j;
 import lombok.Setter;
 
 @Service
@@ -25,6 +24,9 @@ public class MahoutServiceImpl implements MahoutService{
 		mapper.delete();
 		List<Mahout_MemberVO> memList = mapper.getOrderList();
 		List<MahoutVO> userList = new ArrayList<>();
+		
+		List<ReplyVO> reply = mapper.getScoreList();
+		
 		memList.forEach(vo -> {
 			
 			vo.getCartList().forEach(cart -> {
@@ -46,20 +48,33 @@ public class MahoutServiceImpl implements MahoutService{
 				for(int i=0; i<userList.size(); i++) {
 					if(userList.get(i).getItem_id().equals(order.getPno())) {
 						userList.remove(i);
-						user.setValue(5);
 						break;
 					}
 				}
 				userList.add(user);
 			});
 			
+			reply.forEach(rep -> {
+				int index = -1;
+				MahoutVO user = new MahoutVO();
+				user.setUser_id(vo.getMno());
+				user.setItem_id(rep.getPno());
+				for(int i=0; i<userList.size(); i++) {
+					if(userList.get(i).getItem_id().equals(rep.getPno())) {
+						userList.remove(i);
+						user.setValue(rep.getScore());
+						break;
+					}
+				}
+				userList.add(user);
+			});
 		});
 		
 		userList.forEach(vo -> {
 			log.info(vo+"");
-			
+			mapper.insert(vo);
 		});
-		mapper.insert(new MahoutVO());
+		
 	}
 
 }
