@@ -25,14 +25,13 @@ public class MahoutServiceImpl implements MahoutService{
 		mapper.delete();
 		List<Mahout_MemberVO> memList = mapper.getOrderList();
 		List<MahoutVO> userList = new ArrayList<>();
-		log.info(memList+"");
 		memList.forEach(vo -> {
 			
 			vo.getCartList().forEach(cart -> {
 				MahoutVO user = new MahoutVO();
 				user.setUser_id(vo.getMno());
 				user.setItem_id(cart.getPno());
-				user.setValue(3);
+				user.setValue(3.5);
 				
 				userList.add(user);
 			});
@@ -57,8 +56,10 @@ public class MahoutServiceImpl implements MahoutService{
 		});
 		
 		userList.forEach(vo -> {
-			mapper.insert(vo);
+			log.info(vo+"");
+			
 		});
+		mapper.insert(new MahoutVO());
 	}
 
 }

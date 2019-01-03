@@ -14,6 +14,5 @@ public interface MahoutMapper {
 
 	public int delete();
 	
-	public int insert(CategoryVO vo);
 	
 }
