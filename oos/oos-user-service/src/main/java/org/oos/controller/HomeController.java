@@ -1,5 +1,6 @@
 package org.oos.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +79,17 @@ public class HomeController {
 		model.addAttribute("bestS", storeService.getBestStore());
 		model.addAttribute("bestP", productService.bestProductList());
 		model.addAttribute("product", productService.getList(map));
+		
+		List<Integer> pageList = new ArrayList<>();
+	    
+        for(int i=pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++) {
+            pageList.add(i);
+        }
+        model.addAttribute("cri", cri);   
+	    model.addAttribute("pageList", pageList);
+        model.addAttribute("pageMaker", pageDTO);
+        
+		
 	}
 	
 	@GetMapping("/oos")

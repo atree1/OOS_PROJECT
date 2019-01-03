@@ -9,9 +9,12 @@ import org.oos.mapper.MahoutMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import groovy.util.logging.Log;
+import groovy.util.logging.Log4j;
 import lombok.Setter;
 
 @Service
+@lombok.extern.java.Log
 public class MahoutServiceImpl implements MahoutService{
 
 	@Setter(onMethod_=@Autowired)
@@ -22,14 +25,14 @@ public class MahoutServiceImpl implements MahoutService{
 		mapper.delete();
 		List<Mahout_MemberVO> memList = mapper.getOrderList();
 		List<MahoutVO> userList = new ArrayList<>();
-		
+		log.info(memList+"");
 		memList.forEach(vo -> {
 			
 			vo.getCartList().forEach(cart -> {
 				MahoutVO user = new MahoutVO();
 				user.setUser_id(vo.getMno());
 				user.setItem_id(cart.getPno());
-				user.setValue(2);
+				user.setValue(4);
 				
 				userList.add(user);
 			});
