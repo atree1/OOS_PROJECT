@@ -44,7 +44,8 @@ public class VisitManageTask  {
 		productService.resetVisitCnt();
 	}
 	
-	@Scheduled(cron="0 0 0 * * *")
+	/*@Scheduled(cron="0 0 0 * * *")*/
+	@Scheduled(cron="*/600 * * * * *")
 	@Transactional
 	public void Mahout() throws Exception{
 		mahoutService.setTable();

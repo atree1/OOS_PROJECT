@@ -20,16 +20,21 @@
 	</resultMap>
 	
 	<select id="getOrderList" resultMap="User">
-		select a.mid, a.ano, c.pno c_pno,c.mid c_mid, dt.pno d_pno, dt.mid d_mid from tbl_member_auth a
-        left join (select mid, pno from tbl_order_detail d 
-        left join tbl_order o
-        on d.ono = o.ono
-        where d.odno > 0 and o.ono > 0) dt
+		select a.mid, a.ano, c.pno c_pno,c.mid c_mid, dt.pno d_pno, dt.mid d_mid 
+		from tbl_member_auth a
+        left join 
+			(select mid, pno from tbl_order_detail d 
+			left join tbl_order o
+			on d.ono = o.ono
+			where d.odno > 0 and o.ono > 0
+            group by mid, pno) dt
         on a.mid = dt.mid
-        left join tbl_cart c
-        on a.mid = c.mid
-		where a.ano > 0 and cno > 0
-		order by ano, c.pno
+        left join (select * from tbl_cart
+        	where cno > 0
+        group by mid, pno) c
+        on c.mid = a.mid
+		where a.ano > 0
+		order by ano
 	</select>
 	
   <insert id="insert">
