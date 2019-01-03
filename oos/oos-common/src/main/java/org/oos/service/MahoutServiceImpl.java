@@ -25,7 +25,6 @@ public class MahoutServiceImpl implements MahoutService{
 		List<Mahout_MemberVO> memList = mapper.getOrderList();
 		List<MahoutVO> userList = new ArrayList<>();
 		
-		List<ReplyVO> reply = mapper.getScoreList();
 		
 		memList.forEach(vo -> {
 			
@@ -38,7 +37,6 @@ public class MahoutServiceImpl implements MahoutService{
 				userList.add(user);
 			});
 			 
-			
 			vo.getOrderList().forEach(order -> {
 				int index = -1;
 				MahoutVO user = new MahoutVO();
@@ -46,7 +44,8 @@ public class MahoutServiceImpl implements MahoutService{
 				user.setItem_id(order.getPno());
 				user.setValue(4);
 				for(int i=0; i<userList.size(); i++) {
-					if(userList.get(i).getItem_id().equals(order.getPno())) {
+					if(userList.get(i).getItem_id().equals(order.getPno())
+							&& (userList.get(i).getUser_id() == vo.getMno()) ) {
 						userList.remove(i);
 						break;
 					}
@@ -54,15 +53,17 @@ public class MahoutServiceImpl implements MahoutService{
 				userList.add(user);
 			});
 			
-			reply.forEach(rep -> {
+			
+			 mapper.getScoreList(vo.getMid()).forEach(rep -> {
 				int index = -1;
 				MahoutVO user = new MahoutVO();
 				user.setUser_id(vo.getMno());
 				user.setItem_id(rep.getPno());
+				user.setValue(rep.getScore());
 				for(int i=0; i<userList.size(); i++) {
-					if(userList.get(i).getItem_id().equals(rep.getPno())) {
+					if(userList.get(i).getItem_id().equals(rep.getPno())
+							&& (userList.get(i).getUser_id() == vo.getMno()) ) {
 						userList.remove(i);
-						user.setValue(rep.getScore());
 						break;
 					}
 				}
@@ -71,7 +72,6 @@ public class MahoutServiceImpl implements MahoutService{
 		});
 		
 		userList.forEach(vo -> {
-			log.info(vo+"");
 			mapper.insert(vo);
 		});
 		

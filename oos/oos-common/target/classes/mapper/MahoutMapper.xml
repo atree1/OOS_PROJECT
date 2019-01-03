@@ -34,13 +34,13 @@
         group by mid, pno) c
         on c.mid = a.mid
 		where a.ano > 0
-		order by ano
+		order by ano, dt.pno
 	</select>
-
 	
 	<select id="getScoreList" resultType="org.oos.domain.ReplyVO">
 		select * from tbl_reply
-		where rno > 0 and kind = "R" and mid is not null and del = 'N'
+		where rno > 0 and kind = "R" and mid = #{mid} and del = 'N'
+		order by mid
 	</select>
 	
   <insert id="insert">
@@ -48,11 +48,7 @@
   	values(#{user_id}, #{item_id}, #{value})
   </insert>
 
-  <insert id="insert_user_order">
-  	insert into tbl_user_order(mid, pno)
-  	values(#{mid}, #{pno})
-  </insert> 
-  
+
   <delete id="delete">
   	delete from recommend
   </delete>

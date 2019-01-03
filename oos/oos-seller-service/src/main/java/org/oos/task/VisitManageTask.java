@@ -44,8 +44,9 @@ public class VisitManageTask  {
 		productService.resetVisitCnt();
 	}
 	
-	/*@Scheduled(cron="0 0 0 * * *")*/
+	@Scheduled(cron="0 25 16 ? * *")
 	public void Mahout() throws Exception{
+		log.info("start!!!!!!!!!!!!!!!!!!");
 		mahoutService.setTable();
 	}
 	
