@@ -94,12 +94,12 @@
             </ul>
             
         </div>
-        <div class="todaySinsang" style="margin: 40px 0 30px 0;">
+        <!-- <div class="todaySinsang" style="margin: 40px 0 30px 0;">
             <span style="background-color: #fff; padding: 0 10px;">포커스 아이템</span>
             <div class="div_line_grey_2px"
                 style="margin-top: -8px; margin-bottom: 16px;"></div>
-        </div>
-        <div class="today_left_area"
+        </div> -->
+        <!-- <div class="today_left_area"
             style="background-color: #e3e0e8; width: 1100px; padding:10px 0">
             <ul class="goods_list_t1 goods_list_t6 ul_3col">
                 <li>
@@ -114,7 +114,7 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <div class="todaySinsang" style="margin-top: 76px;">
             <span style="background-color: #fff; padding: 0 10px;">오늘의 신상</span>
             <div class="div_line_grey_2px"
@@ -151,7 +151,7 @@
     </div>
 </div>
 <th:block layout:fragment="script">
-<<<<<<< HEAD
+
     <script th:inline="javascript">
     $(document).ready(function() {
         var mainForm = $("#mainForm");
@@ -196,7 +196,7 @@
         
         $("#goList").click(function() {
             window.location.href = "/user/list";
-        }); 
+        });
     
         $(".goodsContainer").click(
             function(e) {
@@ -209,66 +209,5 @@
             });
         });
     </script>
-=======
-	<script th:inline="javascript">
-	$(document).ready(function() {
-
-		var mainForm = $("#mainForm");
-	
-		(function(){
-			var bestP =  [[${bestP}]];
-			var bestS =  [[${bestS}]];
-			var product = [[${product}]];
-			
-			$.each(product, function(index, item){
-				var img = item.imgList[0];
-				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
-				$("#img_"+item.pno).attr("src","/display?fileName="+fileCallPath);
-			}); 
-			
-			$.each(bestP, function(index, item){
-				var img = item.imgList[0];
-				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
-				$("#bestP_"+item.pno).attr("src","/display?fileName="+fileCallPath);
-			}); 
-			
-			$.each(bestS, function(index, item){
-				var img = item.imgList[0];
-				var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
-				$("#bestS_"+item.sno).attr("src","/display?fileName="+fileCallPath);
-			}); 
-		})();
-		
-		$(".item_list .inner").click(function(){
-			
-			mainForm.append("<input type='hidden' name='sno' value='"+
-					$(this).find(".thumb").attr("id").substring(6)+"'>")
-					.attr("action","/store/list").submit();
-		});
-		
-		$(".showcase_con").click(function(){
-			mainForm.append("<input type='hidden' name='pno' value='"+
-							$(this).find("img").attr("id").substring(6)+"'>")
-							
-					.attr("action","/store/detail").submit();
-		});
-		
-		$("#goList").click(function() {
-			window.location.href = "/user/list";
-		});
-	
-		$(".goodsContainer").click(
-			function(e) {
-				var pno = $(this).attr("id")
-						.substring(5);
-				var sno = $(this).attr("class")
-						.substring(21);
-				mainForm.append("<input type='hidden' name='pno' value='"+pno+"'>");
-
-				mainForm.attr("action","/store/detail").submit();
-			});
-		});
-	</script>
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
 </th:block>
 </html>

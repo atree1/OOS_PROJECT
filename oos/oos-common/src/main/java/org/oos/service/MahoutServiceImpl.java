@@ -32,7 +32,7 @@ public class MahoutServiceImpl implements MahoutService{
 				MahoutVO user = new MahoutVO();
 				user.setUser_id(vo.getMno());
 				user.setItem_id(cart.getPno());
-				user.setValue(4);
+				user.setValue(3);
 				
 				userList.add(user);
 			});
