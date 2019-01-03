@@ -15,7 +15,7 @@
 	</resultMap>
 	<resultMap type="org.oos.domain.ProductImgVO" id="Image">
 		<result column="uuid" property="uuid" />
-		<result column="pno" property="pno"/>
+		<result column="pno" property="pno" />
 		<result column="iname" property="iname" />
 		<result column="ipath" property="ipath" />
 	</resultMap>
@@ -26,13 +26,13 @@
 		<result column="tel" property="tel" />
 		<collection property="imgList" resultMap="Image" />
 	</resultMap>
-		<resultMap type="org.oos.domain.HashTagVO" id="Tag">
+	<resultMap type="org.oos.domain.HashTagVO" id="Tag">
 		<result column="hno" property="hno" />
-		<result column="tag" property="tag"/>
+		<result column="tag" property="tag" />
 		<result column="tagcnt" property="tagcnt" />
 		<result column="del" property="del" />
 	</resultMap>
-	
+
 	<resultMap type="org.oos.domain.ProductVO" id="Product">
 		<result column="pno" property="pno" />
 		<result column="pname" property="pname" />
@@ -52,83 +52,68 @@
 		<collection property="tagList" resultMap="Tag" />
 		<collection property="cateList" resultMap="Category" />
 	</resultMap>
-	
+
 	<update id="upVisitCnt">
-		update tbl_product set visitcnt=visitcnt+1 where pno = #{pno}
+		update tbl_product set visitcnt=visitcnt+1 where pno
+		= #{pno}
 	</update>
-	
+
 	<select id="getByPno" resultMap="Product">
-		select p.pno, p.pname, p.price, s.sno, p.state, tel, p.questionreplycnt, p.reviewreplycnt,
-		p.content, uuid, iname, ipath, o.opno, o.size, o.qty, sname from tbl_product p 
-		left join tbl_product_img i
-				on p.pno =i.pno 
-		left join tbl_product_option o 
-		on p.pno=o.pno
-		left join tbl_store s
-			on s.sno = p.sno
-		where p.pno > 0 and o.opno > 0 and p.del = 'N'
-		and uuid != "" and p.pno=#{pno}
+		select p.pno, p.pname, p.price,
+			s.sno, p.state, tel, p.questionreplycnt, p.reviewreplycnt,
+			p.content,uuid, iname, ipath, o.opno, o.size, o.qty, sname,c.catename
+		from tbl_product p
+			left join
+				 tbl_product_img i
+				on p.pno =i.pno
+			left join
+				tbl_product_option o
+				on p.pno=o.pno
+			left join
+				 tbl_store s
+				on s.sno =p.sno
+			left outer join
+				 tbl_category c
+				on p.pno =c.pno
+		where p.pno > 0 and o.opno
+		> 0 and p.del = 'N'
+		and uuid !=
+		"" and c.cateno>0 and p.pno=#{pno}
 	</select>
-	
-	<!-- <select id="getList2" parameterType="map" resultMap="Product">
-		select product.pno,product.pname, product.state
-		,product.price,product.sno,product.regdate,product.updatedate,product.del,product.uuid,product.iname,product.ipath
-		,s.sname from
-		(
-		select
-			 p.pno ,p.pname,p.price,p.sno,p.regdate,p.updatedate,p.state, del,uuid,iname,ipath 
-		from
-			tbl_product p left join tbl_product_img i
-			on p.pno =i.pno left join tbl_product_option o on p.pno=o.pno
-			where p.pno>0
-			    group by p.pno
-		)product join tbl_store s
-			on s.sno = product.sno
-		 where s.sno > 0 and product.del='N'	
-		<if test="sno != null">
-			and s.sno=#{sno}
-		</if>
-		<if test="seller == null">
-			and product.state='O'
-		</if>
-		<if test="dto != null">
-			<if test="dto.cri.filter != null">
-			and product.pname like concat("%", #{dto.cri.keyword} ,"%")
-			</if>
-			<choose>
-				<when test="dto.cri.orderby == '1'.toString()">
-					order by product.price desc
-				</when>
-				<when test="dto.cri.orderby == '2'.toString()">
-					order by product.price asc
-				</when>
-				<otherwise>
-					order by product.pno desc
-				</otherwise>
-			</choose>
-			limit #{dto.cri.skip} ,#{dto.cri.amount}
-		</if>
-	</select> -->
-	
+
+
 	<select id="getListBySno" parameterType="map" resultMap="Product">
-		select * from tbl_product p
-			left join tbl_product_img i
-			on p.pno = i.pno
-		 where p.del='N' and p.pno > 0 and uuid != "" and p.sno=#{sno}
-		 group by i.pno
-		 order by p.pno desc
-		limit #{dto.cri.skip} ,#{dto.cri.amount}
+		select 
+			* 
+		from 
+			tbl_product p
+			left join 
+				tbl_product_img i
+			on
+			 p.pno = i.pno
+		
+		where
+			 p.del='N' and p.pno > 0 and uuid != "" and
+			p.sno=#{sno}
+		
+		group by i.pno
+		
+		order by p.pno desc
+			limit #{dto.cri.skip}
+			,#{dto.cri.amount}
 	</select>
-	
+
 	<select id="getList2" parameterType="map" resultMap="Product">
 		select * from tbl_product p
-			left join tbl_product_img i
-			on p.pno = i.pno
-			left join tbl_store s
-			on p.sno = s.sno
-			right join tbl_category c
-			on c.pno = p.pno
-		 where s.sno > 0 and p.del='N' and p.pno > 0 and c.cateno > 0 and uuid != ""
+		left join tbl_product_img i
+		on p.pno = i.pno
+		left join tbl_store s
+		on p.sno = s.sno
+		right join tbl_category c
+		on c.pno
+		= p.pno
+		where s.sno > 0 and p.del='N' and p.pno > 0 and c.cateno > 0
+		and uuid != ""
 		<if test="sno != null">
 			and s.sno=#{sno}
 		</if>
@@ -140,7 +125,7 @@
 				and c.catename=#{dto.cri.category}
 			</if>
 			<if test="dto.cri.filter != null">
-			and p.pname like concat("%", #{dto.cri.keyword} ,"%")
+				and p.pname like concat("%", #{dto.cri.keyword} ,"%")
 			</if>
 			group by p.pno
 			<choose>
@@ -157,8 +142,9 @@
 			limit #{dto.cri.skip} ,#{dto.cri.amount}
 		</if>
 	</select>
-	
-	<select id="bestProductList" resultType="org.oos.domain.ProductVO" resultMap="Product">
+
+	<select id="bestProductList"
+		resultType="org.oos.domain.ProductVO" resultMap="Product">
 		<![CDATA[
 		select d.pno, pname, price, count(*) cnt, uuid, ipath, iname from tbl_order_detail d
 		left join tbl_product p
@@ -173,44 +159,47 @@
 		order by cnt desc
 		limit 0, 6
 	</select>
-	
+
 	<insert id="insert">
 		insert into tbl_product(pname,price,sno,content)
 		values(#{pname},#{price},#{sno},#{content})
 		<selectKey resultType="Long" keyProperty="pno" order="AFTER">
-			select max(pno) from tbl_product
+			select
+			max(pno) from tbl_product
 		</selectKey>
 	</insert>
 
 	<update id="modify">
 		update tbl_product
-		set pname=#{pname},price=#{price},content=#{content}
+		set
+		pname=#{pname},price=#{price},content=#{content}
 		where pno=#{pno}
 	</update>
-	
+
 	<update id="delete">
 		update tbl_product
 		set del='Y'
 		where pno=${pno}
 	</update>
-	
+
 	<update id="minus">
 		update tbl_product_option
 		set qty = #{qty}
-		where opno=#{opno}
+		where
+		opno=#{opno}
 	</update>
-	
-		<update id="resetVisitCnt">
+
+	<update id="resetVisitCnt">
 		update tbl_product set visitcnt=0 where pno >0
 	</update>
-	
+
 	<select id="count" parameterType="map" resultType="int">
 		select count(*)
 		from tbl_product p
 		left join tbl_store s
-			on p.sno = s.sno
+		on p.sno = s.sno
 		right join tbl_category c
-			on c.pno = p.pno
+		on c.pno = p.pno
 		where p.pno > 0
 		<if test="sno != null">
 			and s.sno=#{sno}
@@ -230,19 +219,21 @@
 		select pname from tbl_product
 		where pno>0
 	</select>
-	
+
 	<update id="updateQuestionReplyCnt">
-		update tbl_product set questionreplycnt = questionreplycnt + #{amount}
+		update tbl_product set questionreplycnt =
+		questionreplycnt + #{amount}
 		where pno = #{pno}
 	</update>
 
 	<update id="updateReviewReplyCnt">
-		update tbl_product set reviewreplycnt = reviewreplycnt + #{amount}
+		update tbl_product set reviewreplycnt =
+		reviewreplycnt + #{amount}
 		where pno = #{pno}
 	</update>
-	
+
 	<update id="permit" parameterType="map">
-		update tbl_product 
+		update tbl_product
 		<if test='permit == "O"'>
 			set state = 'O'
 		</if>
@@ -251,7 +242,7 @@
 		</if>
 		where pno = #{pno}
 	</update>
-	
+
 	<select id="totalProduct" resultType="int">
 		select count(*)
 		from tbl_product
