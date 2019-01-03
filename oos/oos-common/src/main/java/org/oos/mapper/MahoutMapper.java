@@ -10,6 +10,8 @@ public interface MahoutMapper {
 
 	public List<Mahout_MemberVO> getOrderList();
 	
+	public List<Mahout_MemberVO> getRecList(String mid);
+	
 	public List<ReplyVO> getScoreList(String mid);
 	
 	public int insert(MahoutVO vo);

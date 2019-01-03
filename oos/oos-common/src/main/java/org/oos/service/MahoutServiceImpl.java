@@ -77,4 +77,9 @@ public class MahoutServiceImpl implements MahoutService{
 		
 	}
 
+	@Override
+	public List<Mahout_MemberVO> getRecList(String mid) {
+		return mapper.getRecList(mid);
+	}
+
 }

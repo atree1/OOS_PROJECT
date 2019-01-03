@@ -146,7 +146,6 @@
 	</insert>
 
 	<update id="modify">
-
 		update tbl_store set sname = #{sname}, owner =
 		#{owner},
 		saddress = #{saddress}, tel = #{tel},saddressdetail = #{saddressdetail},

@@ -94,27 +94,27 @@
             </ul>
             
         </div>
-        <!-- <div class="todaySinsang" style="margin: 40px 0 30px 0;">
+        <div class="todaySinsang" style="margin: 40px 0 30px 0;" th:if="${recommend != null}">
             <span style="background-color: #fff; padding: 0 10px;">포커스 아이템</span>
             <div class="div_line_grey_2px"
                 style="margin-top: -8px; margin-bottom: 16px;"></div>
-        </div> -->
-        <!-- <div class="today_left_area"
+        </div> 
+        <div class="today_left_area" th:if="${recommend != null}"
             style="background-color: #e3e0e8; width: 1100px; padding:10px 0">
             <ul class="goods_list_t1 goods_list_t6 ul_3col">
-                <li>
-                    <a>
+                <li th:each="arr:${recommend}" style="cursor:pointer">
+                    <a th:href="|/store/detail?pno=${arr.pno}|">
                         <span class="img_wrap_t19"> 
-                            <img style="display: inline;">
+                            <img th:id="|recommend_${arr.pno}|" style="display: inline;">
                         </span> 
-                        <strong class="goods_title_08">배큐빈 와인 악세서리 4종세트</strong> 
-                        <span class="goods_price_04">34,160
+                        <strong class="goods_title_08" th:text="${arr.pname}">PNAME</strong> 
+                        <span class="goods_price_04" th:text="${arr.price}">PRICE
                             <em class="font_14 font_normal">원</em>
                         </span>
                     </a>
                 </li>
             </ul>
-        </div> -->
+        </div>
         <div class="todaySinsang" style="margin-top: 76px;">
             <span style="background-color: #fff; padding: 0 10px;">오늘의 신상</span>
             <div class="div_line_grey_2px"
@@ -160,6 +160,7 @@
             var bestP =  [[${bestP}]];
             var bestS =  [[${bestS}]];
             var product = [[${product}]];
+            var recommend = [[${recommend}]];
             
             $.each(product, function(index, item){
                 var img = item.imgList[0];
@@ -178,6 +179,12 @@
                 var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
                 $("#bestS_"+item.sno).attr("src","/display?fileName="+fileCallPath);
             }); 
+            
+            $.each(recommend, function(index, item){
+                var img = item.imgList[0];
+                var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+                $("#recommend_"+item.pno).attr("src","/display?fileName="+fileCallPath);
+            });
         })();
         
         $(".item_list .inner").click(function(){
