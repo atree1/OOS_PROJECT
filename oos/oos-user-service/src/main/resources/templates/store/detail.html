@@ -386,14 +386,15 @@
 				var value = $("#"+item.opno+"").val();
 				if(value > 0){
 					storeDetailForm.append("<input type='hidden' name='info' id='info' value='"
-							+pno+"_"+item.opno+"_"+value+"_"+sno+"'>");
+							+pno+"_"+item.opno+"_"+value+"_"+sno+"'>")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
 					
 				}
 			});
 			if($("#info").val() == null){
 				alert("수량을 입력해 주세요");
 			}else{
-				storeDetailForm.submit();
+				storeDetailForm.attr("method","post").submit();
 			}
 			
 		});

@@ -274,10 +274,11 @@
 				if(cno != -1){
 					
 					cartForm.append("<input type='hidden' name='info' value='"+
-							item.pno+"_"+item.opno+"_"+item.qty+"_"+item.sno+"'>");
+							item.pno+"_"+item.opno+"_"+item.qty+"_"+item.sno+"'>")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
 				}
 			});
-			cartForm.attr("action","/order/list").submit()
+			cartForm.attr("action","/order/list").attr("method","post").submit()
 		}else{
 			alert("장바구니에 담긴 상품이 없습니다.");
 		}

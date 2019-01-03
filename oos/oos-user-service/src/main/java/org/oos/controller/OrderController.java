@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.oos.domain.CartVO;
-import org.oos.domain.Criteria;
 import org.oos.domain.OrderDetailVO;
 import org.oos.domain.ProductVO;
 import org.oos.service.CartService;
@@ -20,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.Setter;
@@ -71,7 +71,7 @@ public class OrderController {
 		model.addAttribute("order", list);
 	}
 	
-	@GetMapping("/list")
+	@PostMapping("/list")
     public void orderListGET(String[] info, Model model) {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		
