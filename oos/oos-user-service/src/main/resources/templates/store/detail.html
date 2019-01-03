@@ -23,7 +23,7 @@
 			<div id="gthumbs" class="gthumbs" style=" height:720px;overflow-y: auto;">
 
 			</div>
-			<div style="position: relative; width: 540px; height:720px;line-height:200px;">
+			<div style="position: relative; width: 540px;float:right; height:720px;line-height:200px;">
 				<img style="width:100%;position:absolute;
 									top:0;bottom:0;margin:auto;"
 					class="inner_main_img" src="">
@@ -250,7 +250,6 @@
 		function setImg(){
 			
 			 var imgList=[[${product.imgList}]];
-			 console.log(imgList);
 			var str="";
 			var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname);
 			 $(".inner_main_img").attr("src","/display?fileName="+fileCallPath); 
@@ -341,7 +340,10 @@
 			totalSum();
 		})
 
-		$(".gthumbs").on("mouseenter",".gthumb", function(e) {
+		
+		
+		$("#gthumbs").on("mouseover",".gthumb",function(e) {
+			console.log("hello");
 			$(this).find("span").attr("class", "hover");
 			var src = $(this).find("img").attr("src");
 			$(".inner_main_img").attr("src", src);

@@ -50,11 +50,11 @@
 			<div style="position: relative; width: 100%;">
 				<div class="sortMethodSelect"
 					style="margin-top: 40px; font-size: 13px; margin-right: 386px;">
-					<div id="sortMethod_0" class="sortMethodClass selected">최신순</div>
+					<div id="sortMethod_0" class="sortMethodClass store selected">최신순</div>
 					<div class="breakPoint">∙</div>
-					<div id="sortMethod_1" class="sortMethodClass">스토어찜순</div>
+					<div id="sortMethod_1" class="sortMethodClass store">스토어찜순</div>
 					<div class="breakPoint">∙</div>
-					<div id="sortMethod_2" class="sortMethodClass">상품수량순</div>
+					<div id="sortMethod_2" class="sortMethodClass store">상품수량순</div>
 				</div>
 			</div>
 			<div class="div_line_grey_2px"
@@ -203,9 +203,12 @@
 			$(".sortMethodClass").click(function(e) {
                 var val = $(this).attr("id").substring(11);
                 $("#orderby").val(val);
-                listForm.attr("action", "/user/list")
-                		.append("<input type='hidden' name='filter' value='select2'>")
-                		.submit();
+                listForm.attr("action", "/user/list");
+                
+                if($(this).hasClass("store")){
+                    listForm.append("<input type='hidden' name='filter' value='select2'>");
+                }
+                listForm.submit();
             });
 			
 			$(".pageNum").click(function(e) {

@@ -196,8 +196,8 @@
 	
 	<update id="minus">
 		update tbl_product_option
-		set qty = ${qty}
-		where opno=${opno}
+		set qty = #{qty}
+		where opno=#{opno}
 	</update>
 	
 		<update id="resetVisitCnt">

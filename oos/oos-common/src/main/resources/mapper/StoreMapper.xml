@@ -122,6 +122,7 @@
 		on s.sno = d.sno
 		where s.sno > 0
 		and s.del = 'N' and uuid !=""
+		group by sno
 		order by odNum desc
 		limit 0, 6
 	</select>
