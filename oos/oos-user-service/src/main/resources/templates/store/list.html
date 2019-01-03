@@ -95,10 +95,10 @@
 		<form id="storeForm">
 			<input type='hidden' name='amount' value='12'/>
 			<input type='hidden' id='pageNum' name='pageNum'/>
-			<input type='hidden' name='sno' th:value="${store.sno}"/>
+			<input type='hidden' name='sno' id="sno" th:value="${store.sno}"/>
 		</form>
 	</div>
-	
+	<span id="secName" sec:authentication="name" style="display:none"></span>
 	<div style="text-align:center;">
 		<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
 		<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
@@ -120,7 +120,11 @@
 			var popupList =[[${popupList}]];
 			
 	 		(function(){
-
+	 			
+	 			if($("#secName").html() != "anonymousUser"){
+					mid = $("#secName").html();
+				}
+	 			
 				$.each(goodsImg, function(index, item){
 					var img = item.imgList[0];
 					
@@ -129,6 +133,20 @@
 					var imgDiv= $('#img_'+item.pno);
 					imgDiv.attr("src","/display?fileName="+fileCallPath); 
 				}); 
+				
+				if(mid != undefined){
+					$.ajax({
+						type:"post",
+						url:"/store/checkzzim/"+$("#sno").val(),
+				        success:function(result,status,xhr){
+							if(result == "yes"){
+								$(".storeHomeTradeBtn").addClass("on");
+							}else if(result == "no"){
+								$(".storeHomeTradeBtn").removeClass("on");						
+							}
+						},
+					});
+				}
 				 
 				var fileCallPath =  encodeURIComponent(store.imgList[0].ipath+ "/"+
 							store.imgList[0].uuid +"_"+store.imgList[0].iname); 
@@ -172,65 +190,48 @@
 				 											
 				//cookieList("popupOpen");
 				
-				var cookieValue=cookieList("popupOpen").items();
-		 	
-				cookieValue.filter((value, idx, arr) => arr.indexOf(value) === idx);
-				console.log(cookieValue);
-			
-			
-				 var result=true;
-				 $.each(cookieValue,function(i,item){
-				 				
-				 console.log(item);
-				 
+					var cookieValue=cookieList("popupOpen").items();
+			 	
+					cookieValue.filter((value, idx, arr) => arr.indexOf(value) === idx);
 				
-				 
-				if(store.sno == item){
-					
-					result=false;
-					
+					 var result=true;
+					 $.each(cookieValue,function(i,item){
+					 				
+					if(store.sno == item){
+						result=false;
 						return false;
-				}
+					}
 				
 				});
 				 
-				 console.log(goodsImg.length);
-				 console.log(store.owner);
-				 console.log("popupList: "+popupList.length);
-				 
 				 if(result==true){
-					 
 					 if(popupList.length == 0){
 						 return;
-						 
 					 }else{
-						 
 				    	var popOption = "width=800, height=700, resizable=no, location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 						var sid = [[${store.owner}]];
 						window.open("/store/popupList?sid="+sid, "store", popOption);   
 					 }		
-					 	
 				 }
 				 
-				 
 			 	
-			if(mid != undefined){
-						$.ajax({
-							type:"post",
-							url:"/store/checkzzim/"+store.sno,
-							beforeSend: function(xhr) {
-					            xhr.setRequestHeader(header, token);
-					        },
-					        success:function(result,status,xhr){
-								if(result == "yes"){
-									$(".storeHomeTradeBtn").addClass("on");
-									$(".tradeStatusBtn").html("찜리스트 추가됨");
-								}else if(result == "no"){
-									$(".storeHomeTradeBtn").removeClass("on");						
-								}
-							},
-						});
-					}
+				if(mid != undefined){
+					$.ajax({
+						type:"post",
+						url:"/store/checkzzim/"+store.sno,
+						beforeSend: function(xhr) {
+				            xhr.setRequestHeader(header, token);
+				        },
+				        success:function(result,status,xhr){
+							if(result == "yes"){
+								$(".storeHomeTradeBtn").addClass("on");
+								$(".tradeStatusBtn").html("찜리스트 추가됨");
+							}else if(result == "no"){
+								$(".storeHomeTradeBtn").removeClass("on");						
+							}
+						},
+					});
+				}
 
 			})(); 
 			

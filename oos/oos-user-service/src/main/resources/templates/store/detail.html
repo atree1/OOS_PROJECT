@@ -97,7 +97,7 @@
 				<div class="more_goods">
 					<div class="goods_name" th:text="${product.pname}">PNAME</div>
 					<div class="detail_store_name">
-						<span class="store" th:text="${product.store.sname}">SNAME</span> / <span
+						<a th:href="|/store/list?sno=${product.store.sno}|"><span class="store" th:text="${product.store.sname}">SNAME</span></a> / <span
 							th:text="${product.store.tel}">TEL</span>
 					</div>
 					<div class="goods_price" th:text="${product.price}">PRICE</div>
@@ -529,7 +529,6 @@
 			};
 			
 			replyService.update(reply,function(result){
-				alert(result);
 				showList(pageNum);
 			});
 			
