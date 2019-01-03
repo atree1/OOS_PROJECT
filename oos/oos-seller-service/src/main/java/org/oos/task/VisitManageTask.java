@@ -46,7 +46,6 @@ public class VisitManageTask  {
 	
 	/*@Scheduled(cron="0 0 0 * * *")*/
 	@Scheduled(cron="*/60 * * * * *")
-	@Transactional
 	public void Mahout() throws Exception{
 		mahoutService.setTable();
 	}

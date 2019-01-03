@@ -60,6 +60,7 @@
 		on(a.pno = i.pno)
 		where uuid != ''
 		group by a.opno
+		order by cno desc
 		<if test="dto != null ">
 			limit #{dto.cri.skip}, #{dto.cri.amount}
 		</if>

@@ -41,11 +41,11 @@
   	insert into recommend(user_id, item_id, value)
   	values(#{user_id}, #{item_id}, #{value})
   </insert>
-  
+<!--   
   <insert id="insert_user_order">
   	insert into tbl_user_order(mid, pno)
   	values(#{mid}, #{pno})
-  </insert>
+  </insert> -->
   
   <delete id="delete">
   	delete from recommend
