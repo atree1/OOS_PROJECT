@@ -37,7 +37,7 @@ public class MahoutServiceImpl implements MahoutService{
 				
 				userList.add(user);
 			});
-			
+			 
 			
 			vo.getOrderList().forEach(order -> {
 				int index = -1;
