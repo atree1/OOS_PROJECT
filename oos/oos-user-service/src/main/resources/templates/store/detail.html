@@ -512,12 +512,19 @@
 		
 		//수정 replyContainer
 		    $(document).on("click",".modBtn",function(e){
-			
+		    	
+		    if(kindValue == "Q"){
+				scoreValue = 0;
+			}else if(kindValue == "R"){
+				scoreValue = $(this).parent().parent().parent().find("select option:selected").val();
+			}
+		    	
 			var reply ={
 					rno : modifyRno,
 					title:modifyTitle.val(),
 					content:modifyContent.val(),
-					kind:kindValue
+					kind:kindValue,
+					score: scoreValue
 			};
 			
 			replyService.update(reply,function(result){
