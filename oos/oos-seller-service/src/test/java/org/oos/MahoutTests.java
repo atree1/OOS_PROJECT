@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OosSellerServiceApplicationTests {
+public class MahoutTests {
 
 	@Setter(onMethod_=@Autowired)
 	private MahoutService mahoutService;
