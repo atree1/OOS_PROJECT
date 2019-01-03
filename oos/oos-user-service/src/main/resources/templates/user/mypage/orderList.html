@@ -66,16 +66,13 @@
 						<td th:id="|ono_${arr.ono}|" class="orderDetail"><button
 								type="button" class="btn btn-info basketSwapBtn"
 								style="width: 70px;">상세보기</button></td>
-
-
 					</tr>
-					
 				</tbody>
 			</table>
 		</div>
 
 
-		<div style="text-align: center;">
+		<div style="text-align: center;"  th:if="${#lists.size(pageList) gt 1}">
 			<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
 			<div class="showPage"
 				style="display: inline-block; vertical-align: top;"

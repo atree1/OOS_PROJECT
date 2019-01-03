@@ -99,7 +99,7 @@
 		</form>
 	</div>
 	<span id="secName" sec:authentication="name" style="display:none"></span>
-	<div style="text-align:center;">
+	<div style="text-align:center;" th:if="${#lists.size(pageList) gt 1}">
 		<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
 		<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
 			<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
@@ -208,7 +208,7 @@
 					 if(popupList.length == 0){
 						 return;
 					 }else{
-				    	var popOption = "width=800, height=700, resizable=no, location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+				    	var popOption = "width=500, height=700, resizable=no, location=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
 						var sid = [[${store.owner}]];
 						window.open("/store/popupList?sid="+sid, "store", popOption);   
 					 }		

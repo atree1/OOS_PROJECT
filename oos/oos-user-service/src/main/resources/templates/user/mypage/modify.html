@@ -4,25 +4,32 @@
 	
 <div class="container" style="margin-top: 20px;"
 	layout:fragment="Mcontainer">
+<link href="/css/userAdd.css" type="text/css" rel="stylesheet">
 <style>
-.orderInfo{
-	width:300px;
-	border:1px solid #e1e1e1;
-	font-size:13px;
+input[type="checkbox"], input[type="radio"] {
+	display: unset;
 }
 
+input, select {
+	font-size: 12px;
+	color: #5b5b5b
+}
+
+.orderInfo {
+	border: 0;
+	height:30px;
+	margin:5px;
+	font-size:16px;
+	border-bottom:1px solid #d7d7d7;
+}
 .readonly{
 	border:0px;
 	background:unset;
 }
-</style>	
-	
-			
-		<div class="wishlistArea"
-			style="position: relative; margin-top: -315px; left: 225px; width: 800px; margin-bottom: 68px; min-height: 600px;">
+</style>
+		<div style="position: relative; margin-top: -315px; left: 225px; width: 800px; margin-bottom: 68px; min-height: 600px;">
 			<div style="font-size: 20px; color: #202225; height: 40px;">My INFO</div>
-			<table class="basketGoodsTableEnd" style="padding:20px; 
-								width: 760px;  border-top: 4px solid #e5e5e5;">
+			<table  style="padding:20px; width: 760px;">
 				<tbody>
 					<tr>
 						<td class="personalTd headTitle" style="">실명</td>
@@ -62,17 +69,17 @@
 						<td class="personalTd headTitle" style="">휴대폰 번호</td>
 						<td class="personalTd" style="position: relative;">
 						<div style="margin:10px 0 0 3px">
-							<select class="addressInfo" id="pnum" style="width:60px;"> 
+							<select class="orderInfo" id="pnum" style="width:70px;"> 
 								<option value="010">010</option> 
 								<option value="011">011</option> 
 								<option value="016">016</option> 
 								<option value="019">019</option> 
 							</select> 
 							<span class="dash">-</span> 
-							<input type="text" style="width:35px;" maxlength="4" class="addressInfo" id="pnum2"
+							<input type="text" style="width:70px;" maxlength="4" class="orderInfo" id="pnum2"
 												onkeydown="onlyNumber(event)" onkeyup="removeChar(event)"> 
 							<span class="dash">-</span> 
-							<input type="text" style="width:35px;" maxlength="4" class="addressInfo" id="pnum3"
+							<input type="text" style="width:70px;" maxlength="4" class="orderInfo" id="pnum3"
 												onkeydown="onlyNumber(event)" onkeyup="removeChar(event)">
 						</div>
 						</td>
@@ -87,9 +94,9 @@
 					<tr>
 						<td class="personalTd headTitle" style="">이메일</td>
 						<td class="personalTd" style="position: relative;">
-						<input type="text" class="orderInfo"  id="email1" size="15" value="test"  style="width:100px;"> @ 
-						<input type="text" class="orderInfo" id="email2" size="20"  style="width:100px;">
-							<select id="email_select" class="orderInfo" onChange="javascript:checkemailaddy();" style="width:100px;">
+						<input type="text" class="orderInfo"  id="email1" size="15" value="test"  style="width:120px;"> @ 
+						<input type="text" class="orderInfo" id="email2" size="20"  style="width:120px;">
+							<select id="email_select" class="orderInfo" onChange="javascript:checkemailaddy();" style="width:120px;">
 							    <option value="" selected>선택하세요</option>
 							    <option value="naver.com">naver.com</option>
 							    <option value="daum.net">daum.net</option>
