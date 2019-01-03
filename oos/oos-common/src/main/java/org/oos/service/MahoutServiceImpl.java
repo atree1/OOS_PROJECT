@@ -72,6 +72,7 @@ public class MahoutServiceImpl implements MahoutService{
 		});
 		
 		userList.forEach(vo -> {
+			log.info(vo+"");
 			mapper.insert(vo);
 		});
 		

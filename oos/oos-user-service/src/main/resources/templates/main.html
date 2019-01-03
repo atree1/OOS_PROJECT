@@ -180,11 +180,14 @@
                 $("#bestS_"+item.sno).attr("src","/display?fileName="+fileCallPath);
             }); 
             
-            $.each(recommend, function(index, item){
-                var img = item.imgList[0];
-                var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
-                $("#recommend_"+item.pno).attr("src","/display?fileName="+fileCallPath);
-            });
+            if(recommend){
+                $.each(recommend, function(index, item){
+                    var img = item.imgList[0];
+                    var fileCallPath =  encodeURIComponent(img.ipath+"/"+img.uuid +"_"+img.iname);
+                    $("#recommend_"+item.pno).attr("src","/display?fileName="+fileCallPath);
+                });
+            }
+            
         })();
         
         $(".item_list .inner").click(function(){
