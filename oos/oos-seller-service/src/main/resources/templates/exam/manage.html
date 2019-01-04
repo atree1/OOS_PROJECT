@@ -40,7 +40,7 @@
 					aria-describedby="dataTables-example_info" style="width: 100%";>
 					<thead>
 						<tr role="row" style="text-align: center;">
-							<th class="sorting_asc" style="width: 50px;"></th>
+							<th class="sorting_is" style="width: 60px;"><input type="checkbox" id="allCheck_box"></th>
 							<th class="sorting"style="width: 120px;">상품주문번호</th>
 							<th class="sorting" style="width: 170px;">주문일시</th>
 							<th class="sorting" style="width: 120px;">주문상태</th>
@@ -181,6 +181,17 @@ $(document).ready(function(){
 		var orderForm = $("#orderListForm");
 		var pageMaker = [[${pageMaker}]];
 		var orderList = [[${orderList}]];
+		
+		//체크박스 전체선택
+		$("#allCheck_box").click(function(){
+			if($("input[name=checkbox]:not(:checked)").length != 0){
+				
+				$("input[name=checkbox]:checkbox").prop("checked", "checked");
+			}else{
+				$("input[name=checkbox]:checkbox").prop("checked", false);
+			}
+			checkChk();
+		});
 		
 		//페이지 스크립트
 		$(".paginate_button").click(function(e) {
