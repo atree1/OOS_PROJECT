@@ -41,6 +41,12 @@
                 <img src="/img/oos_logo.jpg" class="header-brand-img" alt="tabler logo">
               </a>
               <div class="d-flex order-lg-2 ml-auto">
+<<<<<<< HEAD
+                <div class="nav-item d-none d-md-flex"  sec:authorize="!hasRole('ROLE_USER')">
+                  <a href="http://localhost:8080/oos/login" class="btn btn-sm btn-outline-primary" target="_blank">LOGIN</a>
+                </div>
+=======
+>>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
                 <div class="dropdown d-none d-md-flex">
               
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -68,14 +74,10 @@
                     <a href="#" class="dropdown-item text-center text-muted-dark">Mark all as read</a>
                   </div>
                 </div>
-                <span sec:authorize="!hasRole('ROLE_USER')" style="padding-top:5px;">
-                      <a href="/oos/login"
-                      style="font-size:12px;font-weight:bold">로그인</a>
-                </span>
                 <div class="dropdown" sec:authorize="hasRole('ROLE_USER')">
                   <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
                   <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
-                    <span class="ml-2 d-none d-lg-block">
+                    <span class="ml-2 d-none d-lg-block" >
                     	<input type="hidden" id="userMid" th:value="${#authentication.principal.member.mid}">
                       <span class="text-default" sec:authentication="principal.member.mname">name</span>
                       <small class="text-muted d-block mt-1">일반회원</small>
