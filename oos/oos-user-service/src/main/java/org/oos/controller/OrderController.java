@@ -27,7 +27,7 @@ import lombok.extern.java.Log;
 
 @Controller
 @Log
-@RequestMapping("/order/*")
+@RequestMapping(value= {"/order/*","/m/order/*"})
 public class OrderController {
 	
 	@Setter(onMethod_=@Autowired)
