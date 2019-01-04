@@ -51,13 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/seller/*").permitAll()
 
 		.antMatchers("/store/*", "/qna/*","/notify/*","/adminNotify/notify","/product/*","/exam")
-<<<<<<< HEAD
-		.hasAnyRole("SELLER","ADMIN")
+		.hasAnyRole("SELLER","ADMIN")		
 		.antMatchers("/admin/*","/adminNotify/modify","/adminNotify/register").hasRole("ADMIN");
-=======
-		.hasRole("SELLER")
-		.antMatchers("/admin/*").hasRole("ADMIN");
->>>>>>> branch 'master' of https://github.com/atree1/OOS_PROJECT.git
+
 		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
 		
