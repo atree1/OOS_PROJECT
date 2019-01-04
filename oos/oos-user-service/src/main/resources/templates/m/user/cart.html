@@ -259,7 +259,7 @@
 							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
 				}
 			});
-			cartForm.attr("action","/order/list").attr("method","post").submit()
+			cartForm.attr("action","/m/order/list").attr("method","post").submit()
 		}else{
 			alert("장바구니에 담긴 상품이 없습니다.");
 		}
