@@ -8,13 +8,16 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.oos.domain.Criteria;
+import org.oos.domain.Mahout_MemberVO;
 import org.oos.domain.MemberVO;
 import org.oos.domain.PageDTO;
 import org.oos.service.HashTagService;
+import org.oos.service.MahoutService;
 import org.oos.service.MemberService;
 import org.oos.service.ProductService;
 import org.oos.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +42,9 @@ public class HomeController {
 	
 	@Setter(onMethod_=@Autowired)
 	private MemberService memberService;
+	
+	@Setter(onMethod_=@Autowired)
+	private MahoutService mahoutService;
 
 	@PostMapping("/hashTag")
 	@ResponseBody
@@ -72,13 +78,23 @@ public class HomeController {
 	public void submain(Model model) {
 		Map<String, Object> map = new HashMap<>();
 		
+		String name = SecurityContextHolder.getContext()
+							.getAuthentication().getName();
+		
 		Criteria cri = new Criteria();
+		cri.setAmount(24);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		
 		model.addAttribute("bestS", storeService.getBestStore());
 		model.addAttribute("bestP", productService.bestProductList());
 		model.addAttribute("product", productService.getList(map));
+		
+		List<Mahout_MemberVO> list = mahoutService.getRecList(name);
+		
+		if(list.size() > 0) {
+			model.addAttribute("recommend", list);
+		}
 		
 		List<Integer> pageList = new ArrayList<>();
 	    
@@ -89,7 +105,6 @@ public class HomeController {
 	    model.addAttribute("pageList", pageList);
         model.addAttribute("pageMaker", pageDTO);
         
-		
 	}
 	
 	@GetMapping("/oos")

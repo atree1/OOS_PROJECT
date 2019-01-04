@@ -97,7 +97,7 @@
 				<div class="more_goods">
 					<div class="goods_name" th:text="${product.pname}">PNAME</div>
 					<div class="detail_store_name">
-						<span class="store" th:text="${product.store.sname}">SNAME</span> / <span
+						<a th:href="|/store/list?sno=${product.store.sno}|"><span class="store" th:text="${product.store.sname}">SNAME</span></a> / <span
 							th:text="${product.store.tel}">TEL</span>
 					</div>
 					<div class="goods_price" th:text="${product.price}">PRICE</div>
@@ -386,14 +386,15 @@
 				var value = $("#"+item.opno+"").val();
 				if(value > 0){
 					storeDetailForm.append("<input type='hidden' name='info' id='info' value='"
-							+pno+"_"+item.opno+"_"+value+"_"+sno+"'>");
+							+pno+"_"+item.opno+"_"+value+"_"+sno+"'>")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
 					
 				}
 			});
 			if($("#info").val() == null){
 				alert("수량을 입력해 주세요");
 			}else{
-				storeDetailForm.submit();
+				storeDetailForm.attr("method","post").submit();
 			}
 			
 		});
@@ -512,16 +513,22 @@
 		
 		//수정 replyContainer
 		    $(document).on("click",".modBtn",function(e){
-			
+		    	
+		    if(kindValue == "Q"){
+				scoreValue = 0;
+			}else if(kindValue == "R"){
+				scoreValue = $(this).parent().parent().parent().find("select option:selected").val();
+			}
+		    	
 			var reply ={
 					rno : modifyRno,
 					title:modifyTitle.val(),
 					content:modifyContent.val(),
-					kind:kindValue
+					kind:kindValue,
+					score: scoreValue
 			};
 			
 			replyService.update(reply,function(result){
-				alert(result);
 				showList(pageNum);
 			});
 			

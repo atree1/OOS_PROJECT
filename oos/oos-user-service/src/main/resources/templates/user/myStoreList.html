@@ -103,7 +103,7 @@
 		</div>
 	</div>
 
-	<div style="text-align:center;">
+	<div style="text-align:center;"  th:if="${#lists.size(pageList) gt 1}">
 		<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
 		<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
 			<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>

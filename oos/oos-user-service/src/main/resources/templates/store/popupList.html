@@ -5,15 +5,22 @@
 <title>상품 상세정보</title>
 
 </head>
+<link href="/css/nanumbarungothic.css" type="text/css" rel="stylesheet">
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/custom_bootstrap.css" type="text/css" rel="stylesheet" />
+<style>
+input[type="checkbox"]{
+	display:unset;
+}
+</style>
+<script src="/js/jquery.min.js"></script>
 <body>
-	<div class="myPageContentArea" style="position: relative; width: 380px; min-height: 400px;">
-		<div style="font-size: 20px; color: #202225; height: 40px; border-bottom: 1px solid #bebebe;">Seller Notify</div>
+	<div class="myPageContentArea" style="position: relative; width: 460px; min-height: 400px; margin:20px auto;">
 		
- 		<div class="wishlistArea"
-			style="left: 200px; width: 500px; margin-bottom: 68px; min-height: 600px;">
-			<div style="font-size: 20px; color: #202225; height: 40px;">List</div>
+ 		<div class="wishlistArea">
+			<div style="font-size: 20px; color: #202225; height: 40px;">스토어 공지</div>
 
-			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;">
+			<table class="myPageSheetTable" cellspacing="0" style="width: 100%;margin-bottom:30px;">
 				<colgroup>
 					<col width="80">
 					<col width="150">
@@ -34,7 +41,7 @@
 				</tbody>
 			</table>
 			
-			<div style="text-align:center;">
+			<div style="text-align:center;" th:if="${#lists.size(pageList) gt 1}">
 				<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
 				<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
 					<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
@@ -43,9 +50,11 @@
 			
 		<form name="frm" method="post" action="">
 		 <div style="vertical-align:middle; display:inline-block; margin-bottom:2px;">		
-		 <div><input class="PopupCheck" type="checkbox" name="pop"></div>
-         <div style="font-size:11px;">1일동안 이 창을 열지 않음</div>
-		 <div  style="font-size:11px;"><a id="closeBtn"  href="#" onfocus="this.blur()">[닫기]</a></div>
+		
+         <div style="font-size:11px;"> 
+         	<input class="PopupCheck" type="checkbox" name="pop">1일동안 이 창을 열지 않음
+         	<a id="closeBtn"  href="#" onfocus="this.blur()">[닫기]</a>
+         </div>
 		</div>
 		</form>
 		</div>

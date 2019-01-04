@@ -67,7 +67,7 @@ public class ProductController {
 	
 	@GetMapping({"/read","/modify"})
 	public void productGet(Criteria cri,Long pno, Principal principal, Long opno, Model model) {
-
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		PageDTO dto = new PageDTO(cri,productService.getTotal(map));
@@ -82,6 +82,7 @@ public class ProductController {
 				
 		ProductVO vo = productService.read(pno);
 		model.addAttribute("store", storeService.getBySid(principal.getName()));
+		log.info(""+vo);
 		model.addAttribute("product", vo);
 		model.addAttribute("pageMaker", pageDTO);
 

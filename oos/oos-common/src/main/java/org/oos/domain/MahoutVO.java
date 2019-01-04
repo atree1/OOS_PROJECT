@@ -6,5 +6,5 @@ import lombok.Data;
 public class MahoutVO {
 	private int user_id;
 	private Long item_id;
-	private int value;
+	private double value;
 }

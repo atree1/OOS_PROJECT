@@ -110,7 +110,7 @@ button, input, table, div, textarea, a, span {
 	position: absolute;
 	width: 100%;
 	top: 52px;
-	padding: 0 20px;;
+	padding: 0 20px;
 	background-color: rgb(255, 255, 255);
 	z-index: 100;
 	margin-left: -1px;
@@ -121,6 +121,16 @@ button, input, table, div, textarea, a, span {
 	border-top-style: initial;
 	border-top-color: initial;
 	display: none;
+}
+
+.top_ul{
+	list-style:none; 
+	width:1100px;
+	padding:0px; 
+	font-size:13px; 
+	line-height:2.0; 
+	color:#9b9b9b; 
+	margin:10px auto;
 }
 
 .starRev {
@@ -811,7 +821,6 @@ ul.date_pick li input {
 
 #goodsList .goodsContainer .goodsName {
 	font-size: 15px;
-	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-weight: bold;
 	z-index: 2;

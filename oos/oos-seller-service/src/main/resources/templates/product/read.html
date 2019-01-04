@@ -11,6 +11,8 @@
 	.uploadResult{
 		width:100%;
 		background-color: gray;
+			align-content: center;
+		text-align: center;
 	}
 	
 	.uploadResult ul{
@@ -85,27 +87,36 @@
 										<label>상품설명</label>
 										<textarea type="text" id="content" name="content" th:text="${product.content}" class="form-control" rows="3" readonly="readonly"></textarea>
 									</div> 
-																		
+									<div class="form-group" style=" width:100px">
+										<label>카테고리</label>
+										<div th:each="cate:${product.cateList}">
+										<li type="text" id="content" name="content" th:text="${cate.catename}" class="form-control" rows="3" readonly="readonly">
+										</li>
+										</div>
+										
+									</div> 									
 									<div class="optionDiv" th:each="arr:${product.optList}">
-									<span>
-									<div>
-										<div class="sizeDiv" style="float: left; width: 33%;">
+										<div  style="float: left; width:100px">
+										<div class="sizeDiv">
+										<p>
 											<label>사이즈</label> <input name="size" type="text" th:value="${arr.size}" 
 												class="form-control" readonly="readonly">
-										</div>
-										<div class="qtyDiv" style="float: left; width: 33%;">
+										</br>			
 											<label>수량</label> <input name="qty" type="text" data-idx="0" th:value="${arr.qty}"
-												class="form-control" readonly="readonly">
+												class="form-control" readonly="readonly">	
+									</p>
 										</div>
-									<div>
-									</span>
+									
+									
+								</div>
+									
 									</div>
 										
-									<div class="uploadResult">
+									<div class="uploadResult" style="float: left;" >
 										
 									</div>
 								
-								<form  role="form" action="/product/modify" method="get">
+								<form  role="form" action="/product/modify" method="get" style="float: left;">
 										<input type='hidden' name='pno' th:value="${product.pno}"/>
 										<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}'/>
 										<input type='hidden' id='pageNum' name='pageNum' th:value='${pageMaker.cri.pageNum}'/>

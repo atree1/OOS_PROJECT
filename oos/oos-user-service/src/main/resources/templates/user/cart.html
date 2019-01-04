@@ -152,12 +152,12 @@
 			</tbody>
 
 		</div>
-		<div style="text-align:center;">
-		<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
-		<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
-			<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
-		<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
-	</div>
+		<div style="text-align:center;"  th:if="${#lists.size(pageList) gt 1}">
+			<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
+			<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
+				<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
+			<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
+		</div>
 	</div>
 	<form id="cartForm" method="get">
 		<input type="hidden" name="pageNum" id="pageNum" />
@@ -274,10 +274,11 @@
 				if(cno != -1){
 					
 					cartForm.append("<input type='hidden' name='info' value='"+
-							item.pno+"_"+item.opno+"_"+item.qty+"_"+item.sno+"'>");
+							item.pno+"_"+item.opno+"_"+item.qty+"_"+item.sno+"'>")
+							.append("<input type='hidden' name='"+csrfName+"' value='"+token+"' >");
 				}
 			});
-			cartForm.attr("action","/order/list").submit()
+			cartForm.attr("action","/order/list").attr("method","post").submit()
 		}else{
 			alert("장바구니에 담긴 상품이 없습니다.");
 		}

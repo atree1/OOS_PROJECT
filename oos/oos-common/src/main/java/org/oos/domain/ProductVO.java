@@ -17,6 +17,7 @@ public class ProductVO {
 	private LocalDate regdate;
 	
 	private String sname; //목록에 상점이름띄울때
+	private String mid; //유저맞춤추천
 	
 	private Date updatedate;
 	private StoreVO store;
