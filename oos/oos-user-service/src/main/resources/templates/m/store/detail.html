@@ -229,6 +229,9 @@ ul {
 	    var img = [[${img}]];
 	    var pageNum = 1;
 
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+
 		var mid;
 		var pnoValue =  [[${product.pno}]];
 		var replyUL = $(".card-list-group");
@@ -501,6 +504,11 @@ ul {
 					};
 			
 			console.log(reply);
+			
+			$(document).ajaxSend(function(e,xhr,options){
+			    xhr.setRequestHeader(header, token);
+			 });
+
 			replyService.add(reply, function(result){
 				alert(result);
 				replyAdd.find("input").val("");
