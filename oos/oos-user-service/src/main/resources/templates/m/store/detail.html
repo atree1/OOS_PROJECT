@@ -245,7 +245,7 @@ ul {
 		var InputMid=replyAdd.find("input[name='mid']");
 		var replyPageFooter = $(".replyPageFooter");
 		
-		var replyContainer =$(".replyContainer").clone(true);
+		var replyContainer =$(".col-md-12").clone(true);
 		var modifyTitle ;
 		var modifyContent;
 		var modifyMid;
@@ -420,7 +420,9 @@ ul {
 		});
 		
 		//get
-		$(".inner_goods_comments").on("click",".modifyBtn",function(e){
+		$(".list-group card-list-group").on("click",".modifyBtn",function(e){
+			
+			console.log("mod click");
 			
 			var kind = kindValue;
 			
@@ -466,7 +468,7 @@ ul {
 		});
 		
 		//삭제
-		$(".inner_goods_comments").on("click",".deleteBtn",function(e){
+		$(".list-group card-list-group").on("click",".deleteBtn",function(e){
 			
 			var rno = $(this).data("rno");
 		
@@ -589,11 +591,12 @@ ul {
 						str+="<div class='area_status_user'><span class='text_info'>"+list[i].mid;
 					}	
                     if(mid == list[i].mid){
-						str +="<span class='modBtn' data-rno='"+list[i].rno+"'>수정</span>";
+						str +="<span class='modifyBtn' data-rno='"+list[i].rno+"'>수정</span>";
 						str +="<span class='deleteBtn' data-rno='"+list[i].rno+"'>삭제</span>";
 					}
                     str+="</div><div style='margin-top:10px;font-size:13px;'>"+list[i].content+"</div></div></li>";
-				}	replyUL.html(str);
+				}
+				replyUL.html(str);
 				parent = parentCnt;
 				showReplyPage(replyCnt);
 				
