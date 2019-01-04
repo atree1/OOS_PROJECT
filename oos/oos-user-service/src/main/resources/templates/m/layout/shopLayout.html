@@ -73,7 +73,7 @@
                 </div>
                 <div class="dropdown" sec:authorize="hasRole('ROLE_USER')">
                   <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-                  <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                  <span class="avatar" style="background-image: url(/img/icon_signups_check_a_on.png)"></span>
                     <span class="ml-2 d-none d-lg-block" >
                     	<input type="hidden" id="userMid" th:value="${#authentication.principal.member.mid}">
                       <span class="text-default" sec:authentication="principal.member.mname">name</span>
