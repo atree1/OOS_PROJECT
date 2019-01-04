@@ -30,15 +30,16 @@ img {
 								<div class="product-price">
 									<strong th:text="${arr.price}">PRICE</strong>
 								</div>
-								<div class="ml-auto">
-									<a href="javascript:void(0)" class="btn btn-primary"><i
-										class="fe fe-plus"></i> Add to cart</a>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				<div style="text-align:center;" th:if="${#lists.size(pageList) gt 1}">
+					<div class="pageControlLeft" th:if="${pageMaker.prev} == true"></div>
+					<div class="showPage" style="display:inline-block; vertical-align:top;"  th:each="page : ${pageList}">
+						<button class="pageNum pageNumber" th:id="|page_${page}|" th:text="${page}">1</button></div>
+					<div class="pageControlRight" th:if="${pageMaker.next} == true"></div>
+				</div>
 			</div>
 		</div>
 
@@ -85,7 +86,7 @@ img {
 			
 			
 			$("#pageNum").val(pageMaker.cri.pageNum);
-			$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
+			$("#page_"+pageMaker.cri.pageNum).attr("style","color:#467fcf");
 		})();
 		
 
