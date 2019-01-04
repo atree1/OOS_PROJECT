@@ -40,28 +40,7 @@
             <div class="div_line_grey_2px"
                 style="margin-top: -8px; margin-bottom: 16px;"></div>
         </div>
-        <div id="hp_best" class="hp_best hp_galley_st">
-            <div id="touchSlider_best" class="touchSlider-box">
-                <div class="touchSlider" id="bestItemList">
-                    <ul class="item-list-img">
-                        <li th:each="arr,index : ${bestP}">
-                        <div th:text="${index.count}"
-                        style="padding:0 0 5px 25px; font-size:14px; font-weight:bold">index</div>
-                            <a class="showcase_con" th:data-sno="${arr.sno}"> 
-                                <span class="showcase_img">
-                                    <img class="item_img lazy" th:id="|bestP_${arr.pno}|" 
-                                    style="display: inline;"> 
-                                </span> 
-                                <span class="showcace_info"> 
-                                    <span class="text_type1" th:text="${arr.pname}">
-                                        PNAME</span><em th:text="${arr.price}">PRICE</em>
-                                </span>
-                            </a> 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
     <div class="todaySinsang" style="margin: 40px 0 30px 0;">
             <span style="background-color: #fff; padding: 0 10px;">베스트 상점</span>
             <div class="div_line_grey_2px"
