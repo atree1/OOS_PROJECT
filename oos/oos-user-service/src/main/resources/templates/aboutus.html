@@ -3,21 +3,14 @@
 <head>
 
 <script type="text/javascript" language="JavaScript">
+var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'Windows CE;', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson', 'Mobile', 'Symbian', 'Opera Mobi', 'Opera Mini', 'IEmobile');
 
-           var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'Windows CE;', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson', 'Mobile', 'Symbian', 'Opera Mobi', 'Opera Mini', 'IEmobile');
-
-           for (var word in mobileKeyWords){
-
-               if (navigator.userAgent.match(mobileKeyWords[word]) != null){
-
-                         window.location.href = "/m/aboutus";
-
-                   break;
-
-                     }
-
-           }
-
+for (var word in mobileKeyWords){
+    if (navigator.userAgent.match(mobileKeyWords[word]) != null){
+       window.location.href = "/m/aboutus";
+        break;
+    }
+}
 </script>
 <meta charset="utf-8">
 <meta name="_csrf" th:content="${_csrf.token}"/>
