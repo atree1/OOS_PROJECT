@@ -20,25 +20,19 @@
 		</div>
  		
 			<div class="questionDetail">
-				<div style="background-color: #fafafa; font-size: 14px; color: #202225; border-bottom: 1px solid #eee; min-height: 100px; line-height: 1.4;">
-					<div style="padding: 30px 15px 15px 15px;background-color: #ffffff; padding-left: 40px;"
+				<div style="background-color:#ffffff; font-size: 14px; color: #202225; border-bottom: 1px solid #eee; line-height: 1.4;">
+					<div style="padding: 30px 15px;background-color:#fafafa; padding-left: 40px;"
 					th:text="${popup.content}">
-						<span class="qnaType"
-							style="font-weight: bold;">
-							&gt;&gt;&gt;구매자</span>
 					</div>
 				</div>
 			</div>
 			
-			<div>
-				<button id="listBtn" class="basketSwapBtn">공지사항 목록</button>
-			</div>
+			<button id="listBtn" class="basketSwapBtn" style=" margin-top: 20px;">공지사항 목록</button>
+			
 		
-		<div class="buttonArea" style="text-align: center;">
-			<button type='submit' class="backList" id="backList"
-				onclick='javascript:self.close();' style="margin-top: 25px;">팝업 닫기</button>
-		</div>
-		
+			<button type='submit' class="basketSwapBtn" id="backList" onclick='javascript:self.close();'
+			style="float:right; margin-top: 20px; width:70px; color:#fff; background:#ff7f7a">팝업 닫기</button>
+	
 <form id="notifyForm">
 		<input type='hidden' name='amount' th:value='${pageMaker.cri.amount}' />
 		<input type='hidden' id='pageNum' name='pageNum'
