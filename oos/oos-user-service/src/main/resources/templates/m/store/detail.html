@@ -99,6 +99,7 @@ ul {
 								<div class="form-group">
 									<h4 class="card-title" th:text="${product.pname}">PNAME</h4>
 									<div class="card-subtitle" th:text="${product.store.sname}">SNAME</div>
+									<img class="firstImg" src="">
 									<div class="mt-5 d-flex align-items-center">
 										<div class="product-price">
 											<strong th:text="${product.price}">PRICE</strong>
@@ -266,13 +267,14 @@ ul {
 			 var imgList=[[${product.imgList}]];
 			 console.log(imgList);
 			var str="";
-			//var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname);
+			var fileCallPath =  encodeURIComponent(imgList[0].ipath+ "/"+ imgList[0].uuid +"_"+imgList[0].iname);
+			$(".firstImg").attr("src","/display?fileName="+fileCallPath);
 			 
 			 $.each(imgList, function(index, item){
 					if(item.pno == product.pno){
 						
 						var fileCallPath =  encodeURIComponent(item.ipath+ "/"+ item.uuid +"_"+item.iname);
-						// $(".inner_main_img").attr("src","/display?fileName="+fileCallPath);
+						
 						 $("#imgContainer").append("<img src='/display?fileName="+fileCallPath+"'>");
 					} 
 				});  
