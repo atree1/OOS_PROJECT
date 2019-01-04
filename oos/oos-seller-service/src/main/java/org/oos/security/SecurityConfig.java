@@ -51,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/seller/*").permitAll()
 
 		.antMatchers("/store/*", "/qna/*","/notify/*","/adminNotify/notify","/product/*","/exam")
-		.hasRole("SELLER")
-		.antMatchers("/admin/*","/adminNotify/notify","/adminNotify/*").hasRole("ADMIN");
+		.hasAnyRole("SELLER","ADMIN")
+		.antMatchers("/admin/*","/adminNotify/modify","/adminNotify/register").hasRole("ADMIN");
 		http.formLogin().loginPage("/seller/login").defaultSuccessUrl("/main");
 		
 		
