@@ -131,11 +131,10 @@ input[type="radio"]:checked + label:before{
 
 .loginInput{
 	border-radius:3px;
-	width:392px;
+	width:90%;
 	height:42px;
 	line-height:42px;
 	border:1px solid #cccccc;
-	background-color: fff;
 	font-size:14px;
 	color:#aaaaaa;
 	padding-left:10px;
@@ -146,7 +145,7 @@ input[type="radio"]:checked + label:before{
 .loginButton{
 	cursor:pointer;
 	border-radius:3px;
-	width:402px;
+	width:90%;
 	height:48px;
 	border:1px solid #ff7f7a;
 	margin:0 auto;

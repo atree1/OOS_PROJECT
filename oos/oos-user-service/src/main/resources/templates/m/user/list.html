@@ -71,22 +71,20 @@ img {
 				}); 
 			};
 			
-			if(store){
+		 	if(store){
 				$.each(store, function(index, item){
 					var img = item.imgList[0];
-					if(img){
-						var fileCallPath =  encodeURIComponent(img.ipath+"/s_"+img.uuid +"_"+img.iname);
-						$("#thumb_"+item.sno).attr("src","/display?fileName="+fileCallPath);
-					}
 					
-					$("#tel_"+item.sno).html(item.tel.substring(0,3)+
-							"-"+item.tel.substring(3,7)+"-"+item.tel.substring(7));
+					var fileCallPath =  encodeURIComponent(img.ipath+"/s_"+img.uuid +"_"+img.iname);
+					$("#thb_"+item.sno).attr("src","/display?fileName="+fileCallPath);
+					
+					
 				});
 			};
 			
 			
 			$("#pageNum").val(pageMaker.cri.pageNum);
-			$("#page_"+pageMaker.cri.pageNum).attr("style","color:#467fcf");
+			$("#page_"+pageMaker.cri.pageNum).attr("style","color:#ff7f7a;");
 		})();
 		
 
@@ -103,10 +101,8 @@ img {
 		$(".card").click(function(e){
 			var pno = $(this).attr("id").substring(5);
 			var sno = $(this).attr("class").substring(21);
+			listForm.html("");
 			listForm.append("<input type='hidden' name='pno' value='"+pno+"'>");
-			listForm.append("<input type='hidden' name='sno' value='"+sno+"'>");
-	
-			
 			if(cri.keyword == null){$("#keyword").remove();}
 			if(cri.category == null){$("#category").remove();}
 			
@@ -116,7 +112,12 @@ img {
 		$(".sortMethodClass").click(function(e) {
             var val = $(this).attr("id").substring(11);
             $("#orderby").val(val);
-            listForm.attr("action", "/m/user/list").submit();
+            listForm.attr("action", "/user/list");
+            
+            if($(this).hasClass("store")){
+                listForm.append("<input type='hidden' name='filter' value='select2'>");
+            }
+            listForm.submit();
         });
 		
 		$(".pageNum").click(function(e) {
@@ -125,10 +126,10 @@ img {
 			listForm.submit();
 		});
 		
-		$(".linkClass").click(function(e){
+		$(".linkClass ,.goods_li_img").click(function(e){
 			e.preventDefault();
 			listForm.html("");
-			listForm.attr("action","/m/store/list")
+			listForm.attr("action","/store/list")
 					.append("<input type='hidden' name='sno' value='"+
 								$(this).attr("id").substring(4)+"'>").submit();
 		});
