@@ -172,26 +172,30 @@ input, select {
 			var email1 = member.email.split("@")[0];
 			var email2 = member.email.split("@")[1];
 			
+			var pnum1 = member.pnum.split("-")[0];
+			var pnum2 = member.pnum.split("-")[1];
+			var pnum3 = member.pnum.split("-")[2];
+			
 			$("#email1").val(email1);
 			$("#email2").val(email2);
 			$("#email_select option[value='"+email2+"']").prop("selected",true);
 			
-			if(tel.substring(0,2) == "10"){
+			if(pnum1 == "010"){
 				$("#pnum").val("010").prop("selected",true);
-			}if(tel.substring(0,2) == "11"){
+			}if(pnum1 == "011"){
 				$("#pnum").val("011").prop("selected",true);
-			}if(tel.substring(0,2) == "16"){
+			}if(pnum1 == "016"){
 				$("#pnum").val("011").prop("selected",true);
-			}if(tel.substring(0,2) == "19"){
+			}if(pnum1 == "019"){
 				$("#pnum").val("019").prop("selected",true);
 			}
 			
-			$("#pnum2").val(tel.substring(3,7));
-			$("#pnum3").val(tel.substring(7)); 
+			$("#pnum2").val(pnum2);
+			$("#pnum3").val(pnum3); 
 		})();
 		
 		$("#modifyBtn").click(function(){
-			var pnum = $("#pnum").val()+$("#pnum2").val() + $("#pnum3").val(); 
+			var pnum = $("#pnum").val()+"-"+$("#pnum2").val()+"-"+$("#pnum3").val(); 
 			var email = $("#email1").val() + "@" + $("#email2").val();
 			$("#tel").val(pnum);
 			$("#email").val(email);

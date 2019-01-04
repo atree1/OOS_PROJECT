@@ -821,7 +821,6 @@ ul.date_pick li input {
 
 #goodsList .goodsContainer .goodsName {
 	font-size: 15px;
-	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-weight: bold;
 	z-index: 2;

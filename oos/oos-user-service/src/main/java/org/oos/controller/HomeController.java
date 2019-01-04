@@ -81,9 +81,8 @@ public class HomeController {
 		String name = SecurityContextHolder.getContext()
 							.getAuthentication().getName();
 		
-		log.info(name);
-		
 		Criteria cri = new Criteria();
+		cri.setAmount(24);
 		PageDTO pageDTO = new PageDTO(cri, productService.getTotal(map));
 		map.put("dto", pageDTO);
 		

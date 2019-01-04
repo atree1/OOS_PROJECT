@@ -39,7 +39,7 @@
 			(select mid, pno from tbl_order_detail d 
 			left join tbl_order o
 			on d.ono = o.ono
-			where d.odno > 0 and o.ono > 0
+			where d.odno > 0 and o.ono > 0 and d.del = 'N'
             group by mid, pno) dt
         on a.mid = dt.mid
         left join (select * from tbl_cart
