@@ -252,6 +252,12 @@ ul {
 		var modifyRno;
 		var modifyScore;
 		
+
+		$(document).ajaxSend(function(e,xhr,options){
+		    xhr.setRequestHeader(header, token);
+		 });
+
+		
 		var scoreValue = $("#score option:selected").val();
 	
 		(function() {
@@ -507,10 +513,6 @@ ul {
 			
 			console.log(reply);
 			
-			$(document).ajaxSend(function(e,xhr,options){
-			    xhr.setRequestHeader(header, token);
-			 });
-
 			replyService.add(reply, function(result){
 				alert(result);
 				replyAdd.find("input").val("");
@@ -577,7 +579,10 @@ ul {
 					str +="</div></div><p style='margin-left:45px;'>"+list[i].content+" </p></div></div>"; */
 					str+="<li class='list-group-item py-5'><div class='media-body'><div class='media-heading'>";
 					str+="<small class='float-right text-muted'>"+formatDate(list[i].regdate)+"</small>";
-                    str+="<strong style='font-size:13px;'>"+list[i].title+"</strong><span class='score'><img src ='/img/"+list[i].score+"star.png' width='80px'/></span>";
+                    str+="<strong style='font-size:13px;'>"+list[i].title+"</strong>";
+                    if(list[i].kind =="R"){
+                        str+="<span class='score'><img src ='/img/"+list[i].score+"star.png' width='80px'/></span>";
+					}
                     str+="</div><div style='margin-top:10px;font-size:13px;'>"+list[i].content+"</div></div></li>";
 				}	replyUL.html(str);
 				parent = parentCnt;

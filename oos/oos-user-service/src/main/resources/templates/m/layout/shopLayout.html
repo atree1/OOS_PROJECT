@@ -41,7 +41,7 @@
                 <img src="/img/oos_logo.jpg" class="header-brand-img" alt="tabler logo">
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-                <div class="nav-item d-none d-md-flex"  sec:authorize="!hasRole('ROLE_USER')">
+                <div class="nav-item d-md-flex"  sec:authorize="!hasRole('ROLE_USER')">
                   <a href="http://localhost:8080/oos/login" class="btn btn-sm btn-outline-primary" target="_blank">LOGIN</a>
                 </div>
                 <div class="dropdown d-none d-md-flex">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="dropdown" sec:authorize="hasRole('ROLE_USER')">
                   <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-                  <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                  <span class="avatar" style="background-image: url(/img/icon_signups_check_a_on.png)"></span>
                     <span class="ml-2 d-none d-lg-block" >
                     	<input type="hidden" id="userMid" th:value="${#authentication.principal.member.mid}">
                       <span class="text-default" sec:authentication="principal.member.mname">name</span>
