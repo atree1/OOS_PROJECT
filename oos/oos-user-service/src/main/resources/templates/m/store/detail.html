@@ -245,7 +245,7 @@ ul {
 		var InputMid=replyAdd.find("input[name='mid']");
 		var replyPageFooter = $(".replyPageFooter");
 		
-		var replyContainer =$(".replyContainer").clone(true);
+		var replyContainer =$(".col-md-12").clone(true);
 		var modifyTitle ;
 		var modifyContent;
 		var modifyMid;
@@ -420,7 +420,9 @@ ul {
 		});
 		
 		//get
-		$(".inner_goods_comments").on("click",".modifyBtn",function(e){
+		$(".card").on("click",".modifyBtn",function(e){
+			
+			console.log("mod click");
 			
 			var kind = kindValue;
 			
@@ -450,12 +452,19 @@ ul {
 		
 		//수정 replyContainer
 		    $(document).on("click",".modBtn",function(e){
-			
+		    	
+		    	if(kindValue == "Q"){
+					scoreValue = 0;
+				}else if(kindValue == "R"){
+					scoreValue = $(this).parent().parent().parent().find("select option:selected").val();
+				}
+		    	
 			var reply ={
 					rno : modifyRno,
 					title:modifyTitle.val(),
 					content:modifyContent.val(),
-					kind:kindValue
+					kind:kindValue,
+					score: scoreValue
 			};
 			
 			replyService.update(reply,function(result){
@@ -466,7 +475,7 @@ ul {
 		});
 		
 		//삭제
-		$(".inner_goods_comments").on("click",".deleteBtn",function(e){
+		$(".card").on("click",".deleteBtn",function(e){
 			
 			var rno = $(this).data("rno");
 		
@@ -583,12 +592,18 @@ ul {
                     if(list[i].kind =="R"){
                         str+="<span class='score'><img src ='/img/"+list[i].score+"star.png' width='80px'/></span>";
 					}
+                    if(list[i].depth==1){
+						str+="<div class='area_status_user' style='margin-left:30px'><span class='text_info'>"+list[i].mid;
+					}else{
+						str+="<div class='area_status_user'><span class='text_info'>"+list[i].mid;
+					}	
                     if(mid == list[i].mid){
-						str +="<span class='text_info infoBtn modBtn' data-rno='"+list[i].rno+"'>수정</span>";
+						str +="<span class='text_info infoBtn modifyBtn' data-rno='"+list[i].rno+"'>수정</span>";
 						str +="<span class='text_info infoBtn deleteBtn' data-rno='"+list[i].rno+"'>삭제</span>";
 					}
                     str+="</div><div style='margin-top:10px;font-size:13px;'>"+list[i].content+"</div></div></li>";
-				}	replyUL.html(str);
+				}
+				replyUL.html(str);
 				parent = parentCnt;
 				showReplyPage(replyCnt);
 				
