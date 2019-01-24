@@ -145,7 +145,6 @@
 
 	<select id="bestProductList"
 		resultType="org.oos.domain.ProductVO" resultMap="Product">
-		<![CDATA[
 		select d.pno, pname, price, count(*) cnt, uuid, ipath, iname from tbl_order_detail d
 		left join tbl_product p
 		on d.pno = p.pno
@@ -153,9 +152,7 @@
 		group by pno) i
 		on i.pno = d.pno
 		where odno > 0 and uuid != "" and p.pno > 0 and d.del = 'N'
-		and to_days(now()) - to_days(d.regdate) <= 7
 		group by pno
-		]]>
 		order by cnt desc
 		limit 0, 6
 	</select>
